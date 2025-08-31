@@ -18,11 +18,11 @@ function MerchPay() {
   });
   // Dynamically determine UPI amount based on selection
   let upiAmount = 0;
-  if (formData.type === "Hoodie" && formData.wantName === "Yes") upiAmount = 489;
-  else if (formData.type === "Hoodie" && formData.wantName === "No") upiAmount = 479;
-  else if (formData.type === "T-Shirt" && formData.wantName === "Yes") upiAmount = 409;
-  else if (formData.type === "T-Shirt" && formData.wantName === "No") upiAmount = 399;
-  else if (formData.type === "T-Shirt" && formData.fromNITSilchar === "No") upiAmount = 649;
+  if (formData.type === "Oversized" && formData.wantName === "Yes") upiAmount = 489;
+  else if (formData.type === "Oversized" && formData.wantName === "No") upiAmount = 479;
+  else if (formData.type === "Regular" && formData.wantName === "Yes") upiAmount = 409;
+  else if (formData.type === "Regular" && formData.wantName === "No") upiAmount = 399;
+  else if (formData.type === "Regular" && formData.fromNITSilchar === "No") upiAmount = 649;
   // UPI link
   const upiLink = `upi://pay?pa=swarupchanda1963-1@okhdfcbank&pn=Swarup%20Chanda&am=${upiAmount}&cu=INR`;
   const [fileUrl, setFileUrl] = useState("");
@@ -325,8 +325,8 @@ function MerchPay() {
                   className="w-full px-4 py-3 rounded-xl border border-fuchsia-700 bg-[#0f172a]/60 text-fuchsia-100 focus:ring-2 focus:ring-fuchsia-400 focus:border-fuchsia-400 transition-all"
                 >
                   <option value="">Select Type</option>
-                  <option value="T-Shirt">Regular-sized</option>
-                  <option value="Hoodie">Over-sized</option>
+                  <option value="Regular">Regular-sized</option>
+                  <option value="Oversized">Over-sized</option>
                 </select>
               </div>
 
@@ -492,7 +492,7 @@ function MerchPay() {
               {formData.wantName === "Yes" && (
                 <div>
                   <label className="block text-sm font-medium text-fuchsia-200 mb-1">
-                    Name in T-Shirt
+                    Name in T-Shirt (Max 7 Letters)
                   </label>
                   <input
                     type="text"
