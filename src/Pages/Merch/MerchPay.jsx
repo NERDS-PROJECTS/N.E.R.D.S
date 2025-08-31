@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
 import { ChevronDownIcon } from "lucide-react";
 import Merch_form_landing from './Merch_form_landing'
+import ProgressBar from "react-scroll-progress-bar";
 
 function MerchPay() {
   const [formData, setFormData] = useState({
@@ -178,7 +179,7 @@ function MerchPay() {
         loop={true}
       />
       <Merch_form_landing />
-
+        <ProgressBar duration="0.01"/>
 
       {/* Navigation dots with neon effect */}
       <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-4">
@@ -200,7 +201,7 @@ function MerchPay() {
         {/* Personal Details Section */}
         <section className="form-section min-h-screen py-16 flex flex-col justify-center">
           <div className="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/90 border border-cyan-400/30 shadow-[0_8px_32px_0_#22d3ee33] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
-            
+
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-cyan-400 opacity-10 rounded-full blur-2xl animate-pulse" />
             <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-cyan-300 mb-6 border-b border-cyan-700 pb-4 tracking-wide drop-shadow-lg">
               Personal Details
@@ -612,7 +613,7 @@ function MerchPay() {
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-cyan-400 mt-3 text-center leading-snug">Attach a screenshot or PDF of your payment receipt.<br/>Accepted: JPG, PNG, PDF. Max size: 5MB.</p>
+                  <p className="text-xs text-cyan-400 mt-3 text-center leading-snug">Attach a screenshot or PDF of your payment receipt.<br />Accepted: JPG, PNG, PDF. Max size: 5MB.</p>
                 </div>
               </div>
             </div>
@@ -680,6 +681,12 @@ function MerchPay() {
                 ) : "Pending"}
               </p>
             </div>
+            <div className="mt-5 p-4 rounded-lg border border-fuchsia-700">
+              <p className="text-center text-blue-400">
+                Please verify all details before submitting your order. Once
+                submitted, changes cannot be made.
+              </p>
+            </div>
             <div className="flex justify-center pt-6">
               <button
                 onClick={handleSubmit}
@@ -696,6 +703,30 @@ function MerchPay() {
                 </span>
               </button>
             </div>
+          </div>
+          <div className="text-center mt-8 text-gray-600">
+            <p>Thank you for your order!</p>
+            <p className="mt-2 text-sm">
+              For any queries, contact:{' '}
+              <a
+                href="mailto:nerds@robotics.club"
+                className="text-blue-600 hover:underline"
+              >
+                nerds@nits.ac.in
+              </a>
+            </p>
+          </div>
+          <div className="mt-8 text-center">
+            <h3 className="text-lg font-semibold text-cyan-200 mb-2">
+              Facing Payment Issues?
+            </h3>
+            <p className="text-sm text-cyan-400 leading-relaxed">
+              If you encounter any problems with the payment process, please reach out to our team:
+            </p>
+            <p className="text-sm text-cyan-300 mt-2">
+              📧 Email: <a href="mailto:nerds.merch@club.com" className="underline text-cyan-200 hover:text-cyan-100">nerds@nits.ac.in</a><br />
+              📱 Phone/WhatsApp: <a href="tel:+919876543210" className="underline text-cyan-200 hover:text-cyan-100">+91 60035 01567</a>
+            </p>
           </div>
         </section>
       </main>
