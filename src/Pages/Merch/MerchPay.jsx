@@ -724,8 +724,8 @@ function MerchPay() {
               If you encounter any problems with the payment process, please reach out to our team:
             </p>
             <p className="text-sm text-cyan-300 mt-2">
-              📧 Email: <a href="mailto:nerds.merch@club.com" className="underline text-cyan-200 hover:text-cyan-100">nerds@nits.ac.in</a><br />
-              📱 Phone/WhatsApp: <a href="tel:+919876543210" className="underline text-cyan-200 hover:text-cyan-100">+91 60035 01567</a>
+              📧 Email: <a href="mailto:nerds@nits.ac.in" className="underline text-cyan-200 hover:text-cyan-100">nerds.merch@club.com</a><br />
+              📱 Phone/WhatsApp: <a href="tel:+916003501567" className="underline text-cyan-200 hover:text-cyan-100">+91 60035 01567</a>
             </p>
           </div>
         </section>
