@@ -24,8 +24,8 @@ function MerchPay() {
   else if (formData.type === "Regular" && formData.wantName === "Yes") upiAmount = 409;
   else if (formData.type === "Regular" && formData.wantName === "No") upiAmount = 399;
   else if (formData.type === "Regular" && formData.fromNITSilchar === "No") upiAmount = 649;
-  // UPI link
-  const upiLink = `upi://pay?pa=swarupchanda1963-1@okhdfcbank&pn=Swarup%20Chanda&am=${upiAmount}&cu=INR`;
+  // UPI link 
+  const upiLink = `upi://pay?pa=swarupchanda1963-1@okhdfcbank&pn=Swarup%20Chanda${upiAmount ? `&am=${upiAmount}` : ""}&cu=INR`;
   const [fileUrl, setFileUrl] = useState("");
   const [uploading, setUploading] = useState(false);
 
