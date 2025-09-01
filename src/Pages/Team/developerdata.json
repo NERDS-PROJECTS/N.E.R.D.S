@@ -26,6 +26,19 @@
       "image_id": "https://res.cloudinary.com/dqmktpekh/image/upload/v1727726868/fl7s9efn5nrfilh30rrl.webp"
     },
     {
+    "id": 2000,
+    "name": "Hraday Sadrani",
+    "team": "4th Year",
+    "designation": "Web",
+    "developer_team": "Yes",
+    "email": "sadranih_ug_22@ee.nits.ac.in",
+    "social": "https://www.instagram.com/hraday_sadrani/",
+    "github": "https://github.com/hradaysadrani",
+    "linkedin": "https://www.linkedin.com/in/hradaysadrani/",
+    "image_id": "https://res.cloudinary.com/dqmktpekh/image/upload/v1727726869/tlwygilatnshkvci3ygf.webp",
+    "year": "2025"
+    },
+    {
       "id": 28,
       "name": "Sunidhi Chetri",
       "team": "2nd Year",
@@ -129,19 +142,7 @@
       "linkedin": "https://www.linkedin.com/in/shouvik-paul",
       "image_id": "https://res.cloudinary.com/dqmktpekh/image/upload/f_auto,q_auto/gsdg9e3pixxeaczkavch"
     },
-    {
-   "id": 8306,
-   "name": "Krrish Khandelia",
-   "team": "2nd Year",
-   "designation": "Web",
-   "developer_team": "Yes",
-   "email": "krrishkhandelia@gmail.com",
-   "social": "https://www.instagram.com/krrishhxd",
-   "github": "https://github.com/krrishkhandelia",
-   "linkedin": "https://www.linkedin.com/in/krrish-khandelia-095362187?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-   "image_id": "https://res.cloudinary.com/dnngdcn5m/image/upload/v1756193573/krrish_irek7k.jpg",
-   "year": "2025"
-    },
+
     {
       "id": 7,
       "name": "Abhinav Singh",
