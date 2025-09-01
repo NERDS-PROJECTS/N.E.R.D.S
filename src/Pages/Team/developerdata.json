@@ -129,7 +129,19 @@
       "linkedin": "https://www.linkedin.com/in/shouvik-paul",
       "image_id": "https://res.cloudinary.com/dqmktpekh/image/upload/f_auto,q_auto/gsdg9e3pixxeaczkavch"
     },
-    
+    {
+   "id": 8306,
+   "name": "Krrish Khandelia",
+   "team": "2nd Year",
+   "designation": "Web",
+   "developer_team": "Yes",
+   "email": "krrishkhandelia@gmail.com",
+   "social": "https://www.instagram.com/krrishhxd",
+   "github": "https://github.com/krrishkhandelia",
+   "linkedin": "https://www.linkedin.com/in/krrish-khandelia-095362187?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+   "image_id": "https://res.cloudinary.com/dnngdcn5m/image/upload/v1756193573/krrish_irek7k.jpg",
+   "year": "2025"
+    },
     {
       "id": 7,
       "name": "Abhinav Singh",
@@ -155,19 +167,6 @@
       "github": "https://github.com/account",
       "linkedin": "https://www.linkedin.com/in/mahashweta-borgohain-872378276?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       "image_id": "https://res.cloudinary.com/dqmktpekh/image/upload/v1727867406/tccxh4z0fnxn8ag1ubsf.webp"
-    },
-    {
-      "id": 30,
-      "name": "Uddhav Saikia",
-      "team": "1st Year",
-      "designation": "Web",
-      "developer_team": "Yes",
-      "developer_domain": "Web",
-      "email": "uddhav_ug_23@ece.nits.ac.in",
-      "social": "https://www.instagram.com/inspiral_40mg/",
-      "github": "https://github.com/Uddhav-Saikia",
-      "linkedin": "https://www.linkedin.com/in/uddhav-saikia",
-      "image_id": "https://res.cloudinary.com/dqmktpekh/image/upload/f_auto,q_auto/k2yomc69l9anp0dxcnyu"
     },
     {
       "id": 41,
