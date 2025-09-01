@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
-import { ChevronDownIcon } from "lucide-react";
 import Merch_form_landing from './Merch_form_landing'
 import ProgressBar from "react-scroll-progress-bar";
 
