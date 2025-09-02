@@ -38,7 +38,7 @@ const LoadingAnimation = () => {
   ));
 
   return (
-    <div style={wrapperStyle} className='w-28 flex justify-center m-auto items-center h-screen'>
+    <div style={wrapperStyle} className='w-28 overflow-y-hidden overflow-x-hidden flex justify-center m-auto items-center h-screen'>
       <style>
         {`
           @keyframes scroll {

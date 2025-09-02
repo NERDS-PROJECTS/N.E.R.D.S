@@ -1,13 +1,22 @@
 import { SparklesCore } from "./Sparkles";
+import LoadingAnimation from "../../components/Loader/Loader";
 
-export function SparklesPreview() {
-    // Scroll to the first form section when arrow is clicked
+export function SparklesPreview({ loading }) {
     const handleScrollToForm = () => {
         const formSection = document.querySelector('.form-section');
         if (formSection) {
             formSection.scrollIntoView({ behavior: 'smooth' });
         }
     };
+
+    if (loading) {
+        return (
+            <div className="h-[90vh] w-full flex items-center justify-center bg-black bg-opacity-80">
+                <LoadingAnimation />
+            </div>
+        );
+    }
+
     return (
         <div className="h-[90vh] w-full  bg-[url('https://res.cloudinary.com/dagggqd6g/image/upload/v1756851620/ptrt_olrqji.png')] 
     md:bg-[url('https://res.cloudinary.com/dagggqd6g/image/upload/v1756851508/merch_bg_tuusb4.png')]  bg-cover bg-no-repeat bg-center flex flex-col items-center justify-center overflow-hidden rounded-md relative" >
