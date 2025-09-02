@@ -15,6 +15,8 @@ import {
   User as UserIcon,
   Phone as PhoneIcon,
   MapPin as LocationIcon,
+  ShieldAlertIcon,
+  ShirtIcon,
 } from 'lucide-react'
 export function Track_order() {
   const [notifyEnabled, setNotifyEnabled] = useState(true)
@@ -342,7 +344,7 @@ export function Track_order() {
                     <div className="space-y-2">
                       {shipmentData.items.map((item, index) => (
                         <div key={index} className="flex items-center">
-                          <div className="h-6 w-6 rounded bg-gray-800 border border-cyan-500/30 mr-2 flex-shrink-0"></div>
+                          <ShirtIcon className="h-5 w-5 rounded bg-transparent  mr-2 flex-shrink-0"></ShirtIcon>
                           <div className="flex-1">
                             <div className="text-sm">{item.name}</div>
                           </div>
