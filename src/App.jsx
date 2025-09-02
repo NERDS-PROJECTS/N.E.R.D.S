@@ -13,6 +13,8 @@ import LoadingAnimation from "./components/Loader/Loader";
 import Merch from "./Pages/Merch/Merch";
 import MerchPay from "./Pages/Merch/MerchPay";
 import Giveaway from './Pages/Giveaway/Giveaway';
+import Track_order from "./Pages/Merch/Track_order";
+
 
 
 
@@ -56,6 +58,7 @@ function App() {
                 <Route path="/merch" element={<Merch />} />
                 <Route path="/merchPay" element={<MerchPay />} />
                 <Route path="/giveaway" element={<Giveaway />} /> 
+                <Route path="/trackOrder" element={<Track_order/>} /> 
                 {/* Catch-all route for 404 page */}
                 <Route path="*" element={<Error />} />
               </Routes>

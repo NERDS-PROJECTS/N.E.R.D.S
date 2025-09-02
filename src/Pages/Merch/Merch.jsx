@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import gridBackground from '/grid.svg';
 import { FancyButton } from '../../components/Merch_components/FancyButton';
 import Shirt from '../../components/tshirt_canvas/Shirt';
@@ -19,6 +20,7 @@ import state from '../../store';
 
 const Merch = () => {
     const snap = useSnapshot(state);
+    const navigate = useNavigate();
 
     const [isDragging, setIsDragging] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -73,12 +75,18 @@ const Merch = () => {
                                     <p className="max-w-md font-normal text-gray-300 text-base">
                                         Our exclusive Robotics Club T-shirts are more than just apparel — they represent innovation, teamwork, and the spirit of creation.  <strong>Designed for makers, coders, and dreamers,</strong> these tees let you showcase your love for robotics both inside and outside the lab.
                                     </p>
-                                    <FancyButton
-                                        title1="CUSTOMIZE"
-                                        title2="T-SHIRT"
-                                        handleClick={() => state.intro = false}
-                                        customStyles="w-fit px-4 mt-1.5 py-2.5 font-bold text-sm"
-                                    />
+                                    <div className='flex gap-6 sm:gap-0 md:gap-8 '>
+                                        <FancyButton
+                                            title="Buy Now"
+                                            onClick={() => navigate('/merchPay')} 
+                                            variant="filled"
+                                        />
+                                        <FancyButton
+                                            title="Track Order"
+                                            onClick={() => navigate('/trackOrder')} 
+                                            variant="empty"
+                                        />
+                                    </div>
                                 </motion.div>
                             </motion.div>
                         </motion.section>
