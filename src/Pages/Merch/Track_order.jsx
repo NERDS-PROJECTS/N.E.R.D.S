@@ -1,7 +1,6 @@
-import { useState, Component } from 'react'
+import { useState} from 'react'
 import {
   Package as PackageIcon,
-  Search as SearchIcon,
   RefreshCw as RefreshIcon,
   MessageCircle as MessageIcon,
   Mail as MailIcon,
@@ -29,6 +28,7 @@ export function Track_order() {
       {
         step: 'Ordered',
         completed: true,
+        
         current: true,
       },
       {
@@ -83,7 +83,7 @@ export function Track_order() {
       name: 'Md. Fayjan',
       phone: '+91-60035-01567',
       address:
-        'Hostel-9D, NIT Silchar, NIT Road, 7880101, Cachar, Assam',
+        'Hostel-9D, NIT Silchar, NIT Road, 788010, Cachar, Assam',
     },
     activity: [
       {
