@@ -12,12 +12,12 @@ export function SparklesPreview() {
         <div className="h-[90vh] w-full  bg-[url('https://res.cloudinary.com/dagggqd6g/image/upload/v1756851620/ptrt_olrqji.png')] 
     md:bg-[url('https://res.cloudinary.com/dagggqd6g/image/upload/v1756851508/merch_bg_tuusb4.png')]  bg-cover bg-no-repeat bg-center flex flex-col items-center justify-center overflow-hidden rounded-md relative" >
             <h1
-                className="md:text-7xl text-3xl lg:text-7xl font-ethenocentric text-center text-white drop-shadow-lg tracking-tight relative pb-2 z-20">
+                className="md:text-7xl text-3xl lg:text-7xl font-ethenocentric text-center text-white drop-shadow-xl tracking-tight relative pb-2 z-20">
                 N.E.R.D.S. Merch
             </h1>
             <h4
-                className="text-base md:text-lg font-medium text-gray-200 text-center mb-6 max-w-2xl mx-auto drop-shadow z-20">
-                Complete the form below to order your exclusive Robotics club T-shirt. Scroll down to get started.
+                className="text-base md:text-lg font-medium text-gray-200 text-center mb-6 max-w-2xl mx-auto drop-shadow-lg z-20">
+                Complete the form below to order your exclusive Robotics club Merchandise. Scroll down to get started.
             </h4>
             <div className="w-[40rem] h-40 relative">
                 {/* Gradients */}
