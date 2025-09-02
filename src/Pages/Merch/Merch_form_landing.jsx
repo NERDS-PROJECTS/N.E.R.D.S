@@ -9,8 +9,8 @@ export function SparklesPreview() {
         }
     };
     return (
-        <div className="h-[90vh] w-full bg-transparent bg-cover bg-no-repeat bg-center flex flex-col items-center justify-center overflow-hidden rounded-md relative" 
-        style={{ backgroundImage: "url('/merch_bg.png')" }}>
+        <div className="h-[90vh] w-full  bg-[url('https://res.cloudinary.com/dagggqd6g/image/upload/v1756851620/ptrt_olrqji.png')] 
+    md:bg-[url('https://res.cloudinary.com/dagggqd6g/image/upload/v1756851508/merch_bg_tuusb4.png')]  bg-cover bg-no-repeat bg-center flex flex-col items-center justify-center overflow-hidden rounded-md relative" >
             <h1
                 className="md:text-7xl text-3xl lg:text-7xl font-ethenocentric text-center text-white drop-shadow-lg tracking-tight relative pb-2 z-20">
                 N.E.R.D.S. Merch
@@ -35,13 +35,13 @@ export function SparklesPreview() {
                     background="transparent"
                     minSize={0.4}
                     maxSize={1}
-                    particleDensity={1200}
+                    particleDensity={500}
                     className="w-full h-full"
                     particleColor="#FFFFFF" />
 
                 {/* Radial Gradient to prevent sharp edges */}
                 <div
-                    className="absolute inset-0 w-full h-full bg-transparent [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+                    className="absolute inset-0 w-full h-full bg- [mask-image:radial-gradient(350px_200px_at_top,transparent_10%,white)]"></div>
             </div>
             {/* Bouncing Chevron Arrow */}
             <div className="absolute inset-x-0 bottom-6 z-30 flex justify-center animate-bounce">
