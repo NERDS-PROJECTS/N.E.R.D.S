@@ -168,32 +168,32 @@ export function Track_order() {
                           className="flex flex-col items-center w-1/5"
                         >
                           <div
-                            className={`w-14 h-14 rounded-full flex items-center justify-center mb-2 
+                            className={`w-8 h-8 md:w-14 md:h-14  rounded-full flex items-center justify-center mb-2 
                             ${step.current ? 'bg-cyan-500/20 border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]' : step.completed ? 'bg-cyan-500/20 border border-cyan-500/50' : 'bg-gray-800 border border-gray-700'}`}
                           >
                             {index === 0 && (
                               <WarehouseIcon
-                                className={`h-6 w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
+                                className={`w-4 h-4 md:h-6 md:w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
                               />
                             )}
                             {index === 1 && (
                               <PackageIcon
-                                className={`h-6 w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
+                                className={`w-4 h-4 md:h-6 md:w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
                               />
                             )}
                             {index === 2 && (
                               <TruckIcon
-                                className={`h-6 w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
+                                className={`w-4 h-4 md:h-6 md:w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
                               />
                             )}
                             {index === 3 && (
                               <TruckIcon
-                                className={`h-6 w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
+                                className={`w-4 h-4 md:h-6 md:w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
                               />
                             )}
                             {index === 4 && (
                               <HomeIcon
-                                className={`h-6 w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
+                                className={`w-4 h-4 md:h-6 md:w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
                               />
                             )}
                           </div>
