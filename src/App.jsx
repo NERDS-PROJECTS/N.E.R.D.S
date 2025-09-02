@@ -37,7 +37,7 @@ function App() {
   }, []);
 
   return (
-  <div className="flex flex-col min-h-screen overflow-x-hidden pt-24">
+    <div className={`flex flex-col min-h-screen overflow-x-hidden ${loading ? '' : 'pt-24'}`}>
       <Router>
         <ScrollToTop />
         {loading ? (
