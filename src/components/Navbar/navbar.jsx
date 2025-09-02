@@ -38,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-black z-50 text-white sticky top-0">
+  <nav className="bg-black z-50 text-white w-full fixed top-0 left-0">
       <div className="lg:px-12 sm:px-7 max-w-9xl mx-auto max-h-24 flex justify-between items-center p-6">
         
         <div className="flex cursor-pointer items-center"
@@ -123,3 +123,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// Add this style to your main app container (e.g., in App.jsx or a global layout):
+// <div className="pt-24 ..."> ... </div>
+// Adjust 'pt-24' if your navbar height is different (pt-24 = 6rem = 96px)
