@@ -4,7 +4,6 @@ import {
   RefreshCw as RefreshIcon,
   MessageCircle as MessageIcon,
   Mail as MailIcon,
-  MapPin as MapPinIcon,
   Clock as ClockIcon,
   AlertCircle as AlertIcon,
   Bell as BellIcon,
@@ -15,7 +14,7 @@ import {
   User as UserIcon,
   Phone as PhoneIcon,
   MapPin as LocationIcon,
-  ShieldAlertIcon,
+
   ShirtIcon,
 } from 'lucide-react'
 export function Track_order() {
@@ -114,7 +113,7 @@ export function Track_order() {
               <div className="h-10 w-10 rounded-lg bg-cyan-500/20 flex items-center justify-center mr-3">
                 <PackageIcon className="h-6 w-6 text-cyan-400" />
               </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text">
+              <h1 className="text-2xl md:text-3xl font-spaced font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text">
                 Shipment Tracking
               </h1>
             </div>
@@ -125,20 +124,20 @@ export function Track_order() {
               <div className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 mb-6 border border-gray-800 shadow-lg">
                 <div className="flex flex-wrap justify-between items-start">
                   <div>
-                    <div className="text-gray-400 mb-1">Shipment ID</div>
+                    <div className="text-gray-400 font-spaced mb-1">Shipment ID</div>
                     <div className="text-xl font-bold text-white mb-4">
                       #{shipmentData.id}
                     </div>
                     <div className="flex flex-wrap gap-6 mt-2">
                       <div>
-                        <div className="text-gray-400 text-sm mb-1">ETA</div>
+                        <div className="text-gray-400 font-spaced text-sm mb-1">ETA</div>
                         <div className="flex items-center">
                           <ClockIcon className="h-4 w-4 text-cyan-400 mr-2" />
                           <span>Expected by {shipmentData.eta}</span>
                         </div>
                       </div>
                       <div>
-                        <div className="text-gray-400 text-sm mb-1">
+                        <div className="text-gray-400 font-spaced text-sm mb-1">
                           Package
                         </div>
                         <div className="flex items-center">
@@ -149,8 +148,8 @@ export function Track_order() {
                     </div>
                   </div>
                   <div className="mt-4 sm:mt-0">
-                    <div className="text-gray-400 mb-1">Status</div>
-                    <div className="bg-cyan-500/20 text-cyan-400 px-4 py-1.5 rounded-full inline-block font-medium border border-cyan-500/30 shadow-[0_0_10px_rgba(34,211,238,0.3)]">
+                    <div className="text-gray-400 font-spaced mb-1">Status</div>
+                    <div className="bg-cyan-500/20  text-cyan-400 px-4 py-1.5 rounded-full inline-block font-medium border border-cyan-500/30 shadow-[0_0_10px_rgba(34,211,238,0.3)]">
                       {shipmentData.status}
                     </div>
                   </div>
@@ -214,7 +213,7 @@ export function Track_order() {
               {/* Live Map/Route Panel */}
               <div className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 mb-6 border border-gray-800 shadow-lg relative overflow-hidden">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-lg font-bold text-white">Live Route</h2>
+                  <h2 className="text-lg font-bold font-spaced text-white">Live Route</h2>
                   <button className="bg-gray-800/70 hover:bg-gray-700/70 p-2 rounded-full transition">
                     <RefreshIcon className="h-5 w-5 text-cyan-400" />
                   </button>
@@ -259,13 +258,13 @@ export function Track_order() {
                     </div>
                   </div>
                 </div>
-                <div className="text-xs text-gray-400 mt-3 text-right">
+                <div className="text-xs font-spaced text-gray-400 mt-3 text-right">
                   <span>Updates every day</span>
                 </div>
               </div>
               {/* Activity Log Panel */}
               <div className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 border border-gray-800 shadow-lg">
-                <h2 className="text-lg font-bold text-white mb-4">
+                <h2 className="text-lg font-bold font-spaced text-white mb-4">
                   Activity Log
                 </h2>
                 <div className="overflow-hidden">
@@ -291,7 +290,7 @@ export function Track_order() {
             <div className="lg:col-span-1">
               {/* Courier Details Card */}
               <div className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 mb-6 border border-gray-800 shadow-lg">
-                <h2 className="text-lg font-bold text-white mb-4">
+                <h2 className="text-lg font-bold font-spaced text-white mb-4">
                   Courier Details
                 </h2>
                 <div className="space-y-4">
@@ -319,8 +318,8 @@ export function Track_order() {
                     </div>
                   </div>
                   <div className="pt-2">
-                    <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition duration-300 flex items-center justify-center mb-3">
-                      <MessageIcon className="h-4 w-4 mr-2" />
+                    <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2 px-4 rounded-lg hover:from-cyan-600 font-spaced hover:to-blue-700 transition duration-300 flex items-center justify-center mb-3">
+                      <MessageIcon className="h-4 w-4 mr-2 " />
                       Ping Courier Bot
                     </button>
                     <a
@@ -335,12 +334,12 @@ export function Track_order() {
               </div>
               {/* Shipment Details Card */}
               <div className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 mb-6 border border-gray-800 shadow-lg">
-                <h2 className="text-lg font-bold text-white mb-4">
+                <h2 className="text-lg font-bold font-spaced text-white mb-4">
                   Shipment Details
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-gray-400 text-sm mb-2">Items</div>
+                    <div className="text-gray-400 font-spaced text-sm mb-2">Items</div>
                     <div className="space-y-2">
                       {shipmentData.items.map((item, index) => (
                         <div key={index} className="flex items-center">
@@ -348,7 +347,7 @@ export function Track_order() {
                           <div className="flex-1">
                             <div className="text-sm">{item.name}</div>
                           </div>
-                          <div className="text-sm text-gray-400">
+                          <div className="text-sm  text-gray-400">
                             ×{item.qty}
                           </div>
                         </div>
@@ -357,11 +356,11 @@ export function Track_order() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <div className="text-gray-400 text-sm mb-1">Weight</div>
+                      <div className="text-gray-400 font-spaced text-sm mb-1">Weight</div>
                       <div className="font-medium">{shipmentData.weight}</div>
                     </div>
                     <div>
-                      <div className="text-gray-400 text-sm mb-1">
+                      <div className="text-gray-400 font-spaced text-sm mb-1">
                         Dimensions
                       </div>
                       <div className="font-medium">
@@ -370,7 +369,7 @@ export function Track_order() {
                     </div>
                   </div>
                   <div>
-                    <div className="text-gray-400 text-sm mb-1">Payment</div>
+                    <div className="text-gray-400 font-spaced text-sm mb-1">Payment</div>
                     <div className="font-medium flex items-center">
                       <CheckCircleIcon className="h-4 w-4 text-green-500 mr-1" />
                       Pre-approved
@@ -380,7 +379,7 @@ export function Track_order() {
               </div>
               {/* Shipping Address Card */}
               <div className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 border border-gray-800 shadow-lg">
-                <h2 className="text-lg font-bold text-white mb-4">
+                <h2 className="text-lg font-bold font-spaced text-white mb-4">
                   Shipping Address
                 </h2>
                 <div className="space-y-3">
@@ -417,20 +416,20 @@ export function Track_order() {
             <div className="flex space-x-4">
               <a
                 href="/contact"
-                className="text-gray-400 hover:text-cyan-400 transition-colors"
+                className="text-gray-400 font-spaced hover:text-cyan-400 transition-colors"
               >
                 FAQ
               </a>
               <a
                 href="/contact"
-                className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center"
+                className="text-gray-400  hover:text-cyan-400 transition-colors flex items-center"
               >
                 <AlertIcon className="h-4 w-4 mr-1" />
                 Report issue
               </a>
             </div>
             <div className="flex items-center mt-4 sm:mt-0">
-              <span className="text-gray-400 mr-2 text-sm">Notify me</span>
+              <span className="text-gray-400 mr-2 font-spaced text-sm">Notify me</span>
               <button
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${notifyEnabled ? 'bg-cyan-500' : 'bg-gray-700'}`}
                 onClick={() => setNotifyEnabled(!notifyEnabled)}
