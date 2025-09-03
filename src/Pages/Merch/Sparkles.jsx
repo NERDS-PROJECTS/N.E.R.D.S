@@ -416,5 +416,6 @@ export const SparklesCore = (props) => {
           }} />
       )}
     </motion.div>
+    
   );
 };

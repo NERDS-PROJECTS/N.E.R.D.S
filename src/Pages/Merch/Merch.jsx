@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import gridBackground from '/grid.svg';
 import { FancyButton } from '../../components/Merch_components/FancyButton';
 import Shirt from '../../components/tshirt_canvas/Shirt';
@@ -19,23 +20,34 @@ import state from '../../store';
 
 const Merch = () => {
     const snap = useSnapshot(state);
+    const navigate = useNavigate();
 
     const [isDragging, setIsDragging] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
     const canvasRef = useRef();
-    // Show loader for at least 1s, then show model
+
+    // Detect mobile screen
     useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 1000);
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    // Show loader for at least 2s
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 2000);
         return () => clearTimeout(timer);
     }, []);
 
-    // Handlers to toggle dragging state
+    // Handlers to toggle dragging state (for desktop only)
     const handlePointerDown = () => setIsDragging(true);
     const handlePointerUp = () => setIsDragging(false);
     const handlePointerLeave = () => setIsDragging(false);
 
     return (
-        <div className="app transition-all ease-in main flex flex-col md:mt-[-5rem] md:flex-row min-h-screen h-auto md:h-screen relative">
+        <div className="app transition-all ease-in main flex flex-col mt-8 md:mt-[-5rem] md:flex-row min-h-[120vh] h-auto md:min-h-screen relative">
             {/* Gradient Background */}
             <div className="absolute inset-0 tshirt_gradient z-0"></div>
 
@@ -46,7 +58,7 @@ const Merch = () => {
             ></div>
 
             {/* Left Side Animated Intro */}
-            <div className="w-full md:w-1/2 flex flex-col justify-center items-start z-10 px-4 py-10 md:px-16 md:py-0 min-h-[50vh] md:min-h-0">
+            <div className="w-full md:w-1/2 flex flex-col justify-center items-start z-10 px-4 py-10 mt-16 md:mt-0 md:px-16 md:py-0 min-h-[50vh] md:min-h-0">
                 <AnimatePresence>
                     {snap.intro && (
                         <motion.section className="home" {...slideAnimation('left')}>
@@ -63,12 +75,18 @@ const Merch = () => {
                                     <p className="max-w-md font-normal text-gray-300 text-base">
                                         Our exclusive Robotics Club T-shirts are more than just apparel — they represent innovation, teamwork, and the spirit of creation.  <strong>Designed for makers, coders, and dreamers,</strong> these tees let you showcase your love for robotics both inside and outside the lab.
                                     </p>
-                                    <FancyButton
-                                        title1="CUSTOMIZE"
-                                        title2="T-SHIRT"
-                                        handleClick={() => state.intro = false}
-                                        customStyles="w-fit px-4 mt-1.5 py-2.5 font-bold text-sm"
-                                    />
+                                    <div className='flex gap-6 sm:gap-0 md:gap-8 '>
+                                        <FancyButton
+                                            title="Buy Now"
+                                            onClick={() => navigate('/merchPay')} 
+                                            variant="filled"
+                                        />
+                                        <FancyButton
+                                            title="Track Order"
+                                            onClick={() => navigate('/trackOrder')} 
+                                            variant="empty"
+                                        />
+                                    </div>
                                 </motion.div>
                             </motion.div>
                         </motion.section>
@@ -76,12 +94,12 @@ const Merch = () => {
                 </AnimatePresence>
             </div>
 
-            {/* Right Side 3D Model or Loader */}
-            <div className="flex flex-col items-center justify-center w-full h-full">
+            {/* Right Side Coming Soon */}
+            <div className="w-full md:w-1/2 mt-10 z-10 min-h-[300px] h-[50vh] md:h-full flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center w-full h-full">
                     <span className="text-3xl md:text-5xl font-bold text-cyan-400 mb-4 animate-pulse">Coming Soon</span>
-                   
                 </div>
-
+            </div>
         </div>
     );
 };

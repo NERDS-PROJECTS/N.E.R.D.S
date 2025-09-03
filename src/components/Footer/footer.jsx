@@ -29,7 +29,7 @@ function Footer() {
               N.E.R.D.S NIT Silchar
             </div>
 
-            <div className="flex pl-2 pr-2 flex-col justify-start items-start ml-[-5rem] mt-4">
+            <div className="flex pl-2 pr-2 flex-col justify-start items-start ml-[-7rem] mt-4">
               <p className="font-ethenocentric text-white text-md font-extralight">
                 Wanna know more?
               </p>
@@ -51,7 +51,7 @@ function Footer() {
             </div>
 
             <div className="relative w-full mt-6">
-              <div className="flex flex-col items-start md:ml-[-2.8rem]">
+              <div className="flex flex-col items-star pl-8 md:ml-[-2.8rem]">
                 <p className="text-white font-ethenocentric leading-3 font-extralight text-md">
                   Visit Us
                 </p>
@@ -192,8 +192,8 @@ function Footer() {
               </div>
 
               <div className="flex space-x-16">
-                <div id="visit_us" className="mt-4">
-                  <p className="text-white font-ethenocentric text-[16.2px] font-bold">
+                <div id="visit_us" className="mt-4 ">
+                  <p className="text-white font-ethenocentric  text-[16.2px] font-bold">
                     Visit Us
                   </p>
                   <p className="text-white mt-5 font-spaced text-[14px]">
