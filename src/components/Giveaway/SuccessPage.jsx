@@ -35,7 +35,7 @@ Contact support with this ID for prize redemption.
                     Congratulations!
                 </span>
             </h2>
-            <p className="text-slate-400 mt-2 mb-4 sm:mb-8 text-base sm:text-lg">You solved the riddle correctly!</p>
+            <p className="text-slate-400 mt-2 mb-4 sm:mb-8 text-base sm:text-lg">You solved the riddle correctly! And have entered the Lucky Draw</p>
 
             {/* Unique ID Section */}
             <div className="text-center bg-black/20 border border-white/20 rounded-lg p-4 sm:p-6 my-4 sm:my-8 flex flex-col items-center">
@@ -53,7 +53,7 @@ Contact support with this ID for prize redemption.
                     </button>
                 </div>
                 <p className="text-xs sm:text-sm text-amber-400 mt-4">
-                    <strong>Important:</strong> Please save this ID to claim your prize!
+                    <strong>Important:</strong> Please save this ID to claim your prize! Top 10 Winners will be selected randomly for a final Match on Orientation.
                 </p>
             </div>
 
