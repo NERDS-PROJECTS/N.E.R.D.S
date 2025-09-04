@@ -80,6 +80,39 @@ function MerchPay() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Validate personal details
+    if (!formData.name.trim()) {
+      setModal({ open: true, message: "Please enter your full name.", success: false });
+      return;
+    }
+    if (!formData.phone.trim()) {
+      setModal({ open: true, message: "Please enter your phone number.", success: false });
+      return;
+    }
+    if (!formData.address.trim()) {
+      setModal({ open: true, message: "Please enter your address.", success: false });
+      return;
+    }
+    if (formData.fromNITSilchar === "Yes" && !formData.scholarId.trim()) {
+      setModal({ open: true, message: "Please enter your Scholar ID.", success: false });
+      return;
+    }
+    if (!formData.type) {
+      setModal({ open: true, message: "Please select merchandise type.", success: false });
+      return;
+    }
+    if (!formData.size) {
+      setModal({ open: true, message: "Please select merchandise size.", success: false });
+      return;
+    }
+    if (!formData.wantName) {
+      setModal({ open: true, message: "Please select if you want your name on the T-shirt.", success: false });
+      return;
+    }
+    if (formData.wantName === "Yes" && !formData.nameInTShirt.trim()) {
+      setModal({ open: true, message: "Please enter the name to be printed on the T-shirt.", success: false });
+      return;
+    }
     if (!formData.paymentProofLink) {
       setModal({ open: true, message: "Please upload payment proof before submitting.", success: false });
       return;
@@ -255,7 +288,7 @@ function MerchPay() {
 
               <div>
                 <label className="block text-sm font-medium text-slate-200 mb-1">
-                  Phone Number
+                  Phone Number (10 Digits)
                 </label>
                 <input
                   type="tel"
