@@ -369,7 +369,7 @@ function MerchPay() {
                 </label>
                 {/* Size Chart Tables */}
                 <div className="mb-4">
-                  {formData.type === "T-Shirt" && (
+                  {formData.type === "Regular" && (
                     <div className="w-full overflow-x-auto animate-fade-in">
                       <table className="w-full text-xs md:text-sm text-cyan-100 border-separate border-spacing-y-1 bg-[#0f172a]/80 rounded-xl shadow-lg">
                         <caption className="text-cyan-300 font-bold mb-2 text-base md:text-lg">Regular-sized Size Chart (in inches)</caption>
@@ -416,7 +416,7 @@ function MerchPay() {
                       </table>
                     </div>
                   )}
-                  {formData.type === "Hoodie" && (
+                  {formData.type === "Oversized" && (
                     <div className="w-full overflow-x-auto animate-fade-in">
                       <table className="w-full text-xs md:text-sm text-fuchsia-100 border-separate border-spacing-y-1 bg-[#1e193b]/80 rounded-xl shadow-lg">
                         <caption className="text-fuchsia-300 font-bold mb-2 text-base md:text-lg">Over-sized Size Chart (in inches)</caption>
