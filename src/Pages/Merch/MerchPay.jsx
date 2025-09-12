@@ -599,7 +599,7 @@ function MerchPay() {
               {/* QR Code and UPI Pay */}
               <div className="flex-1 flex flex-col items-center justify-center">
                 <img
-                  src="/tshirt/qr_code.png"
+                  src="/tshirt/qr_code.jpg"
                   alt="Payment QR Code"
                   className="w-48 h-48 rounded-xl shadow-lg border-2 border-cyan-400 mb-4 bg-white object-contain"
                 />

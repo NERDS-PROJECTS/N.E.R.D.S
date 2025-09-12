@@ -23,19 +23,19 @@ export function Track_order() {
   const shipmentData = {
     id: 'Updating Soon',
     status: 'Ordered',
-    eta: '---',
+    eta: 'End Week September',
     packageCount: 0,
     timeline: [
       {
         step: 'Ordered',
         completed: true,
         
-        current: true,
+        
       },
       {
-        step: 'Packed',
-        // date: 'Mar 11, 2:30 PM',
-        date: 'Pending',
+        step: 'Printing',
+        date: 'Sep 12, 2:30 PM',
+        current: true,
         completed: false,
       },
       {
