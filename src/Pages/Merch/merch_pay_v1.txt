@@ -32,9 +32,6 @@ function MerchPay() {
   const [submitting, setSubmitting] = useState(false);
   const [modal, setModal] = useState({ open: false, message: "", success: false });
 
-  // Toggle to close orders instantly (no backend change needed)
-  const ORDERS_CLOSED = true;
-
   // Change this to your actual deployed Apps Script Web App URL
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5p3omtAO6t1MPeTFP9kL0ruKR4lyjxhwWhnw9VG42O-ts8-SxYk-sjMVycqKV0vU3gw/exec";
   const handleInputChange = (e) => {
@@ -77,18 +74,12 @@ function MerchPay() {
         .catch((err) => {
           setUploading(false);
           alert("Upload error");
-          console.error(err);
         });
     };
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Block submissions when orders are closed
-    if (ORDERS_CLOSED) {
-      setModal({ open: true, message: "Orders are closed now. Submissions are disabled.", success: false });
-      return;
-    }
     // Validate personal details
     if (!formData.name.trim()) {
       setModal({ open: true, message: "Please enter your full name.", success: false });
@@ -221,16 +212,6 @@ function MerchPay() {
       />
       <Merch_form_landing />
         <ProgressBar duration="0.01"/>
-
-      {ORDERS_CLOSED && (
-        <div className="mx-auto max-w-3xl px-4 mt-6">
-          <div className="rounded-2xl border-2 border-rose-400/60 bg-gradient-to-r from-rose-900/70 to-rose-700/60 text-rose-100 shadow-[0_8px_32px_0_rgba(244,63,94,0.35)] p-4 text-center">
-            <p className="text-base md:text-lg font-semibold tracking-wide">
-              Orders are closed now. Form submissions are disabled.
-            </p>
-          </div>
-        </div>
-      )}
 
       {/* Navigation dots with neon effect */}
       <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-4">
@@ -741,17 +722,16 @@ function MerchPay() {
             <div className="flex justify-center pt-6">
               <button
                 onClick={handleSubmit}
-                disabled={ORDERS_CLOSED}
-                className="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none disabled:opacity-60 disabled:cursor-not-allowed"
+                className="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none"
               >
                 <span
                   className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"
                 >
                 </span>
                 <span
-                  className="inline-flex h-full w-full items-center justify-center rounded-lg bg-slate-950 px-7 text-md font-medium text-white backdrop-blur-3xl gap-2"
+                  className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-md font-medium text-white backdrop-blur-3xl gap-2 undefined"
                 >
-                  {ORDERS_CLOSED ? 'Orders Closed' : 'Submit Order'}
+                  Submit Order
                 </span>
               </button>
             </div>
