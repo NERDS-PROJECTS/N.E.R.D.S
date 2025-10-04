@@ -21,9 +21,9 @@ export function Track_order() {
   const [notifyEnabled, setNotifyEnabled] = useState(true)
   // Mock data that would normally come from an API
   const shipmentData = {
-    id: 'Updating Soon',
-    status: 'Ordered',
-    eta: 'End of September',
+    id: '291731581',
+    status: 'In Transit',
+    eta: '14th October, 2025',
     packageCount: 1,
     timeline: [
       {
@@ -35,18 +35,20 @@ export function Track_order() {
       {
         step: 'Printing',
         date: 'Sep 22, 2:30 PM',
-        current: true,
-        completed: false,
+        
+        completed: true,
       },
       {
         step: 'Shipped',
-        date: 'Pending',
-        completed: false,
+        date: 'Oct 02, 7:30 AM',
+        completed: true,
+        
       },
       {
         step: 'In Transit',
-        date: 'Pending',
+        date: 'Oct 04, 10:20 PM',
         completed: false,
+        current: true,
         
       },
       {
@@ -56,14 +58,14 @@ export function Track_order() {
       },
     ],
     courier: {
-      name: 'Updating Soon',
-      trackingId: '---',
+      name: 'DELHIVERY',
+      trackingId: '9158110131482',
       bot: '---',
     },
     items: [
       {
         name: 'Tshirt',
-        qty: 1,
+        qty: 189,
       },
     //   {
     //     name: 'Circuit Board Array',
@@ -90,6 +92,18 @@ export function Track_order() {
       {
         time: '21-09-2025',
         event: 'Ordered up from supplier',
+      },
+      {
+        time: '28-09-2025',
+        event: 'Printing Tshirt',
+      },
+      {
+        time: '02-10-2025',
+        event: 'Shipment Shipped From Suplier',
+      },
+      {
+        time: '04-10-2025',
+        event: 'Shipment In Transit From Suplier',
       },
     ],
   }
