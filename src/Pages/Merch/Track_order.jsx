@@ -25,6 +25,7 @@ export function Track_order() {
     status: 'In Transit',
     eta: '14th October, 2025',
     packageCount: 1,
+    weight:'56.7 Kg',
     timeline: [
       {
         step: 'Ordered',
@@ -33,7 +34,7 @@ export function Track_order() {
         
       },
       {
-        step: 'Printing',
+        step: 'Printed',
         date: 'Sep 22, 2:30 PM',
         
         completed: true,
@@ -83,7 +84,7 @@ export function Track_order() {
     dimensions: '---',
     Weight:"---",
     recipient: {
-      name: 'Md. Fayjan',
+      name: 'Swarup Chanda',
       phone: '+91-60035-01567',
       address:
         'Hostel-9D, NIT Silchar, NIT Road, 788010, Cachar, Assam',
@@ -256,19 +257,19 @@ export function Track_order() {
                     </div>
                   </div>
                   {/* Current position pin */}
-                  {/* <div className="absolute left-[58%] top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="absolute left-[58%] top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <div className="w-6 h-6 rounded-full bg-cyan-500/20 border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] flex items-center justify-center">
                       <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></div>
                     </div>
                     <div className="absolute top-7 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 font-medium whitespace-nowrap">
-                      Current Location
+                      Kanpur
                     </div>
-                  </div> */}
+                  </div> 
                   {/* Destination pin */}
                   <div className="absolute left-3/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <div className="w-4 h-4 rounded-full bg-gray-400 shadow-[0_0_5px_rgba(255,255,255,0.3)]"></div>
                     <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 whitespace-nowrap">
-                      Destination
+                      Silchar
                     </div>
                   </div>
                 </div>
