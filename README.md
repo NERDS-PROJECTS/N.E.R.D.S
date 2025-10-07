@@ -149,5 +149,5 @@ If you find this project helpful, please give it a star ⭐ and share it with ot
   <h3>Made with ❤️ by N.E.R.D.S. Team</h3>
   <p><strong>National Institute of Technology, Silchar</strong></p>
   
-  ![NIT Silchar Logo](public/National_Institute_Of_Technology_Silchar_Logo%201@2x.png)
+  <img src="public/National_Institute_Of_Technology_Silchar_Logo%201@2x.png" alt="NIT Silchar Logo" width="80" height="80">
 </div>
