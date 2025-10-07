@@ -256,13 +256,19 @@ export function Track_order() {
                       Surat
                     </div>
                   </div>
+                  <div className="absolute left-1/3 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
+                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 whitespace-nowrap">
+                      Kanpur
+                    </div>
+                  </div>
                   {/* Current position pin */}
                   <div className="absolute left-[58%] top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <div className="w-6 h-6 rounded-full bg-cyan-500/20 border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] flex items-center justify-center">
                       <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></div>
                     </div>
                     <div className="absolute top-7 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 font-medium whitespace-nowrap">
-                      Kanpur
+                      Guwahati
                     </div>
                   </div> 
                   {/* Destination pin */}
