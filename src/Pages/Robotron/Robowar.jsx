@@ -355,6 +355,136 @@ const AttentionSection = () => {
   )
 }
 
+// 3D Model Showcase Section Component
+const ModelShowcaseSection = () => {
+  return (
+    <motion.section
+      className="py-12"
+      initial={{
+        opacity: 0,
+      }}
+      whileInView={{
+        opacity: 1,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+      viewport={{
+        once: true,
+      }}
+    >
+      <motion.h2
+        className="text-3xl font-bold mb-8 text-red-400 text-center"
+        initial={{
+          opacity: 0,
+          y: -20,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.5,
+        }}
+        viewport={{
+          once: true,
+        }}
+      >
+        3D Battle Robot Showcase
+      </motion.h2>
+      <motion.div
+        className="max-w-5xl mx-auto"
+        initial={{
+          opacity: 0,
+          y: 20,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.6,
+          delay: 0.2,
+        }}
+        viewport={{
+          once: true,
+        }}
+      >
+        <div className="bg-gradient-to-br from-black/50 to-red-950/20 backdrop-blur-sm rounded-2xl border-2 border-red-500/30 p-4 md:p-6 lg:p-8 relative overflow-hidden">
+          {/* Animated glow effect */}
+          <motion.div
+            className="absolute inset-0 opacity-50"
+            animate={{
+              boxShadow: [
+                'inset 0 0 20px rgba(239,68,68,0.2)',
+                'inset 0 0 40px rgba(239,68,68,0.3)',
+                'inset 0 0 20px rgba(239,68,68,0.2)',
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+            }}
+          />
+          
+          {/* Sketchfab Embed */}
+          <div className="relative z-10 sketchfab-embed-wrapper">
+            <div className="aspect-video w-full rounded-lg overflow-hidden border border-red-500/50">
+              <iframe 
+                title="Tron Bike - Light Cycle" 
+                frameBorder="0" 
+                allowFullScreen
+                mozAllowFullScreen={true}
+                webkitAllowFullScreen={true}
+                allow="autoplay; fullscreen; xr-spatial-tracking" 
+                src="https://sketchfab.com/models/9ae198b9a25a49c3b28f5c2f92441b92/embed"
+                className="w-full h-full"
+              />
+            </div>
+            
+            {/* Attribution */}
+            <motion.div
+              className="mt-4 text-center text-sm text-red-300/70"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <p className="space-x-2">
+                <a 
+                  href="https://sketchfab.com/3d-models/tron-bike-light-cycle-9ae198b9a25a49c3b28f5c2f92441b92?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
+                >
+                  Tron Bike - Light Cycle
+                </a>
+                <span>by</span>
+                <a 
+                  href="https://sketchfab.com/SQUIR3D?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
+                >
+                  SQUIR3D
+                </a>
+                <span>on</span>
+                <a 
+                  href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
+                >
+                  Sketchfab
+                </a>
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.section>
+  )
+}
+
 // Kit Components Section Component
 const KitComponentsSection = () => {
   const kitItems = [
