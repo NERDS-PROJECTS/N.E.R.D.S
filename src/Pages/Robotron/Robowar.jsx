@@ -8,7 +8,7 @@ import {
   UploadIcon,
 } from 'lucide-react'
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
-import ProgressBar from "react-scroll-progress-bar";
+
 
 // Background Grid Component
 const BackgroundGrid = () => {
@@ -161,7 +161,7 @@ const HeroSection = () => {
           {/* Left Column - Text Content */}
           <div className="text-center md:text-left md:col-span-2">
             <motion.h1
-              className="text-4xl font-spaced md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-300"
+              className="text-4xl font-spaced md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600"
               animate={{
                 textShadow: [
                   '0 0 7px #ff0000',
@@ -178,7 +178,7 @@ const HeroSection = () => {
               ROBOTRON
             </motion.h1>
             <motion.h2
-              className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-red-400"
+              className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-red-200"
               animate={{
                 textShadow: ['0 0 3px #ff0000', '0 0 7px #ff0000', '0 0 3px #ff0000'],
               }}
@@ -204,7 +204,7 @@ const HeroSection = () => {
                 duration: 1,
               }}
             >
-              A battle-forged robot engineered for ROBOWAR supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. Robowar — where only the toughest bots survive! 
+              A battle-forged robot engineered for ROBOWAR supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. Robowar — where only the toughest bots survive!
             </motion.p>
           </div>
 
@@ -355,135 +355,7 @@ const AttentionSection = () => {
   )
 }
 
-// 3D Model Showcase Section Component
-const ModelShowcaseSection = () => {
-  return (
-    <motion.section
-      className="py-12"
-      initial={{
-        opacity: 0,
-      }}
-      whileInView={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 0.5,
-      }}
-      viewport={{
-        once: true,
-      }}
-    >
-      <motion.h2
-        className="text-3xl font-bold mb-8 text-red-400 text-center"
-        initial={{
-          opacity: 0,
-          y: -20,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 0.5,
-        }}
-        viewport={{
-          once: true,
-        }}
-      >
-        3D Battle Robot Showcase
-      </motion.h2>
-      <motion.div
-        className="max-w-5xl mx-auto"
-        initial={{
-          opacity: 0,
-          y: 20,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 0.6,
-          delay: 0.2,
-        }}
-        viewport={{
-          once: true,
-        }}
-      >
-        <div className="bg-gradient-to-br from-black/50 to-red-950/20 backdrop-blur-sm rounded-2xl border-2 border-red-500/30 p-4 md:p-6 lg:p-8 relative overflow-hidden">
-          {/* Animated glow effect */}
-          <motion.div
-            className="absolute inset-0 opacity-50"
-            animate={{
-              boxShadow: [
-                'inset 0 0 20px rgba(239,68,68,0.2)',
-                'inset 0 0 40px rgba(239,68,68,0.3)',
-                'inset 0 0 20px rgba(239,68,68,0.2)',
-              ],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-            }}
-          />
-          
-          {/* Sketchfab Embed */}
-          <div className="relative z-10 sketchfab-embed-wrapper">
-            <div className="aspect-video w-full rounded-lg overflow-hidden border border-red-500/50">
-              <iframe 
-                title="Tron Bike - Light Cycle" 
-                frameBorder="0" 
-                allowFullScreen
-                mozAllowFullScreen={true}
-                webkitAllowFullScreen={true}
-                allow="autoplay; fullscreen; xr-spatial-tracking" 
-                src="https://sketchfab.com/models/9ae198b9a25a49c3b28f5c2f92441b92/embed"
-                className="w-full h-full"
-              />
-            </div>
-            
-            {/* Attribution */}
-            <motion.div
-              className="mt-4 text-center text-sm text-red-300/70"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <p className="space-x-2">
-                <a 
-                  href="https://sketchfab.com/3d-models/tron-bike-light-cycle-9ae198b9a25a49c3b28f5c2f92441b92?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
-                >
-                  Tron Bike - Light Cycle
-                </a>
-                <span>by</span>
-                <a 
-                  href="https://sketchfab.com/SQUIR3D?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
-                >
-                  SQUIR3D
-                </a>
-                <span>on</span>
-                <a 
-                  href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
-                >
-                  Sketchfab
-                </a>
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.section>
-  )
-}
+
 
 // Kit Components Section Component
 const KitComponentsSection = () => {
@@ -540,7 +412,7 @@ const KitComponentsSection = () => {
       }}
     >
       <motion.h2
-        className="text-3xl font-bold mb-6 text-red-400 text-center"
+        className="text-3xl font-bold mb-6 text-red-600 text-center"
         initial={{
           opacity: 0,
           y: -20,
@@ -603,8 +475,7 @@ const KitComponentsSection = () => {
 
 // Payment Details Section Component
 const PaymentDetailsSection = ({ registrationFee }) => {
-  const upiLink1 = `upi://pay?pa=6003147277@ptsbi&pn=Swarup%20Chanda&am=${registrationFee}&cu=INR`;
-  const upiLink2 = `upi://pay?pa=himdfayzan1735-2@oksbi&pn=Md%20Fayjan&am=${registrationFee}&cu=INR`;
+
 
   const paymentOptions = [
     {
@@ -613,7 +484,6 @@ const PaymentDetailsSection = ({ registrationFee }) => {
       ifsc: 'SBIN0017401',
       accountNo: '40293794000',
       upi: '6003147277@ptsbi',
-      upiLink: upiLink1,
     },
     {
       bankName: 'SBI',
@@ -621,7 +491,6 @@ const PaymentDetailsSection = ({ registrationFee }) => {
       ifsc: 'SBIN0016928',
       accountNo: '41946546051',
       upi: 'himdfayzan1735-2@oksbi',
-      upiLink: upiLink2,
     },
   ]
 
@@ -642,7 +511,7 @@ const PaymentDetailsSection = ({ registrationFee }) => {
       }}
     >
       <motion.h2
-        className="text-3xl font-bold mb-8 text-red-400 text-center"
+        className="text-3xl font-bold mb-8 text-red-600 text-center"
         initial={{
           opacity: 0,
           y: -20,
@@ -700,7 +569,7 @@ const PaymentDetailsSection = ({ registrationFee }) => {
               }}
             />
             <div className="flex justify-between items-start mb-4">
-              <h3 className="text-xl font-bold text-red-400">
+              <h3 className="text-xl font-bold text-red-600">
                 Option {index + 1}
               </h3>
               <div className="bg-red-900/30 p-2 rounded-lg">
@@ -900,7 +769,7 @@ function RobowarRegistration() {
       formBody.append("TeamMemberSixth", formData.teamMember6 || "");
       formBody.append("PaymentProofLink", formData.paymentProofLink);
       formBody.append("TransactionNumber", formData.transactionNumber);
-      
+
       await fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
@@ -909,7 +778,7 @@ function RobowarRegistration() {
         },
         body: formBody.toString()
       });
-      
+
       // With no-cors mode, we can't read the response, so we assume success if no error
       setModal({ open: true, message: "Registration submitted successfully! You will receive a confirmation email shortly.", success: true });
       setFormData({
@@ -970,16 +839,15 @@ function RobowarRegistration() {
       {/* Loader overlay - keeping original functionality */}
       <MultiStepLoader
         loadingStates={[
-          { text: "Submitting registration..." },
+          { text: "Submitting  Team registration..." },
           { text: "Processing payment..." },
-          { text: "Finalizing..." },
+          { text: "Finalizing Team Details..." },
         ]}
         loading={submitting}
         duration={1200}
         loop={true}
       />
 
-      <ProgressBar duration="0.01" />
 
       <div className="container mx-auto px-4 py-8 relative z-10">
         <motion.div
@@ -995,6 +863,8 @@ function RobowarRegistration() {
           className="space-y-12 pb-20"
         >
           <HeroSection />
+
+
 
           {/* Registration Form Component with new styling */}
           <motion.section
@@ -1012,25 +882,62 @@ function RobowarRegistration() {
               delay: 0.3,
             }}
           >
-            <motion.h2
-              className="text-3xl font-bold mb-8 text-red-400 text-center"
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
-              transition={{
-                delay: 0.5,
-              }}
-            >
-              Registration Form
-            </motion.h2>
+            {/* Registration Form Heading with SVG Backgrounds */}
+            <div className="relative mb-8 flex items-center justify-center">
+              {/* Left Frame */}
+              <motion.div
+                className="absolute left-32 top-[-0.89rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                style={{
+                  backgroundImage: "url('/robotron/txt_frame_l.svg')",
+                }}
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+              />
+
+              {/* Center Text with Background */}
+              <motion.div
+                className="relative px-8 py-6 md:px-12 md:py-8"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                {/* Blue Background */}
+                <div
+                  className="absolute inset-0 bg-no-repeat bg-center bg-cover opacity-30"
+                  style={{
+                    backgroundImage: "url('/robotron/bg_text.svg')",
+                  }}
+                />
+
+                {/* Text */}
+                <h2 className="relative  z-10 text-xl md:text-2xl lg:text-3xl font-bold text-transparent bg-clip-text bg-slate-200">
+                  Registration Form
+                </h2>
+              </motion.div>
+
+              {/* Right Frame */}
+              <motion.div
+                className="absolute right-32  bottom-[-0.9rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                style={{
+                  backgroundImage: "url('/robotron/txt_frame_r.svg')",
+                }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+              />
+            </div>
+            <div>
+              <h1 className="relative text-xl mb-8 flex items-center justify-center gap-2">
+                Event : <span className="text-red-600">RoboWar</span>
+              </h1>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
               {/* Team Leader Information Section */}
               <div className="space-y-5">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-400">Team Leader Information</h3>
+                  <h3 className="text-xl font-bold text-red-200">Team Leader Information</h3>
                   <p className="text-red-200 text-sm mt-1">Primary contact details</p>
                 </div>
 
@@ -1041,7 +948,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 }}
                 >
-                  <label className="block text-red-300 mb-2 font-medium">
+                  <label className="block text-red-600 mb-2 font-medium">
                     Email ID *
                   </label>
                   <motion.div
@@ -1068,7 +975,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.15 }}
                 >
-                  <label className="block text-red-300 mb-2 font-medium">Team Name *</label>
+                  <label className="block text-red-600 mb-2 font-medium">Team Name *</label>
                   <motion.div
                     className="relative"
                     whileHover={{ scale: 1.005 }}
@@ -1092,7 +999,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <label className="block text-red-300 mb-2 font-medium">
+                  <label className="block text-red-600 mb-2 font-medium">
                     Full Name *
                   </label>
                   <motion.div
@@ -1120,7 +1027,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.25 }}
                   >
-                    <label className="block text-red-300 mb-2 font-medium">
+                    <label className="block text-red-600 mb-2 font-medium">
                       Phone Number *
                     </label>
                     <motion.div
@@ -1147,7 +1054,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 }}
                   >
-                    <label className="block text-red-300 mb-2 font-medium">
+                    <label className="block text-red-600 mb-2 font-medium">
                       WhatsApp Number *
                     </label>
                     <motion.div
@@ -1175,7 +1082,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.35 }}
                 >
-                  <label className="block text-red-300 mb-2 font-medium">
+                  <label className="block text-red-600 mb-2 font-medium">
                     Scholar ID *
                   </label>
                   <motion.div
@@ -1198,7 +1105,7 @@ function RobowarRegistration() {
               {/* Team Members Section */}
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-400">Team Members</h3>
+                  <h3 className="text-xl font-bold text-red-200">Team Members</h3>
                   <p className="text-red-200 text-sm mt-1">Add your team members (minimum 4 required)</p>
                 </div>
 
@@ -1211,7 +1118,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 + (num - 2) * 0.05 }}
                   >
-                    <label className="block text-red-300 mb-2 font-medium">
+                    <label className="block text-red-600 mb-2 font-medium">
                       Team Member {num} Name *
                     </label>
                     <motion.div
@@ -1240,7 +1147,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.55 + (num - 5) * 0.05 }}
                   >
-                    <label className="block text-red-300 mb-2 font-medium">
+                    <label className="block text-red-600 mb-2 font-medium">
                       Team Member {num} Name <span className="text-red-400/60">(Optional)</span>
                     </label>
                     <motion.div
@@ -1437,7 +1344,7 @@ function RobowarRegistration() {
 
               {/* Submit Button */}
               <div className="flex justify-center mt-4">
-                <motion.button 
+                <motion.button
                   type="submit"
                   className="relative w-full max-w-md h-20 bg-no-repeat bg-center bg-contain flex items-center justify-center group cursor-pointer"
                   style={{
