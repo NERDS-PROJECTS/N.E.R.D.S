@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         spaced: ["Spaced", "sans-serif"],
         ethenocentric: ["Ethenocentric", "sans-serif"],
+        orbitron: ["Orbitron", "sans-serif"],
       },
       screens: {
         xs: "480px",

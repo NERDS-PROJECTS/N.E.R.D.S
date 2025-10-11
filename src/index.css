@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-orbitron: 'Orbitron', sans-serif;
 }
 
 @font-face {
@@ -93,6 +96,41 @@
 
 .head-text {
   @apply xl:text-[6rem] font-ethenocentric text-[3rem] xl:leading-[7rem] leading-[4.2rem] font-black text-slate-200;
+}
+
+/* Orbitron Font Utility Classes */
+.font-orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.orbitron-light {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 400;
+}
+
+.orbitron-medium {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 500;
+}
+
+.orbitron-semibold {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+}
+
+.orbitron-bold {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+}
+
+.orbitron-extrabold {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+}
+
+.orbitron-black {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
 }
 
 
