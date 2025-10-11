@@ -21,8 +21,9 @@
 
 @font-face {
   font-family: "Roboto";
-  src: url("/src/assets/Fonts/Roboto-Medium.ttf") format("truetype");
+  src: url("/src/assets/Fonts/SmoochSans-VariableFont_wght.ttf") format("truetype");
   font-weight: 500;
+  font-size: x-large;
 }
 
 .main:before {
