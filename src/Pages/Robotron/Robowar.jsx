@@ -306,12 +306,12 @@ const AttentionSection = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-red-400 mb-2">ATTENTION</h3>
-            <p className="text-red-100">
+            <p className="text-red-100 font-sans">
               ⚠️ Only registrations are currently allowed. Kits and materials
               are not provided at this time. Registration fee: Rs. 999. For kit
-              tracking, visit:{' '}
+              tracking, visit:{''}
               <motion.a
-                href="#"
+                href="/trackOrder"
                 className="text-red-400 font-medium relative inline-block"
                 whileHover={{
                   scale: 1.05,
@@ -430,7 +430,7 @@ const KitComponentsSection = () => {
       >
         KIT Component Details
       </motion.h2>
-      <div className="bg-black/30 flex flex-col justify-self-center w-fit  backdrop-blur-sm rounded-2xl border border-red-900/30 p-8">
+      <div className="bg-black/30 flex flex-col justify-self-center w-fit  backdrop-blur-sm rounded-2xl font-sans  border border-red-900/30 p-8">
         <motion.ul
           className="space-y-3"
           variants={containerVariants}
@@ -533,7 +533,7 @@ const PaymentDetailsSection = ({ registrationFee }) => {
         {paymentOptions.map((option, index) => (
           <motion.div
             key={index}
-            className="bg-gradient-to-br from-black-100/50 to-black/50 backdrop-blur-sm rounded-xl border border-black p-6 relative overflow-hidden group"
+            className="bg-gradient-to-br font-roboto from-black-100/50 to-black/50 backdrop-blur-sm rounded-xl border border-black p-6 relative overflow-hidden group"
             initial={{
               opacity: 0,
               y: 20,
