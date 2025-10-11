@@ -659,7 +659,7 @@ function RobowarRegistration() {
   const [modal, setModal] = useState({ open: false, message: "", success: false });
 
   // Change this to your actual deployed Apps Script Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwwsxlaJN9vJJb1aMAXLTVjrfpe9tmNrQ8gcAQ-57GDUiSWBvfJ3WBkqBo1P9iJ-wo/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5p3omtAO6t1MPeTFP9kL0ruKR4lyjxhwWhnw9VG42O-ts8-SxYk-sjMVycqKV0vU3gw/exec";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -667,7 +667,6 @@ function RobowarRegistration() {
       [name]: value,
     }));
   };
-
 
 
 
@@ -685,7 +684,7 @@ function RobowarRegistration() {
         fname: "uploadFilesToGoogleDrive",
       };
       fetch(
-        "https://script.google.com/macros/s/AKfycbyAQLKv4e4iBfdZn6sdLw-OSerztKzNbfhF_eJiJAf0WrwK7IzvIVS-cF2iKlv_qQ8EMw/exec",
+        "https://script.google.com/macros/s/AKfycbyhMyvbLwGEqCjVGC0gJCwvAOS_KyJnfVleU4h3iUUG88VeUXoWyujKKjRxMSuzT9AoHA/exec",
         {
           method: "POST",
           body: JSON.stringify(dataSend),
@@ -755,33 +754,31 @@ function RobowarRegistration() {
     setSubmitting(true);
     try {
       const timestamp = new Date().toISOString();
-      const formBody = new URLSearchParams();
-      formBody.append("Timestamp", timestamp);
-      formBody.append("TeamLeaderEmail", formData.teamLeaderEmail);
-      formBody.append("TeamName", formData.teamName);
-      formBody.append("TeamLeaderName", formData.teamLeaderName);
-      formBody.append("TeamLeaderPhone", formData.teamLeaderPhone);
-      formBody.append("TeamLeaderWhatsapp", formData.teamLeaderWhatsapp);
-      formBody.append("TeamLeaderScholarId", formData.teamLeaderScholarId);
-      formBody.append("TeamMemberSecond", formData.teamMember2);
-      formBody.append("TeamMemberThird", formData.teamMember3);
-      formBody.append("TeamMemberFourth", formData.teamMember4);
-      formBody.append("TeamMemberFifth", formData.teamMember5 || "");
-      formBody.append("TeamMemberSixth", formData.teamMember6 || "");
-      formBody.append("PaymentProofLink", formData.paymentProofLink);
-      formBody.append("TransactionNumber", formData.transactionNumber);
-      
-      await fetch(SCRIPT_URL, {
+      const params = new URLSearchParams();
+      params.append("Timestamp", timestamp);
+      params.append("TeamLeaderEmail", formData.teamLeaderEmail);
+      params.append("TeamName", formData.teamName);
+      params.append("TeamLeaderName", formData.teamLeaderName);
+      params.append("TeamLeaderPhone", formData.teamLeaderPhone);
+      params.append("TeamLeaderWhatsapp", formData.teamLeaderWhatsapp);
+      params.append("TeamLeaderScholarId", formData.teamLeaderScholarId);
+      params.append("TeamMember2", formData.teamMember2);
+      params.append("TeamMember3", formData.teamMember3);
+      params.append("TeamMember4", formData.teamMember4);
+      params.append("TeamMember5", formData.teamMember5 || "");
+      params.append("TeamMember6", formData.teamMember6 || "");
+      params.append("PaymentProofLink", formData.paymentProofLink);
+      params.append("TransactionNumber", formData.transactionNumber);
+      params.append("RegistrationFee", registrationFee);
+      const res = await fetch(SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: formBody.toString()
+        body: params.toString()
       });
-      
-      // With no-cors mode, we can't read the response, so we assume success if no error
-      setModal({ open: true, message: "Registration submitted successfully! You will receive a confirmation email shortly.", success: true });
+      const response = await res.text();
+      setModal({ open: true, message: response, success: true });
       setFormData({
         teamLeaderEmail: "",
         teamName: "",
@@ -1306,6 +1303,60 @@ function RobowarRegistration() {
               </div>
 
               {/* Submit Button */}
+              <motion.button
+                type="submit"
+                className="w-full bg-gradient-to-r from-red-800 to-red-600 hover:from-red-700 hover:to-red-500 text-white font-bold py-4 px-8 rounded-md mt-8 relative overflow-hidden group"
+                whileHover={{
+                  scale: 1.02,
+                }}
+                whileTap={{
+                  scale: 0.98,
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 17,
+                }}
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2 text-xl">
+                  Register My Team
+                </span>
+
+                <motion.div
+                  className="absolute inset-0 bg-red-400/30"
+                  initial={{
+                    scale: 0,
+                    x: '-50%',
+                    y: '-50%',
+                  }}
+                  whileHover={{
+                    scale: 3,
+                  }}
+                  transition={{
+                    duration: 0.4,
+                  }}
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                    originX: 0.5,
+                    originY: 0.5,
+                  }}
+                />
+                <motion.div
+                  className="absolute inset-0 opacity-70"
+                  animate={{
+                    boxShadow: [
+                      '0 0 0px rgba(239,68,68,0.7)',
+                      '0 0 20px rgba(239,68,68,0.7)',
+                      '0 0 0px rgba(239,68,68,0.7)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                  }}
+                />
+              </motion.button>
               <div className="flex justify-center mt-4">
                 <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                   <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ff0000_0%,#ff6b6b_50%,#ff0000_100%)]" />

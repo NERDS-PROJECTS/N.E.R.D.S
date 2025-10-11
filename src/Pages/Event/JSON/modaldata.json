@@ -7,20 +7,20 @@
     },
     "2": {
       "head": "Robosoccer",
-      "register":"https://forms.gle/qWh4e66yVwZNWZEP7",
+      "register":"/robosoccer",
       "text": "The Robbo-Soccer Competition, organized by N.E.R.D.S at NIT Silchar, combines robotics with soccer as teams build two bots—a striker and a defender—to compete in thrilling matches. The goal is to score the most within a set time, showcasing speed, agility, and strategy. It’s a fun, challenging event that fosters teamwork and sharpens engineering skills in an exciting robotic showdown.",
       "url": "https://res.cloudinary.com/dqmktpekh/image/upload/v1728914518/cbuhipr5hwvf9dshjkl8.webp"
     },
     "3": {
-      "head": "Racecircuit",
-      "register":"https://forms.gle/Hkws7auBReejN2Un8",
+      "head": "Algo Maze",
+      "register":"/algomaze",
 
       "text": "The Line-Following Robot Competition, organized by N.E.R.D.S at NIT Silchar, challenges teams to design autonomous robots that navigate a course by following a predefined line. With twists and obstacles, robots race to finish in the shortest time. This competition hones programming, design, and problem-solving skills, offering participants hands-on experience with sensors, algorithms, and teamwork in a thrilling showcase of innovation.",
       "url": "https://res.cloudinary.com/dqmktpekh/image/upload/v1728914518/abh8m7jkepa7jmify7gz.webp"
     },
     "4": {
-      "head": "Bluetooth Blitz",
-      "register":"https://forms.gle/qEL9FEKhtD1S1o4y8",
+      "head": "Robo Drift",
+      "register":"/robodrift",
 
       "text": "The Bluetooth RC Motor Racing Car Competition, organized by N.E.R.D.S at NIT Silchar, blends speed and innovation as teams build remote-controlled cars using Bluetooth technology. Racing on a dynamic track with sharp turns and obstacles, the event tests speed, control, and maneuverability. It's a fast-paced competition that highlights teamwork, creativity, and technical expertise in an exciting showcase of engineering and racing skills.",
       "url": "https://res.cloudinary.com/dqmktpekh/image/upload/v1728914519/tvwisvpynm9jlvji9bls.webp"
