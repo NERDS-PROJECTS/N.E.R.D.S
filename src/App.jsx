@@ -14,6 +14,10 @@ import Merch from "./Pages/Merch/Merch";
 import MerchPay from "./Pages/Merch/MerchPay";
 import Giveaway from './Pages/Giveaway/Giveaway';
 import Track_order from "./Pages/Merch/Track_order";
+import Robowar from "./Pages/Robotron/Robowar";
+import Robosoccer from "./Pages/Robotron/Robosoccer";
+import RoboDrift from "./Pages/Robotron/RoboDrift";
+import AlgoMaze from "./Pages/Robotron/AlgoMaze";
 
 
 
@@ -59,6 +63,10 @@ function App() {
                 <Route path="/merchPay" element={<MerchPay />} />
                 <Route path="/giveaway" element={<Giveaway />} /> 
                 <Route path="/trackOrder" element={<Track_order/>} /> 
+                <Route path="/robowar" element={<Robowar/>} /> 
+                <Route path="/robosoccer" element={<Robosoccer/>} /> 
+                <Route path="/robodrift" element={<RoboDrift/>} /> 
+                <Route path="/algomaze" element={<AlgoMaze/>} /> 
                 {/* Catch-all route for 404 page */}
                 <Route path="*" element={<Error />} />
               </Routes>
