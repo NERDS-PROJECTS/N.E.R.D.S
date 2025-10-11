@@ -70,7 +70,7 @@ const BackgroundGrid = () => {
       }).map((_, i) => (
         <motion.div
           key={`orb-${i}`}
-          className="absolute rounded-full bg-red-500/30 blur-xl"
+          className="absolute rounded-full bg-black blur-xl"
           style={{
             width: Math.random() * 200 + 100,
             height: Math.random() * 200 + 100,
@@ -99,7 +99,7 @@ const BackgroundGrid = () => {
 const HeroSection = () => {
   return (
     <motion.section
-      className="py-16 text-center relative"
+      className="py-16 relative"
       initial={{
         opacity: 0,
         y: 20,
@@ -154,52 +154,110 @@ const HeroSection = () => {
           />
         ))}
       </div>
-      <motion.h1
-        className="text-5xl font-spaced md:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-300"
-        animate={{
-          textShadow: [
-            '0 0 7px #ff0000',
-            '0 0 10px #ff0000',
-            '0 0 7px #ff0000',
-          ],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          repeatType: 'reverse',
-        }}
-      >
-        ROBOTRON
-      </motion.h1>
-      <motion.h2
-        className="text-3xl font-spaced md:text-4xl font-bold mb-6 text-red-400"
-        animate={{
-          textShadow: ['0 0 3px #ff0000', '0 0 7px #ff0000', '0 0 3px #ff0000'],
-        }}
-        transition={{
-          duration: 2,
-          delay: 0.5,
-          repeat: Infinity,
-          repeatType: 'reverse',
-        }}
-      >
-        Robowar Registration 2025
-      </motion.h2>
-      <motion.p
-        className="text-xl font-spaced text-red-200 max-w-3xl mx-auto"
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-        }}
-        transition={{
-          delay: 0.5,
-          duration: 1,
-        }}
-      >
-        Organized by N.E.R.D.S. Robotics Club, NIT Silchar
-      </motion.p>
+
+      {/* Two Column Layout */}
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 relative z-10 max-w-7xl">
+        <div className="grid md:grid-cols-5 gap-6 lg:gap-10 items-center">
+          {/* Left Column - Text Content */}
+          <div className="text-center md:text-left md:col-span-2">
+            <motion.h1
+              className="text-4xl font-spaced md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-300"
+              animate={{
+                textShadow: [
+                  '0 0 7px #ff0000',
+                  '0 0 10px #ff0000',
+                  '0 0 7px #ff0000',
+                ],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: 'reverse',
+              }}
+            >
+              ROBOTRON
+            </motion.h1>
+            <motion.h2
+              className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-red-400"
+              animate={{
+                textShadow: ['0 0 3px #ff0000', '0 0 7px #ff0000', '0 0 3px #ff0000'],
+              }}
+              transition={{
+                duration: 2,
+                delay: 0.5,
+                repeat: Infinity,
+                repeatType: 'reverse',
+              }}
+            >
+              Robowar Registration 2025
+            </motion.h2>
+            <motion.p
+              className="text-base md:text-lg font-spaced text-red-200 mb-4"
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                delay: 0.5,
+                duration: 1,
+              }}
+            >
+              A battle-forged robot engineered for ROBOWAR supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. Robowar — where only the toughest bots survive! 
+            </motion.p>
+          </div>
+
+          {/* Right Column - Hero Image */}
+          <motion.div
+            className="flex justify-center items-center md:col-span-3"
+            initial={{
+              opacity: 0,
+              scale: 0.8,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            transition={{
+              delay: 0.3,
+              duration: 0.8,
+            }}
+          >
+            <motion.div
+              className="relative"
+              whileHover={{
+                scale: 1.05,
+              }}
+              transition={{
+                type: 'spring',
+                stiffness: 300,
+                damping: 20,
+              }}
+            >
+              {/* Glowing effect behind image */}
+              <motion.div
+                className="absolute inset-0 bg-red-500/30 blur-3xl rounded-full"
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                  scale: [0.9, 1.1, 0.9],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: 'reverse',
+                }}
+              />
+
+              <img
+                src="/robotron/war.png"
+                alt="Battle Robot"
+                className="relative z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(239,68,68,0.6)]"
+              />
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
     </motion.section>
   )
 }
@@ -224,12 +282,12 @@ const AttentionSection = () => {
         once: true,
       }}
     >
-      <div className="bg-red-950/30 backdrop-blur-md border border-red-500/30 rounded-xl p-6 relative overflow-hidden">
+      <div className="bg-red-950/30 flex flex-col justify-self-center w-fit  backdrop-blur-md border border-red-500/30 rounded-xl p-6 relative overflow-hidden">
         {/* Glassmorphism effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-red-900/10" />
         {/* Animated glow */}
         <motion.div
-          className="absolute inset-0 bg-red-500/5 rounded-xl"
+          className="absolute inset-0 bg-black/50 rounded-xl"
           animate={{
             boxShadow: [
               'inset 0 0 30px rgba(239,68,68,0.3)',
@@ -266,7 +324,7 @@ const AttentionSection = () => {
               >
                 Track Your Robot Kits
                 <motion.span
-                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-400"
+                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black"
                   whileHover={{
                     width: '100%',
                   }}
@@ -275,7 +333,7 @@ const AttentionSection = () => {
                   }}
                 />
                 <motion.span
-                  className="absolute inset-0 bg-red-400/20 rounded"
+                  className="absolute inset-0 bg-black/20 rounded"
                   initial={{
                     scale: 0,
                     opacity: 0,
@@ -293,6 +351,136 @@ const AttentionSection = () => {
           </div>
         </div>
       </div>
+    </motion.section>
+  )
+}
+
+// 3D Model Showcase Section Component
+const ModelShowcaseSection = () => {
+  return (
+    <motion.section
+      className="py-12"
+      initial={{
+        opacity: 0,
+      }}
+      whileInView={{
+        opacity: 1,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+      viewport={{
+        once: true,
+      }}
+    >
+      <motion.h2
+        className="text-3xl font-bold mb-8 text-red-400 text-center"
+        initial={{
+          opacity: 0,
+          y: -20,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.5,
+        }}
+        viewport={{
+          once: true,
+        }}
+      >
+        3D Battle Robot Showcase
+      </motion.h2>
+      <motion.div
+        className="max-w-5xl mx-auto"
+        initial={{
+          opacity: 0,
+          y: 20,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.6,
+          delay: 0.2,
+        }}
+        viewport={{
+          once: true,
+        }}
+      >
+        <div className="bg-gradient-to-br from-black/50 to-red-950/20 backdrop-blur-sm rounded-2xl border-2 border-red-500/30 p-4 md:p-6 lg:p-8 relative overflow-hidden">
+          {/* Animated glow effect */}
+          <motion.div
+            className="absolute inset-0 opacity-50"
+            animate={{
+              boxShadow: [
+                'inset 0 0 20px rgba(239,68,68,0.2)',
+                'inset 0 0 40px rgba(239,68,68,0.3)',
+                'inset 0 0 20px rgba(239,68,68,0.2)',
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+            }}
+          />
+          
+          {/* Sketchfab Embed */}
+          <div className="relative z-10 sketchfab-embed-wrapper">
+            <div className="aspect-video w-full rounded-lg overflow-hidden border border-red-500/50">
+              <iframe 
+                title="Tron Bike - Light Cycle" 
+                frameBorder="0" 
+                allowFullScreen
+                mozAllowFullScreen={true}
+                webkitAllowFullScreen={true}
+                allow="autoplay; fullscreen; xr-spatial-tracking" 
+                src="https://sketchfab.com/models/9ae198b9a25a49c3b28f5c2f92441b92/embed"
+                className="w-full h-full"
+              />
+            </div>
+            
+            {/* Attribution */}
+            <motion.div
+              className="mt-4 text-center text-sm text-red-300/70"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <p className="space-x-2">
+                <a 
+                  href="https://sketchfab.com/3d-models/tron-bike-light-cycle-9ae198b9a25a49c3b28f5c2f92441b92?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
+                >
+                  Tron Bike - Light Cycle
+                </a>
+                <span>by</span>
+                <a 
+                  href="https://sketchfab.com/SQUIR3D?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
+                >
+                  SQUIR3D
+                </a>
+                <span>on</span>
+                <a 
+                  href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
+                >
+                  Sketchfab
+                </a>
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
     </motion.section>
   )
 }
@@ -370,7 +558,7 @@ const KitComponentsSection = () => {
       >
         KIT Component Details
       </motion.h2>
-      <div className="bg-black/30 backdrop-blur-sm rounded-2xl border border-red-900/30 p-8">
+      <div className="bg-black/30 flex flex-col justify-self-center w-fit  backdrop-blur-sm rounded-2xl border border-red-900/30 p-8">
         <motion.ul
           className="space-y-3"
           variants={containerVariants}
@@ -417,7 +605,7 @@ const KitComponentsSection = () => {
 const PaymentDetailsSection = ({ registrationFee }) => {
   const upiLink1 = `upi://pay?pa=6003147277@ptsbi&pn=Swarup%20Chanda&am=${registrationFee}&cu=INR`;
   const upiLink2 = `upi://pay?pa=himdfayzan1735-2@oksbi&pn=Md%20Fayjan&am=${registrationFee}&cu=INR`;
-  
+
   const paymentOptions = [
     {
       bankName: 'SBI',
@@ -470,13 +658,13 @@ const PaymentDetailsSection = ({ registrationFee }) => {
           once: true,
         }}
       >
-        Payment Details
+        Bank Transfer Payment Details
       </motion.h2>
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="flex flex-col gap-8 max-w-2xl mx-auto">
         {paymentOptions.map((option, index) => (
           <motion.div
             key={index}
-            className="bg-gradient-to-br from-red-950/50 to-black/50 backdrop-blur-sm rounded-xl border border-red-900/30 p-6 relative overflow-hidden group"
+            className="bg-gradient-to-br from-black-100/50 to-black/50 backdrop-blur-sm rounded-xl border border-black p-6 relative overflow-hidden group"
             initial={{
               opacity: 0,
               y: 20,
@@ -541,17 +729,7 @@ const PaymentDetailsSection = ({ registrationFee }) => {
                 {option.upi}
               </p>
             </div>
-            {/* UPI Payment Button */}
-            <div className="mt-4">
-              <a
-                href={option.upiLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-red-600 to-red-500 text-white font-bold rounded-lg shadow-lg hover:scale-105 transition-all duration-200"
-              >
-                <span>Pay ₹{registrationFee} via UPI</span>
-              </a>
-            </div>
+
             {/* Animated border */}
             <motion.div
               className="absolute inset-0 rounded-xl z-0 pointer-events-none"
@@ -601,17 +779,17 @@ function RobowarRegistration() {
     paymentProofLink: "",
     transactionNumber: "",
   });
-  
+
   // Fixed registration fee
   const registrationFee = 999;
-  
+
   const [fileUrl, setFileUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [modal, setModal] = useState({ open: false, message: "", success: false });
 
   // Change this to your actual deployed Apps Script Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5p3omtAO6t1MPeTFP9kL0ruKR4lyjxhwWhnw9VG42O-ts8-SxYk-sjMVycqKV0vU3gw/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwwsxlaJN9vJJb1aMAXLTVjrfpe9tmNrQ8gcAQ-57GDUiSWBvfJ3WBkqBo1P9iJ-wo/exec";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -619,6 +797,7 @@ function RobowarRegistration() {
       [name]: value,
     }));
   };
+
 
 
 
@@ -636,7 +815,7 @@ function RobowarRegistration() {
         fname: "uploadFilesToGoogleDrive",
       };
       fetch(
-        "https://script.google.com/macros/s/AKfycbyhMyvbLwGEqCjVGC0gJCwvAOS_KyJnfVleU4h3iUUG88VeUXoWyujKKjRxMSuzT9AoHA/exec",
+        "https://script.google.com/macros/s/AKfycbyAQLKv4e4iBfdZn6sdLw-OSerztKzNbfhF_eJiJAf0WrwK7IzvIVS-cF2iKlv_qQ8EMw/exec",
         {
           method: "POST",
           body: JSON.stringify(dataSend),
@@ -706,31 +885,33 @@ function RobowarRegistration() {
     setSubmitting(true);
     try {
       const timestamp = new Date().toISOString();
-      const params = new URLSearchParams();
-      params.append("Timestamp", timestamp);
-      params.append("TeamLeaderEmail", formData.teamLeaderEmail);
-      params.append("TeamName", formData.teamName);
-      params.append("TeamLeaderName", formData.teamLeaderName);
-      params.append("TeamLeaderPhone", formData.teamLeaderPhone);
-      params.append("TeamLeaderWhatsapp", formData.teamLeaderWhatsapp);
-      params.append("TeamLeaderScholarId", formData.teamLeaderScholarId);
-      params.append("TeamMember2", formData.teamMember2);
-      params.append("TeamMember3", formData.teamMember3);
-      params.append("TeamMember4", formData.teamMember4);
-      params.append("TeamMember5", formData.teamMember5 || "");
-      params.append("TeamMember6", formData.teamMember6 || "");
-      params.append("PaymentProofLink", formData.paymentProofLink);
-      params.append("TransactionNumber", formData.transactionNumber);
-      params.append("RegistrationFee", registrationFee);
-      const res = await fetch(SCRIPT_URL, {
+      const formBody = new URLSearchParams();
+      formBody.append("Timestamp", timestamp);
+      formBody.append("TeamLeaderEmail", formData.teamLeaderEmail);
+      formBody.append("TeamName", formData.teamName);
+      formBody.append("TeamLeaderName", formData.teamLeaderName);
+      formBody.append("TeamLeaderPhone", formData.teamLeaderPhone);
+      formBody.append("TeamLeaderWhatsapp", formData.teamLeaderWhatsapp);
+      formBody.append("TeamLeaderScholarId", formData.teamLeaderScholarId);
+      formBody.append("TeamMemberSecond", formData.teamMember2);
+      formBody.append("TeamMemberThird", formData.teamMember3);
+      formBody.append("TeamMemberFourth", formData.teamMember4);
+      formBody.append("TeamMemberFifth", formData.teamMember5 || "");
+      formBody.append("TeamMemberSixth", formData.teamMember6 || "");
+      formBody.append("PaymentProofLink", formData.paymentProofLink);
+      formBody.append("TransactionNumber", formData.transactionNumber);
+      
+      await fetch(SCRIPT_URL, {
         method: "POST",
+        mode: "no-cors",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: params.toString()
+        body: formBody.toString()
       });
-      const response = await res.text();
-      setModal({ open: true, message: response, success: true });
+      
+      // With no-cors mode, we can't read the response, so we assume success if no error
+      setModal({ open: true, message: "Registration submitted successfully! You will receive a confirmation email shortly.", success: true });
       setFormData({
         teamLeaderEmail: "",
         teamName: "",
@@ -756,9 +937,9 @@ function RobowarRegistration() {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-gradient-to-b from-black to-red-950 text-white overflow-hidden font-orbitron">
+    <div className="relative min-h-screen w-full bg-gradient-to-b from-black via-black/40 to-black text-white overflow-hidden font-orbitron">
       <BackgroundGrid />
-      
+
       {/* Modal for alerts - keeping original functionality */}
       {modal.open && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm px-2">
@@ -797,8 +978,8 @@ function RobowarRegistration() {
         duration={1200}
         loop={true}
       />
-      
-      <ProgressBar duration="0.01"/>
+
+      <ProgressBar duration="0.01" />
 
       <div className="container mx-auto px-4 py-8 relative z-10">
         <motion.div
@@ -814,10 +995,10 @@ function RobowarRegistration() {
           className="space-y-12 pb-20"
         >
           <HeroSection />
-          
+
           {/* Registration Form Component with new styling */}
           <motion.section
-            className="py-12 px-4 md:px-8 bg-black/30 backdrop-blur-sm rounded-2xl border border-red-900/30"
+            className="py-12 flex flex-col justify-self-center w-fit px-4 md:px-8 bg-black/30 backdrop-blur-sm rounded-2xl border border-red-900/30"
             initial={{
               opacity: 0,
               y: 20,
@@ -1077,7 +1258,8 @@ function RobowarRegistration() {
                   </motion.div>
                 ))}
               </div>
-
+              <KitComponentsSection />
+              <AttentionSection />
               {/* Payment Section */}
               <div className="space-y-6 pt-8">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
@@ -1108,7 +1290,7 @@ function RobowarRegistration() {
                         PRIMARY
                       </div>
                       <div className="aspect-square bg-white rounded-lg mb-3 flex items-center justify-center overflow-hidden">
-                        <img 
+                        <img
                           src="/tshirt/swarup_qr.png"
                           alt="Primary Payment QR Code - Swarup Chanda"
                           className="w-full h-full object-contain"
@@ -1130,7 +1312,7 @@ function RobowarRegistration() {
                         ALTERNATIVE
                       </div>
                       <div className="aspect-square bg-white rounded-lg mb-3 flex items-center justify-center overflow-hidden">
-                        <img 
+                        <img
                           src="/tshirt/qr_code.jpg"
                           alt="Alternative Payment QR Code - Md Fayjan"
                           className="w-full h-full object-contain"
@@ -1160,7 +1342,7 @@ function RobowarRegistration() {
                   >
                     <div className={`w-full bg-gradient-to-br from-black/60 to-red-950/20 border-2 ${fileUrl ? 'border-green-500' : 'border-red-800 border-dashed'} focus-within:border-red-500 rounded-xl p-6 text-white outline-none transition-all duration-300 focus-within:shadow-[0_0_20px_rgba(239,68,68,0.4)]`}>
                       <label className="flex flex-col items-center gap-4 cursor-pointer">
-                        <div className={`p-4 rounded-full ${fileUrl ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+                        <div className={`p-4 rounded-full ${fileUrl ? 'bg-green-500/20' : 'bg-black/20'}`}>
                           <UploadIcon className={`h-10 w-10 ${fileUrl ? 'text-green-400' : 'text-red-400'}`} />
                         </div>
                         <div className="text-center">
@@ -1170,7 +1352,7 @@ function RobowarRegistration() {
                                 Uploading...
                               </div>
                               <div className="w-48 h-2 bg-red-900/30 rounded-full overflow-hidden mx-auto">
-                                <motion.div 
+                                <motion.div
                                   className="h-full bg-gradient-to-r from-red-600 to-red-400"
                                   initial={{ width: "0%" }}
                                   animate={{ width: "100%" }}
@@ -1184,10 +1366,10 @@ function RobowarRegistration() {
                                 <CheckCircleIcon className="h-6 w-6" />
                                 File Uploaded Successfully!
                               </div>
-                              <a 
-                                href={fileUrl} 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
+                              <a
+                                href={fileUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-red-300 text-sm underline hover:text-red-100 inline-block"
                                 onClick={(e) => e.stopPropagation()}
                               >
@@ -1254,64 +1436,19 @@ function RobowarRegistration() {
               </div>
 
               {/* Submit Button */}
-              <motion.button
-                type="submit"
-                className="w-full bg-gradient-to-r from-red-800 to-red-600 hover:from-red-700 hover:to-red-500 text-white font-bold py-4 px-8 rounded-md mt-8 relative overflow-hidden group"
-                whileHover={{
-                  scale: 1.02,
-                }}
-                whileTap={{
-                  scale: 0.98,
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 400,
-                  damping: 17,
-                }}
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2 text-xl">
-                  Register My Team
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-red-400/30"
-                  initial={{
-                    scale: 0,
-                    x: '-50%',
-                    y: '-50%',
-                  }}
-                  whileHover={{
-                    scale: 3,
-                  }}
-                  transition={{
-                    duration: 0.4,
-                  }}
-                  style={{
-                    left: '50%',
-                    top: '50%',
-                    originX: 0.5,
-                    originY: 0.5,
-                  }}
-                />
-                <motion.div
-                  className="absolute inset-0 opacity-70"
-                  animate={{
-                    boxShadow: [
-                      '0 0 0px rgba(239,68,68,0.7)',
-                      '0 0 20px rgba(239,68,68,0.7)',
-                      '0 0 0px rgba(239,68,68,0.7)',
-                    ],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                  }}
-                />
-              </motion.button>
+              <div className="flex justify-center mt-4">
+                <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ff0000_0%,#ff6b6b_50%,#ff0000_100%)]" />
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                    Register My Team
+                  </span>
+                </button>
+              </div>
             </form>
           </motion.section>
 
-          <AttentionSection />
-          <KitComponentsSection />
+
+
           <PaymentDetailsSection registrationFee={registrationFee} />
         </motion.div>
       </div>
