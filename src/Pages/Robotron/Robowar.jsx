@@ -1437,12 +1437,29 @@ function RobowarRegistration() {
 
               {/* Submit Button */}
               <div className="flex justify-center mt-4">
-                <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ff0000_0%,#ff6b6b_50%,#ff0000_100%)]" />
-                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-                    Register My Team
+                <motion.button 
+                  type="submit"
+                  className="relative w-full max-w-md h-20 bg-no-repeat bg-center bg-contain flex items-center justify-center group cursor-pointer"
+                  style={{
+                    backgroundImage: "url('/robotron/button.svg')",
+                    backgroundSize: "70% 70%",
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  {/* Glow effect on hover */}
+                  <motion.div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      filter: "blur(15px)",
+                      background: "radial-gradient(circle, rgba(165,0,0,0.6) 0%, transparent 70%)",
+                    }}
+                  />
+                  <span className="relative z-10 text-xs md:text-sm font-bold text-white drop-shadow-[0_0_10px_rgba(165,0,0,0.8)] group-hover:drop-shadow-[0_0_15px_rgba(165,0,0,1)] transition-all duration-300">
+                    Register Team
                   </span>
-                </button>
+                </motion.button>
               </div>
             </form>
           </motion.section>
