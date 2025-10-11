@@ -161,7 +161,7 @@ const HeroSection = () => {
           {/* Left Column - Text Content */}
           <div className="text-center md:text-left md:col-span-2">
             <motion.h1
-              className="text-4xl font-spaced md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600"
+              className="text-4xl font-orbitron md:text-5xl lg:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600"
               animate={{
                 textShadow: [
                   '0 0 7px #ff0000',
@@ -175,7 +175,7 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              ROBOTRON
+              ROBOWAR
             </motion.h1>
             <motion.h2
               className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-red-200"
@@ -189,7 +189,7 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              Robowar Registration 2025
+              Robotron Registration 2025
             </motion.h2>
             <motion.p
               className="text-base md:text-lg font-spaced text-red-200 mb-4"
@@ -719,7 +719,7 @@ function RobowarRegistration() {
       case "torque":
         return 4800;
       case "both":
-        return 6000;
+        return 5999;
       default:
         return baseRegistrationFee;
     }
@@ -1418,7 +1418,7 @@ function RobowarRegistration() {
                             <p className="text-red-400/70 text-sm ml-7">Maximum flexibility for any weapon design</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-red-300 font-bold text-lg">₹6,000</p>
+                            <p className="text-red-300 font-bold text-lg">₹5,999</p>
                             <p className="text-red-400/60 text-xs">(Kit + Registration)</p>
                           </div>
                         </div>

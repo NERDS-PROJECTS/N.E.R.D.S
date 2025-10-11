@@ -99,7 +99,7 @@ const BackgroundGrid = () => {
 const HeroSection = () => {
   return (
     <motion.section
-      className="py-16 relative"
+      className="relative"
       initial={{
         opacity: 0,
         y: 20,
@@ -161,7 +161,7 @@ const HeroSection = () => {
           {/* Left Column - Text Content */}
           <div className="text-center md:text-left md:col-span-2">
             <motion.h1
-              className="text-4xl font-spaced md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-600"
+              className="text-4xl font-orbitron md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-600"
               animate={{
                 textShadow: [
                   '0 0 7px #ffff00',
@@ -175,7 +175,7 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              ROBOTRON
+              ALGOMAZE
             </motion.h1>
             <motion.h2
               className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-yellow-200"
@@ -189,7 +189,7 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              AlgoMaze Registration 2025
+              Robotron Registration 2025
             </motion.h2>
             <motion.p
               className="text-base md:text-lg font-spaced text-yellow-200 mb-4"
@@ -204,7 +204,7 @@ const HeroSection = () => {
                 duration: 1,
               }}
             >
-              A battle-forged robot engineeyellow for AlgoMaze supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. AlgoMaze — where only the toughest bots survive!
+              A battle-forged robot engineered for AlgoMaze supremacy — designed to outsmart every twist of the labyrinth. With razor-sharp precision and relentless speed, it conquers the maze with algorithmic mastery. The true champion of N.E.R.D.S. AlgoMaze — where logic meets motion, and only the smartest bots survive!
             </motion.p>
           </div>
 
@@ -252,7 +252,7 @@ const HeroSection = () => {
               <img
                 src="/robotron/mouse.png"
                 alt="Battle Robot"
-                className="relative z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(255,255,0,0.6)]"
+                className="relative left-0 md:left-10  z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(255,255,0,0.6)]"
               />
             </motion.div>
           </motion.div>
@@ -371,12 +371,7 @@ const KitComponentsSection = ({ motorOption }) => {
     'Soldering Kit',
   ]
 
-  // Motor-specific items
-  const motorSpecificItems = {
-    rpm: ['High RPM Motor (1 Piece for weapon)'],
-    torque: ['High Torque Motor (1 Piece for weapon)'],
-    both: ['High RPM Motor (1 Piece for weapon)', 'High Torque Motor (1 Piece for weapon)']
-  }
+
 
   const containerVariants = {
     hidden: {
@@ -435,13 +430,7 @@ const KitComponentsSection = ({ motorOption }) => {
         }}
       >
         KIT Component Details
-        {motorOption && (
-          <span className="block text-lg text-yellow-400 mt-2 font-semibold">
-            {motorOption === 'rpm' && '(High RPM Motor Version)'}
-            {motorOption === 'torque' && '(High Torque Motor Version)'}
-            {motorOption === 'both' && '(Both Motors - Complete Package)'}
-          </span>
-        )}
+        
       </motion.h2>
       
       <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-yellow-900/30 p-8">
@@ -704,25 +693,15 @@ function AlgoMaze() {
 
   // Kit selection state
   const [wantsKit, setWantsKit] = useState(null); // null, true, or false
-  const [motorOption, setMotorOption] = useState(""); // "rpm", "torque", or "both"
 
   // Fixed registration fee
   const baseRegistrationFee = 999;
+  const kitPrice = 4200; // Price with kit
   
   // Calculate total fee based on kit selection
   const calculateTotalFee = () => {
     if (!wantsKit) return baseRegistrationFee;
-    
-    switch(motorOption) {
-      case "rpm":
-        return 4200;
-      case "torque":
-        return 4800;
-      case "both":
-        return 6000;
-      default:
-        return baseRegistrationFee;
-    }
+    return kitPrice;
   };
 
   const registrationFee = calculateTotalFee();
@@ -823,10 +802,6 @@ function AlgoMaze() {
       setModal({ open: true, message: "Please select whether you want to purchase a kit or not.", success: false });
       return;
     }
-    if (wantsKit === true && !motorOption) {
-      setModal({ open: true, message: "Please select a motor option for your kit.", success: false });
-      return;
-    }
     if (!formData.paymentProofLink) {
       setModal({ open: true, message: "Please upload payment proof before submitting.", success: false });
       return;
@@ -852,7 +827,6 @@ function AlgoMaze() {
       formBody.append("TeamMemberFifth", formData.teamMember5 || "");
       formBody.append("TeamMemberSixth", formData.teamMember6 || "");
       formBody.append("WantsKit", wantsKit ? "Yes" : "No");
-      formBody.append("MotorOption", wantsKit ? motorOption : "N/A");
       formBody.append("TotalAmount", registrationFee);
       formBody.append("PaymentProofLink", formData.paymentProofLink);
       formBody.append("TransactionNumber", formData.transactionNumber);
@@ -885,7 +859,6 @@ function AlgoMaze() {
       });
       setFileUrl("");
       setWantsKit(null);
-      setMotorOption("");
     } catch (err) {
       setModal({ open: true, message: "Error submitting registration.", success: false });
       console.error(err);
@@ -1275,10 +1248,7 @@ function AlgoMaze() {
                   <div className="flex gap-4">
                     <motion.button
                       type="button"
-                      onClick={() => {
-                        setWantsKit(true);
-                        if (!motorOption) setMotorOption("rpm");
-                      }}
+                      onClick={() => setWantsKit(true)}
                       className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
                         wantsKit === true
                           ? 'bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]'
@@ -1291,10 +1261,7 @@ function AlgoMaze() {
                     </motion.button>
                     <motion.button
                       type="button"
-                      onClick={() => {
-                        setWantsKit(false);
-                        setMotorOption("");
-                      }}
+                      onClick={() => setWantsKit(false)}
                       className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
                         wantsKit === false
                           ? 'bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]'
@@ -1322,107 +1289,10 @@ function AlgoMaze() {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <label className="block text-yellow-600 mb-3 font-medium text-lg">
-                      Select Motor Option *
-                    </label>
+                    
                     
                     <div className="space-y-3">
-                      {/* High RPM Motor Option */}
-                      <motion.button
-                        type="button"
-                        onClick={() => setMotorOption("rpm")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-                          motorOption === "rpm"
-                            ? 'bg-yellow-600/20 border-yellow-500 shadow-[0_0_15px_rgba(255,255,0,0.3)]'
-                            : 'bg-black/50 border-yellow-800 hover:border-yellow-600'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                      >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "rpm" ? 'border-yellow-500 bg-yellow-500' : 'border-yellow-700'
-                              }`}>
-                                {motorOption === "rpm" && (
-                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                )}
-                              </div>
-                              <h4 className="text-yellow-200 font-semibold">High RPM Motor</h4>
-                            </div>
-                            <p className="text-yellow-400/70 text-sm ml-7">Best for fast spinning weapons</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-yellow-300 font-bold text-lg">₹4,200</p>
-                            <p className="text-yellow-400/60 text-xs">(Kit + Registration)</p>
-                          </div>
-                        </div>
-                      </motion.button>
-
-                      {/* High Torque Motor Option */}
-                      <motion.button
-                        type="button"
-                        onClick={() => setMotorOption("torque")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-                          motorOption === "torque"
-                            ? 'bg-yellow-600/20 border-yellow-500 shadow-[0_0_15px_rgba(255,255,0,0.3)]'
-                            : 'bg-black/50 border-yellow-800 hover:border-yellow-600'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                      >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "torque" ? 'border-yellow-500 bg-yellow-500' : 'border-yellow-700'
-                              }`}>
-                                {motorOption === "torque" && (
-                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                )}
-                              </div>
-                              <h4 className="text-yellow-200 font-semibold">High Torque Motor</h4>
-                            </div>
-                            <p className="text-yellow-400/70 text-sm ml-7">Best for powerful crushing weapons</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-yellow-300 font-bold text-lg">₹4,800</p>
-                            <p className="text-yellow-400/60 text-xs">(Kit + Registration)</p>
-                          </div>
-                        </div>
-                      </motion.button>
-
-                      {/* Both Motors Option */}
-                      <motion.button
-                        type="button"
-                        onClick={() => setMotorOption("both")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left relative overflow-hidden ${
-                          motorOption === "both"
-                            ? 'bg-yellow-600/20 border-yellow-500 shadow-[0_0_15px_rgba(255,255,0,0.3)]'
-                            : 'bg-black/50 border-yellow-800 hover:border-yellow-600'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                      >
-                        
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "both" ? 'border-yellow-500 bg-yellow-500' : 'border-yellow-700'
-                              }`}>
-                                {motorOption === "both" && (
-                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                )}
-                              </div>
-                              <h4 className="text-yellow-200 font-semibold">Both Motors (RPM + Torque)</h4>
-                            </div>
-                            <p className="text-yellow-400/70 text-sm ml-7">Maximum flexibility for any weapon design</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-yellow-300 font-bold text-lg">₹6,000</p>
-                            <p className="text-yellow-400/60 text-xs">(Kit + Registration)</p>
-                          </div>
-                        </div>
-                      </motion.button>
+                      
                     </div>
                   </motion.div>
                 )}
@@ -1439,7 +1309,7 @@ function AlgoMaze() {
                       <div>
                         <p className="text-yellow-400/70 text-sm">Total Amount to Pay:</p>
                         <p className="text-yellow-100 text-xs mt-1">
-                          {wantsKit ? `Kit (${motorOption === 'rpm' ? 'High RPM Motor' : motorOption === 'torque' ? 'High Torque Motor' : motorOption === 'both' ? 'Both Motors' : ''}) + Registration` : 'Registration Only'}
+                          {wantsKit ? 'Kit + Registration' : 'Registration Only'}
                         </p>
                       </div>
                       <div className="text-right">
@@ -1451,7 +1321,7 @@ function AlgoMaze() {
               </div>
 
               {/* Show kit components only if kit is selected */}
-              {wantsKit === true && <KitComponentsSection motorOption={motorOption} />}
+              {wantsKit === true && <KitComponentsSection />}
               <AttentionSection />
               {/* Payment Section */}
               <div className="space-y-6 pt-8">
@@ -1712,17 +1582,7 @@ function AlgoMaze() {
                           {wantsKit === null ? "Not selected" : wantsKit ? "Yes" : "No"}
                         </p>
                       </div>
-                      {wantsKit && (
-                        <div>
-                          <span className="text-yellow-400/70">Motor Option:</span>
-                          <p className="text-yellow-100 font-medium">
-                            {motorOption === "rpm" ? "High RPM Motor" : 
-                             motorOption === "torque" ? "High Torque Motor" : 
-                             motorOption === "both" ? "Both Motors (RPM + Torque)" : 
-                             "Not selected"}
-                          </p>
-                        </div>
-                      )}
+                      
                       <div>
                         <span className="text-yellow-400/70">Total Amount:</span>
                         <p className="text-yellow-100 font-medium text-lg">₹{registrationFee}</p>

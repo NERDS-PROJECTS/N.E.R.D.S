@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import PropTypes from 'prop-types'
 import {
   AlertTriangleIcon,
   CheckCircleIcon,
@@ -99,7 +98,7 @@ const BackgroundGrid = () => {
 const HeroSection = () => {
   return (
     <motion.section
-      className="py-16 relative"
+      className="relative"
       initial={{
         opacity: 0,
         y: 20,
@@ -175,7 +174,7 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              ROBOTRON
+              ROBODRIFT
             </motion.h1>
             <motion.h2
               className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-green-200"
@@ -189,7 +188,7 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              RoboDrift Registration 2025
+              Robotron Registration 2025
             </motion.h2>
             <motion.p
               className="text-base md:text-lg font-spaced text-green-200 mb-4"
@@ -358,8 +357,8 @@ const AttentionSection = () => {
 
 
 // Kit Components Section Component
-const KitComponentsSection = ({ motorOption }) => {
-  // Base kit items (common for all options)
+const KitComponentsSection = () => {
+  // Base kit items (all included items)
   const baseKitItems = [
     'Metal Geagreen Driving Motors (4 Piece)',
     'Traction Wheels (4 Piece)',
@@ -370,13 +369,6 @@ const KitComponentsSection = ({ motorOption }) => {
     'Metal cutter blade (3 Piece)',
     'Soldering Kit',
   ]
-
-  // Motor-specific items
-  const motorSpecificItems = {
-    rpm: ['High RPM Motor (1 Piece for weapon)'],
-    torque: ['High Torque Motor (1 Piece for weapon)'],
-    both: ['High RPM Motor (1 Piece for weapon)', 'High Torque Motor (1 Piece for weapon)']
-  }
 
   const containerVariants = {
     hidden: {
@@ -435,20 +427,13 @@ const KitComponentsSection = ({ motorOption }) => {
         }}
       >
         KIT Component Details
-        {motorOption && (
-          <span className="block text-lg text-green-400 mt-2 font-semibold">
-            {motorOption === 'rpm' && '(High RPM Motor Version)'}
-            {motorOption === 'torque' && '(High Torque Motor Version)'}
-            {motorOption === 'both' && '(Both Motors - Complete Package)'}
-          </span>
-        )}
       </motion.h2>
       
       <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-green-900/30 p-8">
         {/* Base Kit Items */}
         <div className="mb-6">
           <h3 className="text-xl font-bold text-green-400 mb-4 border-b border-green-500/30 pb-2">
-            Base Kit Components
+            Kit Components
           </h3>
           <motion.ul
             className="space-y-3"
@@ -488,45 +473,12 @@ const KitComponentsSection = ({ motorOption }) => {
             ))}
           </motion.ul>
         </div>
-
-        {/* Motor-Specific Items */}
-        {motorOption && motorSpecificItems[motorOption] && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-xl font-bold text-green-300 mb-4 border-b border-green-500/30 pb-2 flex items-center gap-2">
-              <span className="bg-green-600 text-white text-xs font-bold px-2 py-1 rounded">WEAPON</span>
-              Motor Component
-            </h3>
-            <motion.ul
-              className="space-y-3"
-              variants={containerVariants}
-              initial="hidden"
-              animate="show"
-            >
-              {motorSpecificItems[motorOption].map((item, index) => (
-                <motion.li
-                  key={index}
-                  className="flex items-center gap-3 relative bg-green-600/10 p-3 rounded-lg border border-green-500/30"
-                  variants={itemVariants}
-                >
-                  <CheckCircleIcon className="h-5 w-5 text-green-400 shrink-0" />
-                  <span className="text-green-200 font-semibold">{item}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-        )}
       </div>
     </motion.section>
   )
 }
 
-KitComponentsSection.propTypes = {
-  motorOption: PropTypes.string,
-}
+KitComponentsSection.propTypes = {}
 
 // Payment Details Section Component
 const PaymentDetailsSection = () => {
@@ -704,25 +656,15 @@ function RoboDrift() {
 
   // Kit selection state
   const [wantsKit, setWantsKit] = useState(null); // null, true, or false
-  const [motorOption, setMotorOption] = useState(""); // "rpm", "torque", or "both"
 
   // Fixed registration fee
   const baseRegistrationFee = 999;
+  const kitPrice = 4200;
   
   // Calculate total fee based on kit selection
   const calculateTotalFee = () => {
     if (!wantsKit) return baseRegistrationFee;
-    
-    switch(motorOption) {
-      case "rpm":
-        return 4200;
-      case "torque":
-        return 4800;
-      case "both":
-        return 6000;
-      default:
-        return baseRegistrationFee;
-    }
+    return kitPrice;
   };
 
   const registrationFee = calculateTotalFee();
@@ -823,10 +765,6 @@ function RoboDrift() {
       setModal({ open: true, message: "Please select whether you want to purchase a kit or not.", success: false });
       return;
     }
-    if (wantsKit === true && !motorOption) {
-      setModal({ open: true, message: "Please select a motor option for your kit.", success: false });
-      return;
-    }
     if (!formData.paymentProofLink) {
       setModal({ open: true, message: "Please upload payment proof before submitting.", success: false });
       return;
@@ -852,7 +790,6 @@ function RoboDrift() {
       formBody.append("TeamMemberFifth", formData.teamMember5 || "");
       formBody.append("TeamMemberSixth", formData.teamMember6 || "");
       formBody.append("WantsKit", wantsKit ? "Yes" : "No");
-      formBody.append("MotorOption", wantsKit ? motorOption : "N/A");
       formBody.append("TotalAmount", registrationFee);
       formBody.append("PaymentProofLink", formData.paymentProofLink);
       formBody.append("TransactionNumber", formData.transactionNumber);
@@ -885,7 +822,6 @@ function RoboDrift() {
       });
       setFileUrl("");
       setWantsKit(null);
-      setMotorOption("");
     } catch (err) {
       setModal({ open: true, message: "Error submitting registration.", success: false });
       console.error(err);
@@ -1275,10 +1211,7 @@ function RoboDrift() {
                   <div className="flex gap-4">
                     <motion.button
                       type="button"
-                      onClick={() => {
-                        setWantsKit(true);
-                        if (!motorOption) setMotorOption("rpm");
-                      }}
+                      onClick={() => setWantsKit(true)}
                       className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
                         wantsKit === true
                           ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
@@ -1291,10 +1224,7 @@ function RoboDrift() {
                     </motion.button>
                     <motion.button
                       type="button"
-                      onClick={() => {
-                        setWantsKit(false);
-                        setMotorOption("");
-                      }}
+                      onClick={() => setWantsKit(false)}
                       className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
                         wantsKit === false
                           ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
@@ -1313,120 +1243,6 @@ function RoboDrift() {
                   )}
                 </motion.div>
 
-                {/* Motor Option Selection - Only shown if wants kit */}
-                {wantsKit === true && (
-                  <motion.div
-                    className="form-group space-y-4"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <label className="block text-green-600 mb-3 font-medium text-lg">
-                      Select Motor Option *
-                    </label>
-                    
-                    <div className="space-y-3">
-                      {/* High RPM Motor Option */}
-                      <motion.button
-                        type="button"
-                        onClick={() => setMotorOption("rpm")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-                          motorOption === "rpm"
-                            ? 'bg-green-600/20 border-green-500 shadow-[0_0_15px_rgba(0,255,0,0.3)]'
-                            : 'bg-black/50 border-green-800 hover:border-green-600'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                      >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "rpm" ? 'border-green-500 bg-green-500' : 'border-green-700'
-                              }`}>
-                                {motorOption === "rpm" && (
-                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                )}
-                              </div>
-                              <h4 className="text-green-200 font-semibold">High RPM Motor</h4>
-                            </div>
-                            <p className="text-green-400/70 text-sm ml-7">Best for fast spinning weapons</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-green-300 font-bold text-lg">₹4,200</p>
-                            <p className="text-green-400/60 text-xs">(Kit + Registration)</p>
-                          </div>
-                        </div>
-                      </motion.button>
-
-                      {/* High Torque Motor Option */}
-                      <motion.button
-                        type="button"
-                        onClick={() => setMotorOption("torque")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-                          motorOption === "torque"
-                            ? 'bg-green-600/20 border-green-500 shadow-[0_0_15px_rgba(0,255,0,0.3)]'
-                            : 'bg-black/50 border-green-800 hover:border-green-600'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                      >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "torque" ? 'border-green-500 bg-green-500' : 'border-green-700'
-                              }`}>
-                                {motorOption === "torque" && (
-                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                )}
-                              </div>
-                              <h4 className="text-green-200 font-semibold">High Torque Motor</h4>
-                            </div>
-                            <p className="text-green-400/70 text-sm ml-7">Best for powerful crushing weapons</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-green-300 font-bold text-lg">₹4,800</p>
-                            <p className="text-green-400/60 text-xs">(Kit + Registration)</p>
-                          </div>
-                        </div>
-                      </motion.button>
-
-                      {/* Both Motors Option */}
-                      <motion.button
-                        type="button"
-                        onClick={() => setMotorOption("both")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left relative overflow-hidden ${
-                          motorOption === "both"
-                            ? 'bg-green-600/20 border-green-500 shadow-[0_0_15px_rgba(0,255,0,0.3)]'
-                            : 'bg-black/50 border-green-800 hover:border-green-600'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                      >
-                        
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "both" ? 'border-green-500 bg-green-500' : 'border-green-700'
-                              }`}>
-                                {motorOption === "both" && (
-                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                )}
-                              </div>
-                              <h4 className="text-green-200 font-semibold">Both Motors (RPM + Torque)</h4>
-                            </div>
-                            <p className="text-green-400/70 text-sm ml-7">Maximum flexibility for any weapon design</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-green-300 font-bold text-lg">₹6,000</p>
-                            <p className="text-green-400/60 text-xs">(Kit + Registration)</p>
-                          </div>
-                        </div>
-                      </motion.button>
-                    </div>
-                  </motion.div>
-                )}
-
                 {/* Price Summary */}
                 {wantsKit !== null && (
                   <motion.div
@@ -1439,7 +1255,7 @@ function RoboDrift() {
                       <div>
                         <p className="text-green-400/70 text-sm">Total Amount to Pay:</p>
                         <p className="text-green-100 text-xs mt-1">
-                          {wantsKit ? `Kit (${motorOption === 'rpm' ? 'High RPM Motor' : motorOption === 'torque' ? 'High Torque Motor' : motorOption === 'both' ? 'Both Motors' : ''}) + Registration` : 'Registration Only'}
+                          {wantsKit ? 'Kit + Registration' : 'Registration Only'}
                         </p>
                       </div>
                       <div className="text-right">
@@ -1451,7 +1267,7 @@ function RoboDrift() {
               </div>
 
               {/* Show kit components only if kit is selected */}
-              {wantsKit === true && <KitComponentsSection motorOption={motorOption} />}
+              {wantsKit === true && <KitComponentsSection />}
               <AttentionSection />
               {/* Payment Section */}
               <div className="space-y-6 pt-8">
@@ -1712,17 +1528,6 @@ function RoboDrift() {
                           {wantsKit === null ? "Not selected" : wantsKit ? "Yes" : "No"}
                         </p>
                       </div>
-                      {wantsKit && (
-                        <div>
-                          <span className="text-green-400/70">Motor Option:</span>
-                          <p className="text-green-100 font-medium">
-                            {motorOption === "rpm" ? "High RPM Motor" : 
-                             motorOption === "torque" ? "High Torque Motor" : 
-                             motorOption === "both" ? "Both Motors (RPM + Torque)" : 
-                             "Not selected"}
-                          </p>
-                        </div>
-                      )}
                       <div>
                         <span className="text-green-400/70">Total Amount:</span>
                         <p className="text-green-100 font-medium text-lg">₹{registrationFee}</p>

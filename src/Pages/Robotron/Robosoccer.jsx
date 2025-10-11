@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import PropTypes from 'prop-types'
 import {
   AlertTriangleIcon,
   CheckCircleIcon,
@@ -99,7 +98,7 @@ const BackgroundGrid = () => {
 const HeroSection = () => {
   return (
     <motion.section
-      className="py-16 relative"
+      className=" relative"
       initial={{
         opacity: 0,
         y: 20,
@@ -175,7 +174,7 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              ROBOTRON
+              ROBOSOCCER
             </motion.h1>
             <motion.h2
               className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-blue-200"
@@ -189,7 +188,7 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              Robosoccer Registration 2025
+              Robotron Registration 2025
             </motion.h2>
             <motion.p
               className="text-base md:text-lg font-spaced text-blue-200 mb-4"
@@ -204,7 +203,7 @@ const HeroSection = () => {
                 duration: 1,
               }}
             >
-              A battle-forged robot engineeblue for Robosoccer supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. Robosoccer — where only the toughest bots survive!
+              A battle-forged machine of unmatched precision and fury — built for RoboSoccer supremacy. Engineered to strike, defend. This is the ultimate challenger of N.E.R.D.S. RoboSoccer — where skill meets steel, and only the fastest survive.
             </motion.p>
           </div>
 
@@ -358,8 +357,8 @@ const AttentionSection = () => {
 
 
 // Kit Components Section Component
-const KitComponentsSection = ({ motorOption }) => {
-  // Base kit items (common for all options)
+const KitComponentsSection = () => {
+  // Base kit items (all included items)
   const baseKitItems = [
     'Metal Geablue Driving Motors (4 Piece)',
     'Traction Wheels (4 Piece)',
@@ -370,13 +369,6 @@ const KitComponentsSection = ({ motorOption }) => {
     'Metal cutter blade (3 Piece)',
     'Soldering Kit',
   ]
-
-  // Motor-specific items
-  const motorSpecificItems = {
-    rpm: ['High RPM Motor (1 Piece for weapon)'],
-    torque: ['High Torque Motor (1 Piece for weapon)'],
-    both: ['High RPM Motor (1 Piece for weapon)', 'High Torque Motor (1 Piece for weapon)']
-  }
 
   const containerVariants = {
     hidden: {
@@ -435,20 +427,13 @@ const KitComponentsSection = ({ motorOption }) => {
         }}
       >
         KIT Component Details
-        {motorOption && (
-          <span className="block text-lg text-blue-400 mt-2 font-semibold">
-            {motorOption === 'rpm' && '(High RPM Motor Version)'}
-            {motorOption === 'torque' && '(High Torque Motor Version)'}
-            {motorOption === 'both' && '(Both Motors - Complete Package)'}
-          </span>
-        )}
       </motion.h2>
       
       <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-blue-900/30 p-8">
         {/* Base Kit Items */}
         <div className="mb-6">
           <h3 className="text-xl font-bold text-blue-400 mb-4 border-b border-blue-500/30 pb-2">
-            Base Kit Components
+            Kit Components
           </h3>
           <motion.ul
             className="space-y-3"
@@ -488,45 +473,12 @@ const KitComponentsSection = ({ motorOption }) => {
             ))}
           </motion.ul>
         </div>
-
-        {/* Motor-Specific Items */}
-        {motorOption && motorSpecificItems[motorOption] && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-xl font-bold text-blue-300 mb-4 border-b border-blue-500/30 pb-2 flex items-center gap-2">
-              <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">WEAPON</span>
-              Motor Component
-            </h3>
-            <motion.ul
-              className="space-y-3"
-              variants={containerVariants}
-              initial="hidden"
-              animate="show"
-            >
-              {motorSpecificItems[motorOption].map((item, index) => (
-                <motion.li
-                  key={index}
-                  className="flex items-center gap-3 relative bg-blue-600/10 p-3 rounded-lg border border-blue-500/30"
-                  variants={itemVariants}
-                >
-                  <CheckCircleIcon className="h-5 w-5 text-blue-400 shrink-0" />
-                  <span className="text-blue-200 font-semibold">{item}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-        )}
       </div>
     </motion.section>
   )
 }
 
-KitComponentsSection.propTypes = {
-  motorOption: PropTypes.string,
-}
+KitComponentsSection.propTypes = {}
 
 // Payment Details Section Component
 const PaymentDetailsSection = () => {
@@ -704,25 +656,15 @@ function Robosoccer() {
 
   // Kit selection state
   const [wantsKit, setWantsKit] = useState(null); // null, true, or false
-  const [motorOption, setMotorOption] = useState(""); // "rpm", "torque", or "both"
 
   // Fixed registration fee
   const baseRegistrationFee = 999;
+  const kitPrice = 4200;
   
   // Calculate total fee based on kit selection
   const calculateTotalFee = () => {
     if (!wantsKit) return baseRegistrationFee;
-    
-    switch(motorOption) {
-      case "rpm":
-        return 4200;
-      case "torque":
-        return 4800;
-      case "both":
-        return 6000;
-      default:
-        return baseRegistrationFee;
-    }
+    return kitPrice;
   };
 
   const registrationFee = calculateTotalFee();
@@ -823,10 +765,6 @@ function Robosoccer() {
       setModal({ open: true, message: "Please select whether you want to purchase a kit or not.", success: false });
       return;
     }
-    if (wantsKit === true && !motorOption) {
-      setModal({ open: true, message: "Please select a motor option for your kit.", success: false });
-      return;
-    }
     if (!formData.paymentProofLink) {
       setModal({ open: true, message: "Please upload payment proof before submitting.", success: false });
       return;
@@ -852,7 +790,6 @@ function Robosoccer() {
       formBody.append("TeamMemberFifth", formData.teamMember5 || "");
       formBody.append("TeamMemberSixth", formData.teamMember6 || "");
       formBody.append("WantsKit", wantsKit ? "Yes" : "No");
-      formBody.append("MotorOption", wantsKit ? motorOption : "N/A");
       formBody.append("TotalAmount", registrationFee);
       formBody.append("PaymentProofLink", formData.paymentProofLink);
       formBody.append("TransactionNumber", formData.transactionNumber);
@@ -885,7 +822,6 @@ function Robosoccer() {
       });
       setFileUrl("");
       setWantsKit(null);
-      setMotorOption("");
     } catch (err) {
       setModal({ open: true, message: "Error submitting registration.", success: false });
       console.error(err);
@@ -1052,7 +988,7 @@ function Robosoccer() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(59,130,246,0.5)] placeholder:text-blue-400/40"
                       placeholder="team.leader@example.com"
-                      requiblue
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1076,7 +1012,7 @@ function Robosoccer() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(59,130,246,0.5)] placeholder:text-blue-400/40"
                       placeholder="Enter your team name"
-                      requiblue
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1102,7 +1038,7 @@ function Robosoccer() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(59,130,246,0.5)] placeholder:text-blue-400/40"
                       placeholder="Enter your full name"
-                      requiblue
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1131,7 +1067,7 @@ function Robosoccer() {
                         pattern="[0-9]{10,15}"
                         className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(59,130,246,0.5)] placeholder:text-blue-400/40"
                         placeholder="10-digit number"
-                        requiblue
+                        required
                       />
                     </motion.div>
                   </motion.div>
@@ -1158,7 +1094,7 @@ function Robosoccer() {
                         pattern="[0-9]{10,15}"
                         className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(59,130,246,0.5)] placeholder:text-blue-400/40"
                         placeholder="WhatsApp number"
-                        requiblue
+                        required
                       />
                     </motion.div>
                   </motion.div>
@@ -1185,7 +1121,7 @@ function Robosoccer() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(59,130,246,0.5)] placeholder:text-blue-400/40"
                       placeholder="Enter Scholar ID"
-                      requiblue
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1195,10 +1131,10 @@ function Robosoccer() {
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-blue-500 pl-4 mb-6">
                   <h3 className="text-xl font-bold text-blue-200">Team Members</h3>
-                  <p className="text-blue-200 text-sm mt-1">Add your team members (minimum 4 requiblue)</p>
+                  <p className="text-blue-200 text-sm mt-1">Add your team members (minimum 4 required)</p>
                 </div>
 
-                {/* Requiblue Members */}
+                {/* required Members */}
                 {[2, 3, 4].map((num) => (
                   <motion.div
                     key={num}
@@ -1219,9 +1155,9 @@ function Robosoccer() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(59,130,246,0.5)] placeholder:text-blue-400/40"
+                        className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,171,218,0.5)] placeholder:text-blue-400/40"
                         placeholder={`Enter member ${num} name`}
-                        requiblue
+                        required
                       />
                     </motion.div>
                   </motion.div>
@@ -1247,7 +1183,7 @@ function Robosoccer() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-blue-400/40"
+                        className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,171,218,0.5)] placeholder:text-blue-400/40"
                         placeholder={`Enter member ${num} name (optional)`}
                       />
                     </motion.div>
@@ -1275,13 +1211,10 @@ function Robosoccer() {
                   <div className="flex gap-4">
                     <motion.button
                       type="button"
-                      onClick={() => {
-                        setWantsKit(true);
-                        if (!motorOption) setMotorOption("rpm");
-                      }}
+                      onClick={() => setWantsKit(true)}
                       className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
                         wantsKit === true
-                          ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                          ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(0,171,218,0.5)]'
                           : 'bg-black/50 border-blue-800 text-blue-300 hover:border-blue-600'
                       }`}
                       whileHover={{ scale: 1.02 }}
@@ -1291,13 +1224,10 @@ function Robosoccer() {
                     </motion.button>
                     <motion.button
                       type="button"
-                      onClick={() => {
-                        setWantsKit(false);
-                        setMotorOption("");
-                      }}
+                      onClick={() => setWantsKit(false)}
                       className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
                         wantsKit === false
-                          ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                          ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(0,171,218,0.5)]'
                           : 'bg-black/50 border-blue-800 text-blue-300 hover:border-blue-600'
                       }`}
                       whileHover={{ scale: 1.02 }}
@@ -1313,120 +1243,6 @@ function Robosoccer() {
                   )}
                 </motion.div>
 
-                {/* Motor Option Selection - Only shown if wants kit */}
-                {wantsKit === true && (
-                  <motion.div
-                    className="form-group space-y-4"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <label className="block text-blue-600 mb-3 font-medium text-lg">
-                      Select Motor Option *
-                    </label>
-                    
-                    <div className="space-y-3">
-                      {/* High RPM Motor Option */}
-                      <motion.button
-                        type="button"
-                        onClick={() => setMotorOption("rpm")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-                          motorOption === "rpm"
-                            ? 'bg-blue-600/20 border-blue-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
-                            : 'bg-black/50 border-blue-800 hover:border-blue-600'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                      >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "rpm" ? 'border-blue-500 bg-blue-500' : 'border-blue-700'
-                              }`}>
-                                {motorOption === "rpm" && (
-                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                )}
-                              </div>
-                              <h4 className="text-blue-200 font-semibold">High RPM Motor</h4>
-                            </div>
-                            <p className="text-blue-400/70 text-sm ml-7">Best for fast spinning weapons</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-blue-300 font-bold text-lg">₹4,200</p>
-                            <p className="text-blue-400/60 text-xs">(Kit + Registration)</p>
-                          </div>
-                        </div>
-                      </motion.button>
-
-                      {/* High Torque Motor Option */}
-                      <motion.button
-                        type="button"
-                        onClick={() => setMotorOption("torque")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-                          motorOption === "torque"
-                            ? 'bg-blue-600/20 border-blue-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
-                            : 'bg-black/50 border-blue-800 hover:border-blue-600'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                      >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "torque" ? 'border-blue-500 bg-blue-500' : 'border-blue-700'
-                              }`}>
-                                {motorOption === "torque" && (
-                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                )}
-                              </div>
-                              <h4 className="text-blue-200 font-semibold">High Torque Motor</h4>
-                            </div>
-                            <p className="text-blue-400/70 text-sm ml-7">Best for powerful crushing weapons</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-blue-300 font-bold text-lg">₹4,800</p>
-                            <p className="text-blue-400/60 text-xs">(Kit + Registration)</p>
-                          </div>
-                        </div>
-                      </motion.button>
-
-                      {/* Both Motors Option */}
-                      <motion.button
-                        type="button"
-                        onClick={() => setMotorOption("both")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left relative overflow-hidden ${
-                          motorOption === "both"
-                            ? 'bg-blue-600/20 border-blue-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
-                            : 'bg-black/50 border-blue-800 hover:border-blue-600'
-                        }`}
-                        whileHover={{ scale: 1.01 }}
-                      >
-                        
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "both" ? 'border-blue-500 bg-blue-500' : 'border-blue-700'
-                              }`}>
-                                {motorOption === "both" && (
-                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                )}
-                              </div>
-                              <h4 className="text-blue-200 font-semibold">Both Motors (RPM + Torque)</h4>
-                            </div>
-                            <p className="text-blue-400/70 text-sm ml-7">Maximum flexibility for any weapon design</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-blue-300 font-bold text-lg">₹6,000</p>
-                            <p className="text-blue-400/60 text-xs">(Kit + Registration)</p>
-                          </div>
-                        </div>
-                      </motion.button>
-                    </div>
-                  </motion.div>
-                )}
-
                 {/* Price Summary */}
                 {wantsKit !== null && (
                   <motion.div
@@ -1439,7 +1255,7 @@ function Robosoccer() {
                       <div>
                         <p className="text-blue-400/70 text-sm">Total Amount to Pay:</p>
                         <p className="text-blue-100 text-xs mt-1">
-                          {wantsKit ? `Kit (${motorOption === 'rpm' ? 'High RPM Motor' : motorOption === 'torque' ? 'High Torque Motor' : motorOption === 'both' ? 'Both Motors' : ''}) + Registration` : 'Registration Only'}
+                          {wantsKit ? 'Kit + Registration' : 'Registration Only'}
                         </p>
                       </div>
                       <div className="text-right">
@@ -1451,7 +1267,7 @@ function Robosoccer() {
               </div>
 
               {/* Show kit components only if kit is selected */}
-              {wantsKit === true && <KitComponentsSection motorOption={motorOption} />}
+              {wantsKit === true && <KitComponentsSection />}
               <AttentionSection />
               {/* Payment Section */}
               <div className="space-y-6 pt-8">
@@ -1590,7 +1406,7 @@ function Robosoccer() {
                           type="file"
                           accept="application/pdf,image/*"
                           onChange={uploader}
-                          requiblue={!fileUrl}
+                          required={!fileUrl}
                           className="hidden"
                         />
                       </label>
@@ -1617,9 +1433,9 @@ function Robosoccer() {
                       name="transactionNumber"
                       value={formData.transactionNumber}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-blue-400/40 font-mono"
+                      className="w-full bg-black/50 border-2 border-blue-800 focus:border-blue-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,171,218,0.5)] placeholder:text-blue-400/40 font-mono"
                       placeholder="Enter UPI transaction number"
-                      requiblue
+                      required
                     />
                   </motion.div>
                   <p className="text-blue-400/60 text-xs mt-2">
@@ -1712,17 +1528,6 @@ function Robosoccer() {
                           {wantsKit === null ? "Not selected" : wantsKit ? "Yes" : "No"}
                         </p>
                       </div>
-                      {wantsKit && (
-                        <div>
-                          <span className="text-blue-400/70">Motor Option:</span>
-                          <p className="text-blue-100 font-medium">
-                            {motorOption === "rpm" ? "High RPM Motor" : 
-                             motorOption === "torque" ? "High Torque Motor" : 
-                             motorOption === "both" ? "Both Motors (RPM + Torque)" : 
-                             "Not selected"}
-                          </p>
-                        </div>
-                      )}
                       <div>
                         <span className="text-blue-400/70">Total Amount:</span>
                         <p className="text-blue-100 font-medium text-lg">₹{registrationFee}</p>
@@ -1775,7 +1580,7 @@ function Robosoccer() {
                       background: "radial-gradient(circle, rgba(0,171,218,0.6) 0%, transparent 70%)",
                     }}
                   />
-                  <span className="relative z-10 text-xs md:text-sm font-bold text-white drop-shadow-[0_0_10px_rgba(165,0,0,0.8)] group-hover:drop-shadow-[0_0_15px_rgba(165,0,0,1)] transition-all duration-300">
+                  <span className="relative z-10 text-xs md:text-sm font-bold text-white drop-shadow-[0_0_10px_rgba(0,171,218,0.8)] group-hover:drop-shadow-[0_0_15px_rgba(165,0,0,1)] transition-all duration-300">
                     Register Team
                   </span>
                 </motion.button>
