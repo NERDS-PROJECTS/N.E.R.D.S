@@ -8,6 +8,7 @@ import Gallery from "./Pages/Gallery/Gallery";
 import Contact from "./Pages/Contact/Contact";
 import Navbar from "./components/Navbar/navbar";
 import Footer from "./components/Footer/footer";
+import Galaxy from "./components/Hero/Galaxy";
 import Error from "./Pages/Error/Error";
 import LoadingAnimation from "./components/Loader/Loader"; 
 import Merch from "./Pages/Merch/Merch";
@@ -55,6 +56,7 @@ function App() {
             <div className="flex-grow w-full">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/galaxy" element={<Galaxy/>} />
                 <Route path="/event" element={<Event />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/team" element={<Team />} />
