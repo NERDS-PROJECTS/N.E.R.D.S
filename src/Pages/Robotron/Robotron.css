@@ -73,6 +73,46 @@
   text-shadow: 0 0 10px rgba(216, 86, 86, 0.3), 0 0 20px rgba(3, 179, 195, 0.3);
 }
 
+/* Audio Control Button */
+.audio-control-button {
+  position: fixed;
+  top: 120px;
+  right: 2rem;
+  z-index: 100;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(3, 179, 195, 0.5);
+  color: #03B3C3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+}
+
+.audio-control-button:hover {
+  background: rgba(3, 179, 195, 0.2);
+  border-color: #03B3C3;
+  box-shadow: 0 0 20px rgba(3, 179, 195, 0.4),
+              0 0 40px rgba(3, 179, 195, 0.2);
+  transform: scale(1.1);
+}
+
+.audio-control-button:active {
+  transform: scale(0.95);
+}
+
+.audio-control-button svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
 .robotron-buttons-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -260,5 +300,17 @@
     font-size: 0.9rem;
     letter-spacing: 0.1rem;
     min-height: 70px;
+  }
+
+  .audio-control-button {
+    top: 100px;
+    right: 1rem;
+    width: 45px;
+    height: 45px;
+  }
+
+  .audio-control-button svg {
+    width: 20px;
+    height: 20px;
   }
 }
