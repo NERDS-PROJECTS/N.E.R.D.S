@@ -7,7 +7,7 @@ const links = [
   { name: 'Gallery', path: '/gallery' },
   { name: 'Team', path: '/team' },
   { name: 'Merch', path: '/merch' },
-  { name: 'Giveaway', path: '/giveaway'},
+  { name: 'Robotron', path: '/robotron'},
   { name: 'Contact', path: '/contact' },
 ];
 
@@ -124,6 +124,4 @@ const Navbar = () => {
 
 export default Navbar;
 
-// Add this style to your main app container (e.g., in App.jsx or a global layout):
-// <div className="pt-24 ..."> ... </div>
-// Adjust 'pt-24' if your navbar height is different (pt-24 = 6rem = 96px)
+

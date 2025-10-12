@@ -19,6 +19,7 @@ import Robowar from "./Pages/Robotron/Robowar";
 import Robosoccer from "./Pages/Robotron/Robosoccer";
 import RoboDrift from "./Pages/Robotron/RoboDrift";
 import AlgoMaze from "./Pages/Robotron/AlgoMaze";
+import Robotron from "./Pages/Robotron/Robotron";
 
 
 
@@ -57,6 +58,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/galaxy" element={<Galaxy/>} />
+                <Route path="/robotron" element={<Robotron/>} />
                 <Route path="/event" element={<Event />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/team" element={<Team />} />

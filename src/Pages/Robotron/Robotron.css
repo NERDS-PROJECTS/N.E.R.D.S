@@ -1,0 +1,262 @@
+.robotron-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.robotron-title {
+  font-size: 6rem;
+  font-weight: 900;
+  font-family: orbitron;
+  background: linear-gradient(135deg, #e80101 0%, #03B3C3 50%, #f80202 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  /* filter: drop-shadow(0 0 10px rgba(216, 86, 191, 0.6)) 
+          drop-shadow(0 0 20px rgba(3, 179, 195, 0.4)); */
+  animation: titleGradient 5s ease-in-out infinite, titleGlitch 15s infinite;
+  position: relative;
+}
+
+.robotron-title::before,
+.robotron-title::after {
+  content: 'ROBOTRON';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #da0000 0%, #03B3C3 50%, #960303 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+}
+
+.robotron-title::before {
+  animation: glitchTop 3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  transform: translateX(-2px);
+}
+
+.robotron-title::after {
+  animation: glitchBottom 3.5s infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  transform: translateX(2px);
+}
+
+.robotron-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  opacity: 0.9;
+  text-shadow: 0 0 10px rgba(216, 86, 86, 0.3), 0 0 20px rgba(3, 179, 195, 0.3);
+}
+
+.robotron-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  pointer-events: auto;
+  padding: 0 2rem;
+}
+
+.robotron-button {
+  position: relative;
+  padding: 1.5rem 3rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  overflow: visible;
+  transition: filter 0.3s ease;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.robotron-button::before {
+  display: none;
+}
+
+.robotron-button:hover {
+  filter: drop-shadow(0 0 10px var(--glow-color)) drop-shadow(0 0 15px var(--glow-color));
+}
+
+.robotron-button:active {
+  filter: drop-shadow(0 0 8px var(--glow-color)) drop-shadow(0 0 12px var(--glow-color));
+}
+
+.robotron-button-text {
+  position: relative;
+  z-index: 2;
+  display: block;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.robotron-button-line {
+  display: none;
+}
+
+@keyframes titleGradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes titleGlitch {
+  0%, 90%, 100% {
+    transform: translateX(0);
+  }
+  91% {
+    transform: translateX(-2px) skew(-2deg);
+  }
+  92% {
+    transform: translateX(2px) skew(2deg);
+  }
+  93% {
+    transform: translateX(-1px) skew(-1deg);
+  }
+  94% {
+    transform: translateX(1px) skew(1deg);
+  }
+  95% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes glitchTop {
+  0%, 85%, 100% {
+    opacity: 0;
+  }
+  86% {
+    opacity: 0.8;
+    transform: translateX(-4px);
+  }
+  87% {
+    opacity: 0.6;
+    transform: translateX(3px);
+  }
+  88% {
+    opacity: 0;
+  }
+}
+
+@keyframes glitchBottom {
+  0%, 92%, 100% {
+    opacity: 0;
+  }
+  93% {
+    opacity: 0.7;
+    transform: translateX(3px);
+  }
+  94% {
+    opacity: 0.5;
+    transform: translateX(-2px);
+  }
+  95% {
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .robotron-title {
+    font-size: 4rem;
+    letter-spacing: 0.3rem;
+  }
+
+  .robotron-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .robotron-buttons-grid {
+    gap: 1.5rem;
+  }
+
+  .robotron-button {
+    padding: 1.2rem 2rem;
+    font-size: 1.2rem;
+    min-height: 100px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .robotron-title {
+    font-size: 3rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .robotron-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .robotron-buttons-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+    max-width: 400px;
+  }
+
+  .robotron-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    letter-spacing: 0.15rem;
+    min-height: 80px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .robotron-title {
+    font-size: 2rem;
+    letter-spacing: 0.15rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .robotron-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 0.15rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .robotron-buttons-grid {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .robotron-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+    min-height: 70px;
+  }
+}
