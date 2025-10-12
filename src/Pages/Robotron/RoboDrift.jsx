@@ -251,7 +251,7 @@ const HeroSection = () => {
               <img
                 src="/robotron/car.png"
                 alt="Battle Robot"
-                className="relative z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(0,255,0,0.6)]"
+                className="relative left-0 md:left-20 z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(0,255,0,0.6)]"
               />
             </motion.div>
           </motion.div>
@@ -644,27 +644,24 @@ function RoboDrift() {
     teamLeaderName: "",
     teamLeaderPhone: "",
     teamLeaderWhatsapp: "",
-    teamLeaderScholarId: "",
     teamMember2: "",
     teamMember3: "",
     teamMember4: "",
-    teamMember5: "",
-    teamMember6: "",
     paymentProofLink: "",
     transactionNumber: "",
   });
 
-  // Kit selection state
+  // Kit selection state (NIT Silchar only)
   const [wantsKit, setWantsKit] = useState(null); // null, true, or false
 
-  // Fixed registration fee
-  const baseRegistrationFee = 999;
+  // Registration fees (NIT Silchar only)
+  const nitSilcharRegistrationFee = 999;
   const kitPrice = 4200;
   
   // Calculate total fee based on kit selection
   const calculateTotalFee = () => {
-    if (!wantsKit) return baseRegistrationFee;
-    return kitPrice;
+    if (wantsKit === null) return 0;
+    return wantsKit === true ? kitPrice : nitSilcharRegistrationFee;
   };
 
   const registrationFee = calculateTotalFee();
@@ -675,7 +672,10 @@ function RoboDrift() {
   const [modal, setModal] = useState({ open: false, message: "", success: false });
 
   // Change this to your actual deployed Apps Script Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwwsxlaJN9vJJb1aMAXLTVjrfpe9tmNrQ8gcAQ-57GDUiSWBvfJ3WBkqBo1P9iJ-wo/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxyjcvLUV00oQ8X2dqcofxv78Gw9CoFRJEuaVhLh2pDrHUnS-C9iaKBHXBqCLgvpx_W/exec";
+  
+
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -744,20 +744,12 @@ function RoboDrift() {
       setModal({ open: true, message: "Please enter team leader's WhatsApp number.", success: false });
       return;
     }
-    if (!formData.teamLeaderScholarId.trim()) {
-      setModal({ open: true, message: "Please enter team leader's Scholar ID.", success: false });
-      return;
-    }
     if (!formData.teamMember2.trim()) {
       setModal({ open: true, message: "Please enter Team Member 2 name.", success: false });
       return;
     }
     if (!formData.teamMember3.trim()) {
       setModal({ open: true, message: "Please enter Team Member 3 name.", success: false });
-      return;
-    }
-    if (!formData.teamMember4.trim()) {
-      setModal({ open: true, message: "Please enter Team Member 4 name.", success: false });
       return;
     }
     // Validate kit selection
@@ -775,56 +767,82 @@ function RoboDrift() {
     }
     setSubmitting(true);
     try {
-      const timestamp = new Date().toISOString();
-      const formBody = new URLSearchParams();
-      formBody.append("Timestamp", timestamp);
-      formBody.append("TeamLeaderEmail", formData.teamLeaderEmail);
-      formBody.append("TeamName", formData.teamName);
-      formBody.append("TeamLeaderName", formData.teamLeaderName);
-      formBody.append("TeamLeaderPhone", formData.teamLeaderPhone);
-      formBody.append("TeamLeaderWhatsapp", formData.teamLeaderWhatsapp);
-      formBody.append("TeamLeaderScholarId", formData.teamLeaderScholarId);
-      formBody.append("TeamMemberSecond", formData.teamMember2);
-      formBody.append("TeamMemberThird", formData.teamMember3);
-      formBody.append("TeamMemberFourth", formData.teamMember4);
-      formBody.append("TeamMemberFifth", formData.teamMember5 || "");
-      formBody.append("TeamMemberSixth", formData.teamMember6 || "");
-      formBody.append("WantsKit", wantsKit ? "Yes" : "No");
-      formBody.append("TotalAmount", registrationFee);
-      formBody.append("PaymentProofLink", formData.paymentProofLink);
-      formBody.append("TransactionNumber", formData.transactionNumber);
+      // Prepare data in JSON format matching Apps Script expectations
+      const submissionData = {
+        TeamLeaderName: formData.teamLeaderName,
+        Email: formData.teamLeaderEmail,
+        PhoneNumber: formData.teamLeaderPhone,
+        WhatsAppNumber: formData.teamLeaderWhatsapp,
+        TeamName: formData.teamName,
+        WantsKit: wantsKit ? "Yes" : "No",
+        TeamMemberSecond: formData.teamMember2,
+        TeamMemberThird: formData.teamMember3,
+        TeamMemberFourth: formData.teamMember4 || "",
+        TransactionNumber: formData.transactionNumber,
+        PaymentScreenshot: formData.paymentProofLink,
+        TotalFee: registrationFee.toString()
+      };
 
-      await fetch(SCRIPT_URL, {
+      console.log("Submitting registration data:", submissionData);
+      console.log("Apps Script URL:", SCRIPT_URL);
+      console.log("Total Fee:", registrationFee);
+      console.log("Wants Kit:", wantsKit);
+
+      const response = await fetch(SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "text/plain" // Use text/plain to avoid CORS preflight
         },
-        body: formBody.toString()
+        body: JSON.stringify(submissionData),
+        redirect: 'follow'
       });
 
-      // With no-cors mode, we can't read the response, so we assume success if no error
-      setModal({ open: true, message: "Registration submitted successfully! You will receive a confirmation email shortly.", success: true });
-      setFormData({
-        teamLeaderEmail: "",
-        teamName: "",
-        teamLeaderName: "",
-        teamLeaderPhone: "",
-        teamLeaderWhatsapp: "",
-        teamLeaderScholarId: "",
-        teamMember2: "",
-        teamMember3: "",
-        teamMember4: "",
-        teamMember5: "",
-        teamMember6: "",
-        paymentProofLink: "",
-        transactionNumber: "",
-      });
-      setFileUrl("");
-      setWantsKit(null);
+      console.log("Response status:", response.status);
+      console.log("Response ok:", response.ok);
+      console.log("Response type:", response.type);
+
+      const result = await response.json();
+      console.log("Response data:", result);
+      
+      if (result.success) {
+        setModal({ open: true, message: "Registration submitted successfully! You will receive a confirmation email shortly.", success: true });
+        setFormData({
+          teamLeaderEmail: "",
+          teamName: "",
+          teamLeaderName: "",
+          teamLeaderPhone: "",
+          teamLeaderWhatsapp: "",
+          teamMember2: "",
+          teamMember3: "",
+          teamMember4: "",
+          paymentProofLink: "",
+          transactionNumber: "",
+        });
+        setFileUrl("");
+        setWantsKit(null);
+      } else {
+        setModal({ open: true, message: result.message || "Registration failed. Please try again.", success: false });
+      }
     } catch (err) {
-      setModal({ open: true, message: "Error submitting registration.", success: false });
-      console.error(err);
+      console.error("Submission error details:", err);
+      console.error("Error name:", err.name);
+      console.error("Error message:", err.message);
+      
+      let errorMessage = "Error submitting registration. ";
+      
+      if (err.name === 'TypeError' && err.message.includes('Failed to fetch')) {
+        errorMessage = "Network error: Unable to connect to the server. Please check:\n" +
+                      "1. Your internet connection\n" +
+                      "2. The Apps Script URL is correct\n" +
+                      "3. The Apps Script is deployed as Web App\n\n" +
+                      "Current URL: " + SCRIPT_URL;
+      } else if (err instanceof SyntaxError) {
+        errorMessage = "Server returned invalid response. The Apps Script may not be deployed correctly.";
+      } else {
+        errorMessage = `Error: ${err.message}\n\nPlease check the browser console for details.`;
+      }
+      
+      setModal({ open: true, message: errorMessage, success: false });
     } finally {
       setSubmitting(false);
     }
@@ -988,7 +1006,7 @@ function RoboDrift() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="team.leader@example.com"
-                      requigreen
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1012,7 +1030,7 @@ function RoboDrift() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="Enter your team name"
-                      requigreen
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1038,7 +1056,7 @@ function RoboDrift() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="Enter your full name"
-                      requigreen
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1067,7 +1085,7 @@ function RoboDrift() {
                         pattern="[0-9]{10,15}"
                         className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                         placeholder="10-digit number"
-                        requigreen
+                        required
                       />
                     </motion.div>
                   </motion.div>
@@ -1094,48 +1112,22 @@ function RoboDrift() {
                         pattern="[0-9]{10,15}"
                         className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                         placeholder="WhatsApp number"
-                        requigreen
+                        required
                       />
                     </motion.div>
                   </motion.div>
                 </div>
-
-                {/* Leader Scholar ID */}
-                <motion.div
-                  className="form-group"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.35 }}
-                >
-                  <label className="block text-green-600 mb-2 font-medium">
-                    Scholar ID *
-                  </label>
-                  <motion.div
-                    className="relative"
-                    whileHover={{ scale: 1.005 }}
-                  >
-                    <input
-                      type="text"
-                      name="teamLeaderScholarId"
-                      value={formData.teamLeaderScholarId}
-                      onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
-                      placeholder="Enter Scholar ID"
-                      requigreen
-                    />
-                  </motion.div>
-                </motion.div>
               </div>
 
               {/* Team Members Section */}
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-green-500 pl-4 mb-6">
                   <h3 className="text-xl font-bold text-green-200">Team Members</h3>
-                  <p className="text-green-200 text-sm mt-1">Add your team members (minimum 4 requigreen)</p>
+                  <p className="text-green-200 text-sm mt-1">Add your team members (minimum 2 required, max 4 including leader)</p>
                 </div>
 
-                {/* Requigreen Members */}
-                {[2, 3, 4].map((num) => (
+                {/* Required Members (2 and 3) */}
+                {[2, 3].map((num) => (
                   <motion.div
                     key={num}
                     className="form-group"
@@ -1157,114 +1149,116 @@ function RoboDrift() {
                         onChange={handleInputChange}
                         className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                         placeholder={`Enter member ${num} name`}
-                        requigreen
+                        required
                       />
                     </motion.div>
                   </motion.div>
                 ))}
 
-                {/* Optional Members */}
-                {[5, 6].map((num) => (
+                {/* Optional Member 4 */}
+                <motion.div
+                  className="form-group"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <label className="block text-green-600 mb-2 font-medium">
+                    Team Member 4 Name <span className="text-green-400/60">(Optional)</span>
+                  </label>
                   <motion.div
-                    key={num}
-                    className="form-group"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.55 + (num - 5) * 0.05 }}
+                    whileHover={{ scale: 1.005 }}
                   >
-                    <label className="block text-green-600 mb-2 font-medium">
-                      Team Member {num} Name <span className="text-green-400/60">(Optional)</span>
-                    </label>
-                    <motion.div
-                      whileHover={{ scale: 1.005 }}
-                    >
-                      <input
-                        type="text"
-                        name={`teamMember${num}`}
-                        value={formData[`teamMember${num}`]}
-                        onChange={handleInputChange}
-                        className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
-                        placeholder={`Enter member ${num} name (optional)`}
-                      />
-                    </motion.div>
+                    <input
+                      type="text"
+                      name="teamMember4"
+                      value={formData.teamMember4}
+                      onChange={handleInputChange}
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                      placeholder="Enter member 4 name (optional)"
+                    />
                   </motion.div>
-                ))}
+                </motion.div>
               </div>
 
               {/* Kit Selection Section */}
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-green-500 pl-4 mb-6">
                   <h3 className="text-xl font-bold text-green-200">Kit Selection</h3>
-                  <p className="text-green-200 text-sm mt-1">Choose if you want to purchase a kit from us</p>
+                  <p className="text-green-200 text-sm mt-1">Choose if you want to purchase a kit (NIT Silchar students only)</p>
                 </div>
 
-                {/* Do you want kit? */}
                 <motion.div
                   className="form-group"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.6 }}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.55, duration: 0.3 }}
                 >
                   <label className="block text-green-600 mb-3 font-medium text-lg">
                     Do you want to purchase a Robot Kit? *
                   </label>
                   <div className="flex gap-4">
-                    <motion.button
-                      type="button"
-                      onClick={() => setWantsKit(true)}
-                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        wantsKit === true
-                          ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
-                          : 'bg-black/50 border-green-800 text-green-300 hover:border-green-600'
-                      }`}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      Yes, I want a kit
-                    </motion.button>
-                    <motion.button
-                      type="button"
-                      onClick={() => setWantsKit(false)}
-                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        wantsKit === false
-                          ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
-                          : 'bg-black/50 border-green-800 text-green-300 hover:border-green-600'
-                      }`}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      No, registration only
-                    </motion.button>
-                  </div>
-                  {wantsKit === null && (
-                    <p className="text-green-400/60 text-xs mt-2">
-                      ⚠️ Please select an option to continue
-                    </p>
-                  )}
-                </motion.div>
-
-                {/* Price Summary */}
-                {wantsKit !== null && (
-                  <motion.div
-                    className="bg-gradient-to-br from-green-950/30 to-black/50 border-2 border-green-500/40 rounded-xl p-4"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="text-green-400/70 text-sm">Total Amount to Pay:</p>
-                        <p className="text-green-100 text-xs mt-1">
-                          {wantsKit ? 'Kit + Registration' : 'Registration Only'}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-green-300 font-bold text-2xl">₹{registrationFee}</p>
-                      </div>
+                      <motion.button
+                        type="button"
+                        onClick={() => setWantsKit(true)}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                          wantsKit === true
+                            ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
+                            : 'bg-black/50 border-green-800 text-green-300 hover:border-green-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div>
+                          <div>Yes, I want a kit</div>
+                          <div className="text-sm opacity-80 mt-1">₹4200 (Kit + Registration)</div>
+                        </div>
+                      </motion.button>
+                      <motion.button
+                        type="button"
+                        onClick={() => setWantsKit(false)}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                          wantsKit === false
+                            ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
+                            : 'bg-black/50 border-green-800 text-green-300 hover:border-green-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div>
+                          <div>No, registration only</div>
+                          <div className="text-sm opacity-80 mt-1">₹999 (Registration Only)</div>
+                        </div>
+                      </motion.button>
                     </div>
+                    {wantsKit === null && (
+                      <p className="text-green-400/60 text-xs mt-2">
+                        ⚠️ Please select an option to continue
+                      </p>
+                    )}
                   </motion.div>
-                )}
-              </div>
+
+                  {/* Price Summary */}
+                  {wantsKit !== null && (
+                    <motion.div
+                      className="bg-gradient-to-br from-green-950/30 to-black/50 border-2 border-green-500/40 rounded-xl p-4 mt-6"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className="text-green-400/70 text-sm">Total Amount to Pay:</p>
+                          <p className="text-green-100 text-xs mt-1">
+                            {wantsKit ? 'NIT Silchar - Kit + Registration' : 'NIT Silchar - Registration Only'}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-green-300 font-bold text-2xl">₹{registrationFee}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
 
               {/* Show kit components only if kit is selected */}
               {wantsKit === true && <KitComponentsSection />}
@@ -1406,7 +1400,7 @@ function RoboDrift() {
                           type="file"
                           accept="application/pdf,image/*"
                           onChange={uploader}
-                          requigreen={!fileUrl}
+                          required={!fileUrl}
                           className="hidden"
                         />
                       </label>
@@ -1435,7 +1429,7 @@ function RoboDrift() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40 font-mono"
                       placeholder="Enter UPI transaction number"
-                      requigreen
+                      required
                     />
                   </motion.div>
                   <p className="text-green-400/60 text-xs mt-2">
@@ -1492,10 +1486,6 @@ function RoboDrift() {
                         <span className="text-green-400/70">WhatsApp:</span>
                         <p className="text-green-100 font-medium">{formData.teamLeaderWhatsapp || "Not provided"}</p>
                       </div>
-                      <div>
-                        <span className="text-green-400/70">Scholar ID:</span>
-                        <p className="text-green-100 font-medium">{formData.teamLeaderScholarId || "Not provided"}</p>
-                      </div>
                     </div>
                   </div>
 
@@ -1503,7 +1493,7 @@ function RoboDrift() {
                   <div className="space-y-3">
                     <h4 className="text-lg font-bold text-green-300 border-b border-green-500/30 pb-2">Team Members</h4>
                     <div className="grid md:grid-cols-2 gap-4 text-sm">
-                      {[2, 3, 4, 5, 6].map((num) => {
+                      {[2, 3, 4].map((num) => {
                         const memberName = formData[`teamMember${num}`];
                         if (memberName) {
                           return (
@@ -1525,7 +1515,11 @@ function RoboDrift() {
                       <div>
                         <span className="text-green-400/70">Kit Purchase:</span>
                         <p className="text-green-100 font-medium">
-                          {wantsKit === null ? "Not selected" : wantsKit ? "Yes" : "No"}
+                          {wantsKit === null 
+                            ? "Not selected" 
+                            : wantsKit 
+                              ? "Yes" 
+                              : "No"}
                         </p>
                       </div>
                       <div>
@@ -1559,6 +1553,8 @@ function RoboDrift() {
                 </div>
               </motion.div>
 
+            
+
               {/* Submit Button */}
               <div className="flex justify-center mt-4">
                 <motion.button
@@ -1580,7 +1576,7 @@ function RoboDrift() {
                       background: "radial-gradient(circle, rgba(0,218,33,0.6) 0%, transparent 70%)",
                     }}
                   />
-                  <span className="relative z-10 text-xs md:text-sm font-bold text-white drop-shadow-[0_0_10px_rgba(165,0,0,0.8)] group-hover:drop-shadow-[0_0_15px_rgba(165,0,0,1)] transition-all duration-300">
+                  <span className="relative z-10 text-xs md:text-sm font-bold text-white drop-shadow-[0_0_10px_rgba(0,218,33,0.8)] group-hover:drop-shadow-[0_0_15px_rgba(165,0,0,1)] transition-all duration-300">
                     Register Team
                   </span>
                 </motion.button>

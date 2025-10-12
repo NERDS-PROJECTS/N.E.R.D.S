@@ -99,7 +99,7 @@ const BackgroundGrid = () => {
 const HeroSection = () => {
   return (
     <motion.section
-      className="py-16 relative"
+      className="relative"
       initial={{
         opacity: 0,
         y: 20,
@@ -250,9 +250,9 @@ const HeroSection = () => {
               />
 
               <img
-                src="/robotron/war.png"
+                src="/robotron/war_.png"
                 alt="Battle Robot"
-                className="relative z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(239,68,68,0.6)]"
+                className="relative left-0 md:left-20 z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(239,68,68,0.6)]"
               />
             </motion.div>
           </motion.div>
@@ -693,6 +693,7 @@ function RobowarRegistration() {
     teamLeaderPhone: "",
     teamLeaderWhatsapp: "",
     teamLeaderScholarId: "",
+    collegeName: "", // For non-NIT Silchar students
     teamMember2: "",
     teamMember3: "",
     teamMember4: "",
@@ -702,27 +703,43 @@ function RobowarRegistration() {
     transactionNumber: "",
   });
 
-  // Kit selection state
-  const [wantsKit, setWantsKit] = useState(null); // null, true, or false
-  const [motorOption, setMotorOption] = useState(""); // "rpm", "torque", or "both"
+  // College type and kit selection state
+  const [collegeType, setCollegeType] = useState(null); // "nit_silchar" or "other"
+  const [wantsKit, setWantsKit] = useState(null); // null, true, or false (only for NIT Silchar)
+  const [motorOption, setMotorOption] = useState(""); // "rpm", "torque", or "both" (only for NIT Silchar with kit)
+  const [weightCategory, setWeightCategory] = useState(null); // "lightweight" (8kg) or "heavyweight" (15kg)
 
-  // Fixed registration fee
-  const baseRegistrationFee = 999;
+  // Registration fees
+  const nitSilcharRegistrationFee = 999;
+  const otherCollegeRegistrationFee = 2000;
   
-  // Calculate total fee based on kit selection
+  // Calculate total fee based on college type, kit selection, and motor option
   const calculateTotalFee = () => {
-    if (!wantsKit) return baseRegistrationFee;
+    if (!collegeType) return 0;
     
-    switch(motorOption) {
-      case "rpm":
-        return 4200;
-      case "torque":
-        return 4800;
-      case "both":
-        return 5999;
-      default:
-        return baseRegistrationFee;
+    if (collegeType === "other") {
+      return otherCollegeRegistrationFee; // Other colleges: only registration, no kit
     }
+    
+    // NIT Silchar students
+    if (collegeType === "nit_silchar") {
+      if (wantsKit === true) {
+        // Kit prices based on motor option
+        switch(motorOption) {
+          case "rpm":
+            return 4200;
+          case "torque":
+            return 4800;
+          case "both":
+            return 6000;
+          default:
+            return nitSilcharRegistrationFee;
+        }
+      }
+      return nitSilcharRegistrationFee; // Registration only
+    }
+    
+    return 0;
   };
 
   const registrationFee = calculateTotalFee();
@@ -733,7 +750,7 @@ function RobowarRegistration() {
   const [modal, setModal] = useState({ open: false, message: "", success: false });
 
   // Change this to your actual deployed Apps Script Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwwsxlaJN9vJJb1aMAXLTVjrfpe9tmNrQ8gcAQ-57GDUiSWBvfJ3WBkqBo1P9iJ-wo/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz98t-fRbP6E_eLYVlyHdLPoYAb3A-HljuT1V_Imsgi2g0daMzjPKwAzH6T474uDYw/exec";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -818,13 +835,29 @@ function RobowarRegistration() {
       setModal({ open: true, message: "Please enter Team Member 4 name.", success: false });
       return;
     }
-    // Validate kit selection
-    if (wantsKit === null) {
+    // Validate college type selection
+    if (collegeType === null) {
+      setModal({ open: true, message: "Please select your college type.", success: false });
+      return;
+    }
+    // Validate college name (only for non-NIT Silchar students)
+    if (collegeType === "other" && !formData.collegeName.trim()) {
+      setModal({ open: true, message: "Please enter your college name.", success: false });
+      return;
+    }
+    // Validate kit selection (only for NIT Silchar students)
+    if (collegeType === "nit_silchar" && wantsKit === null) {
       setModal({ open: true, message: "Please select whether you want to purchase a kit or not.", success: false });
       return;
     }
-    if (wantsKit === true && !motorOption) {
+    // Validate motor option (only for NIT Silchar students with kit)
+    if (collegeType === "nit_silchar" && wantsKit === true && !motorOption) {
       setModal({ open: true, message: "Please select a motor option for your kit.", success: false });
+      return;
+    }
+    // Validate weight category
+    if (weightCategory === null) {
+      setModal({ open: true, message: "Please select your robot's weight category.", success: false });
       return;
     }
     if (!formData.paymentProofLink) {
@@ -846,13 +879,16 @@ function RobowarRegistration() {
       formBody.append("TeamLeaderPhone", formData.teamLeaderPhone);
       formBody.append("TeamLeaderWhatsapp", formData.teamLeaderWhatsapp);
       formBody.append("TeamLeaderScholarId", formData.teamLeaderScholarId);
+      formBody.append("CollegeName", collegeType === "other" ? formData.collegeName : "NIT Silchar");
       formBody.append("TeamMemberSecond", formData.teamMember2);
       formBody.append("TeamMemberThird", formData.teamMember3);
       formBody.append("TeamMemberFourth", formData.teamMember4);
       formBody.append("TeamMemberFifth", formData.teamMember5 || "");
       formBody.append("TeamMemberSixth", formData.teamMember6 || "");
-      formBody.append("WantsKit", wantsKit ? "Yes" : "No");
-      formBody.append("MotorOption", wantsKit ? motorOption : "N/A");
+      formBody.append("CollegeType", collegeType === "nit_silchar" ? "NIT Silchar" : "Other College");
+      formBody.append("WantsKit", collegeType === "nit_silchar" && wantsKit ? "Yes" : "No");
+      formBody.append("MotorOption", collegeType === "nit_silchar" && wantsKit ? motorOption : "N/A");
+      formBody.append("WeightCategory", weightCategory === "lightweight" ? "Lightweight (8kg and below)" : "Heavyweight (15kg and below)");
       formBody.append("TotalAmount", registrationFee);
       formBody.append("PaymentProofLink", formData.paymentProofLink);
       formBody.append("TransactionNumber", formData.transactionNumber);
@@ -875,6 +911,7 @@ function RobowarRegistration() {
         teamLeaderPhone: "",
         teamLeaderWhatsapp: "",
         teamLeaderScholarId: "",
+        collegeName: "",
         teamMember2: "",
         teamMember3: "",
         teamMember4: "",
@@ -884,8 +921,10 @@ function RobowarRegistration() {
         transactionNumber: "",
       });
       setFileUrl("");
+      setCollegeType(null);
       setWantsKit(null);
       setMotorOption("");
+      setWeightCategory(null);
     } catch (err) {
       setModal({ open: true, message: "Error submitting registration.", success: false });
       console.error(err);
@@ -1255,14 +1294,14 @@ function RobowarRegistration() {
                 ))}
               </div>
 
-              {/* Kit Selection Section */}
+              {/* College Type Selection Section */}
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-200">Kit Selection</h3>
-                  <p className="text-red-200 text-sm mt-1">Choose if you want to purchase a kit from us</p>
+                  <h3 className="text-xl font-bold text-red-200">College Type</h3>
+                  <p className="text-red-200 text-sm mt-1">Select your college type to determine registration options</p>
                 </div>
 
-                {/* Do you want kit? */}
+                {/* College Type Selection */}
                 <motion.div
                   className="form-group"
                   initial={{ opacity: 0, x: -20 }}
@@ -1270,51 +1309,133 @@ function RobowarRegistration() {
                   transition={{ delay: 0.6 }}
                 >
                   <label className="block text-red-600 mb-3 font-medium text-lg">
-                    Do you want to purchase a Robot Kit? *
+                    Are you from NIT Silchar? *
                   </label>
                   <div className="flex gap-4">
                     <motion.button
                       type="button"
                       onClick={() => {
-                        setWantsKit(true);
-                        if (!motorOption) setMotorOption("rpm");
+                        setCollegeType("nit_silchar");
+                        setWantsKit(null); // Reset kit selection when changing college type
                       }}
                       className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        wantsKit === true
+                        collegeType === "nit_silchar"
                           ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
                           : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      Yes, I want a kit
+                      Yes, NIT Silchar
                     </motion.button>
                     <motion.button
                       type="button"
                       onClick={() => {
-                        setWantsKit(false);
-                        setMotorOption("");
+                        setCollegeType("other");
+                        setWantsKit(false); // Other colleges cannot select kit
                       }}
                       className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        wantsKit === false
+                        collegeType === "other"
                           ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
                           : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      No, registration only
+                      No, Other College
                     </motion.button>
                   </div>
-                  {wantsKit === null && (
+                  {collegeType === null && (
                     <p className="text-red-400/60 text-xs mt-2">
-                      ⚠️ Please select an option to continue
+                      ⚠️ Please select your college type to continue
+                    </p>
+                  )}
+                  {collegeType === "other" && (
+                    <p className="text-red-300 text-sm mt-3 bg-red-950/30 border border-red-500/30 rounded-lg p-3">
+                      ℹ️ Registration fee for other college students: ₹2,000 (Kit not available)
                     </p>
                   )}
                 </motion.div>
 
-                {/* Motor Option Selection - Only shown if wants kit */}
-                {wantsKit === true && (
+                {/* College Name Input - Only for Other College Students */}
+                {collegeType === "other" && (
+                  <motion.div
+                    className="form-group"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <label className="block text-red-600 mb-2 font-medium">
+                      College Name *
+                    </label>
+                    <motion.div
+                      className="relative"
+                      whileHover={{ scale: 1.005 }}
+                    >
+                      <input
+                        type="text"
+                        name="collegeName"
+                        value={formData.collegeName}
+                        onChange={handleInputChange}
+                        className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                        placeholder="Enter your college name"
+                        required
+                      />
+                    </motion.div>
+                  </motion.div>
+                )}
+
+                {/* Kit Selection - Only for NIT Silchar Students */}
+                {collegeType === "nit_silchar" && (
+                  <motion.div
+                    className="form-group"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <label className="block text-red-600 mb-3 font-medium text-lg">
+                      Do you want to purchase a Robot Kit? *
+                    </label>
+                    <div className="flex gap-4">
+                      <motion.button
+                        type="button"
+                        onClick={() => setWantsKit(true)}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                          wantsKit === true
+                            ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                            : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        Yes, I want a kit
+                      </motion.button>
+                      <motion.button
+                        type="button"
+                        onClick={() => setWantsKit(false)}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                          wantsKit === false
+                            ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                            : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        No, registration only
+                      </motion.button>
+                    </div>
+                    {wantsKit === null && (
+                      <p className="text-red-400/60 text-xs mt-2">
+                        ⚠️ Please select an option to continue
+                      </p>
+                    )}
+                  </motion.div>
+                )}
+
+                {/* Motor Option Selection - Only for NIT Silchar Students with Kit */}
+                {collegeType === "nit_silchar" && wantsKit === true && (
                   <motion.div
                     className="form-group space-y-4"
                     initial={{ opacity: 0, height: 0 }}
@@ -1402,7 +1523,6 @@ function RobowarRegistration() {
                         }`}
                         whileHover={{ scale: 1.01 }}
                       >
-                        
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
@@ -1418,7 +1538,7 @@ function RobowarRegistration() {
                             <p className="text-red-400/70 text-sm ml-7">Maximum flexibility for any weapon design</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-red-300 font-bold text-lg">₹5,999</p>
+                            <p className="text-red-300 font-bold text-lg">₹6,000</p>
                             <p className="text-red-400/60 text-xs">(Kit + Registration)</p>
                           </div>
                         </div>
@@ -1427,8 +1547,93 @@ function RobowarRegistration() {
                   </motion.div>
                 )}
 
+                {/* Weight Category Selection - For All Students */}
+                <div className="space-y-5 pt-6">
+                  <div className="border-l-4 border-red-500 pl-4 mb-6">
+                    <h3 className="text-xl font-bold text-red-200">Robot Weight Category</h3>
+                    <p className="text-red-200 text-sm mt-1">Select the weight category your robot will compete in</p>
+                  </div>
+
+                  <motion.div
+                    className="form-group"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.7 }}
+                  >
+                    <label className="block text-red-600 mb-3 font-medium text-lg">
+                      Weight Category *
+                    </label>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {/* Lightweight Category */}
+                      <motion.button
+                        type="button"
+                        onClick={() => setWeightCategory("lightweight")}
+                        className={`p-5 rounded-xl border-2 transition-all duration-300 ${
+                          weightCategory === "lightweight"
+                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
+                            : 'bg-black/50 border-red-800 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${
+                            weightCategory === "lightweight" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                          }`}>
+                            {weightCategory === "lightweight" && (
+                              <div className="w-3 h-3 bg-white rounded-full"></div>
+                            )}
+                          </div>
+                          <div className="flex-1 text-left">
+                            <h4 className="text-red-200 font-bold text-lg mb-1">Lightweight</h4>
+                            <p className="text-red-300 font-semibold mb-2">8 kg and below</p>
+                            <p className="text-red-400/70 text-sm">
+                              Perfect for agile and fast robots with quick maneuverability
+                            </p>
+                          </div>
+                        </div>
+                      </motion.button>
+
+                      {/* Heavyweight Category */}
+                      <motion.button
+                        type="button"
+                        onClick={() => setWeightCategory("heavyweight")}
+                        className={`p-5 rounded-xl border-2 transition-all duration-300 ${
+                          weightCategory === "heavyweight"
+                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
+                            : 'bg-black/50 border-red-800 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${
+                            weightCategory === "heavyweight" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                          }`}>
+                            {weightCategory === "heavyweight" && (
+                              <div className="w-3 h-3 bg-white rounded-full"></div>
+                            )}
+                          </div>
+                          <div className="flex-1 text-left">
+                            <h4 className="text-red-200 font-bold text-lg mb-1">Heavyweight</h4>
+                            <p className="text-red-300 font-semibold mb-2">15 kg and below</p>
+                            <p className="text-red-400/70 text-sm">
+                              Built for power and durability with heavy-duty weapons and armor
+                            </p>
+                          </div>
+                        </div>
+                      </motion.button>
+                    </div>
+                    {weightCategory === null && (
+                      <p className="text-red-400/60 text-xs mt-2">
+                        ⚠️ Please select a weight category to continue
+                      </p>
+                    )}
+                  </motion.div>
+                </div>
+
                 {/* Price Summary */}
-                {wantsKit !== null && (
+                {collegeType !== null && (
                   <motion.div
                     className="bg-gradient-to-br from-red-950/30 to-black/50 border-2 border-red-500/40 rounded-xl p-4"
                     initial={{ opacity: 0, y: 10 }}
@@ -1439,7 +1644,11 @@ function RobowarRegistration() {
                       <div>
                         <p className="text-red-400/70 text-sm">Total Amount to Pay:</p>
                         <p className="text-red-100 text-xs mt-1">
-                          {wantsKit ? `Kit (${motorOption === 'rpm' ? 'High RPM Motor' : motorOption === 'torque' ? 'High Torque Motor' : motorOption === 'both' ? 'Both Motors' : ''}) + Registration` : 'Registration Only'}
+                          {collegeType === "other" 
+                            ? 'Registration Only (Other College)' 
+                            : wantsKit 
+                              ? `Kit (${motorOption === 'rpm' ? 'High RPM Motor' : motorOption === 'torque' ? 'High Torque Motor' : motorOption === 'both' ? 'Both Motors' : ''}) + Registration (NIT Silchar)` 
+                              : 'Registration Only (NIT Silchar)'}
                         </p>
                       </div>
                       <div className="text-right">
@@ -1450,8 +1659,8 @@ function RobowarRegistration() {
                 )}
               </div>
 
-              {/* Show kit components only if kit is selected */}
-              {wantsKit === true && <KitComponentsSection motorOption={motorOption} />}
+              {/* Show kit components only if NIT Silchar student selected kit */}
+              {collegeType === "nit_silchar" && wantsKit === true && <KitComponentsSection motorOption={motorOption} />}
               <AttentionSection />
               {/* Payment Section */}
               <div className="space-y-6 pt-8">
@@ -1707,12 +1916,26 @@ function RobowarRegistration() {
                     <h4 className="text-lg font-bold text-red-300 border-b border-red-500/30 pb-2">Payment Details</h4>
                     <div className="grid md:grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="text-red-400/70">Kit Purchase:</span>
+                        <span className="text-red-400/70">College Type:</span>
                         <p className="text-red-100 font-medium">
-                          {wantsKit === null ? "Not selected" : wantsKit ? "Yes" : "No"}
+                          {collegeType === "nit_silchar" ? "NIT Silchar" : collegeType === "other" ? "Other College" : "Not selected"}
                         </p>
                       </div>
-                      {wantsKit && (
+                      {collegeType === "other" && (
+                        <div>
+                          <span className="text-red-400/70">College Name:</span>
+                          <p className="text-red-100 font-medium">{formData.collegeName || "Not provided"}</p>
+                        </div>
+                      )}
+                      {collegeType === "nit_silchar" && (
+                        <div>
+                          <span className="text-red-400/70">Kit Purchase:</span>
+                          <p className="text-red-100 font-medium">
+                            {wantsKit === null ? "Not selected" : wantsKit ? "Yes" : "No"}
+                          </p>
+                        </div>
+                      )}
+                      {collegeType === "nit_silchar" && wantsKit && (
                         <div>
                           <span className="text-red-400/70">Motor Option:</span>
                           <p className="text-red-100 font-medium">
@@ -1723,6 +1946,14 @@ function RobowarRegistration() {
                           </p>
                         </div>
                       )}
+                      <div>
+                        <span className="text-red-400/70">Weight Category:</span>
+                        <p className="text-red-100 font-medium">
+                          {weightCategory === "lightweight" ? "Lightweight (8kg and below)" : 
+                           weightCategory === "heavyweight" ? "Heavyweight (15kg and below)" : 
+                           "Not selected"}
+                        </p>
+                      </div>
                       <div>
                         <span className="text-red-400/70">Total Amount:</span>
                         <p className="text-red-100 font-medium text-lg">₹{registrationFee}</p>

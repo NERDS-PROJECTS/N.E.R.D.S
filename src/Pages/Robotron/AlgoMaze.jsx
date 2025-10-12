@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import PropTypes from 'prop-types'
 import {
   AlertTriangleIcon,
   CheckCircleIcon,
@@ -358,10 +357,10 @@ const AttentionSection = () => {
 
 
 // Kit Components Section Component
-const KitComponentsSection = ({ motorOption }) => {
-  // Base kit items (common for all options)
+const KitComponentsSection = () => {
+  // Base kit items (common for all kits)
   const baseKitItems = [
-    'Metal Geayellow Driving Motors (4 Piece)',
+    'Metal Geared Driving Motors (4 Piece)',
     'Traction Wheels (4 Piece)',
     'L-shaped clamps (4 Piece)',
     'DPDT switch (3 Piece)',
@@ -370,8 +369,6 @@ const KitComponentsSection = ({ motorOption }) => {
     'Metal cutter blade (3 Piece)',
     'Soldering Kit',
   ]
-
-
 
   const containerVariants = {
     hidden: {
@@ -430,14 +427,13 @@ const KitComponentsSection = ({ motorOption }) => {
         }}
       >
         KIT Component Details
-        
       </motion.h2>
       
       <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-yellow-900/30 p-8">
-        {/* Base Kit Items */}
+        {/* Kit Items */}
         <div className="mb-6">
           <h3 className="text-xl font-bold text-yellow-400 mb-4 border-b border-yellow-500/30 pb-2">
-            Base Kit Components
+            Kit Components
           </h3>
           <motion.ul
             className="space-y-3"
@@ -477,44 +473,9 @@ const KitComponentsSection = ({ motorOption }) => {
             ))}
           </motion.ul>
         </div>
-
-        {/* Motor-Specific Items */}
-        {motorOption && motorSpecificItems[motorOption] && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-xl font-bold text-yellow-300 mb-4 border-b border-yellow-500/30 pb-2 flex items-center gap-2">
-              <span className="bg-yellow-600 text-white text-xs font-bold px-2 py-1 rounded">WEAPON</span>
-              Motor Component
-            </h3>
-            <motion.ul
-              className="space-y-3"
-              variants={containerVariants}
-              initial="hidden"
-              animate="show"
-            >
-              {motorSpecificItems[motorOption].map((item, index) => (
-                <motion.li
-                  key={index}
-                  className="flex items-center gap-3 relative bg-yellow-600/10 p-3 rounded-lg border border-yellow-500/30"
-                  variants={itemVariants}
-                >
-                  <CheckCircleIcon className="h-5 w-5 text-yellow-400 shrink-0" />
-                  <span className="text-yellow-200 font-semibold">{item}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-        )}
       </div>
     </motion.section>
   )
-}
-
-KitComponentsSection.propTypes = {
-  motorOption: PropTypes.string,
 }
 
 // Payment Details Section Component
@@ -682,26 +643,40 @@ function AlgoMaze() {
     teamLeaderPhone: "",
     teamLeaderWhatsapp: "",
     teamLeaderScholarId: "",
+    collegeName: "", // For non-NIT Silchar students
     teamMember2: "",
     teamMember3: "",
     teamMember4: "",
-    teamMember5: "",
-    teamMember6: "",
     paymentProofLink: "",
     transactionNumber: "",
   });
 
-  // Kit selection state
-  const [wantsKit, setWantsKit] = useState(null); // null, true, or false
+  // College type and kit selection state
+  const [collegeType, setCollegeType] = useState(null); // "nit_silchar" or "other"
+  const [wantsKit, setWantsKit] = useState(null); // null, true, or false (only for NIT Silchar)
 
-  // Fixed registration fee
-  const baseRegistrationFee = 999;
-  const kitPrice = 4200; // Price with kit
+  // Registration fees
+  const nitSilcharRegistrationFee = 999;
+  const otherCollegeRegistrationFee = 2000;
+  const kitPrice = 4200;
   
-  // Calculate total fee based on kit selection
+  // Calculate total fee based on college type and kit selection
   const calculateTotalFee = () => {
-    if (!wantsKit) return baseRegistrationFee;
-    return kitPrice;
+    if (!collegeType) return 0;
+    
+    if (collegeType === "other") {
+      return otherCollegeRegistrationFee; // Other colleges: only registration, no kit
+    }
+    
+    // NIT Silchar students
+    if (collegeType === "nit_silchar") {
+      if (wantsKit === true) {
+        return kitPrice; // Kit + Registration
+      }
+      return nitSilcharRegistrationFee; // Registration only
+    }
+    
+    return 0;
   };
 
   const registrationFee = calculateTotalFee();
@@ -712,7 +687,7 @@ function AlgoMaze() {
   const [modal, setModal] = useState({ open: false, message: "", success: false });
 
   // Change this to your actual deployed Apps Script Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwwsxlaJN9vJJb1aMAXLTVjrfpe9tmNrQ8gcAQ-57GDUiSWBvfJ3WBkqBo1P9iJ-wo/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbygPyBHVBzwtI-hPt7riJWhNq7sXK7ZanTJh-8AXXZRXxTcGk8te5AMNGMvNU8ChVFHSg/exec";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -793,12 +768,18 @@ function AlgoMaze() {
       setModal({ open: true, message: "Please enter Team Member 3 name.", success: false });
       return;
     }
-    if (!formData.teamMember4.trim()) {
-      setModal({ open: true, message: "Please enter Team Member 4 name.", success: false });
+    // Validate college type selection
+    if (collegeType === null) {
+      setModal({ open: true, message: "Please select your college type.", success: false });
       return;
     }
-    // Validate kit selection
-    if (wantsKit === null) {
+    // Validate college name (only for non-NIT Silchar students)
+    if (collegeType === "other" && !formData.collegeName.trim()) {
+      setModal({ open: true, message: "Please enter your college name.", success: false });
+      return;
+    }
+    // Validate kit selection (only for NIT Silchar students)
+    if (collegeType === "nit_silchar" && wantsKit === null) {
       setModal({ open: true, message: "Please select whether you want to purchase a kit or not.", success: false });
       return;
     }
@@ -815,21 +796,21 @@ function AlgoMaze() {
       const timestamp = new Date().toISOString();
       const formBody = new URLSearchParams();
       formBody.append("Timestamp", timestamp);
-      formBody.append("TeamLeaderEmail", formData.teamLeaderEmail);
       formBody.append("TeamName", formData.teamName);
+      formBody.append("TeamLeaderEmail", formData.teamLeaderEmail);
       formBody.append("TeamLeaderName", formData.teamLeaderName);
       formBody.append("TeamLeaderPhone", formData.teamLeaderPhone);
       formBody.append("TeamLeaderWhatsapp", formData.teamLeaderWhatsapp);
       formBody.append("TeamLeaderScholarId", formData.teamLeaderScholarId);
+      formBody.append("CollegeName", collegeType === "other" ? formData.collegeName : "NIT Silchar");
+      formBody.append("CollegeType", collegeType === "nit_silchar" ? "NIT Silchar" : "Other College");
       formBody.append("TeamMemberSecond", formData.teamMember2);
       formBody.append("TeamMemberThird", formData.teamMember3);
-      formBody.append("TeamMemberFourth", formData.teamMember4);
-      formBody.append("TeamMemberFifth", formData.teamMember5 || "");
-      formBody.append("TeamMemberSixth", formData.teamMember6 || "");
-      formBody.append("WantsKit", wantsKit ? "Yes" : "No");
-      formBody.append("TotalAmount", registrationFee);
-      formBody.append("PaymentProofLink", formData.paymentProofLink);
+      formBody.append("TeamMemberFourth", formData.teamMember4 || "");
+      formBody.append("WantsKit", collegeType === "nit_silchar" && wantsKit ? "Yes" : "No");
+      formBody.append("PaymentScreenshot", formData.paymentProofLink);
       formBody.append("TransactionNumber", formData.transactionNumber);
+      formBody.append("TotalFee", registrationFee);
 
       await fetch(SCRIPT_URL, {
         method: "POST",
@@ -849,15 +830,15 @@ function AlgoMaze() {
         teamLeaderPhone: "",
         teamLeaderWhatsapp: "",
         teamLeaderScholarId: "",
+        collegeName: "",
         teamMember2: "",
         teamMember3: "",
         teamMember4: "",
-        teamMember5: "",
-        teamMember6: "",
         paymentProofLink: "",
         transactionNumber: "",
       });
       setFileUrl("");
+      setCollegeType(null);
       setWantsKit(null);
     } catch (err) {
       setModal({ open: true, message: "Error submitting registration.", success: false });
@@ -1025,7 +1006,7 @@ function AlgoMaze() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
                       placeholder="team.leader@example.com"
-                      requiyellow
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1049,7 +1030,7 @@ function AlgoMaze() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
                       placeholder="Enter your team name"
-                      requiyellow
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1075,7 +1056,7 @@ function AlgoMaze() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
                       placeholder="Enter your full name"
-                      requiyellow
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1104,7 +1085,7 @@ function AlgoMaze() {
                         pattern="[0-9]{10,15}"
                         className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
                         placeholder="10-digit number"
-                        requiyellow
+                        required
                       />
                     </motion.div>
                   </motion.div>
@@ -1131,7 +1112,7 @@ function AlgoMaze() {
                         pattern="[0-9]{10,15}"
                         className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
                         placeholder="WhatsApp number"
-                        requiyellow
+                        required
                       />
                     </motion.div>
                   </motion.div>
@@ -1158,7 +1139,7 @@ function AlgoMaze() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
                       placeholder="Enter Scholar ID"
-                      requiyellow
+                      required
                     />
                   </motion.div>
                 </motion.div>
@@ -1168,11 +1149,11 @@ function AlgoMaze() {
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-yellow-500 pl-4 mb-6">
                   <h3 className="text-xl font-bold text-yellow-200">Team Members</h3>
-                  <p className="text-yellow-200 text-sm mt-1">Add your team members (minimum 4 requiyellow)</p>
+                  <p className="text-yellow-200 text-sm mt-1">Add your team members (minimum 2 required, maximum 4 including leader)</p>
                 </div>
 
-                {/* Requiyellow Members */}
-                {[2, 3, 4].map((num) => (
+                {/* Required Members */}
+                {[2, 3].map((num) => (
                   <motion.div
                     key={num}
                     className="form-group"
@@ -1194,48 +1175,45 @@ function AlgoMaze() {
                         onChange={handleInputChange}
                         className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
                         placeholder={`Enter member ${num} name`}
-                        requiyellow
+                        required
                       />
                     </motion.div>
                   </motion.div>
                 ))}
 
-                {/* Optional Members */}
-                {[5, 6].map((num) => (
+                {/* Optional Member 4 */}
+                <motion.div
+                  className="form-group"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <label className="block text-yellow-600 mb-2 font-medium">
+                    Team Member 4 Name <span className="text-yellow-400/60">(Optional)</span>
+                  </label>
                   <motion.div
-                    key={num}
-                    className="form-group"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.55 + (num - 5) * 0.05 }}
+                    whileHover={{ scale: 1.005 }}
                   >
-                    <label className="block text-yellow-600 mb-2 font-medium">
-                      Team Member {num} Name <span className="text-yellow-400/60">(Optional)</span>
-                    </label>
-                    <motion.div
-                      whileHover={{ scale: 1.005 }}
-                    >
-                      <input
-                        type="text"
-                        name={`teamMember${num}`}
-                        value={formData[`teamMember${num}`]}
-                        onChange={handleInputChange}
-                        className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
-                        placeholder={`Enter member ${num} name (optional)`}
-                      />
-                    </motion.div>
+                    <input
+                      type="text"
+                      name="teamMember4"
+                      value={formData.teamMember4}
+                      onChange={handleInputChange}
+                      className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
+                      placeholder="Enter member 4 name (optional)"
+                    />
                   </motion.div>
-                ))}
+                </motion.div>
               </div>
 
-              {/* Kit Selection Section */}
+              {/* College Information and Kit Selection */}
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-yellow-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-yellow-200">Kit Selection</h3>
-                  <p className="text-yellow-200 text-sm mt-1">Choose if you want to purchase a kit from us</p>
+                  <h3 className="text-xl font-bold text-yellow-200">College Information</h3>
+                  <p className="text-yellow-200 text-sm mt-1">Select your college type to see registration options</p>
                 </div>
 
-                {/* Do you want kit? */}
+                {/* College Type Selection */}
                 <motion.div
                   className="form-group"
                   initial={{ opacity: 0, x: -20 }}
@@ -1243,85 +1221,170 @@ function AlgoMaze() {
                   transition={{ delay: 0.6 }}
                 >
                   <label className="block text-yellow-600 mb-3 font-medium text-lg">
-                    Do you want to purchase a Robot Kit? *
+                    Select Your College Type *
                   </label>
-                  <div className="flex gap-4">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <motion.button
                       type="button"
-                      onClick={() => setWantsKit(true)}
-                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        wantsKit === true
+                      onClick={() => {
+                        setCollegeType("nit_silchar");
+                        setFormData(prev => ({ ...prev, collegeName: "" }));
+                      }}
+                      className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                        collegeType === "nit_silchar"
                           ? 'bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]'
                           : 'bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600'
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      Yes, I want a kit
+                      <div className="text-center">
+                        <div className="text-lg mb-2">NIT Silchar Student</div>
+                        <div className="text-xs text-yellow-200/70">Registration: ₹999 | Kit Option: ₹4200</div>
+                      </div>
                     </motion.button>
                     <motion.button
                       type="button"
-                      onClick={() => setWantsKit(false)}
-                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        wantsKit === false
+                      onClick={() => {
+                        setCollegeType("other");
+                        setWantsKit(false);
+                      }}
+                      className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                        collegeType === "other"
                           ? 'bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]'
                           : 'bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600'
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      No, registration only
+                      <div className="text-center">
+                        <div className="text-lg mb-2">Other College Student</div>
+                        <div className="text-xs text-yellow-200/70">Registration Only: ₹2000</div>
+                      </div>
                     </motion.button>
                   </div>
-                  {wantsKit === null && (
+                  {collegeType === null && (
                     <p className="text-yellow-400/60 text-xs mt-2">
-                      ⚠️ Please select an option to continue
+                      ⚠️ Please select your college type to continue
                     </p>
                   )}
                 </motion.div>
 
-                {/* Motor Option Selection - Only shown if wants kit */}
-                {wantsKit === true && (
+                {/* College Name Input (Only for Other College Students) */}
+                {collegeType === "other" && (
                   <motion.div
-                    className="form-group space-y-4"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    
-                    
-                    <div className="space-y-3">
-                      
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* Price Summary */}
-                {wantsKit !== null && (
-                  <motion.div
-                    className="bg-gradient-to-br from-yellow-950/30 to-black/50 border-2 border-yellow-500/40 rounded-xl p-4"
+                    className="form-group"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="text-yellow-400/70 text-sm">Total Amount to Pay:</p>
-                        <p className="text-yellow-100 text-xs mt-1">
-                          {wantsKit ? 'Kit + Registration' : 'Registration Only'}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-yellow-300 font-bold text-2xl">₹{registrationFee}</p>
-                      </div>
-                    </div>
+                    <label className="block text-yellow-600 mb-2 font-medium">
+                      College Name *
+                    </label>
+                    <motion.div
+                      className="relative"
+                      whileHover={{ scale: 1.005 }}
+                    >
+                      <input
+                        type="text"
+                        name="collegeName"
+                        value={formData.collegeName}
+                        onChange={handleInputChange}
+                        className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40"
+                        placeholder="Enter your college name"
+                        required
+                      />
+                    </motion.div>
+                    <p className="text-yellow-400/60 text-xs mt-2">
+                      📝 Please enter your full college/university name
+                    </p>
                   </motion.div>
                 )}
               </div>
 
-              {/* Show kit components only if kit is selected */}
-              {wantsKit === true && <KitComponentsSection />}
+              {/* Kit Selection Section (Only for NIT Silchar Students) */}
+              {collegeType === "nit_silchar" && (
+                <div className="space-y-5 pt-8">
+                  <div className="border-l-4 border-yellow-500 pl-4 mb-6">
+                    <h3 className="text-xl font-bold text-yellow-200">Kit Selection</h3>
+                    <p className="text-yellow-200 text-sm mt-1">Choose if you want to purchase a kit from us</p>
+                  </div>
+
+                  {/* Do you want kit? */}
+                  <motion.div
+                    className="form-group"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    <label className="block text-yellow-600 mb-3 font-medium text-lg">
+                      Do you want to purchase a Robot Kit? *
+                    </label>
+                    <div className="flex gap-4">
+                      <motion.button
+                        type="button"
+                        onClick={() => setWantsKit(true)}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                          wantsKit === true
+                            ? 'bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]'
+                            : 'bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        Yes, I want a kit (₹4200)
+                      </motion.button>
+                      <motion.button
+                        type="button"
+                        onClick={() => setWantsKit(false)}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                          wantsKit === false
+                            ? 'bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]'
+                            : 'bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        No, registration only (₹999)
+                      </motion.button>
+                    </div>
+                    {wantsKit === null && (
+                      <p className="text-yellow-400/60 text-xs mt-2">
+                        ⚠️ Please select an option to continue
+                      </p>
+                    )}
+                  </motion.div>
+                </div>
+              )}
+
+              {/* Price Summary */}
+              {collegeType !== null && (
+                <motion.div
+                  className="bg-gradient-to-br from-yellow-950/30 to-black/50 border-2 border-yellow-500/40 rounded-xl p-4 mt-8"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-yellow-400/70 text-sm">Total Amount to Pay:</p>
+                      <p className="text-yellow-100 text-xs mt-1">
+                        {collegeType === "other" 
+                          ? 'Registration Only (Other College)' 
+                          : wantsKit 
+                            ? 'Kit + Registration (NIT Silchar)' 
+                            : 'Registration Only (NIT Silchar)'}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-yellow-300 font-bold text-2xl">₹{registrationFee}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Show kit components only if NIT Silchar student selects kit */}
+              {collegeType === "nit_silchar" && wantsKit === true && <KitComponentsSection />}
               <AttentionSection />
               {/* Payment Section */}
               <div className="space-y-6 pt-8">
@@ -1460,7 +1523,7 @@ function AlgoMaze() {
                           type="file"
                           accept="application/pdf,image/*"
                           onChange={uploader}
-                          requiyellow={!fileUrl}
+                          required={!fileUrl}
                           className="hidden"
                         />
                       </label>
@@ -1489,7 +1552,7 @@ function AlgoMaze() {
                       onChange={handleInputChange}
                       className="w-full bg-black/50 border-2 border-yellow-800 focus:border-yellow-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(255,255,0,0.5)] placeholder:text-yellow-400/40 font-mono"
                       placeholder="Enter UPI transaction number"
-                      requiyellow
+                      required
                     />
                   </motion.div>
                   <p className="text-yellow-400/60 text-xs mt-2">
@@ -1553,11 +1616,30 @@ function AlgoMaze() {
                     </div>
                   </div>
 
+                  {/* College Information */}
+                  <div className="space-y-3">
+                    <h4 className="text-lg font-bold text-yellow-300 border-b border-yellow-500/30 pb-2">College Information</h4>
+                    <div className="grid md:grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="text-yellow-400/70">College Type:</span>
+                        <p className="text-yellow-100 font-medium">
+                          {collegeType === "nit_silchar" ? "NIT Silchar" : collegeType === "other" ? "Other College" : "Not selected"}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="text-yellow-400/70">College Name:</span>
+                        <p className="text-yellow-100 font-medium">
+                          {collegeType === "nit_silchar" ? "NIT Silchar" : formData.collegeName || "Not provided"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Team Members */}
                   <div className="space-y-3">
                     <h4 className="text-lg font-bold text-yellow-300 border-b border-yellow-500/30 pb-2">Team Members</h4>
                     <div className="grid md:grid-cols-2 gap-4 text-sm">
-                      {[2, 3, 4, 5, 6].map((num) => {
+                      {[2, 3, 4].map((num) => {
                         const memberName = formData[`teamMember${num}`];
                         if (memberName) {
                           return (
@@ -1579,7 +1661,13 @@ function AlgoMaze() {
                       <div>
                         <span className="text-yellow-400/70">Kit Purchase:</span>
                         <p className="text-yellow-100 font-medium">
-                          {wantsKit === null ? "Not selected" : wantsKit ? "Yes" : "No"}
+                          {collegeType === "other" 
+                            ? "Not Available" 
+                            : wantsKit === null 
+                              ? "Not selected" 
+                              : wantsKit 
+                                ? "Yes" 
+                                : "No"}
                         </p>
                       </div>
                       
