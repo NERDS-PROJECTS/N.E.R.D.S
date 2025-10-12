@@ -96,6 +96,9 @@ const BackgroundGrid = () => {
 
 // Hero Section Component
 const HeroSection = () => {
+  // Detect if device is mobile for performance optimization
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  
   return (
     <motion.section
       className=" relative"
@@ -161,7 +164,11 @@ const HeroSection = () => {
           <div className="text-center md:text-left md:col-span-2">
             <motion.h1
               className="text-4xl font-spaced md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600"
-              animate={{
+              style={{
+                // Static glow on mobile, animated on desktop
+                textShadow: isMobile ? '0 0 10px #0066ff' : undefined,
+              }}
+              animate={isMobile ? {} : {
                 textShadow: [
                   '0 0 7px #0066ff',
                   '0 0 10px #0066ff',
@@ -178,7 +185,11 @@ const HeroSection = () => {
             </motion.h1>
             <motion.h2
               className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-blue-200"
-              animate={{
+              style={{
+                // Static glow on mobile, animated on desktop
+                textShadow: isMobile ? '0 0 5px #0066ff' : undefined,
+              }}
+              animate={isMobile ? {} : {
                 textShadow: ['0 0 3px #0066ff', '0 0 7px #0066ff', '0 0 3px #0066ff'],
               }}
               transition={{
