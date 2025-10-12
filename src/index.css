@@ -6,7 +6,7 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  --font-orbitron: 'Orbitron', sans-serif;
+  --font-orbitron: 'Orbitron', sans-serif, Avenir;
 }
 
 @font-face {
@@ -21,9 +21,14 @@
 
 @font-face {
   font-family: "Roboto";
-  src: url("/src/assets/Fonts/SmoochSans-VariableFont_wght.ttf") format("truetype");
+  src: url("/src/assets/Fonts/Roboto-Medium.ttf") format("truetype");
   font-weight: 500;
   font-size: x-large;
+}
+
+@font-face {
+  font-family: "Tron";
+  src: url("/src/assets/Fonts/tron.ttf") format("truetype");
 }
 
 .main:before {
@@ -148,6 +153,16 @@
 .roboto-medium {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
+}
+
+/* Tron Font Utility Classes */
+.font-tron {
+  font-family: 'Tron', sans-serif;
+}
+
+.tron-regular {
+  font-family: 'Tron', sans-serif;
+  font-weight: 400;
 }
 
 

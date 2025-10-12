@@ -49,7 +49,7 @@ const Robotron = () => {
             </div>
             
             <div className="robotron-overlay mt-[-4rem]">
-                <h1 className="robotron-title">ROBOTRON</h1>
+                <h1 className="robotron-title font-tron">ROBOTRON</h1>
                 <p className="robotron-subtitle">Choose Your Battle</p>
                 
                 <div className="robotron-buttons-grid">

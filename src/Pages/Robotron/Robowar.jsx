@@ -657,7 +657,7 @@ const PaymentDetailsSection = () => {
                 <QrCodeIcon className="h-6 w-6 text-red-500" />
               </div>
             </div>
-            <div className="space-y-2 text-red-100">
+            <div className="space-y-2 font-sans text-red-100">
               <p>
                 <span className="text-red-400 font-medium">Bank Name:</span>{' '}
                 {option.bankName}
@@ -1040,7 +1040,7 @@ function RobowarRegistration() {
             <div className="relative mb-8 flex items-center justify-center">
               {/* Left Frame */}
               <motion.div
-                className="absolute left-4 top-[-0.3rem] md:left-32 md:top-[-0.89rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                className="absolute left-2 top-[-0.3rem] md:left-28 md:top-[-0.89rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
                 style={{
                   backgroundImage: "url('/robotron/txt_frame_l.svg')",
                 }}
@@ -1065,14 +1065,14 @@ function RobowarRegistration() {
                 />
 
                 {/* Text */}
-                <h2 className="relative  z-10 text-xl md:text-2xl lg:text-3xl font-bold text-transparent bg-clip-text bg-slate-200">
+                <h2 className="relative font-tron z-10 text-xl md:text-2xl lg:text-3xl font-bold text-transparent bg-clip-text bg-slate-200">
                   Registration Form
                 </h2>
               </motion.div>
 
               {/* Right Frame */}
               <motion.div
-                className="absolute right-4 bottom-[-0.5rem] md:right-32  md:bottom-[-0.9rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                className="absolute right-2 bottom-[-0.5rem] md:right-28  md:bottom-[-0.9rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
                 style={{
                   backgroundImage: "url('/robotron/txt_frame_r.svg')",
                 }}
