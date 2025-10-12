@@ -1,6 +1,7 @@
 import Hyperspeed, { hyperspeedPresets } from './Hyperspeed';
 import { useNavigate } from 'react-router-dom';
 import './Robotron.css';
+import StarsCanvas from '../../assets/canvas/Stars';
 
 const Robotron = () => {
     const navigate = useNavigate();
@@ -38,9 +39,14 @@ const Robotron = () => {
 
     return (
         <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
-            <Hyperspeed
-                effectOptions={hyperspeedPresets.one}
-            />
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
+                <StarsCanvas />
+            </div>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
+                <Hyperspeed
+                    effectOptions={hyperspeedPresets.one}
+                />
+            </div>
             
             <div className="robotron-overlay mt-[-4rem]">
                 <h1 className="robotron-title">ROBOTRON</h1>
