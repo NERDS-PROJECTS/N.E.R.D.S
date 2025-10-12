@@ -19,6 +19,13 @@
   src: url("/src/assets/Fonts/ethnocentric rg.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("/src/assets/Fonts/SmoochSans-VariableFont_wght.ttf") format("truetype");
+  font-weight: 500;
+  font-size: x-large;
+}
+
 .main:before {
   background: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0, #121212 100%); /* Adjusted for a darker background */
   position: absolute;
@@ -131,6 +138,16 @@
 .orbitron-black {
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
+}
+
+/* Roboto Font Utility Classes */
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.roboto-medium {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
 }
 
 

@@ -8,6 +8,7 @@ import Gallery from "./Pages/Gallery/Gallery";
 import Contact from "./Pages/Contact/Contact";
 import Navbar from "./components/Navbar/navbar";
 import Footer from "./components/Footer/footer";
+import Galaxy from "./components/Hero/Galaxy";
 import Error from "./Pages/Error/Error";
 import LoadingAnimation from "./components/Loader/Loader"; 
 import Merch from "./Pages/Merch/Merch";
@@ -18,6 +19,7 @@ import Robowar from "./Pages/Robotron/Robowar";
 import Robosoccer from "./Pages/Robotron/Robosoccer";
 import RoboDrift from "./Pages/Robotron/RoboDrift";
 import AlgoMaze from "./Pages/Robotron/AlgoMaze";
+import Robotron from "./Pages/Robotron/Robotron";
 
 
 
@@ -55,6 +57,8 @@ function App() {
             <div className="flex-grow w-full">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/galaxy" element={<Galaxy/>} />
+                <Route path="/robotron" element={<Robotron/>} />
                 <Route path="/event" element={<Event />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/team" element={<Team />} />

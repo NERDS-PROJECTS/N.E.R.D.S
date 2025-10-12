@@ -8,10 +8,13 @@ import {
   UploadIcon,
 } from 'lucide-react'
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
-import ProgressBar from "react-scroll-progress-bar";
+
 
 // Background Grid Component
 const BackgroundGrid = () => {
+  // Detect mobile for performance optimization
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  
   return (
     <div className="fixed inset-0 z-0">
       {/* Horizontal lines */}
@@ -32,7 +35,10 @@ const BackgroundGrid = () => {
             opacity: 0.3,
             scaleX: 1,
           }}
-          transition={{
+          transition={isMobile ? {
+            duration: 0.5,
+            delay: 0,
+          } : {
             duration: 1.5,
             delay: i * 0.05,
             ease: 'easeInOut',
@@ -57,15 +63,18 @@ const BackgroundGrid = () => {
             opacity: 0.3,
             scaleY: 1,
           }}
-          transition={{
+          transition={isMobile ? {
+            duration: 0.5,
+            delay: 0,
+          } : {
             duration: 1.5,
             delay: i * 0.05,
             ease: 'easeInOut',
           }}
         />
       ))}
-      {/* Glowing orbs */}
-      {Array.from({
+      {/* Glowing orbs - disabled on mobile for performance */}
+      {!isMobile && Array.from({
         length: 15,
       }).map((_, i) => (
         <motion.div
@@ -97,9 +106,12 @@ const BackgroundGrid = () => {
 
 // Hero Section Component
 const HeroSection = () => {
+  // Detect if device is mobile for performance optimization
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  
   return (
     <motion.section
-      className="py-16 relative"
+      className="relative"
       initial={{
         opacity: 0,
         y: 20,
@@ -113,20 +125,23 @@ const HeroSection = () => {
       }}
     >
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute w-full h-1 bg-red-500 top-1/2 left-0 blur-sm"
-          animate={{
-            x: ['0%', '100%'],
-            opacity: [0.2, 0.8, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        />
-        {/* Circuit lines */}
-        {Array.from({
+        {/* Animated line - disabled on mobile */}
+        {!isMobile && (
+          <motion.div
+            className="absolute w-full h-1 bg-red-500 top-1/2 left-0 blur-sm"
+            animate={{
+              x: ['0%', '100%'],
+              opacity: [0.2, 0.8, 0.2],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          />
+        )}
+        {/* Circuit lines - disabled on mobile */}
+        {!isMobile && Array.from({
           length: 5,
         }).map((_, i) => (
           <motion.div
@@ -161,8 +176,12 @@ const HeroSection = () => {
           {/* Left Column - Text Content */}
           <div className="text-center md:text-left md:col-span-2">
             <motion.h1
-              className="text-4xl font-spaced md:text-5xl lg:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-300"
-              animate={{
+              className="text-4xl font-orbitron md:text-5xl lg:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600"
+              style={{
+                // Static glow on mobile, animated on desktop
+                textShadow: isMobile ? '0 0 10px #ff0000' : undefined,
+              }}
+              animate={isMobile ? {} : {
                 textShadow: [
                   '0 0 7px #ff0000',
                   '0 0 10px #ff0000',
@@ -175,11 +194,15 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              ROBOTRON
+              ROBOWAR
             </motion.h1>
             <motion.h2
-              className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-red-400"
-              animate={{
+              className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-red-200"
+              style={{
+                // Static glow on mobile, animated on desktop
+                textShadow: isMobile ? '0 0 5px #ff0000' : undefined,
+              }}
+              animate={isMobile ? {} : {
                 textShadow: ['0 0 3px #ff0000', '0 0 7px #ff0000', '0 0 3px #ff0000'],
               }}
               transition={{
@@ -189,7 +212,7 @@ const HeroSection = () => {
                 repeatType: 'reverse',
               }}
             >
-              Robowar Registration 2025
+              Robotron Registration 2025
             </motion.h2>
             <motion.p
               className="text-base md:text-lg font-spaced text-red-200 mb-4"
@@ -204,7 +227,7 @@ const HeroSection = () => {
                 duration: 1,
               }}
             >
-              A battle-forged robot engineered for ROBOWAR supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. Robowar — where only the toughest bots survive! 
+              A battle-forged robot engineered for ROBOWAR supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. Robowar — where only the toughest bots survive!
             </motion.p>
           </div>
 
@@ -213,20 +236,22 @@ const HeroSection = () => {
             className="flex justify-center items-center md:col-span-3"
             initial={{
               opacity: 0,
-              scale: 0.8,
+              scale: isMobile ? 1 : 0.8,
             }}
             animate={{
               opacity: 1,
               scale: 1,
             }}
-            transition={{
+            transition={isMobile ? {
+              duration: 0.3,
+            } : {
               delay: 0.3,
               duration: 0.8,
             }}
           >
             <motion.div
               className="relative"
-              whileHover={{
+              whileHover={isMobile ? {} : {
                 scale: 1.05,
               }}
               transition={{
@@ -235,10 +260,10 @@ const HeroSection = () => {
                 damping: 20,
               }}
             >
-              {/* Glowing effect behind image */}
+              {/* Glowing effect behind image - static on mobile */}
               <motion.div
                 className="absolute inset-0 bg-red-500/30 blur-3xl rounded-full"
-                animate={{
+                animate={isMobile ? {} : {
                   opacity: [0.3, 0.6, 0.3],
                   scale: [0.9, 1.1, 0.9],
                 }}
@@ -247,12 +272,13 @@ const HeroSection = () => {
                   repeat: Infinity,
                   repeatType: 'reverse',
                 }}
+                style={isMobile ? { opacity: 0.4 } : {}}
               />
 
               <img
-                src="/robotron/war.png"
+                src="/robotron/war_.png"
                 alt="Battle Robot"
-                className="relative z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(239,68,68,0.6)]"
+                className="relative left-0 md:left-20 z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(239,68,68,0.6)]"
               />
             </motion.div>
           </motion.div>
@@ -306,12 +332,12 @@ const AttentionSection = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-red-400 mb-2">ATTENTION</h3>
-            <p className="text-red-100">
+            <p className="text-red-100 font-sans">
               ⚠️ Only registrations are currently allowed. Kits and materials
               are not provided at this time. Registration fee: Rs. 999. For kit
-              tracking, visit:{' '}
+              tracking, visit:{''}
               <motion.a
-                href="#"
+                href="/trackOrder"
                 className="text-red-400 font-medium relative inline-block"
                 whileHover={{
                   scale: 1.05,
@@ -355,139 +381,12 @@ const AttentionSection = () => {
   )
 }
 
-// 3D Model Showcase Section Component
-const ModelShowcaseSection = () => {
-  return (
-    <motion.section
-      className="py-12"
-      initial={{
-        opacity: 0,
-      }}
-      whileInView={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 0.5,
-      }}
-      viewport={{
-        once: true,
-      }}
-    >
-      <motion.h2
-        className="text-3xl font-bold mb-8 text-red-400 text-center"
-        initial={{
-          opacity: 0,
-          y: -20,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 0.5,
-        }}
-        viewport={{
-          once: true,
-        }}
-      >
-        3D Battle Robot Showcase
-      </motion.h2>
-      <motion.div
-        className="max-w-5xl mx-auto"
-        initial={{
-          opacity: 0,
-          y: 20,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 0.6,
-          delay: 0.2,
-        }}
-        viewport={{
-          once: true,
-        }}
-      >
-        <div className="bg-gradient-to-br from-black/50 to-red-950/20 backdrop-blur-sm rounded-2xl border-2 border-red-500/30 p-4 md:p-6 lg:p-8 relative overflow-hidden">
-          {/* Animated glow effect */}
-          <motion.div
-            className="absolute inset-0 opacity-50"
-            animate={{
-              boxShadow: [
-                'inset 0 0 20px rgba(239,68,68,0.2)',
-                'inset 0 0 40px rgba(239,68,68,0.3)',
-                'inset 0 0 20px rgba(239,68,68,0.2)',
-              ],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-            }}
-          />
-          
-          {/* Sketchfab Embed */}
-          <div className="relative z-10 sketchfab-embed-wrapper">
-            <div className="aspect-video w-full rounded-lg overflow-hidden border border-red-500/50">
-              <iframe 
-                title="Tron Bike - Light Cycle" 
-                frameBorder="0" 
-                allowFullScreen
-                mozAllowFullScreen={true}
-                webkitAllowFullScreen={true}
-                allow="autoplay; fullscreen; xr-spatial-tracking" 
-                src="https://sketchfab.com/models/9ae198b9a25a49c3b28f5c2f92441b92/embed"
-                className="w-full h-full"
-              />
-            </div>
-            
-            {/* Attribution */}
-            <motion.div
-              className="mt-4 text-center text-sm text-red-300/70"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <p className="space-x-2">
-                <a 
-                  href="https://sketchfab.com/3d-models/tron-bike-light-cycle-9ae198b9a25a49c3b28f5c2f92441b92?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
-                >
-                  Tron Bike - Light Cycle
-                </a>
-                <span>by</span>
-                <a 
-                  href="https://sketchfab.com/SQUIR3D?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
-                >
-                  SQUIR3D
-                </a>
-                <span>on</span>
-                <a 
-                  href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=9ae198b9a25a49c3b28f5c2f92441b92" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="font-semibold text-red-400 hover:text-red-300 transition-colors"
-                >
-                  Sketchfab
-                </a>
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.section>
-  )
-}
+
 
 // Kit Components Section Component
-const KitComponentsSection = () => {
-  const kitItems = [
+const KitComponentsSection = ({ motorOption }) => {
+  // Base kit items (common for all options)
+  const baseKitItems = [
     'Metal Geared Driving Motors (4 Piece)',
     'Traction Wheels (4 Piece)',
     'L-shaped clamps (4 Piece)',
@@ -495,10 +394,15 @@ const KitComponentsSection = () => {
     '10 ft metal strip (for frame)',
     '3x4 ft metal sheet',
     'Metal cutter blade (3 Piece)',
-    'High rpm motor (1 Piece for weapon) or High Torque motor (1 Piece for weapon)',
     'Soldering Kit',
-    '(Optional) Both Weapon Motors (extra cost)',
   ]
+
+  // Motor-specific items
+  const motorSpecificItems = {
+    rpm: ['High RPM Motor (1 Piece for weapon)'],
+    torque: ['High Torque Motor (1 Piece for weapon)'],
+    both: ['High RPM Motor (1 Piece for weapon)', 'High Torque Motor (1 Piece for weapon)']
+  }
 
   const containerVariants = {
     hidden: {
@@ -540,7 +444,7 @@ const KitComponentsSection = () => {
       }}
     >
       <motion.h2
-        className="text-3xl font-bold mb-6 text-red-400 text-center"
+        className="text-3xl font-bold mb-6 text-red-600 text-center"
         initial={{
           opacity: 0,
           y: -20,
@@ -557,54 +461,102 @@ const KitComponentsSection = () => {
         }}
       >
         KIT Component Details
+        {motorOption && (
+          <span className="block text-lg text-red-400 mt-2 font-semibold">
+            {motorOption === 'rpm' && '(High RPM Motor Version)'}
+            {motorOption === 'torque' && '(High Torque Motor Version)'}
+            {motorOption === 'both' && '(Both Motors - Complete Package)'}
+          </span>
+        )}
       </motion.h2>
-      <div className="bg-black/30 flex flex-col justify-self-center w-fit  backdrop-blur-sm rounded-2xl border border-red-900/30 p-8">
-        <motion.ul
-          className="space-y-3"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{
-            once: true,
-          }}
-        >
-          {kitItems.map((item, index) => (
-            <motion.li
-              key={index}
-              className="flex items-center gap-3 relative"
-              variants={itemVariants}
+      
+      <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-red-900/30 p-8">
+        {/* Base Kit Items */}
+        <div className="mb-6">
+          <h3 className="text-xl font-bold text-red-400 mb-4 border-b border-red-500/30 pb-2">
+            Base Kit Components
+          </h3>
+          <motion.ul
+            className="space-y-3"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{
+              once: true,
+            }}
+          >
+            {baseKitItems.map((item, index) => (
+              <motion.li
+                key={index}
+                className="flex items-center gap-3 relative"
+                variants={itemVariants}
+              >
+                <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0" />
+                <span className="text-red-100">{item}</span>
+                {/* Animated line underneath each item */}
+                <motion.div
+                  className="absolute left-0 right-0 h-[1px] bg-red-800/30 -bottom-1.5"
+                  initial={{
+                    scaleX: 0,
+                  }}
+                  whileInView={{
+                    scaleX: 1,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                />
+              </motion.li>
+            ))}
+          </motion.ul>
+        </div>
+
+        {/* Motor-Specific Items */}
+        {motorOption && motorSpecificItems[motorOption] && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3 className="text-xl font-bold text-red-300 mb-4 border-b border-red-500/30 pb-2 flex items-center gap-2">
+              <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">WEAPON</span>
+              Motor Component
+            </h3>
+            <motion.ul
+              className="space-y-3"
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
             >
-              <CheckCircleIcon className="h-5 w-5 text-red-500 shrink-0" />
-              <span className="text-red-100">{item}</span>
-              {/* Animated line underneath each item */}
-              <motion.div
-                className="absolute left-0 right-0 h-[1px] bg-red-800/30 -bottom-1.5"
-                initial={{
-                  scaleX: 0,
-                }}
-                whileInView={{
-                  scaleX: 1,
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                }}
-                viewport={{
-                  once: true,
-                }}
-              />
-            </motion.li>
-          ))}
-        </motion.ul>
+              {motorSpecificItems[motorOption].map((item, index) => (
+                <motion.li
+                  key={index}
+                  className="flex items-center gap-3 relative bg-red-600/10 p-3 rounded-lg border border-red-500/30"
+                  variants={itemVariants}
+                >
+                  <CheckCircleIcon className="h-5 w-5 text-red-400 shrink-0" />
+                  <span className="text-red-200 font-semibold">{item}</span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+        )}
       </div>
     </motion.section>
   )
 }
 
+KitComponentsSection.propTypes = {
+  motorOption: PropTypes.string,
+}
+
 // Payment Details Section Component
-const PaymentDetailsSection = ({ registrationFee }) => {
-  const upiLink1 = `upi://pay?pa=6003147277@ptsbi&pn=Swarup%20Chanda&am=${registrationFee}&cu=INR`;
-  const upiLink2 = `upi://pay?pa=himdfayzan1735-2@oksbi&pn=Md%20Fayjan&am=${registrationFee}&cu=INR`;
+const PaymentDetailsSection = () => {
+
 
   const paymentOptions = [
     {
@@ -613,7 +565,6 @@ const PaymentDetailsSection = ({ registrationFee }) => {
       ifsc: 'SBIN0017401',
       accountNo: '40293794000',
       upi: '6003147277@ptsbi',
-      upiLink: upiLink1,
     },
     {
       bankName: 'SBI',
@@ -621,7 +572,6 @@ const PaymentDetailsSection = ({ registrationFee }) => {
       ifsc: 'SBIN0016928',
       accountNo: '41946546051',
       upi: 'himdfayzan1735-2@oksbi',
-      upiLink: upiLink2,
     },
   ]
 
@@ -642,7 +592,7 @@ const PaymentDetailsSection = ({ registrationFee }) => {
       }}
     >
       <motion.h2
-        className="text-3xl font-bold mb-8 text-red-400 text-center"
+        className="text-3xl font-bold mb-8 text-red-600 text-center"
         initial={{
           opacity: 0,
           y: -20,
@@ -700,7 +650,7 @@ const PaymentDetailsSection = ({ registrationFee }) => {
               }}
             />
             <div className="flex justify-between items-start mb-4">
-              <h3 className="text-xl font-bold text-red-400">
+              <h3 className="text-xl font-bold text-red-600">
                 Option {index + 1}
               </h3>
               <div className="bg-red-900/30 p-2 rounded-lg">
@@ -759,9 +709,7 @@ const PaymentDetailsSection = ({ registrationFee }) => {
   )
 }
 
-PaymentDetailsSection.propTypes = {
-  registrationFee: PropTypes.number.isRequired,
-}
+PaymentDetailsSection.propTypes = {}
 
 function RobowarRegistration() {
   const [formData, setFormData] = useState({
@@ -771,6 +719,7 @@ function RobowarRegistration() {
     teamLeaderPhone: "",
     teamLeaderWhatsapp: "",
     teamLeaderScholarId: "",
+    collegeName: "", // For non-NIT Silchar students
     teamMember2: "",
     teamMember3: "",
     teamMember4: "",
@@ -780,8 +729,46 @@ function RobowarRegistration() {
     transactionNumber: "",
   });
 
-  // Fixed registration fee
-  const registrationFee = 999;
+  // College type and kit selection state
+  const [collegeType, setCollegeType] = useState(null); // "nit_silchar" or "other"
+  const [wantsKit, setWantsKit] = useState(null); // null, true, or false (only for NIT Silchar)
+  const [motorOption, setMotorOption] = useState(""); // "rpm", "torque", or "both" (only for NIT Silchar with kit)
+  const [weightCategory, setWeightCategory] = useState(null); // "lightweight" (8kg) or "heavyweight" (15kg)
+
+  // Registration fees
+  const nitSilcharRegistrationFee = 999;
+  const otherCollegeRegistrationFee = 2000;
+  
+  // Calculate total fee based on college type, kit selection, and motor option
+  const calculateTotalFee = () => {
+    if (!collegeType) return 0;
+    
+    if (collegeType === "other") {
+      return otherCollegeRegistrationFee; // Other colleges: only registration, no kit
+    }
+    
+    // NIT Silchar students
+    if (collegeType === "nit_silchar") {
+      if (wantsKit === true) {
+        // Kit prices based on motor option
+        switch(motorOption) {
+          case "rpm":
+            return 4200;
+          case "torque":
+            return 4800;
+          case "both":
+            return 6000;
+          default:
+            return nitSilcharRegistrationFee;
+        }
+      }
+      return nitSilcharRegistrationFee; // Registration only
+    }
+    
+    return 0;
+  };
+
+  const registrationFee = calculateTotalFee();
 
   const [fileUrl, setFileUrl] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -789,7 +776,7 @@ function RobowarRegistration() {
   const [modal, setModal] = useState({ open: false, message: "", success: false });
 
   // Change this to your actual deployed Apps Script Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwwsxlaJN9vJJb1aMAXLTVjrfpe9tmNrQ8gcAQ-57GDUiSWBvfJ3WBkqBo1P9iJ-wo/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz98t-fRbP6E_eLYVlyHdLPoYAb3A-HljuT1V_Imsgi2g0daMzjPKwAzH6T474uDYw/exec";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -874,6 +861,31 @@ function RobowarRegistration() {
       setModal({ open: true, message: "Please enter Team Member 4 name.", success: false });
       return;
     }
+    // Validate college type selection
+    if (collegeType === null) {
+      setModal({ open: true, message: "Please select your college type.", success: false });
+      return;
+    }
+    // Validate college name (only for non-NIT Silchar students)
+    if (collegeType === "other" && !formData.collegeName.trim()) {
+      setModal({ open: true, message: "Please enter your college name.", success: false });
+      return;
+    }
+    // Validate kit selection (only for NIT Silchar students)
+    if (collegeType === "nit_silchar" && wantsKit === null) {
+      setModal({ open: true, message: "Please select whether you want to purchase a kit or not.", success: false });
+      return;
+    }
+    // Validate motor option (only for NIT Silchar students with kit)
+    if (collegeType === "nit_silchar" && wantsKit === true && !motorOption) {
+      setModal({ open: true, message: "Please select a motor option for your kit.", success: false });
+      return;
+    }
+    // Validate weight category
+    if (weightCategory === null) {
+      setModal({ open: true, message: "Please select your robot's weight category.", success: false });
+      return;
+    }
     if (!formData.paymentProofLink) {
       setModal({ open: true, message: "Please upload payment proof before submitting.", success: false });
       return;
@@ -893,14 +905,20 @@ function RobowarRegistration() {
       formBody.append("TeamLeaderPhone", formData.teamLeaderPhone);
       formBody.append("TeamLeaderWhatsapp", formData.teamLeaderWhatsapp);
       formBody.append("TeamLeaderScholarId", formData.teamLeaderScholarId);
+      formBody.append("CollegeName", collegeType === "other" ? formData.collegeName : "NIT Silchar");
       formBody.append("TeamMemberSecond", formData.teamMember2);
       formBody.append("TeamMemberThird", formData.teamMember3);
       formBody.append("TeamMemberFourth", formData.teamMember4);
       formBody.append("TeamMemberFifth", formData.teamMember5 || "");
       formBody.append("TeamMemberSixth", formData.teamMember6 || "");
+      formBody.append("CollegeType", collegeType === "nit_silchar" ? "NIT Silchar" : "Other College");
+      formBody.append("WantsKit", collegeType === "nit_silchar" && wantsKit ? "Yes" : "No");
+      formBody.append("MotorOption", collegeType === "nit_silchar" && wantsKit ? motorOption : "N/A");
+      formBody.append("WeightCategory", weightCategory === "lightweight" ? "Lightweight (8kg and below)" : "Heavyweight (15kg and below)");
+      formBody.append("TotalAmount", registrationFee);
       formBody.append("PaymentProofLink", formData.paymentProofLink);
       formBody.append("TransactionNumber", formData.transactionNumber);
-      
+
       await fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
@@ -909,7 +927,7 @@ function RobowarRegistration() {
         },
         body: formBody.toString()
       });
-      
+
       // With no-cors mode, we can't read the response, so we assume success if no error
       setModal({ open: true, message: "Registration submitted successfully! You will receive a confirmation email shortly.", success: true });
       setFormData({
@@ -919,6 +937,7 @@ function RobowarRegistration() {
         teamLeaderPhone: "",
         teamLeaderWhatsapp: "",
         teamLeaderScholarId: "",
+        collegeName: "",
         teamMember2: "",
         teamMember3: "",
         teamMember4: "",
@@ -928,6 +947,10 @@ function RobowarRegistration() {
         transactionNumber: "",
       });
       setFileUrl("");
+      setCollegeType(null);
+      setWantsKit(null);
+      setMotorOption("");
+      setWeightCategory(null);
     } catch (err) {
       setModal({ open: true, message: "Error submitting registration.", success: false });
       console.error(err);
@@ -970,16 +993,15 @@ function RobowarRegistration() {
       {/* Loader overlay - keeping original functionality */}
       <MultiStepLoader
         loadingStates={[
-          { text: "Submitting registration..." },
+          { text: "Submitting  Team registration..." },
           { text: "Processing payment..." },
-          { text: "Finalizing..." },
+          { text: "Finalizing Team Details..." },
         ]}
         loading={submitting}
         duration={1200}
         loop={true}
       />
 
-      <ProgressBar duration="0.01" />
 
       <div className="container mx-auto px-4 py-8 relative z-10">
         <motion.div
@@ -995,6 +1017,8 @@ function RobowarRegistration() {
           className="space-y-12 pb-20"
         >
           <HeroSection />
+
+
 
           {/* Registration Form Component with new styling */}
           <motion.section
@@ -1012,25 +1036,62 @@ function RobowarRegistration() {
               delay: 0.3,
             }}
           >
-            <motion.h2
-              className="text-3xl font-bold mb-8 text-red-400 text-center"
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
-              transition={{
-                delay: 0.5,
-              }}
-            >
-              Registration Form
-            </motion.h2>
+            {/* Registration Form Heading with SVG Backgrounds */}
+            <div className="relative mb-8 flex items-center justify-center">
+              {/* Left Frame */}
+              <motion.div
+                className="absolute left-32 top-[-0.89rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                style={{
+                  backgroundImage: "url('/robotron/txt_frame_l.svg')",
+                }}
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+              />
+
+              {/* Center Text with Background */}
+              <motion.div
+                className="relative px-8 py-6 md:px-12 md:py-8"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                {/* Blue Background */}
+                <div
+                  className="absolute inset-0 bg-no-repeat bg-center bg-cover opacity-30"
+                  style={{
+                    backgroundImage: "url('/robotron/bg_text.svg')",
+                  }}
+                />
+
+                {/* Text */}
+                <h2 className="relative  z-10 text-xl md:text-2xl lg:text-3xl font-bold text-transparent bg-clip-text bg-slate-200">
+                  Registration Form
+                </h2>
+              </motion.div>
+
+              {/* Right Frame */}
+              <motion.div
+                className="absolute right-32  bottom-[-0.9rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                style={{
+                  backgroundImage: "url('/robotron/txt_frame_r.svg')",
+                }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+              />
+            </div>
+            <div>
+              <h1 className="relative text-xl mb-8 flex items-center justify-center gap-2">
+                Event : <span className="text-red-600">RoboWar</span>
+              </h1>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
               {/* Team Leader Information Section */}
               <div className="space-y-5">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-400">Team Leader Information</h3>
+                  <h3 className="text-xl font-bold text-red-200">Team Leader Information</h3>
                   <p className="text-red-200 text-sm mt-1">Primary contact details</p>
                 </div>
 
@@ -1041,7 +1102,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 }}
                 >
-                  <label className="block text-red-300 mb-2 font-medium">
+                  <label className="block text-red-600 mb-2 font-medium">
                     Email ID *
                   </label>
                   <motion.div
@@ -1068,7 +1129,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.15 }}
                 >
-                  <label className="block text-red-300 mb-2 font-medium">Team Name *</label>
+                  <label className="block text-red-600 mb-2 font-medium">Team Name *</label>
                   <motion.div
                     className="relative"
                     whileHover={{ scale: 1.005 }}
@@ -1092,7 +1153,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <label className="block text-red-300 mb-2 font-medium">
+                  <label className="block text-red-600 mb-2 font-medium">
                     Full Name *
                   </label>
                   <motion.div
@@ -1120,7 +1181,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.25 }}
                   >
-                    <label className="block text-red-300 mb-2 font-medium">
+                    <label className="block text-red-600 mb-2 font-medium">
                       Phone Number *
                     </label>
                     <motion.div
@@ -1147,7 +1208,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 }}
                   >
-                    <label className="block text-red-300 mb-2 font-medium">
+                    <label className="block text-red-600 mb-2 font-medium">
                       WhatsApp Number *
                     </label>
                     <motion.div
@@ -1175,7 +1236,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.35 }}
                 >
-                  <label className="block text-red-300 mb-2 font-medium">
+                  <label className="block text-red-600 mb-2 font-medium">
                     Scholar ID *
                   </label>
                   <motion.div
@@ -1198,7 +1259,7 @@ function RobowarRegistration() {
               {/* Team Members Section */}
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-400">Team Members</h3>
+                  <h3 className="text-xl font-bold text-red-200">Team Members</h3>
                   <p className="text-red-200 text-sm mt-1">Add your team members (minimum 4 required)</p>
                 </div>
 
@@ -1211,7 +1272,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 + (num - 2) * 0.05 }}
                   >
-                    <label className="block text-red-300 mb-2 font-medium">
+                    <label className="block text-red-600 mb-2 font-medium">
                       Team Member {num} Name *
                     </label>
                     <motion.div
@@ -1240,7 +1301,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.55 + (num - 5) * 0.05 }}
                   >
-                    <label className="block text-red-300 mb-2 font-medium">
+                    <label className="block text-red-600 mb-2 font-medium">
                       Team Member {num} Name <span className="text-red-400/60">(Optional)</span>
                     </label>
                     <motion.div
@@ -1258,7 +1319,374 @@ function RobowarRegistration() {
                   </motion.div>
                 ))}
               </div>
-              <KitComponentsSection />
+
+              {/* College Type Selection Section */}
+              <div className="space-y-5 pt-8">
+                <div className="border-l-4 border-red-500 pl-4 mb-6">
+                  <h3 className="text-xl font-bold text-red-200">College Type</h3>
+                  <p className="text-red-200 text-sm mt-1">Select your college type to determine registration options</p>
+                </div>
+
+                {/* College Type Selection */}
+                <motion.div
+                  className="form-group"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <label className="block text-red-600 mb-3 font-medium text-lg">
+                    Are you from NIT Silchar? *
+                  </label>
+                  <div className="flex gap-4">
+                    <motion.button
+                      type="button"
+                      onClick={() => {
+                        setCollegeType("nit_silchar");
+                        setWantsKit(null); // Reset kit selection when changing college type
+                      }}
+                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                        collegeType === "nit_silchar"
+                          ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                          : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                      }`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      Yes, NIT Silchar
+                    </motion.button>
+                    <motion.button
+                      type="button"
+                      onClick={() => {
+                        setCollegeType("other");
+                        setWantsKit(false); // Other colleges cannot select kit
+                      }}
+                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                        collegeType === "other"
+                          ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                          : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                      }`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      No, Other College
+                    </motion.button>
+                  </div>
+                  {collegeType === null && (
+                    <p className="text-red-400/60 text-xs mt-2">
+                      ⚠️ Please select your college type to continue
+                    </p>
+                  )}
+                  {collegeType === "other" && (
+                    <p className="text-red-300 text-sm mt-3 bg-red-950/30 border border-red-500/30 rounded-lg p-3">
+                      ℹ️ Registration fee for other college students: ₹2,000 (Kit not available)
+                    </p>
+                  )}
+                </motion.div>
+
+                {/* College Name Input - Only for Other College Students */}
+                {collegeType === "other" && (
+                  <motion.div
+                    className="form-group"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <label className="block text-red-600 mb-2 font-medium">
+                      College Name *
+                    </label>
+                    <motion.div
+                      className="relative"
+                      whileHover={{ scale: 1.005 }}
+                    >
+                      <input
+                        type="text"
+                        name="collegeName"
+                        value={formData.collegeName}
+                        onChange={handleInputChange}
+                        className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                        placeholder="Enter your college name"
+                        required
+                      />
+                    </motion.div>
+                  </motion.div>
+                )}
+
+                {/* Kit Selection - Only for NIT Silchar Students */}
+                {collegeType === "nit_silchar" && (
+                  <motion.div
+                    className="form-group"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <label className="block text-red-600 mb-3 font-medium text-lg">
+                      Do you want to purchase a Robot Kit? *
+                    </label>
+                    <div className="flex gap-4">
+                      <motion.button
+                        type="button"
+                        onClick={() => setWantsKit(true)}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                          wantsKit === true
+                            ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                            : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        Yes, I want a kit
+                      </motion.button>
+                      <motion.button
+                        type="button"
+                        onClick={() => setWantsKit(false)}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
+                          wantsKit === false
+                            ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                            : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        No, registration only
+                      </motion.button>
+                    </div>
+                    {wantsKit === null && (
+                      <p className="text-red-400/60 text-xs mt-2">
+                        ⚠️ Please select an option to continue
+                      </p>
+                    )}
+                  </motion.div>
+                )}
+
+                {/* Motor Option Selection - Only for NIT Silchar Students with Kit */}
+                {collegeType === "nit_silchar" && wantsKit === true && (
+                  <motion.div
+                    className="form-group space-y-4"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <label className="block text-red-600 mb-3 font-medium text-lg">
+                      Select Motor Option *
+                    </label>
+                    
+                    <div className="space-y-3">
+                      {/* High RPM Motor Option */}
+                      <motion.button
+                        type="button"
+                        onClick={() => setMotorOption("rpm")}
+                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
+                          motorOption === "rpm"
+                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+                            : 'bg-black/50 border-red-800 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.01 }}
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                                motorOption === "rpm" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                              }`}>
+                                {motorOption === "rpm" && (
+                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
+                                )}
+                              </div>
+                              <h4 className="text-red-200 font-semibold">High RPM Motor</h4>
+                            </div>
+                            <p className="text-red-400/70 text-sm ml-7">Best for fast spinning weapons</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-red-300 font-bold text-lg">₹4,200</p>
+                            <p className="text-red-400/60 text-xs">(Kit + Registration)</p>
+                          </div>
+                        </div>
+                      </motion.button>
+
+                      {/* High Torque Motor Option */}
+                      <motion.button
+                        type="button"
+                        onClick={() => setMotorOption("torque")}
+                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
+                          motorOption === "torque"
+                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+                            : 'bg-black/50 border-red-800 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.01 }}
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                                motorOption === "torque" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                              }`}>
+                                {motorOption === "torque" && (
+                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
+                                )}
+                              </div>
+                              <h4 className="text-red-200 font-semibold">High Torque Motor</h4>
+                            </div>
+                            <p className="text-red-400/70 text-sm ml-7">Best for powerful crushing weapons</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-red-300 font-bold text-lg">₹4,800</p>
+                            <p className="text-red-400/60 text-xs">(Kit + Registration)</p>
+                          </div>
+                        </div>
+                      </motion.button>
+
+                      {/* Both Motors Option */}
+                      <motion.button
+                        type="button"
+                        onClick={() => setMotorOption("both")}
+                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left relative overflow-hidden ${
+                          motorOption === "both"
+                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+                            : 'bg-black/50 border-red-800 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.01 }}
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                                motorOption === "both" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                              }`}>
+                                {motorOption === "both" && (
+                                  <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
+                                )}
+                              </div>
+                              <h4 className="text-red-200 font-semibold">Both Motors (RPM + Torque)</h4>
+                            </div>
+                            <p className="text-red-400/70 text-sm ml-7">Maximum flexibility for any weapon design</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-red-300 font-bold text-lg">₹6,000</p>
+                            <p className="text-red-400/60 text-xs">(Kit + Registration)</p>
+                          </div>
+                        </div>
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Weight Category Selection - For All Students */}
+                <div className="space-y-5 pt-6">
+                  <div className="border-l-4 border-red-500 pl-4 mb-6">
+                    <h3 className="text-xl font-bold text-red-200">Robot Weight Category</h3>
+                    <p className="text-red-200 text-sm mt-1">Select the weight category your robot will compete in</p>
+                  </div>
+
+                  <motion.div
+                    className="form-group"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.7 }}
+                  >
+                    <label className="block text-red-600 mb-3 font-medium text-lg">
+                      Weight Category *
+                    </label>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {/* Lightweight Category */}
+                      <motion.button
+                        type="button"
+                        onClick={() => setWeightCategory("lightweight")}
+                        className={`p-5 rounded-xl border-2 transition-all duration-300 ${
+                          weightCategory === "lightweight"
+                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
+                            : 'bg-black/50 border-red-800 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${
+                            weightCategory === "lightweight" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                          }`}>
+                            {weightCategory === "lightweight" && (
+                              <div className="w-3 h-3 bg-white rounded-full"></div>
+                            )}
+                          </div>
+                          <div className="flex-1 text-left">
+                            <h4 className="text-red-200 font-bold text-lg mb-1">Lightweight</h4>
+                            <p className="text-red-300 font-semibold mb-2">8 kg and below</p>
+                            <p className="text-red-400/70 text-sm">
+                              Perfect for agile and fast robots with quick maneuverability
+                            </p>
+                          </div>
+                        </div>
+                      </motion.button>
+
+                      {/* Heavyweight Category */}
+                      <motion.button
+                        type="button"
+                        onClick={() => setWeightCategory("heavyweight")}
+                        className={`p-5 rounded-xl border-2 transition-all duration-300 ${
+                          weightCategory === "heavyweight"
+                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
+                            : 'bg-black/50 border-red-800 hover:border-red-600'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${
+                            weightCategory === "heavyweight" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                          }`}>
+                            {weightCategory === "heavyweight" && (
+                              <div className="w-3 h-3 bg-white rounded-full"></div>
+                            )}
+                          </div>
+                          <div className="flex-1 text-left">
+                            <h4 className="text-red-200 font-bold text-lg mb-1">Heavyweight</h4>
+                            <p className="text-red-300 font-semibold mb-2">15 kg and below</p>
+                            <p className="text-red-400/70 text-sm">
+                              Built for power and durability with heavy-duty weapons and armor
+                            </p>
+                          </div>
+                        </div>
+                      </motion.button>
+                    </div>
+                    {weightCategory === null && (
+                      <p className="text-red-400/60 text-xs mt-2">
+                        ⚠️ Please select a weight category to continue
+                      </p>
+                    )}
+                  </motion.div>
+                </div>
+
+                {/* Price Summary */}
+                {collegeType !== null && (
+                  <motion.div
+                    className="bg-gradient-to-br from-red-950/30 to-black/50 border-2 border-red-500/40 rounded-xl p-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-red-400/70 text-sm">Total Amount to Pay:</p>
+                        <p className="text-red-100 text-xs mt-1">
+                          {collegeType === "other" 
+                            ? 'Registration Only (Other College)' 
+                            : wantsKit 
+                              ? `Kit (${motorOption === 'rpm' ? 'High RPM Motor' : motorOption === 'torque' ? 'High Torque Motor' : motorOption === 'both' ? 'Both Motors' : ''}) + Registration (NIT Silchar)` 
+                              : 'Registration Only (NIT Silchar)'}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-red-300 font-bold text-2xl">₹{registrationFee}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Show kit components only if NIT Silchar student selected kit */}
+              {collegeType === "nit_silchar" && wantsKit === true && <KitComponentsSection motorOption={motorOption} />}
               <AttentionSection />
               {/* Payment Section */}
               <div className="space-y-6 pt-8">
@@ -1435,21 +1863,186 @@ function RobowarRegistration() {
                 </motion.div>
               </div>
 
+              {/* Registration Summary Section */}
+              <motion.div
+                className="space-y-6 pt-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+              >
+                <div className="border-l-4 border-red-500 pl-4 mb-6">
+                  <h3 className="text-xl font-bold text-red-400">Registration Summary</h3>
+                  <p className="text-red-200 text-sm mt-1">Review your details before submitting</p>
+                </div>
+
+                <div className="bg-gradient-to-br from-red-950/30 to-black/50 border-2 border-red-500/40 rounded-2xl p-6 space-y-4 font-orbitron">
+                  {/* Team Information */}
+                  <div className="space-y-3">
+                    <h4 className="text-lg font-bold text-red-300 border-b border-red-500/30 pb-2">Team Information</h4>
+                    <div className="grid md:grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="text-red-400/70">Team Name:</span>
+                        <p className="text-red-100 font-medium">{formData.teamName || "Not provided"}</p>
+                      </div>
+                      <div>
+                        <span className="text-red-400/70">Event:</span>
+                        <p className="text-red-100 font-medium">RoboWar</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Team Leader Details */}
+                  <div className="space-y-3">
+                    <h4 className="text-lg font-bold text-red-300 border-b border-red-500/30 pb-2">Team Leader Details</h4>
+                    <div className="grid md:grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="text-red-400/70">Name:</span>
+                        <p className="text-red-100 font-medium">{formData.teamLeaderName || "Not provided"}</p>
+                      </div>
+                      <div>
+                        <span className="text-red-400/70">Email:</span>
+                        <p className="text-red-100 font-medium break-all">{formData.teamLeaderEmail || "Not provided"}</p>
+                      </div>
+                      <div>
+                        <span className="text-red-400/70">Phone:</span>
+                        <p className="text-red-100 font-medium">{formData.teamLeaderPhone || "Not provided"}</p>
+                      </div>
+                      <div>
+                        <span className="text-red-400/70">WhatsApp:</span>
+                        <p className="text-red-100 font-medium">{formData.teamLeaderWhatsapp || "Not provided"}</p>
+                      </div>
+                      <div>
+                        <span className="text-red-400/70">Scholar ID:</span>
+                        <p className="text-red-100 font-medium">{formData.teamLeaderScholarId || "Not provided"}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Team Members */}
+                  <div className="space-y-3">
+                    <h4 className="text-lg font-bold text-red-300 border-b border-red-500/30 pb-2">Team Members</h4>
+                    <div className="grid md:grid-cols-2 gap-4 text-sm">
+                      {[2, 3, 4, 5, 6].map((num) => {
+                        const memberName = formData[`teamMember${num}`];
+                        if (memberName) {
+                          return (
+                            <div key={num}>
+                              <span className="text-red-400/70">Member {num}:</span>
+                              <p className="text-red-100 font-medium">{memberName}</p>
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Payment Details */}
+                  <div className="space-y-3">
+                    <h4 className="text-lg font-bold text-red-300 border-b border-red-500/30 pb-2">Payment Details</h4>
+                    <div className="grid md:grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="text-red-400/70">College Type:</span>
+                        <p className="text-red-100 font-medium">
+                          {collegeType === "nit_silchar" ? "NIT Silchar" : collegeType === "other" ? "Other College" : "Not selected"}
+                        </p>
+                      </div>
+                      {collegeType === "other" && (
+                        <div>
+                          <span className="text-red-400/70">College Name:</span>
+                          <p className="text-red-100 font-medium">{formData.collegeName || "Not provided"}</p>
+                        </div>
+                      )}
+                      {collegeType === "nit_silchar" && (
+                        <div>
+                          <span className="text-red-400/70">Kit Purchase:</span>
+                          <p className="text-red-100 font-medium">
+                            {wantsKit === null ? "Not selected" : wantsKit ? "Yes" : "No"}
+                          </p>
+                        </div>
+                      )}
+                      {collegeType === "nit_silchar" && wantsKit && (
+                        <div>
+                          <span className="text-red-400/70">Motor Option:</span>
+                          <p className="text-red-100 font-medium">
+                            {motorOption === "rpm" ? "High RPM Motor" : 
+                             motorOption === "torque" ? "High Torque Motor" : 
+                             motorOption === "both" ? "Both Motors (RPM + Torque)" : 
+                             "Not selected"}
+                          </p>
+                        </div>
+                      )}
+                      <div>
+                        <span className="text-red-400/70">Weight Category:</span>
+                        <p className="text-red-100 font-medium">
+                          {weightCategory === "lightweight" ? "Lightweight (8kg and below)" : 
+                           weightCategory === "heavyweight" ? "Heavyweight (15kg and below)" : 
+                           "Not selected"}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="text-red-400/70">Total Amount:</span>
+                        <p className="text-red-100 font-medium text-lg">₹{registrationFee}</p>
+                      </div>
+                      <div>
+                        <span className="text-red-400/70">Transaction Number:</span>
+                        <p className="text-red-100 font-medium font-mono">{formData.transactionNumber || "Not provided"}</p>
+                      </div>
+                      <div className="md:col-span-2">
+                        <span className="text-red-400/70">Payment Proof:</span>
+                        <p className="text-red-100 font-medium">
+                          {fileUrl ? (
+                            <a
+                              href={fileUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-green-400 underline hover:text-green-300 inline-flex items-center gap-1"
+                            >
+                              <CheckCircleIcon className="h-4 w-4" />
+                              Uploaded successfully
+                            </a>
+                          ) : (
+                            "Not uploaded"
+                          )}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
               {/* Submit Button */}
               <div className="flex justify-center mt-4">
-                <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ff0000_0%,#ff6b6b_50%,#ff0000_100%)]" />
-                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-                    Register My Team
+                <motion.button
+                  type="submit"
+                  className="relative w-full max-w-md h-20 bg-no-repeat bg-center bg-contain flex items-center justify-center group cursor-pointer"
+                  style={{
+                    backgroundImage: "url('/robotron/button.svg')",
+                    backgroundSize: "70% 70%",
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  {/* Glow effect on hover */}
+                  <motion.div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      filter: "blur(15px)",
+                      background: "radial-gradient(circle, rgba(165,0,0,0.6) 0%, transparent 70%)",
+                    }}
+                  />
+                  <span className="relative z-10 text-xs md:text-sm font-bold text-white drop-shadow-[0_0_10px_rgba(165,0,0,0.8)] group-hover:drop-shadow-[0_0_15px_rgba(165,0,0,1)] transition-all duration-300">
+                    Register Team
                   </span>
-                </button>
+                </motion.button>
               </div>
             </form>
           </motion.section>
 
 
 
-          <PaymentDetailsSection registrationFee={registrationFee} />
+          <PaymentDetailsSection />
         </motion.div>
       </div>
     </div>
