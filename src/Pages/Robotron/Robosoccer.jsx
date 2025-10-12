@@ -11,6 +11,9 @@ import { MultiStepLoader } from "../../components/Merch_components/multi-step-lo
 
 // Background Grid Component
 const BackgroundGrid = () => {
+  // Detect mobile for performance optimization
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  
   return (
     <div className="fixed inset-0 z-0">
       {/* Horizontal lines */}
@@ -31,7 +34,10 @@ const BackgroundGrid = () => {
             opacity: 0.3,
             scaleX: 1,
           }}
-          transition={{
+          transition={isMobile ? {
+            duration: 0.5,
+            delay: 0,
+          } : {
             duration: 1.5,
             delay: i * 0.05,
             ease: 'easeInOut',
@@ -56,15 +62,18 @@ const BackgroundGrid = () => {
             opacity: 0.3,
             scaleY: 1,
           }}
-          transition={{
+          transition={isMobile ? {
+            duration: 0.5,
+            delay: 0,
+          } : {
             duration: 1.5,
             delay: i * 0.05,
             ease: 'easeInOut',
           }}
         />
       ))}
-      {/* Glowing orbs */}
-      {Array.from({
+      {/* Glowing orbs - disabled on mobile for performance */}
+      {!isMobile && Array.from({
         length: 15,
       }).map((_, i) => (
         <motion.div

@@ -11,6 +11,9 @@ import { MultiStepLoader } from "../../components/Merch_components/multi-step-lo
 
 // Background Grid Component
 const BackgroundGrid = () => {
+  // Detect mobile for performance optimization
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  
   return (
     <div className="fixed inset-0 z-0">
       {/* Horizontal lines */}
@@ -31,7 +34,10 @@ const BackgroundGrid = () => {
             opacity: 0.3,
             scaleX: 1,
           }}
-          transition={{
+          transition={isMobile ? {
+            duration: 0.5,
+            delay: 0,
+          } : {
             duration: 1.5,
             delay: i * 0.05,
             ease: 'easeInOut',
@@ -56,7 +62,10 @@ const BackgroundGrid = () => {
             opacity: 0.3,
             scaleY: 1,
           }}
-          transition={{
+          transition={isMobile ? {
+            duration: 0.5,
+            delay: 0,
+          } : {
             duration: 1.5,
             delay: i * 0.05,
             ease: 'easeInOut',
@@ -64,7 +73,7 @@ const BackgroundGrid = () => {
         />
       ))}
       {/* Glowing orbs */}
-      {Array.from({
+      {!isMobile && Array.from({
         length: 15,
       }).map((_, i) => (
         <motion.div
@@ -117,18 +126,20 @@ const HeroSection = () => {
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute w-full h-1 bg-yellow-500 top-1/2 left-0 blur-sm"
-          animate={{
+          animate={isMobile ? {
+            opacity: 0.3,
+          } : {
             x: ['0%', '100%'],
             opacity: [0.2, 0.8, 0.2],
           }}
-          transition={{
+          transition={isMobile ? {} : {
             duration: 8,
             repeat: Infinity,
             ease: 'linear',
           }}
         />
         {/* Circuit lines */}
-        {Array.from({
+        {!isMobile && Array.from({
           length: 5,
         }).map((_, i) => (
           <motion.div
@@ -221,7 +232,7 @@ const HeroSection = () => {
           {/* Right Column - Hero Image */}
           <motion.div
             className="flex justify-center items-center md:col-span-3"
-            initial={{
+            initial={isMobile ? {} : {
               opacity: 0,
               scale: 0.8,
             }}
@@ -229,17 +240,17 @@ const HeroSection = () => {
               opacity: 1,
               scale: 1,
             }}
-            transition={{
+            transition={isMobile ? {} : {
               delay: 0.3,
               duration: 0.8,
             }}
           >
             <motion.div
               className="relative"
-              whileHover={{
+              whileHover={isMobile ? {} : {
                 scale: 1.05,
               }}
-              transition={{
+              transition={isMobile ? {} : {
                 type: 'spring',
                 stiffness: 300,
                 damping: 20,
@@ -248,11 +259,13 @@ const HeroSection = () => {
               {/* Glowing effect behind image */}
               <motion.div
                 className="absolute inset-0 bg-yellow-500/30 blur-3xl rounded-full"
-                animate={{
+                animate={isMobile ? {
+                  opacity: 0.4,
+                } : {
                   opacity: [0.3, 0.6, 0.3],
                   scale: [0.9, 1.1, 0.9],
                 }}
-                transition={{
+                transition={isMobile ? {} : {
                   duration: 3,
                   repeat: Infinity,
                   repeatType: 'reverse',
