@@ -961,7 +961,7 @@ function Robosoccer() {
             <div className="relative mb-8 flex items-center justify-center">
               {/* Left Frame */}
               <motion.div
-                className="absolute left-32 top-[-0.89rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                className="absolute left-4 top-[-0.3rem] md:left-32 md:top-[-0.89rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
                 style={{
                   backgroundImage: "url('/robotron/txt_frame_bl.svg')",
                 }}
@@ -993,7 +993,7 @@ function Robosoccer() {
 
               {/* Right Frame */}
               <motion.div
-                className="absolute right-32  bottom-[-0.9rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                className="absolute right-4 bottom-[-0.5rem] md:right-32  md:bottom-[-0.9rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
                 style={{
                   backgroundImage: "url('/robotron/txt_frame_br.svg')",
                 }}
