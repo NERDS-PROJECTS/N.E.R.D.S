@@ -10,7 +10,7 @@ const Robotron = () => {
             name: 'ROBOWAR',
             path: '/robowar',
             gradient: 'linear-gradient(135deg, #D856BF, #6750A2)',
-            glowColor: '#D856BF',
+            glowColor: '#e80101',
             svgBg: '/robotron/button.svg'
         },
         {

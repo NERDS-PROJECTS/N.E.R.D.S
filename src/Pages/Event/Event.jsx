@@ -4,6 +4,7 @@ import time2 from "./Assets/time2.svg"
 import {motion} from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import { AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Modal from "./Component/Modal"
 import Modal_mini_body from "./Component/Modal_mini_body"
 import translate_description_on_timeline from "./JSON/translate_description_on_timeline.json"
@@ -14,6 +15,7 @@ import TextAnimation from "./Animations/TextFlip"
 import ProgressBar from "react-scroll-progress-bar";
 import Button from "./Component/Button"
 import Text from "./Component/Verti-text"
+import modaldata from "./JSON/modaldata.json"
 
 
 
@@ -84,11 +86,13 @@ function Hero_small() {
 }
 // Desktop
 function Timeline(){
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [id, setId] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
     const [dataId, setDataId] = useState(1);
     const obj = {...translate_description_on_timeline};
+    const modalObj = {...modaldata};
     const [border, setBorder] = useState(pc_card_border)
     const [border2, setBorder2] = useState(pc_card_border)
     const [border3, setBorder3] = useState(pc_card_border)
@@ -105,7 +109,11 @@ function Timeline(){
                     {/* cards */}
 
                     {/* card1 */}
-                    <motion.div className="cards flex mt-8 " onClick={() =>{ setIsOpen(true);setId(1);}}>
+                    <motion.div 
+                        className="cards flex mt-8"
+                        onHoverStart={() => {setIsHovered(true); setId(1); setDataId(1); setBorder(pc_card_border2)}}
+                        onHoverEnd={() => {setIsHovered(false); setBorder(pc_card_border)}}
+                        onClick={() =>{ setIsOpen(true);setId(1);}}>
                         <motion.div
                             className="text text-slate-200 relative text-right "
                             initial={{ x: 120, opacity: 0 }} 
@@ -113,8 +121,12 @@ function Timeline(){
                             transition={{ duration: 0.3, ease: "easeInOut" }} >
                                 <h1 className="absolute font-ethenocentric text-2xl text-cyan-400  min-w-max left-[2rem]">{obj[dataId].head}</h1>
                                 <p className="absolute font-ethenocentric text-xs min-w-96 left-[-10rem] top-10 ">{obj[dataId].data} </p>
-                                <Button className=" ml-[-4.5rem]" children="Know more"/>
-                                <Button className="ml-[6rem]" children="register"/>
+                                <div onClick={() => {setIsOpen(true); setId(1);}}>
+                                    <Button className=" ml-[-4.5rem]">Know more</Button>
+                                </div>
+                                <div onClick={() => navigate(modalObj[1].register)}>
+                                    <Button className="ml-[6rem]">Register</Button>
+                                </div>
                         </motion.div>
 
                         <motion.div
@@ -125,9 +137,7 @@ function Timeline(){
                             }}
                             onClick={() => {setIsOpen(true); setId(1);}}
                             initial={{ x: 0, opacity: 1 }} 
-                            whileHover={{ x: 360, opacity: 1 }} 
-                            onHoverStart={() => {setIsHovered(true); setId(1); setDataId(1); setBorder(pc_card_border2)}}
-                            onHoverEnd={() => {setIsHovered(false); setBorder(pc_card_border)}}
+                            animate={(isHovered && id==1) ? { x: 360, opacity: 1 } : { x: 0, opacity: 1 }}
                             transition={{duration: 0.3, ease: "easeInOut"}}
                             >
                                 <img src={border} alt="" /> 
@@ -142,18 +152,20 @@ function Timeline(){
                     </motion.div>        
 
                     {/* card2 */}
-                    <motion.div className="cards flex relative overflow-visible" onClick={() =>{ setIsOpen(true);setId(2);}}>
+                    <motion.div 
+                        className="cards flex relative overflow-visible"
+                        onHoverStart={() => {setIsHovered(true); setId(2); setDataId(2);setBorder2(pc_card_border2)}}
+                        onHoverEnd={() => {setIsHovered(false); setBorder2(pc_card_border)}}
+                        onClick={() =>{ setIsOpen(true);setId(2);}}>
                         <motion.div
                             className="relative overflow-hidden flex lg:-mt-0 md:-mt-5 min-w-[30rem]"
                             style={{
                                 clipPath: 'polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%)',
                                 aspectRatio: '730 / 460',
                             }}
-                            onClick={() => {setIsOpen(true); setId(1);}}
+                            onClick={() => {setIsOpen(true); setId(2);}}
                             initial={{ x: 0, opacity: 1 }} 
-                            whileHover={{ x: -180, opacity: 1 }} 
-                            onHoverStart={() => {setIsHovered(true); setId(2); setDataId(2);setBorder2(pc_card_border2)}}
-                            onHoverEnd={() => {setIsHovered(false); setBorder2(pc_card_border)}} 
+                            animate={(isHovered && id==2) ? { x: -180, opacity: 1 } : { x: 0, opacity: 1 }}
                             transition={{duration: 0.3, ease: "easeInOut"}}
                             >
                                 <img src={border2} alt="" /> 
@@ -176,7 +188,11 @@ function Timeline(){
                     </motion.div>        
 
                     {/* card3 */}
-                    <motion.div className="cards flex" onClick={() =>{ setIsOpen(true);setId(3);}}>
+                    <motion.div 
+                        className="cards flex"
+                        onHoverStart={() => {setIsHovered(true); setId(3); setDataId(3);setBorder3(pc_card_border2)}}
+                        onHoverEnd={() => {setIsHovered(false); setBorder3(pc_card_border)}}
+                        onClick={() =>{ setIsOpen(true);setId(3);}}>
                     <motion.div
                             className="text text-slate-200 relative text-right "
                             initial={{ x: 120, opacity: 0 }} 
@@ -195,11 +211,9 @@ function Timeline(){
                                 clipPath: 'polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%)',
                                 aspectRatio: '730 / 460',
                             }}
-                            onClick={() => {setIsOpen(true); setId(1);}}
+                            onClick={() => {setIsOpen(true); setId(3);}}
                             initial={{ x: 0, opacity: 1 }} 
-                            whileHover={{ x: 360, opacity: 1 }} 
-                            onHoverStart={() => {setIsHovered(true); setId(3); setDataId(3);setBorder3(pc_card_border2)}}
-                            onHoverEnd={() => {setIsHovered(false); setBorder3(pc_card_border)}} 
+                            animate={(isHovered && id==3) ? { x: 360, opacity: 1 } : { x: 0, opacity: 1 }}
                             transition={{duration: 0.3, ease: "easeInOut"}}
                             >
                                 <img src={border3} alt="" /> 
@@ -213,7 +227,11 @@ function Timeline(){
                     </motion.div>        
 
                     {/* card4 */}
-                    <motion.div className="cards flex" onClick={() =>{ setIsOpen(true);setId(4);}}>
+                    <motion.div 
+                        className="cards flex"
+                        onHoverStart={() => {setIsHovered(true); setId(4); setDataId(4);setBorder4(pc_card_border2)}}
+                        onHoverEnd={() => {setIsHovered(false); setBorder4(pc_card_border)}}
+                        onClick={() =>{ setIsOpen(true);setId(4);}}>
 
                         <motion.div
                             className="relative overflow-hidden flex lg:-mt-0 md:-mt-5 min-w-[30rem]"
@@ -221,11 +239,9 @@ function Timeline(){
                                 clipPath: 'polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%)',
                                 aspectRatio: '730 / 460',
                             }}
-                            onClick={() => {setIsOpen(true); setId(1);}}
+                            onClick={() => {setIsOpen(true); setId(4);}}
                             initial={{ x: 0, opacity: 1 }} 
-                            whileHover={{ x: -180, opacity: 1 }} 
-                            onHoverStart={() => {setIsHovered(true); setId(4); setDataId(4);setBorder4(pc_card_border2)}}
-                            onHoverEnd={() => {setIsHovered(false); setBorder4(pc_card_border)}} 
+                            animate={(isHovered && id==4) ? { x: -180, opacity: 1 } : { x: 0, opacity: 1 }}
                             transition={{duration: 0.3, ease: "easeInOut"}}
                             >
                                 <img src={border4} alt="" /> 
@@ -249,7 +265,11 @@ function Timeline(){
                     </motion.div>  
 
                     {/* card5 */}
-                    <motion.div className="cards flex" onClick={() =>{ setIsOpen(true);setId(5);}}>
+                    <motion.div 
+                        className="cards flex"
+                        onHoverStart={() => {setIsHovered(true); setId(5); setDataId(5);setBorder5(pc_card_border2)}}
+                        onHoverEnd={() => {setIsHovered(false); setBorder5(pc_card_border)}}
+                        onClick={() =>{ setIsOpen(true);setId(5);}}>
                         <motion.div
                             className="text text-slate-200 relative text-right "
                             initial={{ x: 120, opacity: 0 }} 
@@ -267,11 +287,9 @@ function Timeline(){
                                 clipPath: 'polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%)',
                                 aspectRatio: '730 / 460',
                             }}
-                            onClick={() => {setIsOpen(true); setId(1);}}
+                            onClick={() => {setIsOpen(true); setId(5);}}
                             initial={{ x: 0, opacity: 1 }} 
-                            whileHover={{ x: 360, opacity: 1 }} 
-                            onHoverStart={() => {setIsHovered(true); setId(5); setDataId(5);setBorder5(pc_card_border2)}}
-                            onHoverEnd={() => {setIsHovered(false); setBorder5(pc_card_border)}} 
+                            animate={(isHovered && id==5) ? { x: 360, opacity: 1 } : { x: 0, opacity: 1 }}
                             transition={{duration: 0.3, ease: "easeInOut"}}
                             >
                                 <img src={border5} alt="" /> 
@@ -285,7 +303,11 @@ function Timeline(){
                     </motion.div>        
 
                     {/* card6 */}
-                    <motion.div className="cards flex" onClick={() =>{ setIsOpen(true);setId(6);}}>
+                    <motion.div 
+                        className="cards flex"
+                        onHoverStart={() => {setIsHovered(true); setId(6); setDataId(6);setBorder6(pc_card_border2)}}
+                        onHoverEnd={() => {setIsHovered(false); setBorder6(pc_card_border)}}
+                        onClick={() =>{ setIsOpen(true);setId(6);}}>
 
                         <motion.div
                             className="relative overflow-hidden flex lg:-mt-0 md:-mt-5  min-w-[30rem]"
@@ -293,11 +315,9 @@ function Timeline(){
                                 clipPath: 'polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%)',
                                 aspectRatio: '730 / 460',
                             }}
-                            onClick={() => {setIsOpen(true); setId(1);}}
+                            onClick={() => {setIsOpen(true); setId(6);}}
                             initial={{ x: 0, opacity: 1 }} 
-                            whileHover={{ x: -180, opacity: 1 }} 
-                            onHoverStart={() => {setIsHovered(true); setId(6); setDataId(6);setBorder6(pc_card_border2)}}
-                            onHoverEnd={() => {setIsHovered(false); setBorder6(pc_card_border)}} 
+                            animate={(isHovered && id==6) ? { x: -180, opacity: 1 } : { x: 0, opacity: 1 }}
                             transition={{duration: 0.3, ease: "easeInOut"}}
                             >
                                 <img src={border6} alt="" /> 

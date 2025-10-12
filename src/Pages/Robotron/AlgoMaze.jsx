@@ -331,7 +331,7 @@ const AttentionSection = () => {
             <h3 className="text-xl font-bold text-yellow-400 mb-2">ATTENTION</h3>
             <p className="text-yellow-100 font-sans">
               ⚠️ Only registrations are currently allowed. Kits and materials
-              are not provided at this time. Registration fee: Rs. 999. For kit
+              are not provided at this time. Registration fee: Rs. 799. For kit
               tracking, visit:{''}
               <motion.a
                 href="/trackOrder"
@@ -384,13 +384,23 @@ const AttentionSection = () => {
 const KitComponentsSection = () => {
   // Base kit items (common for all kits)
   const baseKitItems = [
-    'Metal Geared Driving Motors (4 Piece)',
-    'Traction Wheels (4 Piece)',
-    'L-shaped clamps (4 Piece)',
-    'DPDT switch (3 Piece)',
-    '10 ft metal strip (for frame)',
-    '3x4 ft metal sheet',
-    'Metal cutter blade (3 Piece)',
+    'Arduino Uno (1 Piece)',
+    'Arduino Cable (1 Piece)',
+    'Motor driver (1 Piece)',
+    'Caster Wheel (1 Piece)',
+    'Traction Wheels (4 piece)',
+    'Laser Sensor (1 piece)',
+    'Mini Breadboard',
+    '2-pin Switch (1 piece)',
+    'Jumper Wires Set',
+    'Battery Case Holder 2S',
+    'Battery Case Holder 1S',
+    'Chassis Frame',
+    'Gyroscopic Sensor (MPU)',
+    'PCA9548A I2C MUX',
+    'High RPM BO Motors (2 piece)',
+    'Battery Charging Module',
+    'Li-Ion Battery',
     'Soldering Kit',
   ]
 
@@ -680,9 +690,9 @@ function AlgoMaze() {
   const [wantsKit, setWantsKit] = useState(null); // null, true, or false (only for NIT Silchar)
 
   // Registration fees
-  const nitSilcharRegistrationFee = 999;
-  const otherCollegeRegistrationFee = 2000;
-  const kitPrice = 4200;
+  const nitSilcharRegistrationFee = 799;
+  const otherCollegeRegistrationFee = 1499;
+  const kitPrice = 2699;
   
   // Calculate total fee based on college type and kit selection
   const calculateTotalFee = () => {
@@ -1264,7 +1274,7 @@ function AlgoMaze() {
                     >
                       <div className="text-center">
                         <div className="text-lg mb-2">NIT Silchar Student</div>
-                        <div className="text-xs text-yellow-200/70">Registration: ₹999 | Kit Option: ₹4200</div>
+                        <div className="text-xs text-yellow-200/70">Registration: ₹799 | Kit Option: ₹2699</div>
                       </div>
                     </motion.button>
                     <motion.button
@@ -1283,7 +1293,7 @@ function AlgoMaze() {
                     >
                       <div className="text-center">
                         <div className="text-lg mb-2">Other College Student</div>
-                        <div className="text-xs text-yellow-200/70">Registration Only: ₹2000</div>
+                        <div className="text-xs text-yellow-200/70">Registration Only: ₹1499</div>
                       </div>
                     </motion.button>
                   </div>
@@ -1356,7 +1366,7 @@ function AlgoMaze() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        Yes, I want a kit (₹4200)
+                        Yes, I want a kit (₹2699)
                       </motion.button>
                       <motion.button
                         type="button"
@@ -1369,7 +1379,7 @@ function AlgoMaze() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        No, registration only (₹999)
+                        No, registration only (₹799)
                       </motion.button>
                     </div>
                     {wantsKit === null && (

@@ -387,21 +387,21 @@ const AttentionSection = () => {
 const KitComponentsSection = ({ motorOption }) => {
   // Base kit items (common for all options)
   const baseKitItems = [
-    'Metal Geared Driving Motors (4 Piece)',
+    'High Power Geared Motor (Grade A) (2 piece)',
+    '12V Geared Motor (Grade A) (2 piece)',
     'Traction Wheels (4 Piece)',
     'L-shaped clamps (4 Piece)',
-    'DPDT switch (3 Piece)',
-    '10 ft metal strip (for frame)',
-    '3x4 ft metal sheet',
-    'Metal cutter blade (3 Piece)',
+    'Rocker DPDT switch (3 Piece)',
+    'Metal strip (for frame)',
+    'Metal sheet',
     'Soldering Kit',
   ]
 
   // Motor-specific items
   const motorSpecificItems = {
-    rpm: ['High RPM Motor (1 Piece for weapon)'],
-    torque: ['High Torque Motor (1 Piece for weapon)'],
-    both: ['High RPM Motor (1 Piece for weapon)', 'High Torque Motor (1 Piece for weapon)']
+    rpm: ['High RPM Motor (1 Piece for weapon)','Sprocket','Bore Mounted Bearing','Pulley System','Steel Rod','Timing Belt'],
+    torque: ['High Torque Motor (1 Piece for weapon)','Sprocket Wheel','Geared Hub System','Geared Teeth'],
+    both: ['High RPM Motor (1 Piece for weapon)','Sprocket','Bore Mounted Bearing','Pulley System','Steel Rod','Timing Belt','High Torque Motor (1 Piece for weapon)','Sprocket Wheel','Geared Hub System','Geared Teeth']
   }
 
   const containerVariants = {
@@ -737,7 +737,7 @@ function RobowarRegistration() {
 
   // Registration fees
   const nitSilcharRegistrationFee = 999;
-  const otherCollegeRegistrationFee = 2000;
+  const otherCollegeRegistrationFee = 1999;
   
   // Calculate total fee based on college type, kit selection, and motor option
   const calculateTotalFee = () => {
@@ -753,11 +753,11 @@ function RobowarRegistration() {
         // Kit prices based on motor option
         switch(motorOption) {
           case "rpm":
-            return 4200;
+            return 4499;
           case "torque":
-            return 4800;
+            return 4999;
           case "both":
-            return 6000;
+            return 5999;
           default:
             return nitSilcharRegistrationFee;
         }
@@ -1378,7 +1378,7 @@ function RobowarRegistration() {
                   )}
                   {collegeType === "other" && (
                     <p className="text-red-300 text-sm mt-3 bg-red-950/30 border border-red-500/30 rounded-lg p-3">
-                      ℹ️ Registration fee for other college students: ₹2,000 (Kit not available)
+                      ℹ️ Registration fee for other college students: ₹1,999 (Kit not available)
                     </p>
                   )}
                 </motion.div>
@@ -1500,7 +1500,7 @@ function RobowarRegistration() {
                             <p className="text-red-400/70 text-sm ml-7">Best for fast spinning weapons</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-red-300 font-bold text-lg">₹4,200</p>
+                            <p className="text-red-300 font-bold text-lg">₹4,499</p>
                             <p className="text-red-400/60 text-xs">(Kit + Registration)</p>
                           </div>
                         </div>
@@ -1532,7 +1532,7 @@ function RobowarRegistration() {
                             <p className="text-red-400/70 text-sm ml-7">Best for powerful crushing weapons</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-red-300 font-bold text-lg">₹4,800</p>
+                            <p className="text-red-300 font-bold text-lg">₹4,999</p>
                             <p className="text-red-400/60 text-xs">(Kit + Registration)</p>
                           </div>
                         </div>
@@ -1564,7 +1564,7 @@ function RobowarRegistration() {
                             <p className="text-red-400/70 text-sm ml-7">Maximum flexibility for any weapon design</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-red-300 font-bold text-lg">₹6,000</p>
+                            <p className="text-red-300 font-bold text-lg">₹5,999</p>
                             <p className="text-red-400/60 text-xs">(Kit + Registration)</p>
                           </div>
                         </div>
