@@ -327,7 +327,7 @@ const AttentionSection = () => {
             <h3 className="text-xl font-bold text-blue-400 mb-2">ATTENTION</h3>
             <p className="text-blue-100 font-sans">
               ⚠️ Only registrations are currently allowed. Kits and materials
-              are not provided at this time. Registration fee: Rs. 999. For kit
+              are not provided at this time. Registration fee: Rs. 799. For kit
               tracking, visit:{''}
               <motion.a
                 href="/trackOrder"
@@ -380,13 +380,18 @@ const AttentionSection = () => {
 const KitComponentsSection = () => {
   // Base kit items (all included items)
   const baseKitItems = [
-    'Metal Geablue Driving Motors (4 Piece)',
+    'BOT 1',
+    'High Powered Geared Motors (300rpm) (4 piece)',
     'Traction Wheels (4 Piece)',
     'L-shaped clamps (4 Piece)',
-    'DPDT switch (3 Piece)',
-    '10 ft metal strip (for frame)',
-    '3x4 ft metal sheet',
-    'Metal cutter blade (3 Piece)',
+    'DPDT switch (2 Piece)',
+    'Chasis Frame',
+    'BOT 2',
+    'High Powered Geared Motors (300rpm) (4 piece)',
+    'Traction Wheels (4 Piece)',
+    'L-shaped clamps (4 Piece)',
+    'DPDT switch (2 Piece)',
+    'Chasis Frame',
     'Soldering Kit',
   ]
 
@@ -680,9 +685,9 @@ function Robosoccer() {
   const [wantsKit, setWantsKit] = useState(null); // null, true, or false (only for NIT Silchar)
 
   // Registration fees
-  const nitSilcharRegistrationFee = 999;
-  const otherCollegeRegistrationFee = 2000;
-  const kitPrice = 4200;
+  const nitSilcharRegistrationFee = 799;
+  const otherCollegeRegistrationFee = 1499;
+  const kitPrice = 3499;
   
   // Calculate total fee based on college type and kit selection
   const calculateTotalFee = () => {
@@ -1270,7 +1275,7 @@ function Robosoccer() {
                     >
                       <div className="text-center">
                         <div className="text-lg mb-2"> NIT Silchar Student</div>
-                        <div className="text-xs text-blue-200/70">Registration: ₹999 | Kit Option: ₹4200</div>
+                        <div className="text-xs text-blue-200/70">Registration: ₹799 | Kit Option: ₹3499</div>
                       </div>
                     </motion.button>
                     <motion.button
@@ -1289,7 +1294,7 @@ function Robosoccer() {
                     >
                       <div className="text-center">
                         <div className="text-lg mb-2"> Other College Student</div>
-                        <div className="text-xs text-blue-200/70">Registration Only: ₹2000</div>
+                        <div className="text-xs text-blue-200/70">Registration Only: ₹1499</div>
                       </div>
                     </motion.button>
                   </div>
@@ -1362,7 +1367,7 @@ function Robosoccer() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        Yes, I want a kit (₹4200)
+                        Yes, I want a kit (₹3499)
                       </motion.button>
                       <motion.button
                         type="button"
@@ -1375,7 +1380,7 @@ function Robosoccer() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        No, registration only (₹999)
+                        No, registration only (₹799)
                       </motion.button>
                     </div>
                     {wantsKit === null && (

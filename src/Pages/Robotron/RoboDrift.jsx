@@ -333,7 +333,7 @@ const AttentionSection = () => {
             <h3 className="text-xl font-bold text-green-400 mb-2">ATTENTION</h3>
             <p className="text-green-100 font-sans">
               ⚠️ Only registrations are currently allowed. Kits and materials
-              are not provided at this time. Registration fee: Rs. 999. For kit
+              are not provided at this time. Registration fee: Rs. 799. For kit
               tracking, visit:{''}
               <motion.a
                 href="/trackOrder"
@@ -386,13 +386,18 @@ const AttentionSection = () => {
 const KitComponentsSection = () => {
   // Base kit items (all included items)
   const baseKitItems = [
-    'Metal Geagreen Driving Motors (4 Piece)',
-    'Traction Wheels (4 Piece)',
-    'L-shaped clamps (4 Piece)',
-    'DPDT switch (3 Piece)',
-    '10 ft metal strip (for frame)',
-    '3x4 ft metal sheet',
-    'Metal cutter blade (3 Piece)',
+    'ESP 32 NodeMCU (1 piece)',
+    'Motor Driver L298N (1 piece)',
+    'High Powered DC Motors (4 piece)',
+    'Traction Wheels (4 piece)',
+    'Joystick Module',
+    'Lithium Ion Battery (Car)',
+    '3S Battery Holder (Car)',
+    'Battery Charging Module',
+    'Motor Mounter',
+    'BreadBoard',
+    'Chassis Frame',
+    'Jumper Wires Set',
     'Soldering Kit',
   ]
 
@@ -681,8 +686,8 @@ function RoboDrift() {
   const [wantsKit, setWantsKit] = useState(null); // null, true, or false
 
   // Registration fees (NIT Silchar only)
-  const nitSilcharRegistrationFee = 999;
-  const kitPrice = 4200;
+  const nitSilcharRegistrationFee = 799;
+  const kitPrice = 2799;
   
   // Calculate total fee based on kit selection
   const calculateTotalFee = () => {
@@ -1236,7 +1241,7 @@ function RoboDrift() {
                       >
                         <div>
                           <div>Yes, I want a kit</div>
-                          <div className="text-sm opacity-80 mt-1">₹4200 (Kit + Registration)</div>
+                          <div className="text-sm opacity-80 mt-1">₹2799 (Kit + Registration)</div>
                         </div>
                       </motion.button>
                       <motion.button
@@ -1252,7 +1257,7 @@ function RoboDrift() {
                       >
                         <div>
                           <div>No, registration only</div>
-                          <div className="text-sm opacity-80 mt-1">₹999 (Registration Only)</div>
+                          <div className="text-sm opacity-80 mt-1">₹799 (Registration Only)</div>
                         </div>
                       </motion.button>
                     </div>
