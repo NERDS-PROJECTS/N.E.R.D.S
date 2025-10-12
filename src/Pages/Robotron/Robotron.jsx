@@ -14,9 +14,30 @@ const Robotron = () => {
         const audio = audioRef.current;
         if (audio) {
             audio.volume = 0.3; // Set volume to 30%
-            audio.play().catch(error => {
-                console.log('Audio autoplay prevented:', error);
+            
+            // Add event listeners for debugging
+            audio.addEventListener('canplay', () => {
+                console.log('Audio can play');
             });
+            
+            audio.addEventListener('error', (e) => {
+                console.error('Audio error:', e);
+            });
+            
+            // Attempt to play
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        console.log('Audio playing successfully');
+                    })
+                    .catch(error => {
+                        console.log('Audio autoplay prevented:', error);
+                        // Set muted initially if autoplay fails
+                        setIsMuted(true);
+                    });
+            }
         }
 
         // Cleanup: pause audio when component unmounts
@@ -30,7 +51,14 @@ const Robotron = () => {
     // Handle mute/unmute
     const toggleMute = () => {
         if (audioRef.current) {
-            audioRef.current.muted = !isMuted;
+            if (isMuted) {
+                // Unmuting - try to play if paused
+                audioRef.current.muted = false;
+                audioRef.current.play().catch(err => console.log('Play error:', err));
+            } else {
+                // Muting
+                audioRef.current.muted = true;
+            }
             setIsMuted(!isMuted);
         }
     };
@@ -69,8 +97,13 @@ const Robotron = () => {
     return (
         <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
             {/* Background Music */}
-            <audio ref={audioRef} loop>
-                <source src="/src/assets/TRON Mode.mp3" type="audio/mpeg" />
+            <audio 
+                ref={audioRef} 
+                loop 
+                preload="auto"
+            >
+                <source src="/TRON%20Mode.mp3" type="audio/mpeg" />
+                <source src="/TRON Mode.mp3" type="audio/mpeg" />
                 Your browser does not support the audio element.
             </audio>
 
