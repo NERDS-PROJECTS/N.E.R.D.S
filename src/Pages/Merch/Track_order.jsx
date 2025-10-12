@@ -54,7 +54,7 @@ export function Track_order() {
       },
       {
         step: 'Delivered',
-        date: 'Pending',
+        date: 'Expected Tomorrow',
         completed: false,
       },
     ],
@@ -105,6 +105,10 @@ export function Track_order() {
       {
         time: '04-10-2025',
         event: 'Shipment In Transit From Suplier',
+      },
+      {
+        time: '12-10-2025',
+        event: 'Delay due to poor weather conditions',
       },
     ],
   }
@@ -264,19 +268,22 @@ export function Track_order() {
                   </div>
                   {/* Current position pin */}
                   <div className="absolute left-[58%] top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-6 h-6 rounded-full bg-cyan-500/20 border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] flex items-center justify-center">
-                      <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></div>
-                    </div>
-                    <div className="absolute top-7 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 font-medium whitespace-nowrap">
+                    <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
+                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 whitespace-nowrap">
                       Guwahati
                     </div>
                   </div> 
                   {/* Destination pin */}
                   <div className="absolute left-3/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-4 h-4 rounded-full bg-gray-400 shadow-[0_0_5px_rgba(255,255,255,0.3)]"></div>
-                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 whitespace-nowrap">
+                  <div className="w-4 h-4  rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]">
+                    <div className="w-6 h-6 rounded-full bg-cyan-500/20 border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] flex items-center justify-center">
+                      
+                    </div>
+                    </div>
+                    <div className="absolute top-7 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 font-medium whitespace-nowrap">
                       Silchar
                     </div>
+                    
                   </div>
                 </div>
                 <div className="text-xs font-spaced text-gray-400 mt-3 text-right">

@@ -960,7 +960,7 @@ function RoboDrift() {
             <div className="relative mb-8 flex items-center justify-center">
               {/* Left Frame */}
               <motion.div
-                className="absolute left-32 top-[-0.89rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                className="absolute left-2 top-[-0.3rem] md:left-28 md:top-[-0.89rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
                 style={{
                   backgroundImage: "url('/robotron/txt_frame_gl.svg')",
                 }}
@@ -985,14 +985,14 @@ function RoboDrift() {
                 />
 
                 {/* Text */}
-                <h2 className="relative  z-10 text-xl md:text-2xl lg:text-3xl font-bold text-transparent bg-clip-text bg-slate-200">
+                <h2 className="relative font-tron z-10 text-xl md:text-2xl lg:text-3xl font-bold text-transparent bg-clip-text bg-slate-200">
                   Registration Form
                 </h2>
               </motion.div>
 
               {/* Right Frame */}
               <motion.div
-                className="absolute right-32  bottom-[-0.9rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
+                className="absolute right-2 bottom-[-0.5rem] md:right-28  md:bottom-[-0.9rem] w-10 md:w-20 h-10 md:h-20 bg-no-repeat bg-contain bg-center"
                 style={{
                   backgroundImage: "url('/robotron/txt_frame_gr.svg')",
                 }}

@@ -26,10 +26,10 @@ const EventCardSlider = () => {
 
   // Array of card data for the EventCard
   const cardData = [
-    { image: 'https://res.cloudinary.com/diabjuzqc/image/upload/f_auto,q_auto/aahmjv30yp7qx1bdjwat' },
-    { image: 'https://res.cloudinary.com/diabjuzqc/image/upload/f_auto,q_auto/hox7gcv2f6gvax1dve09' },
+    { image: 'https://res.cloudinary.com/dagggqd6g/image/upload/v1760306416/2_wn8v9g.png' },
+    { image: 'https://res.cloudinary.com/dagggqd6g/image/upload/v1760306633/6_k8ueza.png' },
     { image: 'https://res.cloudinary.com/diabjuzqc/image/upload/f_auto,q_auto/ejvo2heqqdqkel0222bc' },
-    { image: 'https://res.cloudinary.com/diabjuzqc/image/upload/f_auto,q_auto/i2yqgni8i4zbdfjiu4yq' },
+    { image: 'https://res.cloudinary.com/dagggqd6g/image/upload/v1760306416/4_jb6xio.png' },
     { image: 'https://res.cloudinary.com/dqmktpekh/image/upload/v1728847659/gsmdqf0bk4hkhevnxzfe.webp' },
     { image: 'https://res.cloudinary.com/diabjuzqc/image/upload/v1742846869/2bee4354-a622-4cc1-8f95-eff255b4c6f7_qgcwft.jpg' },
 

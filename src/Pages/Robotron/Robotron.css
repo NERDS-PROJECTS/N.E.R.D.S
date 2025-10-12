@@ -13,8 +13,10 @@
 }
 
 .robotron-title {
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: 900;
+  align-items: center;
+  justify-content: center;
   font-family: orbitron;
   background: linear-gradient(135deg, #e80101 0%, #039dc3 50%, #f80202 100%);
   background-size: 200% 200%;
