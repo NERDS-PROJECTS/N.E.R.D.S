@@ -112,7 +112,7 @@ We welcome contributions from the community! Here's how you can help:
 ## 👥 Team
 
 ### Faculty Advisor
-- **Dr. Chandrajit Choudhury** - Department of Electronics and Communication Engineering
+- **Dr. Chandrajit Choudhury** - Department of Electronics and Communication Engineering.
 
 ### Core Team 2024-25
 - **President**: Swarup Chanda

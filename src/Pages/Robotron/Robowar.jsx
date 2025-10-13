@@ -1091,8 +1091,8 @@ function RobowarRegistration() {
               {/* Team Leader Information Section */}
               <div className="space-y-5">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-200">Team Leader Information</h3>
-                  <p className="text-red-200 text-sm mt-1">Primary contact details</p>
+                  <h3 className="text-xl font-bold text-red-300">Team Leader Information</h3>
+                  <p className="text-red-100 text-sm mt-1">Primary contact details</p>
                 </div>
 
                 {/* Email */}
@@ -1102,7 +1102,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 }}
                 >
-                  <label className="block text-red-600 mb-2 font-medium">
+                  <label className="block text-red-400 mb-2 font-medium text-base">
                     Email ID *
                   </label>
                   <motion.div
@@ -1115,7 +1115,7 @@ function RobowarRegistration() {
                       name="teamLeaderEmail"
                       value={formData.teamLeaderEmail}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="team.leader@example.com"
                       required
                     />
@@ -1129,7 +1129,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.15 }}
                 >
-                  <label className="block text-red-600 mb-2 font-medium">Team Name *</label>
+                  <label className="block text-red-400 mb-2 font-medium text-base">Team Name *</label>
                   <motion.div
                     className="relative"
                     whileHover={{ scale: 1.005 }}
@@ -1139,7 +1139,7 @@ function RobowarRegistration() {
                       name="teamName"
                       value={formData.teamName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="Enter your team name"
                       required
                     />
@@ -1153,7 +1153,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <label className="block text-red-600 mb-2 font-medium">
+                  <label className="block text-red-400 mb-2 font-medium text-base">
                     Full Name *
                   </label>
                   <motion.div
@@ -1165,7 +1165,7 @@ function RobowarRegistration() {
                       name="teamLeaderName"
                       value={formData.teamLeaderName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="Enter your full name"
                       required
                     />
@@ -1181,7 +1181,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.25 }}
                   >
-                    <label className="block text-red-600 mb-2 font-medium">
+                    <label className="block text-red-400 mb-2 font-medium text-base">
                       Phone Number *
                     </label>
                     <motion.div
@@ -1194,7 +1194,7 @@ function RobowarRegistration() {
                         value={formData.teamLeaderPhone}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder="10-digit number"
                         required
                       />
@@ -1208,7 +1208,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 }}
                   >
-                    <label className="block text-red-600 mb-2 font-medium">
+                    <label className="block text-red-400 mb-2 font-medium text-base">
                       WhatsApp Number *
                     </label>
                     <motion.div
@@ -1221,7 +1221,7 @@ function RobowarRegistration() {
                         value={formData.teamLeaderWhatsapp}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder="WhatsApp number"
                         required
                       />
@@ -1236,7 +1236,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.35 }}
                 >
-                  <label className="block text-red-600 mb-2 font-medium">
+                  <label className="block text-red-400 mb-2 font-medium text-base">
                     Scholar ID *
                   </label>
                   <motion.div
@@ -1248,7 +1248,7 @@ function RobowarRegistration() {
                       name="teamLeaderScholarId"
                       value={formData.teamLeaderScholarId}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="Enter Scholar ID"
                       required
                     />
@@ -1259,8 +1259,8 @@ function RobowarRegistration() {
               {/* Team Members Section */}
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-200">Team Members</h3>
-                  <p className="text-red-200 text-sm mt-1">Add your team members (minimum 4 required)</p>
+                  <h3 className="text-xl font-bold text-red-300">Team Members</h3>
+                  <p className="text-red-100 text-sm mt-1">Add your team members (minimum 4 required)</p>
                 </div>
 
                 {/* Required Members */}
@@ -1272,7 +1272,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 + (num - 2) * 0.05 }}
                   >
-                    <label className="block text-red-600 mb-2 font-medium">
+                    <label className="block text-red-400 mb-2 font-medium text-base">
                       Team Member {num} Name *
                     </label>
                     <motion.div
@@ -1284,7 +1284,7 @@ function RobowarRegistration() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder={`Enter member ${num} name`}
                         required
                       />
@@ -1301,8 +1301,8 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.55 + (num - 5) * 0.05 }}
                   >
-                    <label className="block text-red-600 mb-2 font-medium">
-                      Team Member {num} Name <span className="text-red-400/60">(Optional)</span>
+                    <label className="block text-red-400 mb-2 font-medium text-base">
+                      Team Member {num} Name <span className="text-red-300/70">(Optional)</span>
                     </label>
                     <motion.div
                       whileHover={{ scale: 1.005 }}
@@ -1312,7 +1312,7 @@ function RobowarRegistration() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder={`Enter member ${num} name (optional)`}
                       />
                     </motion.div>
@@ -1323,8 +1323,8 @@ function RobowarRegistration() {
               {/* College Type Selection Section */}
               <div className="space-y-5 pt-8">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-200">College Type</h3>
-                  <p className="text-red-200 text-sm mt-1">Select your college type to determine registration options</p>
+                  <h3 className="text-xl font-bold text-red-300">College Type</h3>
+                  <p className="text-red-100 text-sm mt-1">Select your college type to determine registration options</p>
                 </div>
 
                 {/* College Type Selection */}
@@ -1334,7 +1334,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <label className="block text-red-600 mb-3 font-medium text-lg">
+                  <label className="block text-red-300 mb-3 font-medium text-lg">
                     Are you from NIT Silchar? *
                   </label>
                   <div className="flex gap-4">
@@ -1392,7 +1392,7 @@ function RobowarRegistration() {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <label className="block text-red-600 mb-2 font-medium">
+                    <label className="block text-red-400 mb-2 font-medium text-base">
                       College Name *
                     </label>
                     <motion.div
@@ -1404,7 +1404,7 @@ function RobowarRegistration() {
                         name="collegeName"
                         value={formData.collegeName}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder="Enter your college name"
                         required
                       />
@@ -1421,7 +1421,7 @@ function RobowarRegistration() {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <label className="block text-red-600 mb-3 font-medium text-lg">
+                    <label className="block text-red-300 mb-3 font-medium text-lg">
                       Do you want to purchase a Robot Kit? *
                     </label>
                     <div className="flex gap-4">
@@ -1469,7 +1469,7 @@ function RobowarRegistration() {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <label className="block text-red-600 mb-3 font-medium text-lg">
+                    <label className="block text-red-300 mb-3 font-medium text-lg">
                       Select Motor Option *
                     </label>
                     
@@ -1576,8 +1576,8 @@ function RobowarRegistration() {
                 {/* Weight Category Selection - For All Students */}
                 <div className="space-y-5 pt-6">
                   <div className="border-l-4 border-red-500 pl-4 mb-6">
-                    <h3 className="text-xl font-bold text-red-200">Robot Weight Category</h3>
-                    <p className="text-red-200 text-sm mt-1">Select the weight category your robot will compete in</p>
+                    <h3 className="text-xl font-bold text-red-300">Robot Weight Category</h3>
+                    <p className="text-red-100 text-sm mt-1">Select the weight category your robot will compete in</p>
                   </div>
 
                   <motion.div
@@ -1586,7 +1586,7 @@ function RobowarRegistration() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.7 }}
                   >
-                    <label className="block text-red-600 mb-3 font-medium text-lg">
+                    <label className="block text-red-300 mb-3 font-medium text-lg">
                       Weight Category *
                     </label>
                     <div className="grid md:grid-cols-2 gap-4">
@@ -1691,8 +1691,8 @@ function RobowarRegistration() {
               {/* Payment Section */}
               <div className="space-y-6 pt-8">
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-400">Payment Information</h3>
-                  <p className="text-red-200 text-sm mt-1">Complete the payment and upload proof</p>
+                  <h3 className="text-xl font-bold text-red-300">Payment Information</h3>
+                  <p className="text-red-100 text-sm mt-1">Complete the payment and upload proof</p>
                 </div>
 
                 {/* QR Codes Display */}
@@ -1840,7 +1840,7 @@ function RobowarRegistration() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.75 }}
                 >
-                  <label className="block text-red-300 mb-2 font-medium">
+                  <label className="block text-red-300 mb-2 font-medium text-base">
                     Transaction Number (UPI Reference) *
                   </label>
                   <motion.div
@@ -1852,7 +1852,7 @@ function RobowarRegistration() {
                       name="transactionNumber"
                       value={formData.transactionNumber}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-red-800 focus:border-red-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-400/40 font-mono"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50 font-mono"
                       placeholder="Enter UPI transaction number"
                       required
                     />
@@ -1871,8 +1871,8 @@ function RobowarRegistration() {
                 transition={{ delay: 0.8 }}
               >
                 <div className="border-l-4 border-red-500 pl-4 mb-6">
-                  <h3 className="text-xl font-bold text-red-400">Registration Summary</h3>
-                  <p className="text-red-200 text-sm mt-1">Review your details before submitting</p>
+                  <h3 className="text-xl font-bold text-red-300">Registration Summary</h3>
+                  <p className="text-red-100 text-sm mt-1">Review your details before submitting</p>
                 </div>
 
                 <div className="bg-gradient-to-br from-red-950/30 to-black/50 border-2 border-red-500/40 rounded-2xl p-6 space-y-4 font-orbitron">
