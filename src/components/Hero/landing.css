@@ -64,7 +64,7 @@
     position: relative;
 }
 .typewriter::after{
-    content: '|';
+    content: '';
     position: absolute;
     right: 0;
     color: #ffd700;

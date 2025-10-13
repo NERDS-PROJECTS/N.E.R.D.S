@@ -703,7 +703,7 @@ function RoboDrift() {
   const [modal, setModal] = useState({ open: false, message: "", success: false });
 
   // Change this to your actual deployed Apps Script Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxyjcvLUV00oQ8X2dqcofxv78Gw9CoFRJEuaVhLh2pDrHUnS-C9iaKBHXBqCLgvpx_W/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzes_xKa1W6ccI6Ej4wHFU1JGJtJ6kiutTBoayZVSvvqqnDT_8RvxyMhI5lfdbxFRVI/exec";
   
 
   
