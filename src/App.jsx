@@ -7,7 +7,7 @@ import Team from "./Pages/Team/Team";
 import Gallery from "./Pages/Gallery/Gallery";
 import Contact from "./Pages/Contact/Contact";
 import Navbar from "./components/Navbar/navbar";
-import Footer from "./components/Footer/footer";
+import Footer from "./components/Footer/Footer_v2";
 import Galaxy from "./components/Hero/Galaxy";
 import Error from "./Pages/Error/Error";
 import LoadingAnimation from "./components/Loader/Loader"; 
