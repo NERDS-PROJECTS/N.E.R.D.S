@@ -107,8 +107,6 @@ We welcome contributions from the community! Here's how you can help:
 
 
 ## 🏆 Our Achievements
-
-- 🎖️ Best Innovation Award - Tecnoesis NIT Silchar 2023
 - 📜 Multiple works in robotics and automation.
 
 ## 👥 Team
