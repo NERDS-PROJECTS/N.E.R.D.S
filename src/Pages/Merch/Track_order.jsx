@@ -22,10 +22,36 @@ export function Track_order() {
   // Mock data that would normally come from an API
   const shipmentData = {
     id: '291731581',
-    status: 'In Transit',
+    status: 'Delivered',
     eta: '14th October, 2025',
     packageCount: 1,
     weight:'56.7 Kg',
+    route: [
+      {
+        city: 'Surat',
+        position: '25%', // left position percentage
+        completed: true,
+        current: false,
+      },
+      {
+        city: 'Kanpur',
+        position: '33.33%',
+        completed: true,
+        current: false,
+      },
+      {
+        city: 'Guwahati',
+        position: '58%',
+        completed: true,
+        current: false,
+      },
+      {
+        city: 'Silchar',
+        position: '75%',
+        completed: true,
+        current: true, // This flag shows current location
+      },
+    ],
     timeline: [
       {
         step: 'Ordered',
@@ -48,14 +74,14 @@ export function Track_order() {
       {
         step: 'In Transit',
         date: 'Oct 04, 10:20 PM',
-        completed: false,
-        current: true,
+        completed: true,
         
       },
       {
         step: 'Delivered',
-        date: 'Expected Tomorrow',
-        completed: false,
+        date: 'Oct 14, 01:30 PM',
+        completed: true,
+        current: true,
       },
     ],
     courier: {
@@ -109,6 +135,10 @@ export function Track_order() {
       {
         time: '12-10-2025',
         event: 'Delay due to poor weather conditions',
+      },
+      {
+        time: '14-10-2025',
+        event: 'Order Delivered Successfully',
       },
     ],
   }
@@ -251,40 +281,48 @@ export function Track_order() {
                       backgroundSize: '30px 30px, 15px 15px, 15px 15px',
                     }}
                   ></div>
-                  {/* Route line */}
-                  <div className="absolute left-1/4 top-1/2 w-1/2 h-px bg-gradient-to-r from-cyan-500 to-blue-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
-                  {/* Origin pin */}
-                  <div className="absolute left-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
-                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 whitespace-nowrap">
-                      Surat
+                  {/* Route line - dynamically calculated */}
+                  <div 
+                    className="absolute top-1/2 h-px bg-gradient-to-r from-cyan-500 to-blue-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"
+                    style={{
+                      left: shipmentData.route[0].position,
+                      width: `calc(${shipmentData.route[shipmentData.route.length - 1].position} - ${shipmentData.route[0].position})`,
+                    }}
+                  ></div>
+                  
+                  {/* Route pins - dynamically rendered from JSON */}
+                  {shipmentData.route.map((location, index) => (
+                    <div
+                      key={index}
+                      className="absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                      style={{ left: location.position }}
+                    >
+                      {location.current ? (
+                        // Current location - larger with concentric circles
+                        <div className="w-8 h-8 rounded-full bg-cyan-500/20 border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] flex items-center justify-center animate-pulse">
+                          <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
+                        </div>
+                      ) : (
+                        // Regular location pin
+                        <div 
+                          className={`w-4 h-4 rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)] ${
+                            location.completed 
+                              ? 'bg-cyan-500' 
+                              : 'bg-gray-600'
+                          }`}
+                        ></div>
+                      )}
+                      <div 
+                        className={`absolute left-1/2 transform -translate-x-1/2 text-xs whitespace-nowrap ${
+                          location.current 
+                            ? 'top-10 text-cyan-400 font-bold' 
+                            : 'top-5 text-cyan-400'
+                        }`}
+                      >
+                        {location.city}
+                      </div>
                     </div>
-                  </div>
-                  <div className="absolute left-1/3 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
-                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 whitespace-nowrap">
-                      Kanpur
-                    </div>
-                  </div>
-                  {/* Current position pin */}
-                  <div className="absolute left-[58%] top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
-                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 whitespace-nowrap">
-                      Guwahati
-                    </div>
-                  </div> 
-                  {/* Destination pin */}
-                  <div className="absolute left-3/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <div className="w-4 h-4  rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]">
-                    <div className="w-6 h-6 rounded-full bg-cyan-500/20 border-2 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] flex items-center justify-center">
-                      
-                    </div>
-                    </div>
-                    <div className="absolute top-7 left-1/2 transform -translate-x-1/2 text-xs text-cyan-400 font-medium whitespace-nowrap">
-                      Silchar
-                    </div>
-                    
-                  </div>
+                  ))}
                 </div>
                 <div className="text-xs font-spaced text-gray-400 mt-3 text-right">
                   <span>Updates every day</span>
