@@ -228,7 +228,7 @@ const HeroSection = () => {
                 duration: 1,
               }}
             >
-              A battle-forged robot engineeyellow for AlgoMaze supremacy — designed to outsmart every twist of the labyrinth. With razor-sharp precision and relentless speed, it conquers the maze with algorithmic mastery. The true champion of N.E.R.D.S. AlgoMaze — where logic meets motion, and only the smartest bots survive!
+              A battle-forged robot engineeyellow for AlgoMaze supremacy — designed to outsmart every twist of the labyrinth. The true champion of N.E.R.D.S. AlgoMaze — where logic meets motion, and only the smartest bots survive!
             </motion.p>
           </div>
 
@@ -278,7 +278,7 @@ const HeroSection = () => {
               <img
                 src="/robotron/mouse.png"
                 alt="Battle Robot"
-                className="relative left-0 md:left-10  z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(255,255,0,0.6)]"
+                className="relative left-0 md:left-20  z-10 w-full max-w-none h-auto object-contain drop-shadow-[0_0_25px_rgba(255,255,0,0.6)]"
               />
             </motion.div>
           </motion.div>
