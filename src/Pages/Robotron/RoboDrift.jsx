@@ -388,16 +388,17 @@ const KitComponentsSection = () => {
   const baseKitItems = [
     'ESP 32 NodeMCU (1 piece)',
     'Motor Driver L298N (1 piece)',
-    'High Powered DC Motors (4 piece)',
+    'High RPM DC Motors (4 piece)',
     'Traction Wheels (4 piece)',
     'Joystick Module',
     'Lithium Ion Battery (Car)',
-    '3S Battery Holder (Car)',
+    'Battery Holder (Car)',
     'Battery Charging Module',
-    'Motor Mounter',
+    'Motor Mounter L Clamp',
     'BreadBoard',
     'Chassis Frame',
     'Jumper Wires Set',
+    'USB to Micro-USB Cable for NodeMCU',
     'Soldering Kit',
   ]
 
