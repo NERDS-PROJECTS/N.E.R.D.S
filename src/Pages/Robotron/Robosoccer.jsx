@@ -5,15 +5,214 @@ import {
   CheckCircleIcon,
   QrCodeIcon,
   UploadIcon,
+  FileTextIcon,
+  DownloadIcon,
+  EyeIcon,
 } from 'lucide-react'
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
 
+const BrochureSection = () => {
+  const brochureUrl = "https://drive.google.com/file/d/1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ/view?usp=sharing"
+  const downloadUrl = "https://drive.google.com/uc?export=download&id=1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ"
+
+  return (
+    <motion.section
+      className="py-8 flex justify-center w-full"
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+      viewport={{
+        once: true,
+      }}
+    >
+      <div className="bg-gradient-to-br from-blue-950/40 to-black/60 backdrop-blur-md border-2 border-blue-500/40 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-[0_0_20px_rgba(1,160,234,0.2)] w-full max-w-2xl">
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-blue-900/10" />
+
+        {/* Glow effect */}
+        <motion.div
+          className="absolute inset-0 bg-black/30 rounded-2xl"
+          animate={{
+            boxShadow: [
+              'inset 0 0 10px rgba(1,160,234,0.2)',
+              'inset 0 0 30px rgba(1,160,234,0.3)',
+              'inset 0 0 10px rgba(1,160,234,0.2)',
+            ],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+          }}
+        />
+
+        <div className="relative z-10">
+          {/* Header */}
+          <div className="flex items-start gap-4 mb-6">
+            <div className="p-3 bg-blue-600/10 rounded-xl border border-blue-500/30 shrink-0">
+              <FileTextIcon className="h-7 w-7 md:h-8 md:w-8 text-blue-400" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl md:text-3xl font-bold text-blue-300 mb-2 font-orbitron">
+                EVENT RULES & REGULATIONS
+              </h3>
+              <p className="text-blue-100 font-sans text-sm md:text-base">
+                Download the official Robosoccer brochure to learn about competition rules, robot specifications, arena details, and scoring system.
+              </p>
+            </div>
+          </div>
+
+          {/* Features List */}
+          <div className="grid md:grid-cols-2 gap-3 mb-6">
+            <div className="flex items-center gap-2 text-blue-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-blue-500 shrink-0" />
+              <span>Complete rule book</span>
+            </div>
+            <div className="flex items-center gap-2 text-blue-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-blue-500 shrink-0" />
+              <span>Robot specifications</span>
+            </div>
+            <div className="flex items-center gap-2 text-blue-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-blue-500 shrink-0" />
+              <span>Arena dimensions</span>
+            </div>
+            <div className="flex items-center gap-2 text-blue-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-blue-500 shrink-0" />
+              <span>Scoring & judging criteria</span>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* View Button */}
+            <motion.a
+              href={brochureUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-gradient-to-r from-blue-950 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-[0_0_20px_rgba(1,160,234,0.5)] border border-blue-500/30"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <EyeIcon className="h-5 w-5" />
+              <span className="font-spaced">VIEW BROCHURE</span>
+            </motion.a>
+
+            {/* Download Button */}
+            <motion.a
+              href={downloadUrl}
+              className="flex-1 bg-gradient-to-r from-blue-900/80 to-blue-950/80 hover:from-blue-800/90 hover:to-blue-900/90 text-blue-100 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-[0_0_20px_rgba(1,160,234,0.3)] border-2 border-blue-600/50 hover:border-blue-500"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <DownloadIcon className="h-5 w-5" />
+              <span className="font-spaced">DOWNLOAD PDF</span>
+            </motion.a>
+          </div>
+
+          {/* Additional Info */}
+          <div className="mt-4 pt-4 border-t border-blue-500/20">
+            <p className="text-blue-300/70 text-xs md:text-sm font-sans text-center mb-4">
+              📋 Make sure to read all rules carefully before registering for the competition
+            </p>
+
+            {/* Module Head Contact Details */}
+            <div className="mt-6 pt-4 border-t border-blue-500/30">
+              <h4 className="text-lg font-bold text-blue-300 mb-3 text-center font-spaced">
+                FOR ANY QUERIES, CONTACT:
+              </h4>
+              <div className="grid md:grid-cols-3 gap-4">
+                {/* Module Head 1 */}
+                <div className="bg-blue-950/30 border border-blue-600/30 rounded-lg p-4 hover:bg-blue-950/50 transition-all">
+                  <p className="text-blue-200 font-semibold text-sm md:text-base mb-1">
+                    Ayushman Sagar
+                  </p>
+                  <p className="text-blue-300/80 text-xs md:text-sm">Module Head - Robosoccer</p>
+                  <div className="mt-2 space-y-1">
+                    <a
+                      href="tel:+919127147825"
+                      className="text-blue-400 font-sans hover:text-blue-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>+91-91271-47825</span>
+                    </a>
+                    <a
+                      href="mailto:swarup_ug@mech.nits.ac.in"
+                      className="text-blue-400 font-sans hover:text-blue-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>swarup_ug@ece.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Module Head 2 */}
+                <div className="bg-blue-950/30 border border-blue-600/30 rounded-lg p-4 hover:bg-blue-950/50 transition-all">
+                  <p className="text-blue-200 font-semibold text-sm md:text-base mb-1">
+                    Abhinav Kumar
+                  </p>
+                  <p className="text-blue-300/80 text-xs md:text-sm">Module Head - Robosoccer</p>
+                  <div className="mt-2 space-y-1">
+                    <a
+                      href="tel:+919304782838"
+                      className="text-blue-400 font-sans hover:text-blue-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>+91-93047-82838</span>
+                    </a>
+                    <a
+                      href="mailto:shubham_ug@ece.nits.ac.in"
+                      className="text-blue-400 font-sans hover:text-blue-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>abhinavk_ug_23@ece.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Module Head 3 */}
+                <div className="bg-blue-950/30 border border-blue-600/30 rounded-lg p-4 hover:bg-blue-950/50 transition-all">
+                  <p className="text-blue-200 font-semibold text-sm md:text-base mb-1">
+                    Chaman Laguri
+                  </p>
+                  <p className="text-blue-300/80 text-xs md:text-sm">Module Head - Robosoccer</p>
+                  <div className="mt-2 space-y-1">
+                    <a
+                      href="tel:+917991090603"
+                      className="text-blue-400 font-sans hover:text-blue-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>+91-79910-90603</span>
+                    </a>
+                    <a
+                      href="mailto:aryan_ug@ece.nits.ac.in"
+                      className="text-blue-400 font-sans hover:text-blue-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>aryan_ug@ece.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.section>
+  )
+}
 
 // Background Grid Component
 const BackgroundGrid = () => {
   // Detect mobile for performance optimization
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  
+
   return (
     <div className="fixed inset-0 z-0">
       {/* Horizontal lines */}
@@ -107,7 +306,7 @@ const BackgroundGrid = () => {
 const HeroSection = () => {
   // Detect if device is mobile for performance optimization
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  
+
   return (
     <motion.section
       className=" relative"
@@ -223,7 +422,7 @@ const HeroSection = () => {
                 duration: 1,
               }}
             >
-              A battle-forged machine of unmatched precision and fury — built for RoboSoccer supremacy. Engineered to strike, defend. This is the ultimate challenger of N.E.R.D.S. RoboSoccer — where skill meets steel, and only the fastest survive.
+              A battle-forged machine of unmatched precision and fury — built for RoboSoccer supremacy. Engineeblue to strike, defend. This is the ultimate challenger of N.E.R.D.S. RoboSoccer — where skill meets steel, and only the fastest survive.
             </motion.p>
           </div>
 
@@ -381,13 +580,13 @@ const KitComponentsSection = () => {
   // Base kit items (all included items)
   const baseKitItems = [
     'BOT 1',
-    'High Powered Geared Motors (300rpm) (4 piece)',
+    'High Poweblue Geablue Motors (300rpm) (4 piece)',
     'Traction Wheels (4 Piece)',
     'L-shaped clamps (4 Piece)',
     'DPDT switch (2 Piece)',
     'Chasis Frame',
     'BOT 2',
-    'High Powered Geared Motors (300rpm) (4 piece)',
+    'High Poweblue Geablue Motors (300rpm) (4 piece)',
     'Traction Wheels (4 Piece)',
     'L-shaped clamps (4 Piece)',
     'DPDT switch (2 Piece)',
@@ -453,7 +652,7 @@ const KitComponentsSection = () => {
       >
         KIT Component Details
       </motion.h2>
-      
+
       <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-blue-900/30 p-8">
         {/* Base Kit Items */}
         <div className="mb-6">
@@ -688,15 +887,15 @@ function Robosoccer() {
   const nitSilcharRegistrationFee = 799;
   const otherCollegeRegistrationFee = 1499;
   const kitPrice = 3499;
-  
+
   // Calculate total fee based on college type and kit selection
   const calculateTotalFee = () => {
     if (!collegeType) return 0;
-    
+
     if (collegeType === "other") {
       return otherCollegeRegistrationFee; // Other colleges: only registration, no kit
     }
-    
+
     // NIT Silchar students
     if (collegeType === "nit_silchar") {
       if (wantsKit === true) {
@@ -704,7 +903,7 @@ function Robosoccer() {
       }
       return nitSilcharRegistrationFee; // Registration only
     }
-    
+
     return 0;
   };
 
@@ -939,7 +1138,7 @@ function Robosoccer() {
         >
           <HeroSection />
 
-
+          <BrochureSection />
 
           {/* Registration Form Component with new styling */}
           <motion.section
@@ -1265,11 +1464,10 @@ function Robosoccer() {
                         setCollegeType("nit_silchar");
                         setFormData(prev => ({ ...prev, collegeName: "" }));
                       }}
-                      className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        collegeType === "nit_silchar"
+                      className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${collegeType === "nit_silchar"
                           ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(0,171,218,0.5)]'
                           : 'bg-black/50 border-blue-800 text-blue-300 hover:border-blue-600'
-                      }`}
+                        }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -1284,11 +1482,10 @@ function Robosoccer() {
                         setCollegeType("other");
                         setWantsKit(false);
                       }}
-                      className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        collegeType === "other"
+                      className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${collegeType === "other"
                           ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(0,171,218,0.5)]'
                           : 'bg-black/50 border-blue-800 text-blue-300 hover:border-blue-600'
-                      }`}
+                        }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -1359,11 +1556,10 @@ function Robosoccer() {
                       <motion.button
                         type="button"
                         onClick={() => setWantsKit(true)}
-                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                          wantsKit === true
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === true
                             ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(0,171,218,0.5)]'
                             : 'bg-black/50 border-blue-800 text-blue-300 hover:border-blue-600'
-                        }`}
+                          }`}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
@@ -1372,11 +1568,10 @@ function Robosoccer() {
                       <motion.button
                         type="button"
                         onClick={() => setWantsKit(false)}
-                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                          wantsKit === false
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === false
                             ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(0,171,218,0.5)]'
                             : 'bg-black/50 border-blue-800 text-blue-300 hover:border-blue-600'
-                        }`}
+                          }`}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
@@ -1404,10 +1599,10 @@ function Robosoccer() {
                     <div>
                       <p className="text-blue-400/70 text-sm">Total Amount to Pay:</p>
                       <p className="text-blue-100 text-xs mt-1">
-                        {collegeType === "other" 
-                          ? 'Registration Only (Other College)' 
-                          : wantsKit 
-                            ? 'Kit + Registration (NIT Silchar)' 
+                        {collegeType === "other"
+                          ? 'Registration Only (Other College)'
+                          : wantsKit
+                            ? 'Kit + Registration (NIT Silchar)'
                             : 'Registration Only (NIT Silchar)'}
                       </p>
                     </div>
@@ -1696,12 +1891,12 @@ function Robosoccer() {
                       <div>
                         <span className="text-blue-400/70">Kit Purchase:</span>
                         <p className="text-blue-100 font-medium">
-                          {collegeType === "other" 
-                            ? "Not Available" 
-                            : wantsKit === null 
-                              ? "Not selected" 
-                              : wantsKit 
-                                ? "Yes" 
+                          {collegeType === "other"
+                            ? "Not Available"
+                            : wantsKit === null
+                              ? "Not selected"
+                              : wantsKit
+                                ? "Yes"
                                 : "No"}
                         </p>
                       </div>

@@ -6,6 +6,9 @@ import {
   CheckCircleIcon,
   QrCodeIcon,
   UploadIcon,
+  FileTextIcon,
+  DownloadIcon,
+  EyeIcon,
 } from 'lucide-react'
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
 
@@ -374,6 +377,204 @@ const AttentionSection = () => {
                 />
               </motion.a>
             </p>
+          </div>
+        </div>
+      </div>
+    </motion.section>
+  )
+}
+
+// Brochure Download Section Component
+const BrochureSection = () => {
+  const brochureUrl = "https://drive.google.com/file/d/1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ/view?usp=sharing"
+  const downloadUrl = "https://drive.google.com/uc?export=download&id=1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ"
+
+  return (
+    <motion.section
+      className="py-8 flex justify-center w-full"
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+      viewport={{
+        once: true,
+      }}
+    >
+      <div className="bg-gradient-to-br from-red-950/40 to-black/60 backdrop-blur-md border-2 border-red-500/40 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.2)] w-full max-w-2xl">
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-red-900/10" />
+        
+        {/* Glow effect */}
+        <motion.div
+          className="absolute inset-0 bg-black/30 rounded-2xl"
+          animate={{
+            boxShadow: [
+              'inset 0 0 10px rgba(239,68,68,0.2)',
+              'inset 0 0 30px rgba(239,68,68,0.3)',
+              'inset 0 0 10px rgba(239,68,68,0.2)',
+            ],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+          }}
+        />
+
+        <div className="relative z-10">
+          {/* Header */}
+          <div className="flex items-start gap-4 mb-6">
+            <div className="p-3 bg-red-600/10 rounded-xl border border-red-500/30 shrink-0">
+              <FileTextIcon className="h-7 w-7 md:h-8 md:w-8 text-red-400" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl md:text-3xl font-bold text-red-300 mb-2 font-orbitron">
+                EVENT RULES & REGULATIONS
+              </h3>
+              <p className="text-red-100 font-sans text-sm md:text-base">
+                Download the official RoboWar brochure to learn about competition rules, robot specifications, arena details, and scoring system.
+              </p>
+            </div>
+          </div>
+
+          {/* Features List */}
+          <div className="grid md:grid-cols-2 gap-3 mb-6">
+            <div className="flex items-center gap-2 text-red-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-red-500 shrink-0" />
+              <span>Complete rule book</span>
+            </div>
+            <div className="flex items-center gap-2 text-red-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-red-500 shrink-0" />
+              <span>Robot specifications</span>
+            </div>
+            <div className="flex items-center gap-2 text-red-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-red-500 shrink-0" />
+              <span>Arena dimensions</span>
+            </div>
+            <div className="flex items-center gap-2 text-red-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-red-500 shrink-0" />
+              <span>Scoring & judging criteria</span>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* View Button */}
+            <motion.a
+              href={brochureUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-gradient-to-r from-red-950 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-[0_0_20px_rgba(239,68,68,0.5)] border border-red-500/30"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <EyeIcon className="h-5 w-5" />
+              <span className="font-spaced">VIEW BROCHURE</span>
+            </motion.a>
+
+            {/* Download Button */}
+            <motion.a
+              href={downloadUrl}
+              className="flex-1 bg-gradient-to-r from-red-900/80 to-red-950/80 hover:from-red-800/90 hover:to-red-900/90 text-red-100 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] border-2 border-red-600/50 hover:border-red-500"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <DownloadIcon className="h-5 w-5" />
+              <span className="font-spaced">DOWNLOAD PDF</span>
+            </motion.a>
+          </div>
+
+          {/* Additional Info */}
+          <div className="mt-4 pt-4 border-t border-red-500/20">
+            <p className="text-red-300/70 text-xs md:text-sm font-sans text-center mb-4">
+              📋 Make sure to read all rules carefully before registering for the competition
+            </p>
+            
+            {/* Module Head Contact Details */}
+            <div className="mt-6 pt-4 border-t border-red-500/30">
+              <h4 className="text-lg font-bold text-red-300 mb-3 text-center font-spaced">
+                FOR ANY QUERIES, CONTACT:
+              </h4>
+              <div className="grid md:grid-cols-3 gap-4">
+                {/* Module Head 1 */}
+                <div className="bg-red-950/30 border border-red-600/30 rounded-lg p-4 hover:bg-red-950/50 transition-all">
+                  <p className="text-red-200 font-semibold text-sm md:text-base mb-1">
+                    Ayushman Sagar
+                  </p>
+                  <p className="text-red-300/80 text-xs md:text-sm">Module Head - RoboWar</p>
+                  <div className="mt-2 space-y-1">
+                    <a 
+                      href="tel:+919127147825" 
+                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>+91-91271-47825</span>
+                    </a>
+                    <a 
+                      href="mailto:swarup_ug@mech.nits.ac.in" 
+                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>swarup_ug@ece.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Module Head 2 */}
+                <div className="bg-red-950/30 border border-red-600/30 rounded-lg p-4 hover:bg-red-950/50 transition-all">
+                  <p className="text-red-200 font-semibold text-sm md:text-base mb-1">
+                    Abhinav Kumar
+                  </p>
+                  <p className="text-red-300/80 text-xs md:text-sm">Module Head - RoboWar</p>
+                  <div className="mt-2 space-y-1">
+                    <a 
+                      href="tel:+919304782838" 
+                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>+91-93047-82838</span>
+                    </a>
+                    <a 
+                      href="mailto:shubham_ug@ece.nits.ac.in" 
+                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>abhinavk_ug_23@ece.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Module Head 3 */}
+                <div className="bg-red-950/30 border border-red-600/30 rounded-lg p-4 hover:bg-red-950/50 transition-all">
+                  <p className="text-red-200 font-semibold text-sm md:text-base mb-1">
+                    Chaman Laguri
+                  </p>
+                  <p className="text-red-300/80 text-xs md:text-sm">Module Head - RoboWar</p>
+                  <div className="mt-2 space-y-1">
+                    <a 
+                      href="tel:+917991090603" 
+                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>+91-79910-90603</span>
+                    </a>
+                    <a 
+                      href="mailto:aryan_ug@ece.nits.ac.in" 
+                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>aryan_ug@ece.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1017,6 +1218,8 @@ function RobowarRegistration() {
           className="space-y-12 pb-20"
         >
           <HeroSection />
+          
+          <BrochureSection />
 
 
 
