@@ -8,6 +8,7 @@ import {
   FileTextIcon,
   DownloadIcon,
   EyeIcon,
+  DollarSignIcon,
 } from 'lucide-react'
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
 
@@ -231,6 +232,18 @@ const HeroSection = () => {
             >
               A battle-forged robot engineegreen for RoboDrift supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. RoboDrift — where only the toughest bots survive!
             </motion.p>
+            {/* Prize Pool Announcement */}
+              <motion.div
+                className="flex justify-center md:justify-start mb-4"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.7 }}
+              >
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-black font-bold text-lg md:text-xl shadow-lg border-2 border-green-500/40">
+                  <DollarSignIcon className="h-6 w-6 md:h-7 md:w-7 text-black" />
+                  Total Prize Pool: <span className="text-white font-extrabold  ml-2">₹20,000</span>
+                </span>
+              </motion.div>
           </div>
 
           {/* Right Column - Hero Image */}
