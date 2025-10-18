@@ -538,18 +538,18 @@ const BrochureSection = () => {
                   <p className="text-green-300/80 text-xs md:text-sm">Module Head - RoboDrift</p>
                   <div className="mt-2 space-y-1">
                     <a
-                      href="tel:+919127147825"
+                      href="tel:+919678632377"
                       className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>91271-47825</span>
+                      <span>96786-32377</span>
                     </a>
                     <a
-                      href="mailto:swarup_ug@mech.nits.ac.in"
+                      href="mailto:nishit_ug_23@ece.nits.ac.in"
                       className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
-                      <span>swarup_ug@ece.nits.ac.in</span>
+                      <span>nishit_ug_23@ece.nits.ac.in</span>
                     </a>
                   </div>
                 </div>
@@ -586,18 +586,18 @@ const BrochureSection = () => {
                   <p className="text-green-300/80 text-xs md:text-sm">Module Head - RoboDrift</p>
                   <div className="mt-2 space-y-1">
                     <a
-                      href="tel:+917991090603"
+                      href="tel:+919101172955"
                       className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>79910-90603</span>
+                      <span>91011-72955</span>
                     </a>
                     <a
-                      href="mailto:aryan_ug@ece.nits.ac.in"
+                      href="mailto:sunidhi_ug_23@ei.nits.ac.in"
                       className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
-                      <span>aryan_ug@ece.nits.ac.in</span>
+                      <span>sunidhi_ug_23@ei.nits.ac.in</span>
                     </a>
                   </div>
                 </div>

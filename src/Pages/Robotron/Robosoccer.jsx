@@ -161,18 +161,18 @@ const BrochureSection = () => {
                   <p className="text-blue-300/80 text-xs md:text-sm">Module Head - Robosoccer</p>
                   <div className="mt-2 space-y-1">
                     <a
-                      href="tel:+919304782838"
+                      href="tel:+916003354585"
                       className="text-blue-400 font-mono hover:text-blue-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>86386-72009</span>
+                      <span>60033-54585</span>
                     </a>
                     <a
-                      href="mailto:shubham_ug@ece.nits.ac.in"
+                      href="mailto:jyotirmoyn_ug_23@ei.nits.ac.in"
                       className="text-blue-400 font-mono hover:text-blue-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
-                      <span>abhinavk_ug_23@ece.nits.ac.in</span>
+                      <span>jyotirmoyn_ug_23@ei.nits.ac.in</span>
                     </a>
                   </div>
                 </div>
@@ -1118,7 +1118,7 @@ function Robosoccer() {
       });
 
       // With no-cors mode, we can't read the response, so we assume success if no error
-      setModal({ open: true, message: "Registration submitted successfully! You will receive a confirmation email shortly.", success: true });
+      setModal({ open: true, message: "Registration submitted successfully!", success: true });
       setFormData({
         teamLeaderEmail: "",
         teamName: "",
