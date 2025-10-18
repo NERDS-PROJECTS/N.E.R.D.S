@@ -5,6 +5,10 @@ import {
   CheckCircleIcon,
   QrCodeIcon,
   UploadIcon,
+  FileTextIcon,
+  DownloadIcon,
+  EyeIcon,
+  DollarSignIcon,
 } from 'lucide-react'
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
 
@@ -13,7 +17,7 @@ import { MultiStepLoader } from "../../components/Merch_components/multi-step-lo
 const BackgroundGrid = () => {
   // Detect mobile for performance optimization
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  
+
   return (
     <div className="fixed inset-0 z-0">
       {/* Horizontal lines */}
@@ -107,7 +111,7 @@ const BackgroundGrid = () => {
 const HeroSection = () => {
   // Detect if device is mobile for performance optimization
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  
+
   return (
     <motion.section
       className="relative"
@@ -228,6 +232,18 @@ const HeroSection = () => {
             >
               A battle-forged robot engineegreen for RoboDrift supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. RoboDrift — where only the toughest bots survive!
             </motion.p>
+            {/* Prize Pool Announcement */}
+              <motion.div
+                className="flex justify-center md:justify-start mb-4"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.7 }}
+              >
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-green-400 via-green-500 to-green-700 text-black font-bold text-lg md:text-xl shadow-lg border-2 border-green-500/40">
+                  <DollarSignIcon className="h-6 w-6 md:h-7 md:w-7 text-black" />
+                  Total Prize Pool: <span className="text-white font-extrabold  ml-2">₹20,000</span>
+                </span>
+              </motion.div>
           </div>
 
           {/* Right Column - Hero Image */}
@@ -331,10 +347,27 @@ const AttentionSection = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-green-400 mb-2">ATTENTION</h3>
-            <p className="text-green-100 font-sans">
-              ⚠️ Only registrations are currently allowed. Kits and materials
-              are not provided at this time. Registration fee: Rs. 799. For kit
-              tracking, visit:{''}
+            <p className="text-red-100 font-mono">
+              ⚠️<strong>Registration & Kit Information</strong>
+              <br /><br />
+
+              🕒 <strong>Registration Deadline:</strong>
+              <br />
+              All participants must register before <strong>1st November 2025, 12:00 PM</strong>.<br />
+              Ensure your details are submitted on time to confirm your slot for <strong>Robotron 2025</strong>.
+              <br /><br />
+
+              🤖 <strong>Kit Registration Policy:</strong>
+              <br />
+              NIT Silchar students are eligible to register for <strong>Robotron Kits</strong> provided by the club.<br /><br />
+              Participants from other colleges are<strong> not allowed </strong> to participate in the Robo Drift Module, only NIT Silchar students can participate.
+              <br /><br />
+              📦 <strong>Kit Order Tracking:</strong>
+              <br />
+              For tracking your kit order or delivery status, visit the tracking portal using the link below:
+              <br />
+              <br />
+              👉 Track Your Kit Order Visit:{''}
               <motion.a
                 href="/trackOrder"
                 className="text-green-400 font-medium relative inline-block"
@@ -380,7 +413,202 @@ const AttentionSection = () => {
   )
 }
 
+const BrochureSection = () => {
+  const brochureUrl = "https://drive.google.com/file/d/1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ/view?usp=sharing"
+  const downloadUrl = "https://drive.google.com/uc?export=download&id=1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ"
 
+  return (
+    <motion.section
+      className="py-8 flex justify-center w-full"
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+      viewport={{
+        once: true,
+      }}
+    >
+      <div className="bg-gradient-to-br from-green-950/40 to-black/60 backdrop-blur-md border-2 border-green-500/40 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-[0_0_20px_rgba(17,245,0,0.2)] w-full max-w-2xl">
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-green-900/10" />
+
+        {/* Glow effect */}
+        <motion.div
+          className="absolute inset-0 bg-black/30 rounded-2xl"
+          animate={{
+            boxShadow: [
+              'inset 0 0 10px rgba(17,245,0,0.2)',
+              'inset 0 0 30px rgba(17,245,0,0.3)',
+              'inset 0 0 10px rgba(17,245,0,0.2)',
+            ],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+          }}
+        />
+
+        <div className="relative z-10">
+          {/* Header */}
+          <div className="flex items-start gap-4 mb-6">
+            <div className="p-3 bg-green-600/10 rounded-xl border border-green-500/30 shrink-0">
+              <FileTextIcon className="h-7 w-7 md:h-8 md:w-8 text-green-400" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl md:text-3xl font-bold text-green-300 mb-2 font-orbitron">
+                EVENT RULES & REGULATIONS
+              </h3>
+              <p className="text-green-100 font-mono text-sm md:text-base">
+                Download the official RoboDrift brochure to learn about competition rules, robot specifications, arena details, and scoring system.
+              </p>
+            </div>
+          </div>
+
+          {/* Features List */}
+          <div className="grid md:grid-cols-2 gap-3 mb-6">
+            <div className="flex items-center gap-2 text-green-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-green-500 shrink-0" />
+              <span>Complete rule book</span>
+            </div>
+            <div className="flex items-center gap-2 text-green-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-green-500 shrink-0" />
+              <span>Robot specifications</span>
+            </div>
+            <div className="flex items-center gap-2 text-green-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-green-500 shrink-0" />
+              <span>Arena dimensions</span>
+            </div>
+            <div className="flex items-center gap-2 text-green-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-green-500 shrink-0" />
+              <span>Scoring & judging criteria</span>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* View Button */}
+            <motion.a
+              href={brochureUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-gradient-to-r from-green-950 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-[0_0_20px_rgba(17,245,0,0.5)] border border-green-500/30"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <EyeIcon className="h-5 w-5" />
+              <span className="font-spaced">VIEW BROCHURE</span>
+            </motion.a>
+
+            {/* Download Button */}
+            <motion.a
+              href={downloadUrl}
+              className="flex-1 bg-gradient-to-r from-green-900/80 to-green-950/80 hover:from-green-800/90 hover:to-green-900/90 text-green-100 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-[0_0_20px_rgba(17,245,0,0.3)] border-2 border-green-600/50 hover:border-green-500"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <DownloadIcon className="h-5 w-5" />
+              <span className="font-spaced">DOWNLOAD PDF</span>
+            </motion.a>
+          </div>
+
+          {/* Additional Info */}
+          <div className="mt-4 pt-4 border-t border-green-500/20">
+            <p className="text-green-300/70 text-xs md:text-sm font-mono text-center mb-4">
+              📋 Make sure to read all rules carefully before registering for the competition
+            </p>
+
+            {/* Module Head Contact Details */}
+            <div className="mt-6 pt-4 border-t border-green-500/30">
+              <h4 className="text-lg font-bold text-green-300 mb-3 text-center font-spaced">
+                FOR ANY QUERIES, CONTACT:
+              </h4>
+              <div className="grid md:grid-cols-3 gap-4">
+                {/* Module Head 1 */}
+                <div className="bg-green-950/30 border border-green-600/30 rounded-lg p-4 hover:bg-green-950/50 transition-all">
+                  <p className="text-green-200 font-semibold text-sm md:text-base mb-1">
+                    Nishit Baishya
+                  </p>
+                  <p className="text-green-300/80 text-xs md:text-sm">Module Head - RoboDrift</p>
+                  <div className="mt-2 space-y-1">
+                    <a
+                      href="tel:+919678632377"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>96786-32377</span>
+                    </a>
+                    <a
+                      href="mailto:nishit_ug_23@ece.nits.ac.in"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>nishit_ug_23@ece.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Module Head 2 */}
+                <div className="bg-green-950/30 border border-green-600/30 rounded-lg p-4 hover:bg-green-950/50 transition-all">
+                  <p className="text-green-200 font-semibold text-sm md:text-base mb-1">
+                    Abhishek Kumar
+                  </p>
+                  <p className="text-green-300/80 text-xs md:text-sm">Module Head - RoboDrift</p>
+                  <div className="mt-2 space-y-1">
+                    <a
+                      href="tel:+916200894865"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>62008-94865</span>
+                    </a>
+                    <a
+                      href="mailto:abhishekkr_ug_23@ee.nits.ac.in"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>abhishekkr_ug_23@ee.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Module Head 3 */}
+                <div className="bg-green-950/30 border border-green-600/30 rounded-lg p-4 hover:bg-green-950/50 transition-all">
+                  <p className="text-green-200 font-semibold text-sm md:text-base mb-1">
+                    Sunidhi Chetri
+                  </p>
+                  <p className="text-green-300/80 text-xs md:text-sm">Module Head - RoboDrift</p>
+                  <div className="mt-2 space-y-1">
+                    <a
+                      href="tel:+919101172955"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>91011-72955</span>
+                    </a>
+                    <a
+                      href="mailto:sunidhi_ug_23@ei.nits.ac.in"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>sunidhi_ug_23@ei.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.section>
+  )
+}
 
 // Kit Components Section Component
 const KitComponentsSection = () => {
@@ -460,8 +688,8 @@ const KitComponentsSection = () => {
       >
         KIT Component Details
       </motion.h2>
-      
-      <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-green-900/30 p-8">
+
+      <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-mono border border-green-900/30 p-8">
         {/* Base Kit Items */}
         <div className="mb-6">
           <h3 className="text-xl font-bold text-green-400 mb-4 border-b border-green-500/30 pb-2">
@@ -615,7 +843,7 @@ const PaymentDetailsSection = () => {
                 <QrCodeIcon className="h-6 w-6 text-green-500" />
               </div>
             </div>
-            <div className="space-y-2 text-green-100">
+            <div className="space-y-2 font-mono text-green-100">
               <p>
                 <span className="text-green-400 font-medium">Bank Name:</span>{' '}
                 {option.bankName}
@@ -689,7 +917,7 @@ function RoboDrift() {
   // Registration fees (NIT Silchar only)
   const nitSilcharRegistrationFee = 799;
   const kitPrice = 2799;
-  
+
   // Calculate total fee based on kit selection
   const calculateTotalFee = () => {
     if (wantsKit === null) return 0;
@@ -705,9 +933,9 @@ function RoboDrift() {
 
   // Change this to your actual deployed Apps Script Web App URL
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzes_xKa1W6ccI6Ej4wHFU1JGJtJ6kiutTBoayZVSvvqqnDT_8RvxyMhI5lfdbxFRVI/exec";
-  
 
-  
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -826,7 +1054,7 @@ function RoboDrift() {
           "Content-Type": "text/plain" // Use text/plain to avoid CORS preflight
         },
         body: JSON.stringify(submissionData),
-        redirect: 'follow'
+        greenirect: 'follow'
       });
 
       console.log("Response status:", response.status);
@@ -835,7 +1063,7 @@ function RoboDrift() {
 
       const result = await response.json();
       console.log("Response data:", result);
-      
+
       if (result.success) {
         setModal({ open: true, message: "Registration submitted successfully! You will receive a confirmation email shortly.", success: true });
         setFormData({
@@ -859,21 +1087,21 @@ function RoboDrift() {
       console.error("Submission error details:", err);
       console.error("Error name:", err.name);
       console.error("Error message:", err.message);
-      
+
       let errorMessage = "Error submitting registration. ";
-      
+
       if (err.name === 'TypeError' && err.message.includes('Failed to fetch')) {
         errorMessage = "Network error: Unable to connect to the server. Please check:\n" +
-                      "1. Your internet connection\n" +
-                      "2. The Apps Script URL is correct\n" +
-                      "3. The Apps Script is deployed as Web App\n\n" +
-                      "Current URL: " + SCRIPT_URL;
+          "1. Your internet connection\n" +
+          "2. The Apps Script URL is correct\n" +
+          "3. The Apps Script is deployed as Web App\n\n" +
+          "Current URL: " + SCRIPT_URL;
       } else if (err instanceof SyntaxError) {
         errorMessage = "Server returned invalid response. The Apps Script may not be deployed correctly.";
       } else {
         errorMessage = `Error: ${err.message}\n\nPlease check the browser console for details.`;
       }
-      
+
       setModal({ open: true, message: errorMessage, success: false });
     } finally {
       setSubmitting(false);
@@ -939,7 +1167,7 @@ function RoboDrift() {
         >
           <HeroSection />
 
-
+          <BrochureSection />
 
           {/* Registration Form Component with new styling */}
           <motion.section
@@ -1036,7 +1264,7 @@ function RoboDrift() {
                       name="teamLeaderEmail"
                       value={formData.teamLeaderEmail}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="team.leader@example.com"
                       required
                     />
@@ -1060,7 +1288,7 @@ function RoboDrift() {
                       name="teamName"
                       value={formData.teamName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="Enter your team name"
                       required
                     />
@@ -1086,7 +1314,7 @@ function RoboDrift() {
                       name="teamLeaderName"
                       value={formData.teamLeaderName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="Enter your full name"
                       required
                     />
@@ -1115,7 +1343,7 @@ function RoboDrift() {
                         value={formData.teamLeaderPhone}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                        className="w-full bg-black/50 border-2 border-green-800 font-mono focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                         placeholder="10-digit number"
                         required
                       />
@@ -1142,7 +1370,7 @@ function RoboDrift() {
                         value={formData.teamLeaderWhatsapp}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                        className="w-full bg-black/50 border-2  border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                         placeholder="WhatsApp number"
                         required
                       />
@@ -1158,7 +1386,7 @@ function RoboDrift() {
                   <p className="text-green-200 text-sm mt-1">Add your team members (minimum 2 required, max 4 including leader)</p>
                 </div>
 
-                {/* Required Members (2 and 3) */}
+                {/* required Members (2 and 3) */}
                 {[2, 3].map((num) => (
                   <motion.div
                     key={num}
@@ -1179,7 +1407,7 @@ function RoboDrift() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                        className="w-full bg-black/50 border-2 border-green-800 font-mono focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                         placeholder={`Enter member ${num} name`}
                         required
                       />
@@ -1205,7 +1433,7 @@ function RoboDrift() {
                       name="teamMember4"
                       value={formData.teamMember4}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="Enter member 4 name (optional)"
                     />
                   </motion.div>
@@ -1229,68 +1457,66 @@ function RoboDrift() {
                     Do you want to purchase a Robot Kit? *
                   </label>
                   <div className="flex gap-4">
-                      <motion.button
-                        type="button"
-                        onClick={() => setWantsKit(true)}
-                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                          wantsKit === true
-                            ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
-                            : 'bg-black/50 border-green-800 text-green-300 hover:border-green-600'
+                    <motion.button
+                      type="button"
+                      onClick={() => setWantsKit(true)}
+                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === true
+                          ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
+                          : 'bg-black/50 border-green-800 text-green-300 hover:border-green-600'
                         }`}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <div>
-                          <div>Yes, I want a kit</div>
-                          <div className="text-sm opacity-80 mt-1">₹2799 (Kit + Registration)</div>
-                        </div>
-                      </motion.button>
-                      <motion.button
-                        type="button"
-                        onClick={() => setWantsKit(false)}
-                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                          wantsKit === false
-                            ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
-                            : 'bg-black/50 border-green-800 text-green-300 hover:border-green-600'
-                        }`}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <div>
-                          <div>No, registration only</div>
-                          <div className="text-sm opacity-80 mt-1">₹799 (Registration Only)</div>
-                        </div>
-                      </motion.button>
-                    </div>
-                    {wantsKit === null && (
-                      <p className="text-green-400/60 text-xs mt-2">
-                        ⚠️ Please select an option to continue
-                      </p>
-                    )}
-                  </motion.div>
-
-                  {/* Price Summary */}
-                  {wantsKit !== null && (
-                    <motion.div
-                      className="bg-gradient-to-br from-green-950/30 to-black/50 border-2 border-green-500/40 rounded-xl p-4 mt-6"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <p className="text-green-400/70 text-sm">Total Amount to Pay:</p>
-                          <p className="text-green-100 text-xs mt-1">
-                            {wantsKit ? 'NIT Silchar - Kit + Registration' : 'NIT Silchar - Registration Only'}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-green-300 font-bold text-2xl">₹{registrationFee}</p>
-                        </div>
+                      <div>
+                        <div>Yes, I want a kit</div>
+                        <div className="text-sm opacity-80 mt-1">₹2799 (Kit + Registration)</div>
                       </div>
-                    </motion.div>
+                    </motion.button>
+                    <motion.button
+                      type="button"
+                      onClick={() => setWantsKit(false)}
+                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === false
+                          ? 'bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]'
+                          : 'bg-black/50 border-green-800 text-green-300 hover:border-green-600'
+                        }`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <div>
+                        <div>No, registration only</div>
+                        <div className="text-sm opacity-80 mt-1">₹799 (Registration Only)</div>
+                      </div>
+                    </motion.button>
+                  </div>
+                  {wantsKit === null && (
+                    <p className="text-green-400/60 text-xs mt-2">
+                      ⚠️ Please select an option to continue
+                    </p>
                   )}
-                </div>
+                </motion.div>
+
+                {/* Price Summary */}
+                {wantsKit !== null && (
+                  <motion.div
+                    className="bg-gradient-to-br from-green-950/30 to-black/50 border-2 border-green-500/40 rounded-xl p-4 mt-6"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-green-400/70 text-sm">Total Amount to Pay:</p>
+                        <p className="text-green-100 text-xs mt-1">
+                          {wantsKit ? 'NIT Silchar - Kit + Registration' : 'NIT Silchar - Registration Only'}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-green-300 font-bold text-2xl">₹{registrationFee}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
 
               {/* Show kit components only if kit is selected */}
               {wantsKit === true && <KitComponentsSection />}
@@ -1459,7 +1685,7 @@ function RoboDrift() {
                       name="transactionNumber"
                       value={formData.transactionNumber}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40 font-mono"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500  rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40 font-mono"
                       placeholder="Enter UPI transaction number"
                       required
                     />
@@ -1547,10 +1773,10 @@ function RoboDrift() {
                       <div>
                         <span className="text-green-400/70">Kit Purchase:</span>
                         <p className="text-green-100 font-medium">
-                          {wantsKit === null 
-                            ? "Not selected" 
-                            : wantsKit 
-                              ? "Yes" 
+                          {wantsKit === null
+                            ? "Not selected"
+                            : wantsKit
+                              ? "Yes"
                               : "No"}
                         </p>
                       </div>
@@ -1585,7 +1811,7 @@ function RoboDrift() {
                 </div>
               </motion.div>
 
-            
+
 
               {/* Submit Button */}
               <div className="flex justify-center mt-4">

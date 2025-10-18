@@ -6,6 +6,10 @@ import {
   CheckCircleIcon,
   QrCodeIcon,
   UploadIcon,
+  FileTextIcon,
+  DownloadIcon,
+  EyeIcon,
+  DollarSignIcon,
 } from 'lucide-react'
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
 
@@ -14,7 +18,7 @@ import { MultiStepLoader } from "../../components/Merch_components/multi-step-lo
 const BackgroundGrid = () => {
   // Detect mobile for performance optimization
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  
+
   return (
     <div className="fixed inset-0 z-0">
       {/* Horizontal lines */}
@@ -108,7 +112,7 @@ const BackgroundGrid = () => {
 const HeroSection = () => {
   // Detect if device is mobile for performance optimization
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  
+
   return (
     <motion.section
       className="relative"
@@ -229,6 +233,18 @@ const HeroSection = () => {
             >
               A battle-forged robot engineered for ROBOWAR supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. Robowar — where only the toughest bots survive!
             </motion.p>
+            {/* Prize Pool Announcement */}
+            <motion.div
+              className="flex justify-center md:justify-start mb-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.7 }}
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-red-400 via-red-500 to-red-700 text-black font-bold text-lg md:text-xl shadow-lg border-2 border-red-500/40">
+                <DollarSignIcon className="h-6 w-6 md:h-7 md:w-7 text-black" />
+                Total Prize Pool: <span className="text-white font-extrabold  ml-2">₹50,000</span>
+              </span>
+            </motion.div>
           </div>
 
           {/* Right Column - Hero Image */}
@@ -332,10 +348,38 @@ const AttentionSection = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-red-400 mb-2">ATTENTION</h3>
-            <p className="text-red-100 font-sans">
-              ⚠️ Only registrations are currently allowed. Kits and materials
-              are not provided at this time. Registration fee: Rs. 999. For kit
-              tracking, visit:{''}
+            <p className="text-red-100 font-mono">
+              ⚠️<strong>Registration & Kit Information</strong>
+              <br /><br />
+
+              🕒 <strong>Registration Deadline:</strong>
+              <br />
+              All participants must register before <strong>1st November 2025, 12:00 PM</strong>.<br />
+              Ensure your details are submitted on time to confirm your slot for <strong>Robotron 2025</strong>.
+              <br /><br />
+
+              🤖 <strong>Kit Registration Policy:</strong>
+              <br />
+              NIT Silchar students are eligible to register for <strong>Robotron Kits</strong> provided by the club.<br /><br />
+              Participants from other colleges are welcome to compete, but kits will <strong>not be provided</strong> — they must bring their own bots and components.
+              <br /><br />
+
+              🏠 <strong>Accommodation & Food Facilities:</strong>
+              <br />
+              Participants from other colleges will be provided accommodation and food services at <strong>nominal, chargeable rates</strong> arranged by NIT Silchar.
+              <br /><br />
+
+              🎶 <strong>Festival Access:</strong>
+              <br />
+              All registered participants from other colleges can enjoy <strong>Tecnoesis festival attractions</strong> such as the DJ Night, Artist Performances, and other campus events through their <strong>college-issued access card</strong>.
+              <br /><br />
+
+              📦 <strong>Kit Order Tracking:</strong>
+              <br />
+              For tracking your kit order or delivery status, visit the tracking portal using the link below:
+              <br />
+              <br />
+              👉 Track Your Kit Order Visit:{''}
               <motion.a
                 href="/trackOrder"
                 className="text-red-400 font-medium relative inline-block"
@@ -381,6 +425,204 @@ const AttentionSection = () => {
   )
 }
 
+// Brochure Download Section Component
+const BrochureSection = () => {
+  const brochureUrl = "https://drive.google.com/file/d/1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ/view?usp=sharing"
+  const downloadUrl = "https://drive.google.com/uc?export=download&id=1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ"
+
+  return (
+    <motion.section
+      className="py-8 flex justify-center w-full"
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+      viewport={{
+        once: true,
+      }}
+    >
+      <div className="bg-gradient-to-br from-red-950/40 to-black/60 backdrop-blur-md border-2 border-red-500/40 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.2)] w-full max-w-2xl">
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-red-900/10" />
+
+        {/* Glow effect */}
+        <motion.div
+          className="absolute inset-0 bg-black/30 rounded-2xl"
+          animate={{
+            boxShadow: [
+              'inset 0 0 10px rgba(239,68,68,0.2)',
+              'inset 0 0 30px rgba(239,68,68,0.3)',
+              'inset 0 0 10px rgba(239,68,68,0.2)',
+            ],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+          }}
+        />
+
+        <div className="relative z-10">
+          {/* Header */}
+          <div className="flex items-start gap-4 mb-6">
+            <div className="p-3 bg-red-600/10 rounded-xl border border-red-500/30 shrink-0">
+              <FileTextIcon className="h-7 w-7 md:h-8 md:w-8 text-red-400" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl md:text-3xl font-bold text-red-300 mb-2 font-orbitron">
+                EVENT RULES & REGULATIONS
+              </h3>
+              <p className="text-red-100 font-mono text-sm md:text-base">
+                Download the official RoboWar brochure to learn about competition rules, robot specifications, arena details, and scoring system.
+              </p>
+            </div>
+          </div>
+
+          {/* Features List */}
+          <div className="grid md:grid-cols-2 gap-3 mb-6">
+            <div className="flex items-center gap-2 text-red-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-red-500 shrink-0" />
+              <span>Complete rule book</span>
+            </div>
+            <div className="flex items-center gap-2 text-red-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-red-500 shrink-0" />
+              <span>Robot specifications</span>
+            </div>
+            <div className="flex items-center gap-2 text-red-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-red-500 shrink-0" />
+              <span>Arena dimensions</span>
+            </div>
+            <div className="flex items-center gap-2 text-red-200 text-sm">
+              <CheckCircleIcon className="h-4 w-4 text-red-500 shrink-0" />
+              <span>Scoring & judging criteria</span>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* View Button */}
+            <motion.a
+              href={brochureUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-gradient-to-r from-red-950 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-[0_0_20px_rgba(239,68,68,0.5)] border border-red-500/30"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <EyeIcon className="h-5 w-5" />
+              <span className="font-spaced">VIEW BROCHURE</span>
+            </motion.a>
+
+            {/* Download Button */}
+            <motion.a
+              href={downloadUrl}
+              className="flex-1 bg-gradient-to-r from-red-900/80 to-red-950/80 hover:from-red-800/90 hover:to-red-900/90 text-red-100 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] border-2 border-red-600/50 hover:border-red-500"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <DownloadIcon className="h-5 w-5" />
+              <span className="font-spaced">DOWNLOAD PDF</span>
+            </motion.a>
+          </div>
+
+          {/* Additional Info */}
+          <div className="mt-4 pt-4 border-t border-red-500/20">
+            <p className="text-red-300/70 text-xs md:text-sm font-mono text-center mb-4">
+              📋 Make sure to read all rules carefully before registering for the competition
+            </p>
+
+            {/* Module Head Contact Details */}
+            <div className="mt-6 pt-4 border-t border-red-500/30">
+              <h4 className="text-lg font-bold text-red-300 mb-3 text-center font-spaced">
+                FOR ANY QUERIES, CONTACT:
+              </h4>
+              <div className="grid md:grid-cols-3 gap-4">
+                {/* Module Head 1 */}
+                <div className="bg-red-950/30 border border-red-600/30 rounded-lg p-4 hover:bg-red-950/50 transition-all">
+                  <p className="text-red-200 font-semibold text-sm md:text-base mb-1">
+                    Ayushman Sagar
+                  </p>
+                  <p className="text-red-300/80 text-xs md:text-sm">Module Head - RoboWar</p>
+                  <div className="mt-2 space-y-1">
+                    <a
+                      href="tel:+918822568388"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>88225-68388</span>
+                    </a>
+                    <a
+                      href="mailto:ayushman_ug_23@ece.nits.ac.in"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>ayushman_ug_23@ece.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Module Head 2 */}
+                <div className="bg-red-950/30 border border-red-600/30 rounded-lg p-4 hover:bg-red-950/50 transition-all">
+                  <p className="text-red-200 font-semibold text-sm md:text-base mb-1">
+                    Abhinav Singh
+                  </p>
+                  <p className="text-red-300/80 text-xs md:text-sm">Module Head - RoboWar</p>
+                  <div className="mt-2 space-y-1">
+                    <a
+                      href="tel:+918638672009"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>86386-72009</span>
+                    </a>
+                    <a
+                      href="mailto:abhinav_ug_23@ece.nits.ac.in"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>abhinav_ug_23@ece.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Module Head 3 */}
+                <div className="bg-red-950/30 border border-red-600/30 rounded-lg p-4 hover:bg-red-950/50 transition-all">
+                  <p className="text-red-200 font-semibold text-sm md:text-base mb-1">
+                    Chaman Laguri
+                  </p>
+                  <p className="text-red-300/80 text-xs md:text-sm">Module Head - RoboWar</p>
+                  <div className="mt-2 space-y-1">
+                    <a
+                      href="tel:+917991090603"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors"
+                    >
+                      <span>📞</span>
+                      <span>79910-90603</span>
+                    </a>
+                    <a
+                      href="mailto:chaman_ug_23@mech.nits.ac.in"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
+                    >
+                      <span>✉️</span>
+                      <span>chaman_ug_23@mech.nits.ac.in</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.section>
+  )
+}
+
 
 
 // Kit Components Section Component
@@ -399,9 +641,9 @@ const KitComponentsSection = ({ motorOption }) => {
 
   // Motor-specific items
   const motorSpecificItems = {
-    rpm: ['High RPM Motor (1 Piece for weapon)','Sprocket','Bore Mounted Bearing','Pulley System','Steel Rod','Timing Belt'],
-    torque: ['High Torque Motor (1 Piece for weapon)','Sprocket Wheel','Geared Hub System','Geared Teeth'],
-    both: ['High RPM Motor (1 Piece for weapon)','Sprocket','Bore Mounted Bearing','Pulley System','Steel Rod','Timing Belt','High Torque Motor (1 Piece for weapon)','Sprocket Wheel','Geared Hub System','Geared Teeth']
+    rpm: ['High RPM Motor (1 Piece for weapon)', 'Sprocket', 'Bore Mounted Bearing', 'Pulley System', 'Steel Rod', 'Timing Belt'],
+    torque: ['High Torque Motor (1 Piece for weapon)', 'Sprocket Wheel', 'Geared Hub System', 'Geared Teeth'],
+    both: ['High RPM Motor (1 Piece for weapon)', 'Sprocket', 'Bore Mounted Bearing', 'Pulley System', 'Steel Rod', 'Timing Belt', 'High Torque Motor (1 Piece for weapon)', 'Sprocket Wheel', 'Geared Hub System', 'Geared Teeth']
   }
 
   const containerVariants = {
@@ -469,8 +711,8 @@ const KitComponentsSection = ({ motorOption }) => {
           </span>
         )}
       </motion.h2>
-      
-      <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-red-900/30 p-8">
+
+      <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-mono border border-red-900/30 p-8">
         {/* Base Kit Items */}
         <div className="mb-6">
           <h3 className="text-xl font-bold text-red-400 mb-4 border-b border-red-500/30 pb-2">
@@ -657,7 +899,7 @@ const PaymentDetailsSection = () => {
                 <QrCodeIcon className="h-6 w-6 text-red-500" />
               </div>
             </div>
-            <div className="space-y-2 font-sans text-red-100">
+            <div className="space-y-2 font-mono text-red-100">
               <p>
                 <span className="text-red-400 font-medium">Bank Name:</span>{' '}
                 {option.bankName}
@@ -738,20 +980,20 @@ function RobowarRegistration() {
   // Registration fees
   const nitSilcharRegistrationFee = 999;
   const otherCollegeRegistrationFee = 1999;
-  
+
   // Calculate total fee based on college type, kit selection, and motor option
   const calculateTotalFee = () => {
     if (!collegeType) return 0;
-    
+
     if (collegeType === "other") {
       return otherCollegeRegistrationFee; // Other colleges: only registration, no kit
     }
-    
+
     // NIT Silchar students
     if (collegeType === "nit_silchar") {
       if (wantsKit === true) {
         // Kit prices based on motor option
-        switch(motorOption) {
+        switch (motorOption) {
           case "rpm":
             return 4499;
           case "torque":
@@ -764,7 +1006,7 @@ function RobowarRegistration() {
       }
       return nitSilcharRegistrationFee; // Registration only
     }
-    
+
     return 0;
   };
 
@@ -1018,6 +1260,8 @@ function RobowarRegistration() {
         >
           <HeroSection />
 
+          <BrochureSection />
+
 
 
           {/* Registration Form Component with new styling */}
@@ -1115,7 +1359,7 @@ function RobowarRegistration() {
                       name="teamLeaderEmail"
                       value={formData.teamLeaderEmail}
                       onChange={handleInputChange}
-                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="team.leader@example.com"
                       required
                     />
@@ -1139,7 +1383,7 @@ function RobowarRegistration() {
                       name="teamName"
                       value={formData.teamName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="Enter your team name"
                       required
                     />
@@ -1165,7 +1409,7 @@ function RobowarRegistration() {
                       name="teamLeaderName"
                       value={formData.teamLeaderName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="Enter your full name"
                       required
                     />
@@ -1194,7 +1438,7 @@ function RobowarRegistration() {
                         value={formData.teamLeaderPhone}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder="10-digit number"
                         required
                       />
@@ -1221,7 +1465,7 @@ function RobowarRegistration() {
                         value={formData.teamLeaderWhatsapp}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder="WhatsApp number"
                         required
                       />
@@ -1248,7 +1492,7 @@ function RobowarRegistration() {
                       name="teamLeaderScholarId"
                       value={formData.teamLeaderScholarId}
                       onChange={handleInputChange}
-                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="Enter Scholar ID"
                       required
                     />
@@ -1284,7 +1528,7 @@ function RobowarRegistration() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder={`Enter member ${num} name`}
                         required
                       />
@@ -1312,7 +1556,7 @@ function RobowarRegistration() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder={`Enter member ${num} name (optional)`}
                       />
                     </motion.div>
@@ -1344,11 +1588,10 @@ function RobowarRegistration() {
                         setCollegeType("nit_silchar");
                         setWantsKit(null); // Reset kit selection when changing college type
                       }}
-                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        collegeType === "nit_silchar"
-                          ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
-                          : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
-                      }`}
+                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${collegeType === "nit_silchar"
+                        ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                        : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                        }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -1360,11 +1603,10 @@ function RobowarRegistration() {
                         setCollegeType("other");
                         setWantsKit(false); // Other colleges cannot select kit
                       }}
-                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                        collegeType === "other"
-                          ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
-                          : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
-                      }`}
+                      className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${collegeType === "other"
+                        ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                        : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                        }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -1404,7 +1646,7 @@ function RobowarRegistration() {
                         name="collegeName"
                         value={formData.collegeName}
                         onChange={handleInputChange}
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder="Enter your college name"
                         required
                       />
@@ -1428,11 +1670,10 @@ function RobowarRegistration() {
                       <motion.button
                         type="button"
                         onClick={() => setWantsKit(true)}
-                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                          wantsKit === true
-                            ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
-                            : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
-                        }`}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === true
+                          ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                          : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                          }`}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
@@ -1441,11 +1682,10 @@ function RobowarRegistration() {
                       <motion.button
                         type="button"
                         onClick={() => setWantsKit(false)}
-                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-                          wantsKit === false
-                            ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
-                            : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
-                        }`}
+                        className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === false
+                          ? 'bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
+                          : 'bg-black/50 border-red-800 text-red-300 hover:border-red-600'
+                          }`}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
@@ -1472,25 +1712,23 @@ function RobowarRegistration() {
                     <label className="block text-red-300 mb-3 font-medium text-lg">
                       Select Motor Option *
                     </label>
-                    
+
                     <div className="space-y-3">
                       {/* High RPM Motor Option */}
                       <motion.button
                         type="button"
                         onClick={() => setMotorOption("rpm")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-                          motorOption === "rpm"
-                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
-                            : 'bg-black/50 border-red-800 hover:border-red-600'
-                        }`}
+                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${motorOption === "rpm"
+                          ? 'bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+                          : 'bg-black/50 border-red-800 hover:border-red-600'
+                          }`}
                         whileHover={{ scale: 1.01 }}
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "rpm" ? 'border-red-500 bg-red-500' : 'border-red-700'
-                              }`}>
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${motorOption === "rpm" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                                }`}>
                                 {motorOption === "rpm" && (
                                   <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
                                 )}
@@ -1510,19 +1748,17 @@ function RobowarRegistration() {
                       <motion.button
                         type="button"
                         onClick={() => setMotorOption("torque")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-                          motorOption === "torque"
-                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
-                            : 'bg-black/50 border-red-800 hover:border-red-600'
-                        }`}
+                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${motorOption === "torque"
+                          ? 'bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+                          : 'bg-black/50 border-red-800 hover:border-red-600'
+                          }`}
                         whileHover={{ scale: 1.01 }}
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "torque" ? 'border-red-500 bg-red-500' : 'border-red-700'
-                              }`}>
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${motorOption === "torque" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                                }`}>
                                 {motorOption === "torque" && (
                                   <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
                                 )}
@@ -1542,19 +1778,17 @@ function RobowarRegistration() {
                       <motion.button
                         type="button"
                         onClick={() => setMotorOption("both")}
-                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left relative overflow-hidden ${
-                          motorOption === "both"
-                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
-                            : 'bg-black/50 border-red-800 hover:border-red-600'
-                        }`}
+                        className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left relative overflow-hidden ${motorOption === "both"
+                          ? 'bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+                          : 'bg-black/50 border-red-800 hover:border-red-600'
+                          }`}
                         whileHover={{ scale: 1.01 }}
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                motorOption === "both" ? 'border-red-500 bg-red-500' : 'border-red-700'
-                              }`}>
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${motorOption === "both" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                                }`}>
                                 {motorOption === "both" && (
                                   <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
                                 )}
@@ -1594,18 +1828,16 @@ function RobowarRegistration() {
                       <motion.button
                         type="button"
                         onClick={() => setWeightCategory("lightweight")}
-                        className={`p-5 rounded-xl border-2 transition-all duration-300 ${
-                          weightCategory === "lightweight"
-                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
-                            : 'bg-black/50 border-red-800 hover:border-red-600'
-                        }`}
+                        className={`p-5 rounded-xl border-2 transition-all duration-300 ${weightCategory === "lightweight"
+                          ? 'bg-red-600/20 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
+                          : 'bg-black/50 border-red-800 hover:border-red-600'
+                          }`}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
                         <div className="flex items-start gap-3">
-                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${
-                            weightCategory === "lightweight" ? 'border-red-500 bg-red-500' : 'border-red-700'
-                          }`}>
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${weightCategory === "lightweight" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                            }`}>
                             {weightCategory === "lightweight" && (
                               <div className="w-3 h-3 bg-white rounded-full"></div>
                             )}
@@ -1624,18 +1856,16 @@ function RobowarRegistration() {
                       <motion.button
                         type="button"
                         onClick={() => setWeightCategory("heavyweight")}
-                        className={`p-5 rounded-xl border-2 transition-all duration-300 ${
-                          weightCategory === "heavyweight"
-                            ? 'bg-red-600/20 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
-                            : 'bg-black/50 border-red-800 hover:border-red-600'
-                        }`}
+                        className={`p-5 rounded-xl border-2 transition-all duration-300 ${weightCategory === "heavyweight"
+                          ? 'bg-red-600/20 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
+                          : 'bg-black/50 border-red-800 hover:border-red-600'
+                          }`}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
                         <div className="flex items-start gap-3">
-                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${
-                            weightCategory === "heavyweight" ? 'border-red-500 bg-red-500' : 'border-red-700'
-                          }`}>
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${weightCategory === "heavyweight" ? 'border-red-500 bg-red-500' : 'border-red-700'
+                            }`}>
                             {weightCategory === "heavyweight" && (
                               <div className="w-3 h-3 bg-white rounded-full"></div>
                             )}
@@ -1670,10 +1900,10 @@ function RobowarRegistration() {
                       <div>
                         <p className="text-red-400/70 text-sm">Total Amount to Pay:</p>
                         <p className="text-red-100 text-xs mt-1">
-                          {collegeType === "other" 
-                            ? 'Registration Only (Other College)' 
-                            : wantsKit 
-                              ? `Kit (${motorOption === 'rpm' ? 'High RPM Motor' : motorOption === 'torque' ? 'High Torque Motor' : motorOption === 'both' ? 'Both Motors' : ''}) + Registration (NIT Silchar)` 
+                          {collegeType === "other"
+                            ? 'Registration Only (Other College)'
+                            : wantsKit
+                              ? `Kit (${motorOption === 'rpm' ? 'High RPM Motor' : motorOption === 'torque' ? 'High Torque Motor' : motorOption === 'both' ? 'Both Motors' : ''}) + Registration (NIT Silchar)`
                               : 'Registration Only (NIT Silchar)'}
                         </p>
                       </div>
@@ -1965,19 +2195,19 @@ function RobowarRegistration() {
                         <div>
                           <span className="text-red-400/70">Motor Option:</span>
                           <p className="text-red-100 font-medium">
-                            {motorOption === "rpm" ? "High RPM Motor" : 
-                             motorOption === "torque" ? "High Torque Motor" : 
-                             motorOption === "both" ? "Both Motors (RPM + Torque)" : 
-                             "Not selected"}
+                            {motorOption === "rpm" ? "High RPM Motor" :
+                              motorOption === "torque" ? "High Torque Motor" :
+                                motorOption === "both" ? "Both Motors (RPM + Torque)" :
+                                  "Not selected"}
                           </p>
                         </div>
                       )}
                       <div>
                         <span className="text-red-400/70">Weight Category:</span>
                         <p className="text-red-100 font-medium">
-                          {weightCategory === "lightweight" ? "Lightweight (8kg and below)" : 
-                           weightCategory === "heavyweight" ? "Heavyweight (15kg and below)" : 
-                           "Not selected"}
+                          {weightCategory === "lightweight" ? "Lightweight (8kg and below)" :
+                            weightCategory === "heavyweight" ? "Heavyweight (15kg and below)" :
+                              "Not selected"}
                         </p>
                       </div>
                       <div>
