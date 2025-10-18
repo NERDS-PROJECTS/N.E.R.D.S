@@ -348,7 +348,7 @@ const AttentionSection = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-red-400 mb-2">ATTENTION</h3>
-            <p className="text-red-100 font-sans">
+            <p className="text-red-100 font-mono">
               ⚠️ Only registrations are currently allowed. Kits and materials
               are not provided at this time. Registration fee: Rs. 999. For kit
               tracking, visit:{''}
@@ -450,7 +450,7 @@ const BrochureSection = () => {
               <h3 className="text-2xl md:text-3xl font-bold text-red-300 mb-2 font-orbitron">
                 EVENT RULES & REGULATIONS
               </h3>
-              <p className="text-red-100 font-sans text-sm md:text-base">
+              <p className="text-red-100 font-mono text-sm md:text-base">
                 Download the official RoboWar brochure to learn about competition rules, robot specifications, arena details, and scoring system.
               </p>
             </div>
@@ -505,7 +505,7 @@ const BrochureSection = () => {
 
           {/* Additional Info */}
           <div className="mt-4 pt-4 border-t border-red-500/20">
-            <p className="text-red-300/70 text-xs md:text-sm font-sans text-center mb-4">
+            <p className="text-red-300/70 text-xs md:text-sm font-mono text-center mb-4">
               📋 Make sure to read all rules carefully before registering for the competition
             </p>
             
@@ -524,14 +524,14 @@ const BrochureSection = () => {
                   <div className="mt-2 space-y-1">
                     <a 
                       href="tel:+919127147825" 
-                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
                       <span>+91-91271-47825</span>
                     </a>
                     <a 
                       href="mailto:swarup_ug@mech.nits.ac.in" 
-                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
                       <span>swarup_ug@ece.nits.ac.in</span>
@@ -548,14 +548,14 @@ const BrochureSection = () => {
                   <div className="mt-2 space-y-1">
                     <a 
                       href="tel:+919304782838" 
-                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
                       <span>+91-93047-82838</span>
                     </a>
                     <a 
                       href="mailto:shubham_ug@ece.nits.ac.in" 
-                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
                       <span>abhinavk_ug_23@ece.nits.ac.in</span>
@@ -572,14 +572,14 @@ const BrochureSection = () => {
                   <div className="mt-2 space-y-1">
                     <a 
                       href="tel:+917991090603" 
-                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
                       <span>+91-79910-90603</span>
                     </a>
                     <a 
                       href="mailto:aryan_ug@ece.nits.ac.in" 
-                      className="text-red-400 font-sans hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
+                      className="text-red-400 font-mono hover:text-red-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
                       <span>aryan_ug@ece.nits.ac.in</span>
@@ -684,7 +684,7 @@ const KitComponentsSection = ({ motorOption }) => {
         )}
       </motion.h2>
       
-      <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-red-900/30 p-8">
+      <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-mono border border-red-900/30 p-8">
         {/* Base Kit Items */}
         <div className="mb-6">
           <h3 className="text-xl font-bold text-red-400 mb-4 border-b border-red-500/30 pb-2">
@@ -871,7 +871,7 @@ const PaymentDetailsSection = () => {
                 <QrCodeIcon className="h-6 w-6 text-red-500" />
               </div>
             </div>
-            <div className="space-y-2 font-sans text-red-100">
+            <div className="space-y-2 font-mono text-red-100">
               <p>
                 <span className="text-red-400 font-medium">Bank Name:</span>{' '}
                 {option.bankName}
@@ -1331,7 +1331,7 @@ function RobowarRegistration() {
                       name="teamLeaderEmail"
                       value={formData.teamLeaderEmail}
                       onChange={handleInputChange}
-                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="team.leader@example.com"
                       required
                     />
@@ -1355,7 +1355,7 @@ function RobowarRegistration() {
                       name="teamName"
                       value={formData.teamName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="Enter your team name"
                       required
                     />
@@ -1381,7 +1381,7 @@ function RobowarRegistration() {
                       name="teamLeaderName"
                       value={formData.teamLeaderName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="Enter your full name"
                       required
                     />
@@ -1410,7 +1410,7 @@ function RobowarRegistration() {
                         value={formData.teamLeaderPhone}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder="10-digit number"
                         required
                       />
@@ -1437,7 +1437,7 @@ function RobowarRegistration() {
                         value={formData.teamLeaderWhatsapp}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder="WhatsApp number"
                         required
                       />
@@ -1464,7 +1464,7 @@ function RobowarRegistration() {
                       name="teamLeaderScholarId"
                       value={formData.teamLeaderScholarId}
                       onChange={handleInputChange}
-                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                      className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                       placeholder="Enter Scholar ID"
                       required
                     />
@@ -1500,7 +1500,7 @@ function RobowarRegistration() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder={`Enter member ${num} name`}
                         required
                       />
@@ -1528,7 +1528,7 @@ function RobowarRegistration() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder={`Enter member ${num} name (optional)`}
                       />
                     </motion.div>
@@ -1620,7 +1620,7 @@ function RobowarRegistration() {
                         name="collegeName"
                         value={formData.collegeName}
                         onChange={handleInputChange}
-                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
+                        className="w-full bg-black/70 border-2 border-red-700 focus:border-red-400 font-mono rounded-lg px-4 py-3.5 text-red-50 outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(239,68,68,0.5)] placeholder:text-red-300/50"
                         placeholder="Enter your college name"
                         required
                       />

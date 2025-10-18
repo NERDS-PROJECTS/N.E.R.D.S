@@ -347,7 +347,7 @@ const AttentionSection = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-green-400 mb-2">ATTENTION</h3>
-            <p className="text-green-100 font-sans">
+            <p className="text-green-100 font-mono">
               ⚠️ Only registrations are currently allowed. Kits and materials
               are not provided at this time. Registration fee: Rs. 799. For kit
               tracking, visit:{''}
@@ -448,7 +448,7 @@ const BrochureSection = () => {
               <h3 className="text-2xl md:text-3xl font-bold text-green-300 mb-2 font-orbitron">
                 EVENT RULES & REGULATIONS
               </h3>
-              <p className="text-green-100 font-sans text-sm md:text-base">
+              <p className="text-green-100 font-mono text-sm md:text-base">
                 Download the official RoboDrift brochure to learn about competition rules, robot specifications, arena details, and scoring system.
               </p>
             </div>
@@ -503,7 +503,7 @@ const BrochureSection = () => {
 
           {/* Additional Info */}
           <div className="mt-4 pt-4 border-t border-green-500/20">
-            <p className="text-green-300/70 text-xs md:text-sm font-sans text-center mb-4">
+            <p className="text-green-300/70 text-xs md:text-sm font-mono text-center mb-4">
               📋 Make sure to read all rules carefully before registering for the competition
             </p>
 
@@ -522,14 +522,14 @@ const BrochureSection = () => {
                   <div className="mt-2 space-y-1">
                     <a
                       href="tel:+919127147825"
-                      className="text-green-400 font-sans hover:text-green-300 text-md flex items-center gap-2 transition-colors"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
                       <span>+91-91271-47825</span>
                     </a>
                     <a
                       href="mailto:swarup_ug@mech.nits.ac.in"
-                      className="text-green-400 font-sans hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
                       <span>swarup_ug@ece.nits.ac.in</span>
@@ -546,14 +546,14 @@ const BrochureSection = () => {
                   <div className="mt-2 space-y-1">
                     <a
                       href="tel:+919304782838"
-                      className="text-green-400 font-sans hover:text-green-300 text-md flex items-center gap-2 transition-colors"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
                       <span>+91-93047-82838</span>
                     </a>
                     <a
                       href="mailto:shubham_ug@ece.nits.ac.in"
-                      className="text-green-400 font-sans hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
                       <span>abhinavk_ug_23@ece.nits.ac.in</span>
@@ -570,14 +570,14 @@ const BrochureSection = () => {
                   <div className="mt-2 space-y-1">
                     <a
                       href="tel:+917991090603"
-                      className="text-green-400 font-sans hover:text-green-300 text-md flex items-center gap-2 transition-colors"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
                       <span>+91-79910-90603</span>
                     </a>
                     <a
                       href="mailto:aryan_ug@ece.nits.ac.in"
-                      className="text-green-400 font-sans hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
+                      className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
                       <span>aryan_ug@ece.nits.ac.in</span>
@@ -672,7 +672,7 @@ const KitComponentsSection = () => {
         KIT Component Details
       </motion.h2>
 
-      <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-sans border border-green-900/30 p-8">
+      <div className="bg-black/30 flex flex-col justify-self-center w-fit backdrop-blur-sm rounded-2xl font-mono border border-green-900/30 p-8">
         {/* Base Kit Items */}
         <div className="mb-6">
           <h3 className="text-xl font-bold text-green-400 mb-4 border-b border-green-500/30 pb-2">
@@ -826,7 +826,7 @@ const PaymentDetailsSection = () => {
                 <QrCodeIcon className="h-6 w-6 text-green-500" />
               </div>
             </div>
-            <div className="space-y-2 text-green-100">
+            <div className="space-y-2 font-mono text-green-100">
               <p>
                 <span className="text-green-400 font-medium">Bank Name:</span>{' '}
                 {option.bankName}
@@ -1247,7 +1247,7 @@ function RoboDrift() {
                       name="teamLeaderEmail"
                       value={formData.teamLeaderEmail}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="team.leader@example.com"
                       required
                     />
@@ -1271,7 +1271,7 @@ function RoboDrift() {
                       name="teamName"
                       value={formData.teamName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="Enter your team name"
                       required
                     />
@@ -1297,7 +1297,7 @@ function RoboDrift() {
                       name="teamLeaderName"
                       value={formData.teamLeaderName}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="Enter your full name"
                       required
                     />
@@ -1326,7 +1326,7 @@ function RoboDrift() {
                         value={formData.teamLeaderPhone}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                        className="w-full bg-black/50 border-2 border-green-800 font-mono focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                         placeholder="10-digit number"
                         required
                       />
@@ -1353,7 +1353,7 @@ function RoboDrift() {
                         value={formData.teamLeaderWhatsapp}
                         onChange={handleInputChange}
                         pattern="[0-9]{10,15}"
-                        className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                        className="w-full bg-black/50 border-2  border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                         placeholder="WhatsApp number"
                         required
                       />
@@ -1390,7 +1390,7 @@ function RoboDrift() {
                         name={`teamMember${num}`}
                         value={formData[`teamMember${num}`]}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                        className="w-full bg-black/50 border-2 border-green-800 font-mono focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                         placeholder={`Enter member ${num} name`}
                         required
                       />
@@ -1416,7 +1416,7 @@ function RoboDrift() {
                       name="teamMember4"
                       value={formData.teamMember4}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 font-mono rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40"
                       placeholder="Enter member 4 name (optional)"
                     />
                   </motion.div>
@@ -1668,7 +1668,7 @@ function RoboDrift() {
                       name="transactionNumber"
                       value={formData.transactionNumber}
                       onChange={handleInputChange}
-                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500 rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40 font-mono"
+                      className="w-full bg-black/50 border-2 border-green-800 focus:border-green-500  rounded-lg px-4 py-3.5 text-white outline-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,0,0.5)] placeholder:text-green-400/40 font-mono"
                       placeholder="Enter UPI transaction number"
                       required
                     />
