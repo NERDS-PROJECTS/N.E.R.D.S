@@ -562,18 +562,18 @@ const BrochureSection = () => {
                   <p className="text-green-300/80 text-xs md:text-sm">Module Head - RoboDrift</p>
                   <div className="mt-2 space-y-1">
                     <a
-                      href="tel:+919304782838"
+                      href="tel:+916200894865"
                       className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>93047-82838</span>
+                      <span>62008-94865</span>
                     </a>
                     <a
-                      href="mailto:shubham_ug@ece.nits.ac.in"
+                      href="mailto:abhishekkr_ug_23@ee.nits.ac.in"
                       className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
-                      <span>abhinavk_ug_23@ece.nits.ac.in</span>
+                      <span>abhishekkr_ug_23@ee.nits.ac.in</span>
                     </a>
                   </div>
                 </div>

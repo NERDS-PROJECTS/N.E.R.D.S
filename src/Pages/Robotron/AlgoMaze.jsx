@@ -595,18 +595,18 @@ const BrochureSection = () => {
                   <p className="text-yellow-300/80 text-xs md:text-sm">Module Head - AlgoMaze</p>
                   <div className="mt-2 space-y-1">
                     <a
-                      href="tel:+917991090603"
+                      href="tel:+916000207181"
                       className="text-yellow-400 font-mono hover:text-yellow-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>79910-90603</span>
+                      <span>60002-07181</span>
                     </a>
                     <a
-                      href="mailto:aryan_ug@ece.nits.ac.in"
+                      href="mailto:tanmoy_ug_23@ece.nits.ac.in"
                       className="text-yellow-400 font-mono hover:text-yellow-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
-                      <span>aryan_ug@ece.nits.ac.in</span>
+                      <span>tanmoy_ug_23@ece.nits.ac.in</span>
                     </a>
                   </div>
                 </div>

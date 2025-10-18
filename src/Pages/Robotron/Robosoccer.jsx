@@ -211,18 +211,18 @@ const BrochureSection = () => {
                   <p className="text-blue-300/80 text-xs md:text-sm">Module Head - Robosoccer</p>
                   <div className="mt-2 space-y-1">
                     <a
-                      href="tel:+919707268499"
+                      href="tel:+918638209153"
                       className="text-blue-400 font-mono hover:text-blue-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>79910-90603</span>
+                      <span>86382-09153</span>
                     </a>
                     <a
-                      href="mailto:aryan_ug@ece.nits.ac.in"
+                      href="mailto:hrisikesh_ug_23@ece.nits.ac.in"
                       className="text-blue-400 font-mono hover:text-blue-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
-                      <span>sagnik_ug_23@mech.nits.ac.in</span>
+                      <span>hrisikesh_ug_23@ece.nits.ac.in</span>
                     </a>
                   </div>
                 </div>
