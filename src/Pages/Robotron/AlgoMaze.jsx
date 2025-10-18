@@ -345,10 +345,38 @@ const AttentionSection = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-yellow-400 mb-2">ATTENTION</h3>
-            <p className="text-yellow-100 font-mono">
-              ⚠️ Only registrations are currently allowed. Kits and materials
-              are not provided at this time. Registration fee: Rs. 799. For kit
-              tracking, visit:{''}
+            <p className="text-red-100 font-mono">
+              ⚠️<strong>Registration & Kit Information</strong>
+              <br /><br />
+
+              🕒 <strong>Registration Deadline:</strong>
+              <br />
+              All participants must register before <strong>1st November 2025, 12:00 PM</strong>.<br />
+              Ensure your details are submitted on time to confirm your slot for <strong>Robotron 2025</strong>.
+              <br /><br />
+
+              🤖 <strong>Kit Registration Policy:</strong>
+              <br />
+              NIT Silchar students are eligible to register for <strong>Robotron Kits</strong> provided by the club.<br /><br />
+              Participants from other colleges are welcome to compete, but kits will <strong>not be provided</strong> — they must bring their own bots and components.
+              <br /><br />
+
+              🏠 <strong>Accommodation & Food Facilities:</strong>
+              <br />
+              Participants from other colleges will be provided accommodation and food services at <strong>nominal, chargeable rates</strong> arranged by NIT Silchar.
+              <br /><br />
+
+              🎶 <strong>Festival Access:</strong>
+              <br />
+              All registered participants from other colleges can enjoy <strong>Tecnoesis festival attractions</strong> such as the DJ Night, Artist Performances, and other campus events through their <strong>college-issued access card</strong>.
+              <br /><br />
+
+              📦 <strong>Kit Order Tracking:</strong>
+              <br />
+              For tracking your kit order or delivery status, visit the tracking portal using the link below:
+              <br />
+              <br />
+              👉 Track Your Kit Order Visit:{''}
               <motion.a
                 href="/trackOrder"
                 className="text-yellow-400 font-medium relative inline-block"
@@ -514,23 +542,23 @@ const BrochureSection = () => {
                 {/* Module Head 1 */}
                 <div className="bg-yellow-950/30 border border-yellow-600/30 rounded-lg p-4 hover:bg-yellow-950/50 transition-all">
                   <p className="text-yellow-200 font-semibold text-sm md:text-base mb-1">
-                    Ayushman Sagar
+                    Akshat Anil Digade
                   </p>
                   <p className="text-yellow-300/80 text-xs md:text-sm">Module Head - AlgoMaze</p>
                   <div className="mt-2 space-y-1">
                     <a
-                      href="tel:+919127147825"
+                      href="tel:+917755955380"
                       className="text-yellow-400 font-mono hover:text-yellow-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>+91-91271-47825</span>
+                      <span>77559-55380</span>
                     </a>
                     <a
-                      href="mailto:swarup_ug@mech.nits.ac.in"
+                      href="mailto:akshatdighade_ug_23@ece.nits.ac.in"
                       className="text-yellow-400 font-mono hover:text-yellow-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
-                      <span>swarup_ug@ece.nits.ac.in</span>
+                      <span>akshatdighade_ug_23@ece.nits.ac.in</span>
                     </a>
                   </div>
                 </div>
@@ -538,7 +566,7 @@ const BrochureSection = () => {
                 {/* Module Head 2 */}
                 <div className="bg-yellow-950/30 border border-yellow-600/30 rounded-lg p-4 hover:bg-yellow-950/50 transition-all">
                   <p className="text-yellow-200 font-semibold text-sm md:text-base mb-1">
-                    Abhinav Kumar
+                    Misbahul Karim
                   </p>
                   <p className="text-yellow-300/80 text-xs md:text-sm">Module Head - AlgoMaze</p>
                   <div className="mt-2 space-y-1">
@@ -547,7 +575,7 @@ const BrochureSection = () => {
                       className="text-yellow-400 font-mono hover:text-yellow-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>+91-93047-82838</span>
+                      <span>93047-82838</span>
                     </a>
                     <a
                       href="mailto:shubham_ug@ece.nits.ac.in"
@@ -562,7 +590,7 @@ const BrochureSection = () => {
                 {/* Module Head 3 */}
                 <div className="bg-yellow-950/30 border border-yellow-600/30 rounded-lg p-4 hover:bg-yellow-950/50 transition-all">
                   <p className="text-yellow-200 font-semibold text-sm md:text-base mb-1">
-                    Chaman Laguri
+                    Tanmoy Talukdar
                   </p>
                   <p className="text-yellow-300/80 text-xs md:text-sm">Module Head - AlgoMaze</p>
                   <div className="mt-2 space-y-1">
@@ -571,7 +599,7 @@ const BrochureSection = () => {
                       className="text-yellow-400 font-mono hover:text-yellow-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>+91-79910-90603</span>
+                      <span>79910-90603</span>
                     </a>
                     <a
                       href="mailto:aryan_ug@ece.nits.ac.in"

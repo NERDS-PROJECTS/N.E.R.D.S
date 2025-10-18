@@ -347,10 +347,27 @@ const AttentionSection = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-green-400 mb-2">ATTENTION</h3>
-            <p className="text-green-100 font-mono">
-              ⚠️ Only registrations are currently allowed. Kits and materials
-              are not provided at this time. Registration fee: Rs. 799. For kit
-              tracking, visit:{''}
+            <p className="text-red-100 font-mono">
+              ⚠️<strong>Registration & Kit Information</strong>
+              <br /><br />
+
+              🕒 <strong>Registration Deadline:</strong>
+              <br />
+              All participants must register before <strong>1st November 2025, 12:00 PM</strong>.<br />
+              Ensure your details are submitted on time to confirm your slot for <strong>Robotron 2025</strong>.
+              <br /><br />
+
+              🤖 <strong>Kit Registration Policy:</strong>
+              <br />
+              NIT Silchar students are eligible to register for <strong>Robotron Kits</strong> provided by the club.<br /><br />
+              Participants from other colleges are<strong> not allowed </strong> to participate in the Robo Drift Module, only NIT Silchar students can participate.
+              <br /><br />
+              📦 <strong>Kit Order Tracking:</strong>
+              <br />
+              For tracking your kit order or delivery status, visit the tracking portal using the link below:
+              <br />
+              <br />
+              👉 Track Your Kit Order Visit:{''}
               <motion.a
                 href="/trackOrder"
                 className="text-green-400 font-medium relative inline-block"
@@ -516,7 +533,7 @@ const BrochureSection = () => {
                 {/* Module Head 1 */}
                 <div className="bg-green-950/30 border border-green-600/30 rounded-lg p-4 hover:bg-green-950/50 transition-all">
                   <p className="text-green-200 font-semibold text-sm md:text-base mb-1">
-                    Ayushman Sagar
+                    Nishit Baishya
                   </p>
                   <p className="text-green-300/80 text-xs md:text-sm">Module Head - RoboDrift</p>
                   <div className="mt-2 space-y-1">
@@ -525,7 +542,7 @@ const BrochureSection = () => {
                       className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>+91-91271-47825</span>
+                      <span>91271-47825</span>
                     </a>
                     <a
                       href="mailto:swarup_ug@mech.nits.ac.in"
@@ -540,7 +557,7 @@ const BrochureSection = () => {
                 {/* Module Head 2 */}
                 <div className="bg-green-950/30 border border-green-600/30 rounded-lg p-4 hover:bg-green-950/50 transition-all">
                   <p className="text-green-200 font-semibold text-sm md:text-base mb-1">
-                    Abhinav Kumar
+                    Abhishek Kumar
                   </p>
                   <p className="text-green-300/80 text-xs md:text-sm">Module Head - RoboDrift</p>
                   <div className="mt-2 space-y-1">
@@ -549,7 +566,7 @@ const BrochureSection = () => {
                       className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>+91-93047-82838</span>
+                      <span>93047-82838</span>
                     </a>
                     <a
                       href="mailto:shubham_ug@ece.nits.ac.in"
@@ -564,7 +581,7 @@ const BrochureSection = () => {
                 {/* Module Head 3 */}
                 <div className="bg-green-950/30 border border-green-600/30 rounded-lg p-4 hover:bg-green-950/50 transition-all">
                   <p className="text-green-200 font-semibold text-sm md:text-base mb-1">
-                    Chaman Laguri
+                    Sunidhi Chetri
                   </p>
                   <p className="text-green-300/80 text-xs md:text-sm">Module Head - RoboDrift</p>
                   <div className="mt-2 space-y-1">
@@ -573,7 +590,7 @@ const BrochureSection = () => {
                       className="text-green-400 font-mono hover:text-green-300 text-md flex items-center gap-2 transition-colors"
                     >
                       <span>📞</span>
-                      <span>+91-79910-90603</span>
+                      <span>79910-90603</span>
                     </a>
                     <a
                       href="mailto:aryan_ug@ece.nits.ac.in"
