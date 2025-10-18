@@ -706,7 +706,7 @@ export function Track_order() {
                           className="flex items-center bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3"
                           whileHover={{ scale: 1.02, backgroundColor: 'rgba(34, 211, 238, 0.15)' }}
                         >
-                          <ShirtIcon className="h-6 w-6 text-cyan-400 mr-3 flex-shrink-0" />
+                          <PackageIcon className="h-6 w-6 text-cyan-400 mr-3 flex-shrink-0" />
                           <div className="flex-1">
                             <div className="text-sm font-bold text-white">{item.name}</div>
                           </div>
