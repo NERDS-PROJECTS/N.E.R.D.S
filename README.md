@@ -2,7 +2,7 @@
 
 **Robotics Club of NIT Silchar**
 
-Welcome to the official repository of N.E.R.D.S. (NITS Embedded and Robotics Development Society), the premier robotics club of National Institute of Technology, Silchar.
+Welcome to the official repository of N.E.R.D.S. (NITS Embedded and Robotics Development Society), the premier robotics club of National Institute of Technology, Silchar
 
 ## 🚀 About Us
 
