@@ -168,11 +168,11 @@ const BrochureSection = () => {
                       <span>60033-54585</span>
                     </a>
                     <a
-                      href="mailto:jyotirmoyn_ug_23@ei.nits.ac.in"
+                      href="mailto:jyotirmoy_ug_23@ei.nits.ac.in"
                       className="text-blue-400 font-mono hover:text-blue-300 text-md flex items-center gap-2 transition-colors break-all"
                     >
                       <span>✉️</span>
-                      <span>jyotirmoyn_ug_23@ei.nits.ac.in</span>
+                      <span>jyotirmoy_ug_23@ei.nits.ac.in</span>
                     </a>
                   </div>
                 </div>
