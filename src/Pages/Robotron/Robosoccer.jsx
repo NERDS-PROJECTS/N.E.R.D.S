@@ -13,8 +13,8 @@ import {
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
 
 const BrochureSection = () => {
-  const brochureUrl = "https://drive.google.com/file/d/1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ/view?usp=sharing"
-  const downloadUrl = "https://drive.google.com/uc?export=download&id=1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ"
+  const brochureUrl = "https://drive.google.com/file/d/1fr7sBdS3sxjxBPsTiESDiD8j3GjpXQyX/"
+  const downloadUrl = "https://drive.google.com/file/d/1fr7sBdS3sxjxBPsTiESDiD8j3GjpXQyX/"
 
   return (
     <motion.section

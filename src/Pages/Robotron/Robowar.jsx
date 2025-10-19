@@ -481,8 +481,8 @@ const AttentionSection = () => {
 
 // Brochure Download Section Component
 const BrochureSection = () => {
-  const brochureUrl = "https://drive.google.com/file/d/1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ/view?usp=sharing"
-  const downloadUrl = "https://drive.google.com/uc?export=download&id=1nSIvnlE8Qz22bzqI2Ka_mgc1GvKY65VZ"
+  const brochureUrl = "https://drive.google.com/file/d/1gC4JQyut7dF71Rbz_KoSxZpYV9NKP2th/"
+  const downloadUrl = "https://drive.google.com/file/d/1gC4JQyut7dF71Rbz_KoSxZpYV9NKP2th/"
 
   return (
     <motion.section
