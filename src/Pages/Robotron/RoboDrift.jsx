@@ -11,6 +11,7 @@ import {
 	DollarSignIcon,
 } from "lucide-react";
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
+import ProgressBar from "react-scroll-progress-bar";
 
 // Background Grid Component
 const BackgroundGrid = () => {
@@ -40,14 +41,14 @@ const BackgroundGrid = () => {
 					transition={
 						isMobile
 							? {
-									duration: 0.5,
-									delay: 0,
-							  }
+								duration: 0.5,
+								delay: 0,
+							}
 							: {
-									duration: 1.5,
-									delay: i * 0.05,
-									ease: "easeInOut",
-							  }
+								duration: 1.5,
+								delay: i * 0.05,
+								ease: "easeInOut",
+							}
 					}
 				/>
 			))}
@@ -72,14 +73,14 @@ const BackgroundGrid = () => {
 					transition={
 						isMobile
 							? {
-									duration: 0.5,
-									delay: 0,
-							  }
+								duration: 0.5,
+								delay: 0,
+							}
 							: {
-									duration: 1.5,
-									delay: i * 0.05,
-									ease: "easeInOut",
-							  }
+								duration: 1.5,
+								delay: i * 0.05,
+								ease: "easeInOut",
+							}
 					}
 				/>
 			))}
@@ -197,12 +198,12 @@ const HeroSection = () => {
 								isMobile
 									? {}
 									: {
-											textShadow: [
-												"0 0 7px #00ff00",
-												"0 0 10px #00ff00",
-												"0 0 7px #00ff00",
-											],
-									  }
+										textShadow: [
+											"0 0 7px #00ff00",
+											"0 0 10px #00ff00",
+											"0 0 7px #00ff00",
+										],
+									}
 							}
 							transition={{
 								duration: 2,
@@ -222,12 +223,12 @@ const HeroSection = () => {
 								isMobile
 									? {}
 									: {
-											textShadow: [
-												"0 0 3px #00ff00",
-												"0 0 7px #00ff00",
-												"0 0 3px #00ff00",
-											],
-									  }
+										textShadow: [
+											"0 0 3px #00ff00",
+											"0 0 7px #00ff00",
+											"0 0 3px #00ff00",
+										],
+									}
 							}
 							transition={{
 								duration: 2,
@@ -253,11 +254,8 @@ const HeroSection = () => {
 						>
 							A high-octane race of wireless bots, engineered for speed,
 							agility, and precision. Witness cutting-edge robots drift, dodge,
-							and dominate the neon circuit — pushing physics to its limits.
-							Each bot is tuned to perfection, controlled wirelessly by pilots
-							with lightning-fast reflexes. It’s not just a race — it’s a battle
-							of balance and brains, where only the fastest and most stable
-							survive. Feel the pulse. Hear the hum. Conquer the drift.
+							and dominate the neon circuit pushing physics to its limits.
+							Each bot is tuned to perfection, controlled wirelessly by pilots with lightning-fast reflexes. Feel the pulse. Hear the hum. Conquer the drift.
 						</motion.p>
 						{/* Prize Pool Announcement */}
 						<motion.div
@@ -288,12 +286,12 @@ const HeroSection = () => {
 						transition={
 							isMobile
 								? {
-										duration: 0.3,
-								  }
+									duration: 0.3,
+								}
 								: {
-										delay: 0.3,
-										duration: 0.8,
-								  }
+									delay: 0.3,
+									duration: 0.8,
+								}
 						}
 					>
 						<motion.div
@@ -302,8 +300,8 @@ const HeroSection = () => {
 								isMobile
 									? {}
 									: {
-											scale: 1.05,
-									  }
+										scale: 1.05,
+									}
 							}
 							transition={{
 								type: "spring",
@@ -318,9 +316,9 @@ const HeroSection = () => {
 									isMobile
 										? {}
 										: {
-												opacity: [0.3, 0.6, 0.3],
-												scale: [0.9, 1.1, 0.9],
-										  }
+											opacity: [0.3, 0.6, 0.3],
+											scale: [0.9, 1.1, 0.9],
+										}
 								}
 								transition={{
 									duration: 3,
@@ -1291,22 +1289,20 @@ function RoboDrift() {
 	return (
 		<div className="relative min-h-screen w-full bg-gradient-to-b from-black via-black/40 to-black text-white overflow-hidden font-orbitron">
 			<BackgroundGrid />
-
+			<ProgressBar bgcolor="#11F500" duration="0.3" />
 			{/* Modal for alerts - keeping original functionality */}
 			{modal.open && (
 				<div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm px-2">
 					<div
-						className={`w-full max-w-md md:max-w-md sm:max-w-xs rounded-2xl shadow-2xl p-6 sm:p-4 border-2 ${
-							modal.success
+						className={`w-full max-w-md md:max-w-md sm:max-w-xs rounded-2xl shadow-2xl p-6 sm:p-4 border-2 ${modal.success
 								? "border-green-400 bg-gradient-to-br from-green-900/90 to-green-700/80"
 								: "border-green-400 bg-gradient-to-br from-green-900/90 to-green-700/80"
-						} animate-fade-in`}
+							} animate-fade-in`}
 					>
 						<div className="flex flex-col items-center gap-4">
 							<div
-								className={`rounded-full p-3 ${
-									modal.success ? "bg-green-400/20" : "bg-green-400/20"
-								}`}
+								className={`rounded-full p-3 ${modal.success ? "bg-green-400/20" : "bg-green-400/20"
+									}`}
 							>
 								{modal.success ? (
 									<svg
@@ -1340,9 +1336,8 @@ function RoboDrift() {
 							</div>
 							<div className="text-center">
 								<h3
-									className={`text-xl sm:text-lg font-bold mb-2 ${
-										modal.success ? "text-green-200" : "text-green-200"
-									}`}
+									className={`text-xl sm:text-lg font-bold mb-2 ${modal.success ? "text-green-200" : "text-green-200"
+										}`}
 								>
 									{modal.success ? "Registration Status" : "Error"}
 								</h3>
@@ -1370,11 +1365,10 @@ function RoboDrift() {
 								)}
 								<button
 									onClick={() => setModal({ ...modal, open: false })}
-									className={`px-6 py-2 rounded-lg font-semibold shadow transition-all duration-200 ${
-										modal.success
+									className={`px-6 py-2 rounded-lg font-semibold shadow transition-all duration-200 ${modal.success
 											? "bg-green-400 text-green-900 hover:bg-green-300"
 											: "bg-green-400 text-green-900 hover:bg-green-300"
-									}`}
+										}`}
 								>
 									Close
 								</button>
@@ -1722,11 +1716,10 @@ function RoboDrift() {
 										<motion.button
 											type="button"
 											onClick={() => setWantsKit(true)}
-											className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-												wantsKit === true
+											className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === true
 													? "bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]"
 													: "bg-black/50 border-green-800 text-green-300 hover:border-green-600"
-											}`}
+												}`}
 											whileHover={{ scale: 1.02 }}
 											whileTap={{ scale: 0.98 }}
 										>
@@ -1740,11 +1733,10 @@ function RoboDrift() {
 										<motion.button
 											type="button"
 											onClick={() => setWantsKit(false)}
-											className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-												wantsKit === false
+											className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === false
 													? "bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]"
 													: "bg-black/50 border-green-800 text-green-300 hover:border-green-600"
-											}`}
+												}`}
 											whileHover={{ scale: 1.02 }}
 											whileTap={{ scale: 0.98 }}
 										>
@@ -1892,22 +1884,19 @@ function RoboDrift() {
 										whileHover={{ scale: 1.005 }}
 									>
 										<div
-											className={`w-full bg-gradient-to-br from-black/60 to-green-950/20 border-2 ${
-												fileUrl
+											className={`w-full bg-gradient-to-br from-black/60 to-green-950/20 border-2 ${fileUrl
 													? "border-green-500"
 													: "border-green-800 border-dashed"
-											} focus-within:border-green-500 rounded-xl p-6 text-white outline-none transition-all duration-300 focus-within:shadow-[0_0_20px_rgba(0,255,0,0.4)]`}
+												} focus-within:border-green-500 rounded-xl p-6 text-white outline-none transition-all duration-300 focus-within:shadow-[0_0_20px_rgba(0,255,0,0.4)]`}
 										>
 											<label className="flex flex-col items-center gap-4 cursor-pointer">
 												<div
-													className={`p-4 rounded-full ${
-														fileUrl ? "bg-green-500/20" : "bg-black/20"
-													}`}
+													className={`p-4 rounded-full ${fileUrl ? "bg-green-500/20" : "bg-black/20"
+														}`}
 												>
 													<UploadIcon
-														className={`h-10 w-10 ${
-															fileUrl ? "text-green-400" : "text-green-400"
-														}`}
+														className={`h-10 w-10 ${fileUrl ? "text-green-400" : "text-green-400"
+															}`}
 													/>
 												</div>
 												<div className="text-center">
@@ -2107,8 +2096,8 @@ function RoboDrift() {
 													{wantsKit === null
 														? "Not selected"
 														: wantsKit
-														? "Yes"
-														: "No"}
+															? "Yes"
+															: "No"}
 												</p>
 											</div>
 											<div>

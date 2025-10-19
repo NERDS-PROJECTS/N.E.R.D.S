@@ -11,6 +11,7 @@ import {
 	DollarSignIcon,
 } from "lucide-react";
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
+import ProgressBar from "react-scroll-progress-bar";
 
 // Background Grid Component
 const BackgroundGrid = () => {
@@ -40,14 +41,14 @@ const BackgroundGrid = () => {
 					transition={
 						isMobile
 							? {
-									duration: 0.5,
-									delay: 0,
-							  }
+								duration: 0.5,
+								delay: 0,
+							}
 							: {
-									duration: 1.5,
-									delay: i * 0.05,
-									ease: "easeInOut",
-							  }
+								duration: 1.5,
+								delay: i * 0.05,
+								ease: "easeInOut",
+							}
 					}
 				/>
 			))}
@@ -72,14 +73,14 @@ const BackgroundGrid = () => {
 					transition={
 						isMobile
 							? {
-									duration: 0.5,
-									delay: 0,
-							  }
+								duration: 0.5,
+								delay: 0,
+							}
 							: {
-									duration: 1.5,
-									delay: i * 0.05,
-									ease: "easeInOut",
-							  }
+								duration: 1.5,
+								delay: i * 0.05,
+								ease: "easeInOut",
+							}
 					}
 				/>
 			))}
@@ -141,21 +142,21 @@ const HeroSection = () => {
 					animate={
 						isMobile
 							? {
-									opacity: 0.3,
-							  }
+								opacity: 0.3,
+							}
 							: {
-									x: ["0%", "100%"],
-									opacity: [0.2, 0.8, 0.2],
-							  }
+								x: ["0%", "100%"],
+								opacity: [0.2, 0.8, 0.2],
+							}
 					}
 					transition={
 						isMobile
 							? {}
 							: {
-									duration: 8,
-									repeat: Infinity,
-									ease: "linear",
-							  }
+								duration: 8,
+								repeat: Infinity,
+								ease: "linear",
+							}
 					}
 				/>
 				{/* Circuit lines */}
@@ -204,12 +205,12 @@ const HeroSection = () => {
 								isMobile
 									? {}
 									: {
-											textShadow: [
-												"0 0 7px #ffff00",
-												"0 0 10px #ffff00",
-												"0 0 7px #ffff00",
-											],
-									  }
+										textShadow: [
+											"0 0 7px #ffff00",
+											"0 0 10px #ffff00",
+											"0 0 7px #ffff00",
+										],
+									}
 							}
 							transition={{
 								duration: 2,
@@ -229,12 +230,12 @@ const HeroSection = () => {
 								isMobile
 									? {}
 									: {
-											textShadow: [
-												"0 0 3px #ffff00",
-												"0 0 7px #ffff00",
-												"0 0 3px #ffff00",
-											],
-									  }
+										textShadow: [
+											"0 0 3px #ffff00",
+											"0 0 7px #ffff00",
+											"0 0 3px #ffff00",
+										],
+									}
 							}
 							transition={{
 								duration: 2,
@@ -285,9 +286,9 @@ const HeroSection = () => {
 							isMobile
 								? {}
 								: {
-										opacity: 0,
-										scale: 0.8,
-								  }
+									opacity: 0,
+									scale: 0.8,
+								}
 						}
 						animate={{
 							opacity: 1,
@@ -297,9 +298,9 @@ const HeroSection = () => {
 							isMobile
 								? {}
 								: {
-										delay: 0.3,
-										duration: 0.8,
-								  }
+									delay: 0.3,
+									duration: 0.8,
+								}
 						}
 					>
 						<motion.div
@@ -308,17 +309,17 @@ const HeroSection = () => {
 								isMobile
 									? {}
 									: {
-											scale: 1.05,
-									  }
+										scale: 1.05,
+									}
 							}
 							transition={
 								isMobile
 									? {}
 									: {
-											type: "spring",
-											stiffness: 300,
-											damping: 20,
-									  }
+										type: "spring",
+										stiffness: 300,
+										damping: 20,
+									}
 							}
 						>
 							{/* Glowing effect behind image */}
@@ -327,21 +328,21 @@ const HeroSection = () => {
 								animate={
 									isMobile
 										? {
-												opacity: 0.4,
-										  }
+											opacity: 0.4,
+										}
 										: {
-												opacity: [0.3, 0.6, 0.3],
-												scale: [0.9, 1.1, 0.9],
-										  }
+											opacity: [0.3, 0.6, 0.3],
+											scale: [0.9, 1.1, 0.9],
+										}
 								}
 								transition={
 									isMobile
 										? {}
 										: {
-												duration: 3,
-												repeat: Infinity,
-												repeatType: "reverse",
-										  }
+											duration: 3,
+											repeat: Infinity,
+											repeatType: "reverse",
+										}
 								}
 							/>
 
@@ -1344,22 +1345,20 @@ function AlgoMaze() {
 	return (
 		<div className="relative min-h-screen w-full bg-gradient-to-b from-black via-black/40 to-black text-white overflow-hidden font-orbitron">
 			<BackgroundGrid />
-
+			<ProgressBar bgcolor="#EEC500" duration="0.3" />
 			{/* Modal for alerts - keeping original functionality */}
 			{modal.open && (
 				<div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm px-2">
 					<div
-						className={`w-full max-w-md md:max-w-md sm:max-w-xs rounded-2xl shadow-2xl p-6 sm:p-4 border-2 ${
-							modal.success
+						className={`w-full max-w-md md:max-w-md sm:max-w-xs rounded-2xl shadow-2xl p-6 sm:p-4 border-2 ${modal.success
 								? "border-yellow-400 bg-gradient-to-br from-yellow-900/90 to-yellow-700/80"
 								: "border-yellow-400 bg-gradient-to-br from-yellow-900/90 to-yellow-700/80"
-						} animate-fade-in`}
+							} animate-fade-in`}
 					>
 						<div className="flex flex-col items-center gap-4">
 							<div
-								className={`rounded-full p-3 ${
-									modal.success ? "bg-yellow-400/20" : "bg-yellow-400/20"
-								}`}
+								className={`rounded-full p-3 ${modal.success ? "bg-yellow-400/20" : "bg-yellow-400/20"
+									}`}
 							>
 								{modal.success ? (
 									<svg
@@ -1393,9 +1392,8 @@ function AlgoMaze() {
 							</div>
 							<div className="text-center">
 								<h3
-									className={`text-xl sm:text-lg font-bold mb-2 ${
-										modal.success ? "text-yellow-200" : "text-yellow-200"
-									}`}
+									className={`text-xl sm:text-lg font-bold mb-2 ${modal.success ? "text-yellow-200" : "text-yellow-200"
+										}`}
 								>
 									{modal.success ? "Registration Status" : "Error"}
 								</h3>
@@ -1423,11 +1421,10 @@ function AlgoMaze() {
 								)}
 								<button
 									onClick={() => setModal({ ...modal, open: false })}
-									className={`px-6 py-2 rounded-lg font-semibold shadow transition-all duration-200 ${
-										modal.success
+									className={`px-6 py-2 rounded-lg font-semibold shadow transition-all duration-200 ${modal.success
 											? "bg-yellow-400 text-yellow-900 hover:bg-yellow-300"
 											: "bg-yellow-400 text-yellow-900 hover:bg-yellow-300"
-									}`}
+										}`}
 								>
 									Close
 								</button>
@@ -1804,11 +1801,10 @@ function AlgoMaze() {
 												setCollegeType("nit_silchar");
 												setFormData((prev) => ({ ...prev, collegeName: "" }));
 											}}
-											className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-												collegeType === "nit_silchar"
+											className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${collegeType === "nit_silchar"
 													? "bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]"
 													: "bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600"
-											}`}
+												}`}
 											whileHover={{ scale: 1.02 }}
 											whileTap={{ scale: 0.98 }}
 										>
@@ -1825,11 +1821,10 @@ function AlgoMaze() {
 												setCollegeType("other");
 												setWantsKit(false);
 											}}
-											className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-												collegeType === "other"
+											className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${collegeType === "other"
 													? "bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]"
 													: "bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600"
-											}`}
+												}`}
 											whileHover={{ scale: 1.02 }}
 											whileTap={{ scale: 0.98 }}
 										>
@@ -1908,11 +1903,10 @@ function AlgoMaze() {
 											<motion.button
 												type="button"
 												onClick={() => setWantsKit(true)}
-												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-													wantsKit === true
+												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === true
 														? "bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]"
 														: "bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600"
-												}`}
+													}`}
 												whileHover={{ scale: 1.02 }}
 												whileTap={{ scale: 0.98 }}
 											>
@@ -1921,11 +1915,10 @@ function AlgoMaze() {
 											<motion.button
 												type="button"
 												onClick={() => setWantsKit(false)}
-												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-													wantsKit === false
+												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${wantsKit === false
 														? "bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]"
 														: "bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600"
-												}`}
+													}`}
 												whileHover={{ scale: 1.02 }}
 												whileTap={{ scale: 0.98 }}
 											>
@@ -1958,8 +1951,8 @@ function AlgoMaze() {
 												{collegeType === "other"
 													? "Registration Only (Other College)"
 													: wantsKit
-													? "Kit + Registration (NIT Silchar)"
-													: "Registration Only (NIT Silchar)"}
+														? "Kit + Registration (NIT Silchar)"
+														: "Registration Only (NIT Silchar)"}
 											</p>
 										</div>
 										<div className="text-right">
@@ -2073,22 +2066,19 @@ function AlgoMaze() {
 										whileHover={{ scale: 1.005 }}
 									>
 										<div
-											className={`w-full bg-gradient-to-br from-black/60 to-yellow-950/20 border-2 ${
-												fileUrl
+											className={`w-full bg-gradient-to-br from-black/60 to-yellow-950/20 border-2 ${fileUrl
 													? "border-green-500"
 													: "border-yellow-800 border-dashed"
-											} focus-within:border-yellow-500 rounded-xl p-6 text-white outline-none transition-all duration-300 focus-within:shadow-[0_0_20px_rgba(255,255,0,0.4)]`}
+												} focus-within:border-yellow-500 rounded-xl p-6 text-white outline-none transition-all duration-300 focus-within:shadow-[0_0_20px_rgba(255,255,0,0.4)]`}
 										>
 											<label className="flex flex-col items-center gap-4 cursor-pointer">
 												<div
-													className={`p-4 rounded-full ${
-														fileUrl ? "bg-green-500/20" : "bg-black/20"
-													}`}
+													className={`p-4 rounded-full ${fileUrl ? "bg-green-500/20" : "bg-black/20"
+														}`}
 												>
 													<UploadIcon
-														className={`h-10 w-10 ${
-															fileUrl ? "text-green-400" : "text-yellow-400"
-														}`}
+														className={`h-10 w-10 ${fileUrl ? "text-green-400" : "text-yellow-400"
+															}`}
 													/>
 												</div>
 												<div className="text-center">
@@ -2271,8 +2261,8 @@ function AlgoMaze() {
 													{collegeType === "nit_silchar"
 														? "NIT Silchar"
 														: collegeType === "other"
-														? "Other College"
-														: "Not selected"}
+															? "Other College"
+															: "Not selected"}
 												</p>
 											</div>
 											<div>
@@ -2327,10 +2317,10 @@ function AlgoMaze() {
 													{collegeType === "other"
 														? "Not Available"
 														: wantsKit === null
-														? "Not selected"
-														: wantsKit
-														? "Yes"
-														: "No"}
+															? "Not selected"
+															: wantsKit
+																? "Yes"
+																: "No"}
 												</p>
 											</div>
 
