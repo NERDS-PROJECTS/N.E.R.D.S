@@ -325,17 +325,17 @@ export function Track_order() {
                     {/* Timeline line - Glowing */}
                     <div className="absolute h-1 bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-cyan-500/30 top-7 left-0 right-0 z-0 shadow-[0_0_10px_rgba(34,211,238,0.3)]"></div>
                     {/* Timeline steps */}
-                    <div className="flex justify-between relative z-10">
+                    <div className="flex  justify-between relative z-10">
                       {shipmentData.timeline.map((step, index) => (
                         <motion.div
                           key={index}
-                          className="flex flex-col items-center w-1/5"
+                          className="flex flex-col  items-center w-1/5"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
                         >
                           <motion.div
-                            className={`w-8 h-8 md:w-14 md:h-14 rounded-full flex items-center justify-center mb-2 relative
+                            className={`w-8 h-8  md:w-14 md:h-14 rounded-full flex items-center justify-center mb-2 relative
                             ${step.current ? 'bg-gradient-to-br from-cyan-500/40 to-blue-500/40 border-2 border-cyan-400 shadow-[0_0_25px_rgba(34,211,238,0.8)]' : step.completed ? 'bg-cyan-500/20 border-2 border-cyan-500/50 shadow-[0_0_15px_rgba(34,211,238,0.3)]' : 'bg-gray-800 border-2 border-gray-600'}`}
                             animate={step.current ? {
                               scale: [1, 1.1, 1],
@@ -349,12 +349,12 @@ export function Track_order() {
                           >
                             {index === 0 && (
                               <WarehouseIcon
-                                className={`w-4 h-4 md:h-6 md:w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
+                                className={`w-4 h-4  md:h-6 md:w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
                               />
                             )}
                             {index === 1 && (
                               <PackageIcon
-                                className={`w-4 h-4 md:h-6 md:w-6 ${step.completed ? 'text-cyan-400' : 'text-gray-500'}`}
+                                className={`w-4 h-4 md:h-6  md:w-6 ${step.completed ? 'text-cyan-400 ' : 'text-gray-500'}`}
                               />
                             )}
                             {index === 2 && (
@@ -381,7 +381,7 @@ export function Track_order() {
                             )}
                           </motion.div>
                           <div
-                            className={`text-sm font-bold font-spaced mt-2 ${step.current ? 'text-cyan-400' : step.completed ? 'text-white' : 'text-gray-500'}`}
+                            className={` text-xs md:text-sm  font-bold font-spaced mt-2 ${step.current ? 'text-cyan-400' : step.completed ? 'text-white' : 'text-gray-500'}`}
                           >
                             {step.step}
                           </div>
@@ -528,7 +528,7 @@ export function Track_order() {
                       ) : (
                         // Regular location pin - Enhanced
                         <motion.div 
-                          className={`w-5 h-5 md:w-6 md:h-6 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.5)] border-2 ${
+                          className={`w-4 h-4 md:w-6 md:h-6 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.5)] border-2 ${
                             location.completed 
                               ? 'bg-cyan-500 border-cyan-400' 
                               : 'bg-gray-700 border-gray-600'

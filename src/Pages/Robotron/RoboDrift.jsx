@@ -351,9 +351,16 @@ const AttentionSection = () => {
               ⚠️<strong>Registration & Kit Information</strong>
               <br /><br />
 
+              🕒 <strong>Event Dates:</strong>
+              <br />
+              Event Dates: <strong>21st to 23rd November 2025</strong>.
+              <br />Venue:  <strong>NIT Silchar, Assam</strong><br />
+              <br />
+
               🕒 <strong>Registration Deadline:</strong>
               <br />
-              All participants must register before <strong>1st November 2025, 12:00 PM</strong>.<br />
+              All NIT Silchar participants with Kit Requirements must register before <strong>1st November 2025, 12:00 PM</strong>.<br /><br />
+              Final Closing date of Registration (without Kits) for all particiapnts is <strong> 15th November, 2025, 12:00 PM </strong><br />
               Ensure your details are submitted on time to confirm your slot for <strong>Robotron 2025</strong>.
               <br /><br />
 
