@@ -47,27 +47,27 @@ export function Track_order() {
         completed: true,
         current: false,
       },
-      {
-        city: '--',
-        x: '35%',
-        y: '30%',
-        completed: false,
-        current: false,
-      },
-      {
-        city: '--',
-        x: '65%',
-        y: '55%',
-        completed: false,
-        current: false,
-      },
-      {
-        city: '--',
-        x: '85%',
-        y: '35%',
-        completed: false,
-        current: false, // This flag shows current location
-      },
+      // {
+      //   city: '--',
+      //   x: '35%',
+      //   y: '30%',
+      //   completed: false,
+      //   current: false,
+      // },
+      // {
+      //   city: '--',
+      //   x: '65%',
+      //   y: '55%',
+      //   completed: false,
+      //   current: false,
+      // },
+      // {
+      //   city: '--',
+      //   x: '85%',
+      //   y: '35%',
+      //   completed: false,
+      //   current: false, // This flag shows current location
+      // },
     ],
     timeline: [
       {
