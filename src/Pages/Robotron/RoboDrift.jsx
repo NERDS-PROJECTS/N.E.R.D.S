@@ -230,7 +230,13 @@ const HeroSection = () => {
                 duration: 1,
               }}
             >
-              A battle-forged robot engineegreen for RoboDrift supremacy — built to crush, smash, and dominate the arena. With unmatched power, precision control, proving its might as the true champion of N.E.R.D.S. RoboDrift — where only the toughest bots survive!
+							A high-octane race of wireless bots, engineered for speed,
+							agility, and precision. Witness cutting-edge robots drift, dodge,
+							and dominate the neon circuit — pushing physics to its limits.
+							Each bot is tuned to perfection, controlled wirelessly by pilots
+							with lightning-fast reflexes. It’s not just a race — it’s a battle
+							of balance and brains, where only the fastest and most stable
+							survive. Feel the pulse. Hear the hum. Conquer the drift.
             </motion.p>
             {/* Prize Pool Announcement */}
             <motion.div
