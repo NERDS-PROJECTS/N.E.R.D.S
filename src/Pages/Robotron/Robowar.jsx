@@ -211,7 +211,7 @@ const HeroSection = () => {
 								repeatType: "reverse",
 							}}
 						>
-							ROBOWAR
+							ROBOWARS
 						</motion.h1>
 						<motion.h2
 							className="text-2xl font-spaced md:text-3xl font-bold mb-4 text-red-200"
@@ -252,10 +252,10 @@ const HeroSection = () => {
 								duration: 1,
 							}}
 						>
-							A battle-forged robot engineered for ROBOWAR supremacy — built to
+							A battle-forged robot engineered for ROBOWARS supremacy — built to
 							crush, smash, and dominate the arena. With unmatched power,
 							precision control, proving its might as the true champion of
-							N.E.R.D.S. Robowar — where only the toughest bots survive!
+							N.E.R.D.S. Robowars — where only the toughest bots survive!
 						</motion.p>
 						{/* Prize Pool Announcement */}
 						<motion.div
@@ -503,7 +503,7 @@ const AttentionSection = () => {
 									damping: 10,
 								}}
 							>
-								Join RoboWar WhatsApp Group
+								Join RoboWars WhatsApp Group
 								<motion.span
 									className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black"
 									whileHover={{
@@ -592,7 +592,7 @@ const BrochureSection = () => {
 								EVENT RULES & REGULATIONS
 							</h3>
 							<p className="text-red-100 font-mono text-sm md:text-base">
-								Download the official RoboWar brochure to learn about
+								Download the official RoboWars brochure to learn about
 								competition rules, robot specifications, arena details, and
 								scoring system.
 							</p>
@@ -665,7 +665,7 @@ const BrochureSection = () => {
 										Ayushman Sagar
 									</p>
 									<p className="text-red-300/80 text-xs md:text-sm">
-										Module Head - RoboWar
+										Module Head - RoboWars
 									</p>
 									<div className="mt-2 space-y-1">
 										<a
@@ -691,7 +691,7 @@ const BrochureSection = () => {
 										Abhinav Singh
 									</p>
 									<p className="text-red-300/80 text-xs md:text-sm">
-										Module Head - RoboWar
+										Module Head - RoboWars
 									</p>
 									<div className="mt-2 space-y-1">
 										<a
@@ -717,7 +717,7 @@ const BrochureSection = () => {
 										Chaman Laguri
 									</p>
 									<p className="text-red-300/80 text-xs md:text-sm">
-										Module Head - RoboWar
+										Module Head - RoboWars
 									</p>
 									<div className="mt-2 space-y-1">
 										<a
@@ -1408,7 +1408,7 @@ function RobowarRegistration() {
 			setModal({
 				open: true,
 				message:
-					"✅ Registration submitted successfully!\n\n🎉 Welcome to RoboWar 2025!\n\n💬 Join our official WhatsApp group to stay updated with announcements.",
+					"✅ Registration submitted successfully!\n\n🎉 Welcome to RoboWars 2025!\n\n💬 Join our official WhatsApp group to stay updated with announcements.",
 				success: true,
 				showWhatsAppButton: true,
 			});
@@ -1633,7 +1633,7 @@ function RobowarRegistration() {
 						</div>
 						<div>
 							<h1 className="relative text-xl mb-8 flex items-center justify-center gap-2">
-								Event : <span className="text-red-600">RoboWar</span>
+								Event : <span className="text-red-600">RoboWars</span>
 							</h1>
 						</div>
 
@@ -2562,7 +2562,7 @@ function RobowarRegistration() {
 											</div>
 											<div>
 												<span className="text-red-400/70">Event:</span>
-												<p className="text-red-100 font-medium">RoboWar</p>
+												<p className="text-red-100 font-medium">RoboWars</p>
 											</div>
 										</div>
 									</div>
