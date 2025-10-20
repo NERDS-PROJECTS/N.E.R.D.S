@@ -57,7 +57,9 @@ const Navbar = () => {
 							className={`relative group transition duration-300 
                 ${location.pathname === link.path ? "text-gray-300" : ""}`}
 						>
-							<span className="relative z-10 px-4 py-2">{link.name}</span>
+							<span className="relative bottom-[2.5px] z-10 px-3 py-2">
+								{link.name}
+							</span>
 							<span className="absolute inset-0 rounded-full border-2 border-purple-500 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition duration-300 shadow-3xl group-hover:shadow-[0_0_20px_6px_rgba(128,0,128,0.9)]"></span>
 						</button>
 					))}
