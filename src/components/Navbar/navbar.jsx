@@ -21,13 +21,11 @@ const Navbar = () => {
 	};
 
 	const handleLinkClick = (path) => {
+		navigate(path);
+		setIsOpen(false); // Close the mobile menu after clicking the link
+
 		// Scroll to the top of the page
 		window.scrollTo({ top: 0, behavior: "smooth" });
-
-		setTimeout(() => {
-			navigate(path);
-			setIsOpen(false); // Close the mobile menu after clicking the link
-		}, 1000);
 	};
 
 	return (
