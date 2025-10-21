@@ -529,7 +529,7 @@ function Timeline_small(){
 export default function Event(){
     return (
         <div className="bg-black overflow-hidden">
-            <ProgressBar duration="0.3"/>
+            <ProgressBar bgcolor="#9F2B68"  duration="0.3"/>
             <Hero />
             <Hero_small />
             <Timeline_small />
