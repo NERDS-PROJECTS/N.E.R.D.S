@@ -254,11 +254,10 @@ const HeroSection = () => {
 						>
 							A high-octane race of wireless bots, engineered for speed,
 							agility, and precision. Witness cutting-edge robots drift, dodge,
-							and dominate the neon circuit — pushing physics to its limits.
-							Each bot is tuned to perfection, controlled wirelessly by pilots
-							with lightning-fast reflexes. It’s not just a race — it’s a battle
-							of balance and brains, where only the fastest and most stable
-							survive. Feel the pulse. Hear the hum. Conquer the drift.
+							and dominate the neon circuit pushing physics to its limits. Each
+							bot is tuned to perfection, controlled wirelessly by pilots with
+							lightning-fast reflexes. Feel the pulse. Hear the hum. Conquer the
+							drift.
 						</motion.p>
 						{/* Prize Pool Announcement */}
 						<motion.div

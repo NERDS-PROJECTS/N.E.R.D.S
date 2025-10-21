@@ -1346,7 +1346,6 @@ function AlgoMaze() {
 		<div className="relative min-h-screen w-full bg-gradient-to-b from-black via-black/40 to-black text-white overflow-hidden font-orbitron">
 			<BackgroundGrid />
 			<ProgressBar bgcolor="#EEC500" duration="0.3" />
-
 			{/* Modal for alerts - keeping original functionality */}
 			{modal.open && (
 				<div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm px-2">
