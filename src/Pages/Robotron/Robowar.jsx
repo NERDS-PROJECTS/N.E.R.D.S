@@ -12,6 +12,7 @@ import {
 	DollarSignIcon,
 } from "lucide-react";
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
+import ProgressBar from "react-scroll-progress-bar";
 
 // Background Grid Component
 const BackgroundGrid = () => {
@@ -1448,6 +1449,7 @@ function RobowarRegistration() {
 	return (
 		<div className="relative min-h-screen w-full bg-gradient-to-b from-black via-black/40 to-black text-white overflow-hidden font-orbitron">
 			<BackgroundGrid />
+			<ProgressBar bgcolor="#FF0000" duration="0.3" />
 
 			{/* Modal for alerts - keeping original functionality */}
 			{modal.open && (
