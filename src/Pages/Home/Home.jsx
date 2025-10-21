@@ -6,19 +6,17 @@ import AboutUsSection from "../../components/About_Us/AboutUsSection";
 import Upcoming_events from "../../components/upcoming_events/event_card_slider";
 import Galaxy from "../../components/Hero/Galaxy";
 
-
 const Home = () => {
-  return (
-    <div className="overflow-x-hidden">
-      
-      <Galaxy/>
-      <Upcoming_events/>
-      <AboutUsSection></AboutUsSection>
-      <Projects />
-      <WhatDoWeProvideSlider />
-      <TestimonialSection />
-    </div>
-  );
+	return (
+		<div className="overflow-x-hidden">
+			<Galaxy />
+			<Upcoming_events />
+			<AboutUsSection />
+			<Projects />
+			<WhatDoWeProvideSlider />
+			<TestimonialSection />
+		</div>
+	);
 };
 
 export default Home;

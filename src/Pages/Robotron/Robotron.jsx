@@ -59,7 +59,7 @@ const Robotron = () => {
 
 	const events = [
 		{
-			name: "ROBOWAR",
+			name: "ROBOWARS",
 			path: "/robowar",
 			gradient: "linear-gradient(135deg, #D856BF, #6750A2)",
 			glowColor: "#e80101",
