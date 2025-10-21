@@ -445,7 +445,7 @@ const AttentionSection = () => {
 							👉 Track Your Kit Order Visit:{""}
 							<motion.a
 								href="/trackOrder"
-								className="text-red-400 font-medium relative inline-block"
+								className="text-red-400 left-[5.5px] font-medium relative inline-block"
 								whileHover={{
 									scale: 1.05,
 								}}
@@ -493,7 +493,7 @@ const AttentionSection = () => {
 								href="https://chat.whatsapp.com/BFaYiBWDzmh7N2QRYLPzOS"
 								target="_blank"
 								rel="noopener noreferrer"
-								className="text-red-400 font-medium relative inline-block"
+								className="text-red-400 left-[7px] font-medium relative inline-block"
 								whileHover={{
 									scale: 1.05,
 								}}

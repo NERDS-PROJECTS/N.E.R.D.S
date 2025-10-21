@@ -464,7 +464,7 @@ const AttentionSection = () => {
 							👉 Track Your Kit Order Visit:{""}
 							<motion.a
 								href="/trackOrder"
-								className="text-yellow-400 font-medium relative inline-block"
+								className="text-yellow-400 left-[5.5px] font-medium relative inline-block"
 								whileHover={{
 									scale: 1.05,
 								}}
@@ -509,10 +509,10 @@ const AttentionSection = () => {
 							<br />
 							👉{""}
 							<motion.a
-								href="https://chat.whatsapp.com/CbGdh3H6nFb6ZUuQKDvAA0"
+								href="https://chat.whatsapp.com/DGtEYzhyczN9RT6zhqgNgs"
 								target="_blank"
 								rel="noopener noreferrer"
-								className="text-yellow-400 font-medium relative inline-block"
+								className="text-yellow-400 left-[7px] font-medium relative inline-block"
 								whileHover={{
 									scale: 1.05,
 								}}
@@ -1406,7 +1406,7 @@ function AlgoMaze() {
 							<div className="flex flex-col gap-3 w-full">
 								{modal.showWhatsAppButton && modal.success && (
 									<a
-										href="https://chat.whatsapp.com/CbGdh3H6nFb6ZUuQKDvAA0"
+										href="https://chat.whatsapp.com/DGtEYzhyczN9RT6zhqgNgs"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="mt-2 px-6 py-3 rounded-lg font-semibold shadow transition-all duration-200 bg-green-500 text-white hover:bg-green-600 flex items-center justify-center gap-2"
