@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import TestimonialCard from "./testimonial_card";
 import TestimonialText from "./testimonial_text";
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import "./testimonial_styles.css";
 
 
@@ -84,23 +83,16 @@ const TestimonialSection = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     beforeChange: (current, next) => setCurrentTestimonialIndex(next),
+    autoplay: true,
+    autoplaySpeed: 4000,
+    ease: "ease-in-out",
   };
 
-  const handleNext = () => {
-    if (cardSliderRef.current) {
-      cardSliderRef.current.slickNext();
-    }
-  };
 
-  const handlePrev = () => {
-    if (cardSliderRef.current) {
-      cardSliderRef.current.slickPrev();
-    }
-  };
 
   return (
     <div className="relative w-full h-screen flex justify-center items-center overflow-hidden">
@@ -184,20 +176,7 @@ const TestimonialSection = () => {
           </Slider>
 
           {/* Custom navigation buttons using IoIosArrowBack and IoIosArrowForward */}
-          <button
-            onClick={handlePrev}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-full focus:outline-none transition"
-            style={{ background: "transparent" }}
-          >
-            <IoIosArrowBack size={40} />
-          </button>
-          <button
-            onClick={handleNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-full focus:outline-none transition"
-            style={{ background: "transparent" }}
-          >
-            <IoIosArrowForward size={40} />
-          </button>
+          {/* Removed arrow buttons for cleaner UI */}
         </div>
       </div>
     </div>
