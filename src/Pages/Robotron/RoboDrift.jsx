@@ -737,6 +737,7 @@ const KitComponentsSection = () => {
 	// Base kit items (all included items)
 	const baseKitItems = [
 		"ESP 32 NodeMCU (1 piece)",
+		"LM2596S DC-DC Buck Converter Power Supply",
 		"Motor Driver L298N (1 piece)",
 		"High RPM DC Motors (4 piece)",
 		"Traction Wheels (4 piece)",

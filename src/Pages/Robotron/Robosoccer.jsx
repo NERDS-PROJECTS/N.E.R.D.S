@@ -138,7 +138,7 @@ const BrochureSection = () => {
 								{/* Module Head 1 */}
 								<div className="bg-blue-950/30 border border-blue-600/30 rounded-lg p-4 hover:bg-blue-950/50 transition-all">
 									<p className="text-blue-200 font-semibold text-sm md:text-base mb-1">
-										Mahashweta Buragohain
+										Mahashweta Borgohain
 									</p>
 									<p className="text-blue-300/80 text-xs md:text-sm">
 										Module Head - Robosoccer
