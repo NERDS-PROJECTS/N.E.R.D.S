@@ -529,6 +529,53 @@ const AttentionSection = () => {
 									}}
 								/>
 							</motion.a>
+							<br />
+							<br />
+							🗓️ <strong>Register in Unstop:</strong>
+							<br />
+							Particiapnts must be also registered in the Unstop portal for receiving their participation certificates.
+							<br />
+							<br />
+							👉{""}
+							<motion.a
+								href="https://unstop.com/o/y9aX31v?lb=vlJn96DJ&utm_medium=Share&utm_source=nerdsclu15149&utm_campaign=Competitions"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-red-400 left-[7px] font-medium relative inline-block"
+								whileHover={{
+									scale: 1.05,
+								}}
+								transition={{
+									type: "spring",
+									stiffness: 400,
+									damping: 10,
+								}}
+							>
+								Registration Link
+								<motion.span
+									className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black"
+									whileHover={{
+										width: "100%",
+									}}
+									transition={{
+										duration: 0.3,
+									}}
+								/>
+								<motion.span
+									className="absolute inset-0 bg-black/20 rounded"
+									initial={{
+										scale: 0,
+										opacity: 0,
+									}}
+									whileHover={{
+										scale: 1,
+										opacity: 1,
+									}}
+									transition={{
+										duration: 0.2,
+									}}
+								/>
+							</motion.a>
 						</p>
 					</div>
 				</div>
