@@ -1,18 +1,16 @@
-import GalaxyComponent from './Landing_v2';
 import './landing.css';
 import { SplineScene } from "@/components/ui/splite";
+import StyledStarsCanvas from "@/assets/canvas/Stars";
 
 export default function Galaxy() {
   return (
     <div className="main-div">
-      <GalaxyComponent 
-        mouseRepulsion={true}
-        mouseInteraction={true}
-        density={1.5}
-        glowIntensity={0.2}
-        saturation={0}
-        hueShift={0}
-      />
+     
+      
+      {/* Stars background */}
+      <div className="stars-container">
+        <StyledStarsCanvas />
+      </div>
       
       <h1 className="typewriter mt-10 md:mt-0 mx-auto font-spaced">ROBOTICS CLUB, NIT SILCHAR</h1>
 
