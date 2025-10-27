@@ -1,15 +1,4 @@
-@font-face {
-    font-family: "Roboto";
-    src: url(../../assets/Fonts/Roboto-Medium.ttf);
-}
-@font-face {
-    font-family: "Spaced";
-    src: url(../../assets/Fonts/Spaced\ TTF.ttf);
-}
-@font-face {
-    font-family: "Ethno";
-    src: url(../../assets/Fonts/ethnocentric\ rg\ it.otf);
-}
+/* Font declarations moved to index.css to avoid duplicates */
 .errormsg{
     color: white;
     font-family: "Roboto";
