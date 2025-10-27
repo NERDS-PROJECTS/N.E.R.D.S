@@ -13,6 +13,7 @@ export default function Galaxy() {
         saturation={0}
         hueShift={0}
       />
+      
       <h1 className="typewriter mt-10 md:mt-0 mx-auto font-spaced">ROBOTICS CLUB, NIT SILCHAR</h1>
 
       {/* Right content */}
