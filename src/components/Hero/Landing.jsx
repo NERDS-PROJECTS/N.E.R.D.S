@@ -1,5 +1,6 @@
 import './landing.css';
-import StarCanvas from "../../assets/canvas/Stars"
+import StarCanvas from "../../assets/canvas/Stars";
+import { SplineScene } from "@/components/ui/splite";
 
 const Landing = () => {
  return(
@@ -9,7 +10,12 @@ const Landing = () => {
     <StarCanvas/>
     <h1 className="typewriter font-spaced">ROBOTICS CLUB, NIT SILCHAR</h1>
 
-        <img src="https://res.cloudinary.com/dmhbmurzw/image/upload/v1728710649/Subject_lvavbf.png" alt="Hero-img" className='parallax-image'/>
+        <div className='parallax-image'>
+          <SplineScene 
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className="w-full h-full"
+          />
+        </div>
         <div className='nerds parallax-text font-ethenocentric text-[#b8b8b8]'>
             <h1>N</h1>
             <h1>.</h1>
