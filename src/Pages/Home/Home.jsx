@@ -6,6 +6,7 @@ import AboutUsSection from "../../components/About_Us/AboutUsSection";
 import Upcoming_events from "../../components/upcoming_events/event_card_slider";
 import Galaxy from "../../components/Hero/Galaxy";
 import Sponsor from "../../components/Sponsor/Sponsor";
+// import { SplineSceneBasic } from "../../components/Hero/Robot_hero";
 
 const Home = () => {
 	return (

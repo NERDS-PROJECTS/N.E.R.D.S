@@ -25,7 +25,7 @@ const testimonials = [
   {
     name: "Swarup Chanda",
     role: "President",
-    image: "https://res.cloudinary.com/dqmktpekh/image/upload/f_auto,q_auto/ucr0cfbfdfdytnm9hhrh",
+    image: "https://res.cloudinary.com/dagggqd6g/image/upload/v1760649725/20251016_185151_edt9wj.webp",
     text: (
       <>
         <span className="quote">“</span>
@@ -81,7 +81,7 @@ const TestimonialSection = () => {
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 1000,
     slidesToShow: 1,
