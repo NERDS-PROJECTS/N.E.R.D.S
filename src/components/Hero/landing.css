@@ -57,11 +57,11 @@
     font-weight: 600;
     color: #ffd700;
     width: 410px;
-    margin-left: 45px;
-    margin-bottom: 1rem;
+    margin: 0;
 }
 .typewriter{
-    position: relative;
+    position: absolute;
+    z-index: 10;
 }
 .typewriter::after{
     content: '';
@@ -132,7 +132,11 @@
         height: 74vh;
     }
     .typewriter{
-        margin-left: 0px;
+        width: 90%;
+        max-width: 400px;
+        font-size: 1.8rem;
+        text-align: center;
+        z-index: 15;
     }
 }
 
@@ -141,11 +145,11 @@
 
 @media screen and (max-width: 448px) {
     .typewriter{
-        font-size: 1.6rem;
-        width: 350px;
-        margin-bottom: 4rem;
+        font-size: 1.4rem;
+        width: 95%;
+        max-width: 320px;
         font-weight: 600;
-        margin-top: -4rem;
+        z-index: 20;
     }
     .nerds{
         font-size: 3rem;
