@@ -1,11 +1,4 @@
-@font-face {
-    font-family: "Spaced";
-    src: url(../../assets/Fonts/Spaced\ TTF.ttf);
-}
-@font-face {
-    font-family: "Ethno";
-    src: url(../../assets/Fonts/ethnocentric\ rg\ it.otf);
-}
+/* Font declarations moved to index.css to avoid duplicates */
 .main-div{
     height: 90vh;
     background-color: black;
@@ -63,16 +56,32 @@
     }
 }
 .typewriter{
-    font-family: "Spaced";
+    font-family: "Spaced", "Orbitron", "Arial", "sans-serif";
     font-size: 30px;
     font-weight: 600;
     color: #ffd700;
     width: 410px;
     margin: 0;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 .typewriter{
     position: absolute;
     z-index: 10;
+}
+
+/* Font loading states */
+.typewriter.font-loading {
+    opacity: 0.8;
+    transform: scale(0.98);
+}
+
+.typewriter.font-loaded {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
 }
 .typewriter::after{
     content: '';

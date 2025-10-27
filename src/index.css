@@ -11,24 +11,29 @@
 
 @font-face {
   font-family: "Spaced";
-  src: url("/src/assets/Fonts/Spaced OTF.otf") format("opentype");
+  src: url("./assets/Fonts/Spaced OTF.otf") format("opentype");
+  font-display: block;
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "Ethenocentric";
-  src: url("/src/assets/Fonts/ethnocentric rg.otf") format("opentype");
+  src: url("./assets/Fonts/ethnocentric rg.otf") format("opentype");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url("/src/assets/Fonts/Roboto-Medium.ttf") format("truetype");
+  src: url("./assets/Fonts/Roboto-Medium.ttf") format("truetype");
   font-weight: 500;
-  font-size: x-large;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Tron";
-  src: url("/src/assets/Fonts/tron.ttf") format("truetype");
+  src: url("./assets/Fonts/tron.ttf") format("truetype");
+  font-display: swap;
 }
 
 .main:before {

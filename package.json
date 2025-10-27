@@ -46,7 +46,6 @@
         "react-scroll": "^1.9.0",
         "react-scroll-progress-bar": "^2.0.3",
         "react-slick": "^0.30.2",
-        "react-three-fiber": "^6.0.13",
         "slick-carousel": "^1.8.1",
         "styled-components": "^6.1.13",
         "swiper": "^11.1.14",
@@ -54,6 +53,9 @@
         "tailwindcss-animate": "^1.0.7",
         "three": "^0.179.1",
         "valtio": "^2.1.7"
+    },
+    "resolutions": {
+        "three": "^0.179.1"
     },
     "devDependencies": {
         "@eslint/js": "^9.9.0",

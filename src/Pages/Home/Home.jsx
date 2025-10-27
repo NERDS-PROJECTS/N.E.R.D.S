@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TestimonialSection from "../../components/testimonial/testimonial_section"; // Adjust the path if needed
 // import WhatDoWeProvide from "../../components/what_do_we_provide/what_do_we_provide_card"; // Adjust the import name
 import WhatDoWeProvideSlider from "../../components/what_do_we_provide/what_do_we_provide_section";
@@ -8,16 +9,30 @@ import Galaxy from "../../components/Hero/Galaxy";
 import Sponsor from "../../components/Sponsor/Sponsor";
 // import { SplineSceneBasic } from "../../components/Hero/Robot_hero";
 
-const Home = () => {
+// eslint-disable-next-line react/prop-types
+const Home = ({ onSplineLoad }) => {
+	const [isSplineLoaded, setIsSplineLoaded] = useState(false);
+
+	const handleSplineLoad = () => {
+		setIsSplineLoaded(true);
+		if (onSplineLoad) {
+			onSplineLoad();
+		}
+	};
+
 	return (
 		<div className="overflow-x-hidden">
-			<Galaxy />
-			<Upcoming_events />
-			<AboutUsSection />
-			<Projects />
-			<WhatDoWeProvideSlider />
-			<Sponsor />
-			<TestimonialSection />
+			<Galaxy onSplineLoad={handleSplineLoad} />
+			{isSplineLoaded && (
+				<>
+					<Upcoming_events />
+					<AboutUsSection />
+					<Projects />
+					<WhatDoWeProvideSlider />
+					<Sponsor />
+					<TestimonialSection />
+				</>
+			)}
 		</div>
 	);
 };

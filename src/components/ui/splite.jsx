@@ -9,9 +9,10 @@ const Spline = lazy(() => import('@splinetool/react-spline'))
  * @param {string} className - CSS classes for styling
  * @param {number} mobileScale - Scale factor for mobile devices (default: 0.8)
  * @param {number} desktopScale - Scale factor for desktop devices (default: 1.5)
+ * @param {function} onLoad - Callback when Spline scene loads
  */
 // eslint-disable-next-line react/prop-types
-export function SplineScene({ scene, className, mobileScale = 0.8, desktopScale = 1.5 }) {
+export function SplineScene({ scene, className, mobileScale = 0.8, desktopScale = 1.5, onLoad }) {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -24,6 +25,12 @@ export function SplineScene({ scene, className, mobileScale = 0.8, desktopScale 
     
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  const handleLoad = () => {
+    if (onLoad) {
+      onLoad()
+    }
+  }
 
   return (
     <Suspense 
@@ -40,6 +47,7 @@ export function SplineScene({ scene, className, mobileScale = 0.8, desktopScale 
           transform: `scale(${isMobile ? mobileScale : desktopScale})`,
           transformOrigin: 'center center'
         }}
+        onLoad={handleLoad}
       />
     </Suspense>
   )
