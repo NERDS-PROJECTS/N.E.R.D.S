@@ -491,7 +491,7 @@ const AttentionSection = () => {
 							<br />
 							👉{""}
 							<motion.a
-								href="https://chat.whatsapp.com/BFaYiBWDzmh7N2QRYLPzOS"
+								href="https://chat.whatsapp.com/HesXQfKE1IU5yDl1cFDp1U"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="text-red-400 left-[7px] font-medium relative inline-block"
@@ -1559,7 +1559,7 @@ function RobowarRegistration() {
 							<div className="flex flex-col gap-3 w-full">
 								{modal.showWhatsAppButton && modal.success && (
 									<a
-										href="https://chat.whatsapp.com/BFaYiBWDzmh7N2QRYLPzOS"
+										href="https://chat.whatsapp.com/HesXQfKE1IU5yDl1cFDp1U"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="mt-2 px-6 py-3 rounded-lg font-semibold shadow transition-all duration-200 bg-green-500 text-white hover:bg-green-600 flex items-center justify-center gap-2"
