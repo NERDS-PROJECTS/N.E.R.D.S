@@ -58,6 +58,41 @@ function App() {
     setSplineLoaded(true);
   };
 
+  // Lenis smooth scroll initialization
+  useEffect(() => {
+    let rafId;
+    let lenisInstance;
+    let mounted = true;
+
+    // Dynamically import to avoid SSR issues and reduce initial bundle size
+    import('@studio-freight/lenis')
+      .then(({ default: Lenis }) => {
+        if (!mounted) return;
+        lenisInstance = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+
+        const raf = (time) => {
+          lenisInstance.raf(time);
+          rafId = requestAnimationFrame(raf);
+        };
+
+        rafId = requestAnimationFrame(raf);
+      })
+      .catch((err) => {
+        console.warn('Lenis failed to load:', err);
+      });
+
+    return () => {
+      mounted = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      if (lenisInstance && typeof lenisInstance.destroy === 'function') {
+        lenisInstance.destroy();
+      }
+    };
+  }, []);
+
   return (
     <div className={`flex flex-col min-h-screen overflow-x-hidden ${loading ? '' : 'pt-24'}`}>
       <Router>
