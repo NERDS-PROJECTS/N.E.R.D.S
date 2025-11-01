@@ -15,6 +15,7 @@
         "@react-three/fiber": "^8.18.0",
         "@splinetool/react-spline": "^4.1.0",
         "@splinetool/runtime": "^1.10.87",
+        "@studio-freight/lenis": "^1.0.42",
         "@tabler/icons-react": "^3.34.1",
         "@tailwindcss/line-clamp": "^0.4.4",
         "@tailwindcss/vite": "^4.1.16",
