@@ -36,8 +36,8 @@ export function Track_order() {
   const shipmentData = {
     id: '--',
     status: 'Ordered',
-    eta: '--',
-    packageCount: 0,
+    eta: '10th November, 2025',
+    packageCount: 1,
     weight:'--',
     route: [
       {
@@ -72,6 +72,7 @@ export function Track_order() {
     timeline: [
       {
         step: 'Ordered',
+        date: '2nd Nov, 2025',
         completed: true,
         current:true,
         
@@ -127,20 +128,20 @@ export function Track_order() {
     dimensions: '---',
     Weight:"---",
     recipient: {
-      name: 'Md Fayjan',
+      name: 'Swarup Chanda',
       phone: '+91-60035-01567',
       address:
         'Hostel-9D, NIT Silchar, NIT Road, 788010, Cachar, Assam',
     },
     activity: [
       {
-        time: '20-10-2025',
+        time: '02-11-2025',
         event: 'Ordered up from supplier',
       },
-      // {
-      //   time: '28-09-2025',
-      //   event: 'Printing Tshirt',
-      // },
+      {
+        time: '03-11-2025',
+        event: 'Processing Order',
+      },
       // {
       //   time: '02-10-2025',
       //   event: 'Shipment Shipped From Suplier',
