@@ -402,6 +402,11 @@ const AttentionSection = () => {
 							All NIT Silchar participants with Kit Requirements must register
 							before <strong>1st November 2025, 12:00 PM</strong>.<br />
 							<br />
+							<strong className="text-red-300">🚨 KIT REGISTRATION CLOSED:</strong>
+							<br />
+							Kit registration is now closed as of <strong>2nd November 2025</strong>. Only event registration (without kits) is available.
+							<br />
+							<br />
 							Final Closing date of Registration (without Kits) for all
 							particiapnts is <strong> 15th November, 2025, 12:00 PM </strong>
 							<br />
@@ -411,8 +416,7 @@ const AttentionSection = () => {
 							<br />
 							🤖 <strong>Kit Registration Policy:</strong>
 							<br />
-							NIT Silchar students are eligible to register for{" "}
-							<strong>Robotron Kits</strong> provided by the club.
+							Kit registration for NIT Silchar students has been <strong>closed after 2nd November 2025</strong>.
 							<br />
 							<br />
 							Participants from other colleges are welcome to compete, but kits
@@ -1169,17 +1173,16 @@ function RobowarRegistration() {
 		transactionNumber: "",
 	});
 
-	// College type and kit selection state
+	// College type and weight category state
 	const [collegeType, setCollegeType] = useState(null); // "nit_silchar" or "other"
-	const [wantsKit, setWantsKit] = useState(null); // null, true, or false (only for NIT Silchar)
-	const [motorOption, setMotorOption] = useState(""); // "rpm", "torque", or "both" (only for NIT Silchar with kit)
+	// Kit selection disabled - registration closed after 2nd November
 	const [weightCategory, setWeightCategory] = useState(null); // "lightweight" (8kg) or "heavyweight" (15kg)
 
 	// Registration fees
 	const nitSilcharRegistrationFee = 999;
 	const otherCollegeRegistrationFee = 1999;
 
-	// Calculate total fee based on college type, kit selection, and motor option
+	// Calculate total fee based on college type (kits disabled after 2nd Nov)
 	const calculateTotalFee = () => {
 		if (!collegeType) return 0;
 
@@ -1187,21 +1190,8 @@ function RobowarRegistration() {
 			return otherCollegeRegistrationFee; // Other colleges: only registration, no kit
 		}
 
-		// NIT Silchar students
+		// NIT Silchar students - only registration fee (kits closed)
 		if (collegeType === "nit_silchar") {
-			if (wantsKit === true) {
-				// Kit prices based on motor option
-				switch (motorOption) {
-					case "rpm":
-						return 4499;
-					case "torque":
-						return 4999;
-					case "both":
-						return 5999;
-					default:
-						return nitSilcharRegistrationFee;
-				}
-			}
 			return nitSilcharRegistrationFee; // Registration only
 		}
 
@@ -1358,24 +1348,7 @@ function RobowarRegistration() {
 			});
 			return;
 		}
-		// Validate kit selection (only for NIT Silchar students)
-		if (collegeType === "nit_silchar" && wantsKit === null) {
-			setModal({
-				open: true,
-				message: "Please select whether you want to purchase a kit or not.",
-				success: false,
-			});
-			return;
-		}
-		// Validate motor option (only for NIT Silchar students with kit)
-		if (collegeType === "nit_silchar" && wantsKit === true && !motorOption) {
-			setModal({
-				open: true,
-				message: "Please select a motor option for your kit.",
-				success: false,
-			});
-			return;
-		}
+		// Kit selection validation removed - kit registration closed
 		// Validate weight category
 		if (weightCategory === null) {
 			setModal({
@@ -1425,14 +1398,8 @@ function RobowarRegistration() {
 				"CollegeType",
 				collegeType === "nit_silchar" ? "NIT Silchar" : "Other College"
 			);
-			formBody.append(
-				"WantsKit",
-				collegeType === "nit_silchar" && wantsKit ? "Yes" : "No"
-			);
-			formBody.append(
-				"MotorOption",
-				collegeType === "nit_silchar" && wantsKit ? motorOption : "N/A"
-			);
+			formBody.append("WantsKit", "No"); // Kit registration closed
+			formBody.append("MotorOption", "N/A"); // Kit registration closed
 			formBody.append(
 				"WeightCategory",
 				weightCategory === "lightweight"
@@ -1478,8 +1445,7 @@ function RobowarRegistration() {
 			});
 			setFileUrl("");
 			setCollegeType(null);
-			setWantsKit(null);
-			setMotorOption("");
+			// Kit selection removed - registration closed
 			setWeightCategory(null);
 		} catch (err) {
 			setModal({
@@ -1957,7 +1923,7 @@ function RobowarRegistration() {
 											type="button"
 											onClick={() => {
 												setCollegeType("nit_silchar");
-												setWantsKit(null); // Reset kit selection when changing college type
+												// Kit selection removed - registration closed
 											}}
 											className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
 												collegeType === "nit_silchar"
@@ -1973,7 +1939,7 @@ function RobowarRegistration() {
 											type="button"
 											onClick={() => {
 												setCollegeType("other");
-												setWantsKit(false); // Other colleges cannot select kit
+												// Kit selection removed - registration closed
 											}}
 											className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
 												collegeType === "other"
@@ -2028,7 +1994,7 @@ function RobowarRegistration() {
 									</motion.div>
 								)}
 
-								{/* Kit Selection - Only for NIT Silchar Students */}
+								{/* Kit Selection - DISABLED (Closed after 2nd November) */}
 								{collegeType === "nit_silchar" && (
 									<motion.div
 										className="form-group"
@@ -2038,192 +2004,31 @@ function RobowarRegistration() {
 										transition={{ duration: 0.3 }}
 									>
 										<label className="block text-red-300 mb-3 font-medium text-lg">
-											Do you want to purchase a Robot Kit? *
+											Robot Kit Purchase
 										</label>
-										<div className="flex gap-4">
-											<motion.button
-												type="button"
-												onClick={() => setWantsKit(true)}
-												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-													wantsKit === true
-														? "bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]"
-														: "bg-black/50 border-red-800 text-red-300 hover:border-red-600"
-												}`}
-												whileHover={{ scale: 1.02 }}
-												whileTap={{ scale: 0.98 }}
-											>
-												Yes, I want a kit
-											</motion.button>
-											<motion.button
-												type="button"
-												onClick={() => setWantsKit(false)}
-												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-													wantsKit === false
-														? "bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]"
-														: "bg-black/50 border-red-800 text-red-300 hover:border-red-600"
-												}`}
-												whileHover={{ scale: 1.02 }}
-												whileTap={{ scale: 0.98 }}
-											>
-												No, registration only
-											</motion.button>
-										</div>
-										{wantsKit === null && (
-											<p className="text-red-400/60 text-xs mt-2">
-												⚠️ Please select an option to continue
-											</p>
-										)}
-									</motion.div>
-								)}
-
-								{/* Motor Option Selection - Only for NIT Silchar Students with Kit */}
-								{collegeType === "nit_silchar" && wantsKit === true && (
-									<motion.div
-										className="form-group space-y-4"
-										initial={{ opacity: 0, height: 0 }}
-										animate={{ opacity: 1, height: "auto" }}
-										exit={{ opacity: 0, height: 0 }}
-										transition={{ duration: 0.3 }}
-									>
-										<label className="block text-red-300 mb-3 font-medium text-lg">
-											Select Motor Option *
-										</label>
-
-										<div className="space-y-3">
-											{/* High RPM Motor Option */}
-											<motion.button
-												type="button"
-												onClick={() => setMotorOption("rpm")}
-												className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-													motorOption === "rpm"
-														? "bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]"
-														: "bg-black/50 border-red-800 hover:border-red-600"
-												}`}
-												whileHover={{ scale: 1.01 }}
-											>
-												<div className="flex items-start justify-between">
-													<div className="flex-1">
-														<div className="flex items-center gap-2 mb-1">
-															<div
-																className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-																	motorOption === "rpm"
-																		? "border-red-500 bg-red-500"
-																		: "border-red-700"
-																}`}
-															>
-																{motorOption === "rpm" && (
-																	<div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-																)}
-															</div>
-															<h4 className="text-red-200 font-semibold">
-																High RPM Motor
-															</h4>
-														</div>
-														<p className="text-red-400/70 text-sm ml-7">
-															Best for fast spinning weapons
-														</p>
-													</div>
-													<div className="text-right">
-														<p className="text-red-300 font-bold text-lg">
-															₹4,499
-														</p>
-														<p className="text-red-400/60 text-xs">
-															(Kit + Registration)
-														</p>
-													</div>
+										<div className="bg-red-950/40 border-2 border-red-500/60 rounded-xl p-6">
+											<div className="flex items-start gap-4">
+												<div className="shrink-0">
+													<AlertTriangleIcon className="h-8 w-8 text-red-400" />
 												</div>
-											</motion.button>
-
-											{/* High Torque Motor Option */}
-											<motion.button
-												type="button"
-												onClick={() => setMotorOption("torque")}
-												className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left ${
-													motorOption === "torque"
-														? "bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]"
-														: "bg-black/50 border-red-800 hover:border-red-600"
-												}`}
-												whileHover={{ scale: 1.01 }}
-											>
-												<div className="flex items-start justify-between">
-													<div className="flex-1">
-														<div className="flex items-center gap-2 mb-1">
-															<div
-																className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-																	motorOption === "torque"
-																		? "border-red-500 bg-red-500"
-																		: "border-red-700"
-																}`}
-															>
-																{motorOption === "torque" && (
-																	<div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-																)}
-															</div>
-															<h4 className="text-red-200 font-semibold">
-																High Torque Motor
-															</h4>
-														</div>
-														<p className="text-red-400/70 text-sm ml-7">
-															Best for powerful crushing weapons
-														</p>
-													</div>
-													<div className="text-right">
-														<p className="text-red-300 font-bold text-lg">
-															₹4,999
-														</p>
-														<p className="text-red-400/60 text-xs">
-															(Kit + Registration)
-														</p>
-													</div>
+												<div>
+													<h4 className="text-red-300 font-bold font-mono text-lg mb-2">
+														Kit Registration Closed
+													</h4>
+													<p className="text-red-100 text-sm font-mono">
+														Kit registration for NIT Silchar students closed on <strong>2nd November 2025</strong>. 
+														Only event registration (without kits) is now available.
+													</p>
+													<p className="text-red-200/80 font-mono text-sm mt-3">
+														You can still register for the event and bring your own robot components.
+													</p>
 												</div>
-											</motion.button>
-
-											{/* Both Motors Option */}
-											<motion.button
-												type="button"
-												onClick={() => setMotorOption("both")}
-												className={`w-full p-4 rounded-lg border-2 transition-all duration-300 text-left relative overflow-hidden ${
-													motorOption === "both"
-														? "bg-red-600/20 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]"
-														: "bg-black/50 border-red-800 hover:border-red-600"
-												}`}
-												whileHover={{ scale: 1.01 }}
-											>
-												<div className="flex items-start justify-between">
-													<div className="flex-1">
-														<div className="flex items-center gap-2 mb-1">
-															<div
-																className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-																	motorOption === "both"
-																		? "border-red-500 bg-red-500"
-																		: "border-red-700"
-																}`}
-															>
-																{motorOption === "both" && (
-																	<div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-																)}
-															</div>
-															<h4 className="text-red-200 font-semibold">
-																Both Motors (RPM + Torque)
-															</h4>
-														</div>
-														<p className="text-red-400/70 text-sm ml-7">
-															Maximum flexibility for any weapon design
-														</p>
-													</div>
-													<div className="text-right">
-														<p className="text-red-300 font-bold text-lg">
-															₹5,999
-														</p>
-														<p className="text-red-400/60 text-xs">
-															(Kit + Registration)
-														</p>
-													</div>
-												</div>
-											</motion.button>
+											</div>
 										</div>
 									</motion.div>
 								)}
+
+								{/* Motor Option Selection - REMOVED (Kit registration closed) */}
 
 								{/* Weight Category Selection - For All Students */}
 								<div className="space-y-5 pt-6">
@@ -2332,7 +2137,7 @@ function RobowarRegistration() {
 									</motion.div>
 								</div>
 
-								{/* Price Summary */}
+								{/* Price Summary - Updated for registration only */}
 								{collegeType !== null && (
 									<motion.div
 										className="bg-gradient-to-br from-red-950/30 to-black/50 border-2 border-red-500/40 rounded-xl p-4"
@@ -2348,16 +2153,6 @@ function RobowarRegistration() {
 												<p className="text-red-100 text-xs mt-1">
 													{collegeType === "other"
 														? "Registration Only (Other College)"
-														: wantsKit
-														? `Kit (${
-																motorOption === "rpm"
-																	? "High RPM Motor"
-																	: motorOption === "torque"
-																	? "High Torque Motor"
-																	: motorOption === "both"
-																	? "Both Motors"
-																	: ""
-														  }) + Registration (NIT Silchar)`
 														: "Registration Only (NIT Silchar)"}
 												</p>
 											</div>
@@ -2371,10 +2166,7 @@ function RobowarRegistration() {
 								)}
 							</div>
 
-							{/* Show kit components only if NIT Silchar student selected kit */}
-							{collegeType === "nit_silchar" && wantsKit === true && (
-								<KitComponentsSection motorOption={motorOption} />
-							)}
+							{/* Kit components section removed - kit registration closed */}
 							<AttentionSection />
 							{/* Payment Section */}
 							<div className="space-y-6 pt-8">
@@ -2704,32 +2496,7 @@ function RobowarRegistration() {
 													</p>
 												</div>
 											)}
-											{collegeType === "nit_silchar" && (
-												<div>
-													<span className="text-red-400/70">Kit Purchase:</span>
-													<p className="text-red-100 font-medium">
-														{wantsKit === null
-															? "Not selected"
-															: wantsKit
-															? "Yes"
-															: "No"}
-													</p>
-												</div>
-											)}
-											{collegeType === "nit_silchar" && wantsKit && (
-												<div>
-													<span className="text-red-400/70">Motor Option:</span>
-													<p className="text-red-100 font-medium">
-														{motorOption === "rpm"
-															? "High RPM Motor"
-															: motorOption === "torque"
-															? "High Torque Motor"
-															: motorOption === "both"
-															? "Both Motors (RPM + Torque)"
-															: "Not selected"}
-													</p>
-												</div>
-											)}
+											{/* Kit purchase info removed - registration closed */}
 											<div>
 												<span className="text-red-400/70">
 													Weight Category:

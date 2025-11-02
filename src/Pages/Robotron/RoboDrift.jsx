@@ -404,13 +404,16 @@ const AttentionSection = () => {
 							before <strong>1st November 2025, 12:00 PM</strong>.<br />
 							<br />
 							Final Closing date of Registration (without Kits) for all
-							particiapnts is <strong> 15th November, 2025, 12:00 PM </strong>
+							particiapnts is <strong className="text-yellow-300"> 15th November, 2025, 12:00 PM </strong>
 							<br />
 							Ensure your details are submitted on time to confirm your slot for{" "}
 							<strong>Robotron 2025</strong>.
 							<br />
 							<br />
 							🤖 <strong>Kit Registration Policy:</strong>
+							<br />
+							<strong className="text-yellow-300">🚨 KIT REGISTRATION CLOSED - After 2nd November 2025, only registration is allowed. Kit ordering is no longer available.</strong>
+							<br />
 							<br />
 							NIT Silchar students are eligible to register for{" "}
 							<strong>Robotron Kits</strong> provided by the club.
@@ -1086,17 +1089,15 @@ function RoboDrift() {
 		transactionNumber: "",
 	});
 
-	// Kit selection state (NIT Silchar only)
-	const [wantsKit, setWantsKit] = useState(null); // null, true, or false
+	// Kit selection state (NIT Silchar only) - DISABLED AFTER NOV 2
+	const [wantsKit, setWantsKit] = useState(false); // Kit registration closed, only registration allowed
 
 	// Registration fees (NIT Silchar only)
 	const nitSilcharRegistrationFee = 799;
-	const kitPrice = 2799;
 
-	// Calculate total fee based on kit selection
+	// Calculate total fee - Kit registration closed after Nov 2, only registration fee applies
 	const calculateTotalFee = () => {
-		if (wantsKit === null) return 0;
-		return wantsKit === true ? kitPrice : nitSilcharRegistrationFee;
+		return nitSilcharRegistrationFee; // Only registration allowed now
 	};
 
 	const registrationFee = calculateTotalFee();
@@ -1215,15 +1216,8 @@ function RoboDrift() {
 			});
 			return;
 		}
-		// Validate kit selection
-		if (wantsKit === null) {
-			setModal({
-				open: true,
-				message: "Please select whether you want to purchase a kit or not.",
-				success: false,
-			});
-			return;
-		}
+		// Kit selection validation removed - kit registration closed after Nov 2
+		// Only registration is allowed now
 		if (!formData.paymentProofLink) {
 			setModal({
 				open: true,
@@ -1249,7 +1243,7 @@ function RoboDrift() {
 				PhoneNumber: formData.teamLeaderPhone,
 				WhatsAppNumber: formData.teamLeaderWhatsapp,
 				TeamName: formData.teamName,
-				WantsKit: wantsKit ? "Yes" : "No",
+				WantsKit: "No - Registration Only (Kit Registration Closed)",
 				TeamMemberSecond: formData.teamMember2,
 				TeamMemberThird: formData.teamMember3,
 				TeamMemberFourth: formData.teamMember4 || "",
@@ -1746,99 +1740,36 @@ function RoboDrift() {
 								</motion.div>
 							</div>
 
-							{/* Kit Selection Section */}
+							{/* Kit Selection Section - DISABLED AFTER NOV 2, 2025 */}
+							{/* Kit registration is now closed. Only registration fee of ₹799 applies */}
+							
+							{/* Registration Fee Notice */}
 							<div className="space-y-5 pt-8">
-								<div className="border-l-4 border-green-500 pl-4 mb-6">
-									<h3 className="text-xl font-bold text-green-200">
-										Kit Selection
-									</h3>
-									<p className="text-green-200 text-sm mt-1">
-										Choose if you want to purchase a kit (NIT Silchar students
-										only)
-									</p>
-								</div>
-
 								<motion.div
-									className="form-group"
-									initial={{ opacity: 0, y: -20 }}
+									className="bg-gradient-to-br from-green-950/30 to-black/50 border-2 border-green-500/40 rounded-xl p-6"
+									initial={{ opacity: 0, y: 10 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.55, duration: 0.3 }}
+									transition={{ duration: 0.3 }}
 								>
-									<label className="block text-green-600 mb-3 font-medium text-lg">
-										Do you want to purchase a Robot Kit? *
-									</label>
-									<div className="flex gap-4">
-										<motion.button
-											type="button"
-											onClick={() => setWantsKit(true)}
-											className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-												wantsKit === true
-													? "bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]"
-													: "bg-black/50 border-green-800 text-green-300 hover:border-green-600"
-											}`}
-											whileHover={{ scale: 1.02 }}
-											whileTap={{ scale: 0.98 }}
-										>
-											<div>
-												<div>Yes, I want a kit</div>
-												<div className="text-sm opacity-80 mt-1">
-													₹2799 (Kit + Registration)
-												</div>
-											</div>
-										</motion.button>
-										<motion.button
-											type="button"
-											onClick={() => setWantsKit(false)}
-											className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-												wantsKit === false
-													? "bg-green-600 border-green-500 text-white shadow-[0_0_20px_rgba(0,255,0,0.5)]"
-													: "bg-black/50 border-green-800 text-green-300 hover:border-green-600"
-											}`}
-											whileHover={{ scale: 1.02 }}
-											whileTap={{ scale: 0.98 }}
-										>
-											<div>
-												<div>No, registration only</div>
-												<div className="text-sm opacity-80 mt-1">
-													₹799 (Registration Only)
-												</div>
-											</div>
-										</motion.button>
-									</div>
-									{wantsKit === null && (
-										<p className="text-green-400/60 text-xs mt-2">
-											⚠️ Please select an option to continue
-										</p>
-									)}
-								</motion.div>
-
-								{/* Price Summary */}
-								{wantsKit !== null && (
-									<motion.div
-										className="bg-gradient-to-br from-green-950/30 to-black/50 border-2 border-green-500/40 rounded-xl p-4 mt-6"
-										initial={{ opacity: 0, y: 10 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.3 }}
-									>
-										<div className="flex justify-between items-center">
-											<div>
-												<p className="text-green-400/70 text-sm">
-													Total Amount to Pay:
-												</p>
-												<p className="text-green-100 text-xs mt-1">
-													{wantsKit
-														? "NIT Silchar - Kit + Registration"
-														: "NIT Silchar - Registration Only"}
-												</p>
-											</div>
-											<div className="text-right">
-												<p className="text-green-300 font-bold text-2xl">
-													₹{registrationFee}
-												</p>
-											</div>
+									<div className="flex justify-between items-center mb-4">
+										<div>
+											<p className="text-green-400 text-lg font-bold mb-2">
+												Registration Fee
+											</p>
+											<p className="text-green-100 text-sm">
+												NIT Silchar - Registration Only
+											</p>
+											<p className="text-yellow-300 text-xs mt-2 font-semibold">
+												⚠️ Kit registration closed after 2nd November 2025
+											</p>
 										</div>
-									</motion.div>
-								)}
+										<div className="text-right">
+											<p className="text-green-300 font-bold text-3xl">
+												₹{registrationFee}
+											</p>
+										</div>
+									</div>
+								</motion.div>
 							</div>
 
 							{/* Show kit components only if kit is selected */}

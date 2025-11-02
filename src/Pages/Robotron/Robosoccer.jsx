@@ -618,6 +618,11 @@ const AttentionSection = () => {
 							All NIT Silchar participants with Kit Requirements must register
 							before <strong>1st November 2025, 12:00 PM</strong>.<br />
 							<br />
+							<strong className="text-blue-300">🚨 KIT REGISTRATION CLOSED:</strong>
+							<br />
+							Kit registration is now closed as of <strong>2nd November 2025</strong>. Only event registration (without kits) is available.
+							<br />
+							<br />
 							Final Closing date of Registration (without Kits) for all
 							particiapnts is <strong> 15th November, 2025, 12:00 PM </strong>
 							<br />
@@ -627,8 +632,7 @@ const AttentionSection = () => {
 							<br />
 							🤖 <strong>Kit Registration Policy:</strong>
 							<br />
-							NIT Silchar students are eligible to register for{" "}
-							<strong>Robotron Kits</strong> provided by the club.
+							Kit registration for NIT Silchar students has been <strong>closed after 2nd November 2025</strong>.
 							<br />
 							<br />
 							Participants from other colleges are welcome to compete, but kits
@@ -1109,16 +1113,15 @@ function Robosoccer() {
 		transactionNumber: "",
 	});
 
-	// College type and kit selection state
+	// College type state - kit selection disabled
 	const [collegeType, setCollegeType] = useState(null); // "nit_silchar" or "other"
-	const [wantsKit, setWantsKit] = useState(null); // null, true, or false (only for NIT Silchar)
+	// Kit selection disabled - registration closed after 2nd November
 
 	// Registration fees
 	const nitSilcharRegistrationFee = 799;
 	const otherCollegeRegistrationFee = 1499;
-	const kitPrice = 3499;
 
-	// Calculate total fee based on college type and kit selection
+	// Calculate total fee based on college type (kits disabled after 2nd Nov)
 	const calculateTotalFee = () => {
 		if (!collegeType) return 0;
 
@@ -1126,11 +1129,8 @@ function Robosoccer() {
 			return otherCollegeRegistrationFee; // Other colleges: only registration, no kit
 		}
 
-		// NIT Silchar students
+		// NIT Silchar students - only registration fee (kits closed)
 		if (collegeType === "nit_silchar") {
-			if (wantsKit === true) {
-				return kitPrice; // Kit + Registration
-			}
 			return nitSilcharRegistrationFee; // Registration only
 		}
 
@@ -1278,15 +1278,7 @@ function Robosoccer() {
 			});
 			return;
 		}
-		// Validate kit selection (only for NIT Silchar students)
-		if (collegeType === "nit_silchar" && wantsKit === null) {
-			setModal({
-				open: true,
-				message: "Please select whether you want to purchase a kit or not.",
-				success: false,
-			});
-			return;
-		}
+		// Kit selection validation removed - kit registration closed
 		if (!formData.paymentProofLink) {
 			setModal({
 				open: true,
@@ -1326,10 +1318,7 @@ function Robosoccer() {
 				"CollegeType",
 				collegeType === "nit_silchar" ? "NIT Silchar" : "Other College"
 			);
-			formBody.append(
-				"WantsKit",
-				collegeType === "nit_silchar" && wantsKit ? "Yes" : "No"
-			);
+			formBody.append("WantsKit", "No"); // Kit registration closed
 			formBody.append("TotalAmount", registrationFee);
 			formBody.append("PaymentProofLink", formData.paymentProofLink);
 			formBody.append("TransactionNumber", formData.transactionNumber);
@@ -1369,7 +1358,7 @@ function Robosoccer() {
 			});
 			setFileUrl("");
 			setCollegeType(null);
-			setWantsKit(null);
+			// Kit selection removed - registration closed
 		} catch (err) {
 			setModal({
 				open: true,
@@ -1867,7 +1856,7 @@ function Robosoccer() {
 											type="button"
 											onClick={() => {
 												setCollegeType("other");
-												setWantsKit(false);
+												// Kit selection removed - registration closed
 											}}
 											className={`py-6 px-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
 												collegeType === "other"
@@ -1939,7 +1928,7 @@ function Robosoccer() {
 										</p>
 									</div>
 
-									{/* Do you want kit? */}
+									{/* Kit Selection - DISABLED (Closed after 2nd November) */}
 									<motion.div
 										className="form-group"
 										initial={{ opacity: 0, x: -20 }}
@@ -1947,46 +1936,32 @@ function Robosoccer() {
 										transition={{ delay: 0.1 }}
 									>
 										<label className="block text-blue-600 mb-3 font-medium text-lg">
-											Do you want to purchase a Robot Kit? *
+											Robot Kit Purchase
 										</label>
-										<div className="flex gap-4">
-											<motion.button
-												type="button"
-												onClick={() => setWantsKit(true)}
-												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-													wantsKit === true
-														? "bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(0,171,218,0.5)]"
-														: "bg-black/50 border-blue-800 text-blue-300 hover:border-blue-600"
-												}`}
-												whileHover={{ scale: 1.02 }}
-												whileTap={{ scale: 0.98 }}
-											>
-												Yes, I want a kit (₹3499)
-											</motion.button>
-											<motion.button
-												type="button"
-												onClick={() => setWantsKit(false)}
-												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-													wantsKit === false
-														? "bg-blue-600 border-blue-500 text-white shadow-[0_0_20px_rgba(0,171,218,0.5)]"
-														: "bg-black/50 border-blue-800 text-blue-300 hover:border-blue-600"
-												}`}
-												whileHover={{ scale: 1.02 }}
-												whileTap={{ scale: 0.98 }}
-											>
-												No, registration only (₹799)
-											</motion.button>
+										<div className="bg-blue-950/40 border-2 border-blue-500/60 rounded-xl p-6">
+											<div className="flex items-start gap-4">
+												<div className="shrink-0">
+													<AlertTriangleIcon className="h-8 w-8 text-blue-400" />
+												</div>
+												<div>
+													<h4 className="text-blue-300 font-mono font-bold text-lg mb-2">
+														Kit Registration Closed
+													</h4>
+													<p className="text-blue-100 font-mono text-sm">
+														Kit registration for NIT Silchar students closed on <strong>2nd November 2025</strong>. 
+														Only event registration (without kits) is now available.
+													</p>
+													<p className="text-blue-200/80 font-mono text-sm mt-3">
+														You can still register for the event and bring your own robot components.
+													</p>
+												</div>
+											</div>
 										</div>
-										{wantsKit === null && (
-											<p className="text-blue-400/60 text-xs mt-2">
-												⚠️ Please select an option to continue
-											</p>
-										)}
 									</motion.div>
 								</div>
 							)}
 
-							{/* Price Summary */}
+							{/* Price Summary - Updated for registration only */}
 							{collegeType !== null && (
 								<motion.div
 									className="bg-gradient-to-br from-blue-950/30 to-black/50 border-2 border-blue-500/40 rounded-xl p-4 mt-8"
@@ -2002,8 +1977,6 @@ function Robosoccer() {
 											<p className="text-blue-100 text-xs mt-1">
 												{collegeType === "other"
 													? "Registration Only (Other College)"
-													: wantsKit
-													? "Kit + Registration (NIT Silchar)"
 													: "Registration Only (NIT Silchar)"}
 											</p>
 										</div>
@@ -2016,10 +1989,7 @@ function Robosoccer() {
 								</motion.div>
 							)}
 
-							{/* Show kit components only if NIT Silchar student selects kit */}
-							{collegeType === "nit_silchar" && wantsKit === true && (
-								<KitComponentsSection />
-							)}
+							{/* Kit components section removed - kit registration closed */}
 							<AttentionSection />
 							{/* Payment Section */}
 							<div className="space-y-6 pt-8">
@@ -2358,18 +2328,7 @@ function Robosoccer() {
 											Payment Details
 										</h4>
 										<div className="grid md:grid-cols-2 gap-4 text-sm">
-											<div>
-												<span className="text-blue-400/70">Kit Purchase:</span>
-												<p className="text-blue-100 font-medium">
-													{collegeType === "other"
-														? "Not Available"
-														: wantsKit === null
-														? "Not selected"
-														: wantsKit
-														? "Yes"
-														: "No"}
-												</p>
-											</div>
+											{/* Kit purchase info removed - registration closed */}
 											<div>
 												<span className="text-blue-400/70">Total Amount:</span>
 												<p className="text-blue-100 font-medium text-lg">
