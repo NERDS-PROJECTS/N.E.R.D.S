@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
 	AlertTriangleIcon,
+	AlertTriangle,
 	CheckCircleIcon,
 	QrCodeIcon,
 	UploadIcon,
@@ -403,6 +404,11 @@ const AttentionSection = () => {
 							All NIT Silchar participants with Kit Requirements must register
 							before <strong>1st November 2025, 12:00 PM</strong>.<br />
 							<br />
+							<strong className="text-green-300">🚨 KIT REGISTRATION CLOSED:</strong>
+							<br />
+							Kit registration is now closed as of <strong>2nd November 2025</strong>. Only event registration (without kits) is available.
+							<br />
+							<br />
 							Final Closing date of Registration (without Kits) for all
 							particiapnts is <strong> 15th November, 2025, 12:00 PM </strong>
 							<br />
@@ -412,8 +418,7 @@ const AttentionSection = () => {
 							<br />
 							🤖 <strong>Kit Registration Policy:</strong>
 							<br />
-							NIT Silchar students are eligible to register for{" "}
-							<strong>Robotron Kits</strong> provided by the club.
+							Kit registration for NIT Silchar students has been <strong>closed after 2nd November 2025</strong>.
 							<br />
 							<br />
 							Participants from other colleges are<strong>
@@ -1086,17 +1091,12 @@ function RoboDrift() {
 		transactionNumber: "",
 	});
 
-	// Kit selection state (NIT Silchar only)
-	const [wantsKit, setWantsKit] = useState(null); // null, true, or false
-
-	// Registration fees (NIT Silchar only)
+	// Registration fees (NIT Silchar only - Kit registration closed after Nov 2, 2025)
 	const nitSilcharRegistrationFee = 799;
-	const kitPrice = 2799;
 
-	// Calculate total fee based on kit selection
+	// Calculate total fee (only registration fee now, no kit option)
 	const calculateTotalFee = () => {
-		if (wantsKit === null) return 0;
-		return wantsKit === true ? kitPrice : nitSilcharRegistrationFee;
+		return nitSilcharRegistrationFee;
 	};
 
 	const registrationFee = calculateTotalFee();
@@ -1215,15 +1215,7 @@ function RoboDrift() {
 			});
 			return;
 		}
-		// Validate kit selection
-		if (wantsKit === null) {
-			setModal({
-				open: true,
-				message: "Please select whether you want to purchase a kit or not.",
-				success: false,
-			});
-			return;
-		}
+
 		if (!formData.paymentProofLink) {
 			setModal({
 				open: true,
@@ -1258,12 +1250,9 @@ function RoboDrift() {
 				TotalFee: registrationFee.toString(),
 			};
 
-			console.log("Submitting registration data:", submissionData);
-			console.log("Apps Script URL:", SCRIPT_URL);
-			console.log("Total Fee:", registrationFee);
-			console.log("Wants Kit:", wantsKit);
-
-			const response = await fetch(SCRIPT_URL, {
+		console.log("Submitting registration data:", submissionData);
+		console.log("Apps Script URL:", SCRIPT_URL);
+		console.log("Total Fee:", registrationFee);			const response = await fetch(SCRIPT_URL, {
 				method: "POST",
 				headers: {
 					"Content-Type": "text/plain", // Use text/plain to avoid CORS preflight

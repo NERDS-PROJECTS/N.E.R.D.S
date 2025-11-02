@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
 	AlertTriangleIcon,
+	AlertTriangle,
 	CheckCircleIcon,
 	QrCodeIcon,
 	UploadIcon,
@@ -421,6 +422,11 @@ const AttentionSection = () => {
 							All NIT Silchar participants with Kit Requirements must register
 							before <strong>1st November 2025, 12:00 PM</strong>.<br />
 							<br />
+							<strong className="text-yellow-300">🚨 KIT REGISTRATION CLOSED:</strong>
+							<br />
+							Kit registration is now closed as of <strong>2nd November 2025</strong>. Only event registration (without kits) is available.
+							<br />
+							<br />
 							Final Closing date of Registration (without Kits) for all
 							particiapnts is <strong> 15th November, 2025, 12:00 PM </strong>
 							<br />
@@ -430,8 +436,7 @@ const AttentionSection = () => {
 							<br />
 							🤖 <strong>Kit Registration Policy:</strong>
 							<br />
-							NIT Silchar students are eligible to register for{" "}
-							<strong>Robotron Kits</strong> provided by the club.
+							Kit registration for NIT Silchar students has been <strong>closed after 2nd November 2025</strong>.
 							<br />
 							<br />
 							Participants from other colleges are welcome to compete, but kits
@@ -1119,28 +1124,23 @@ function AlgoMaze() {
 		transactionNumber: "",
 	});
 
-	// College type and kit selection state
+	// College type state
 	const [collegeType, setCollegeType] = useState(null); // "nit_silchar" or "other"
-	const [wantsKit, setWantsKit] = useState(null); // null, true, or false (only for NIT Silchar)
 
-	// Registration fees
+	// Registration fees (Kit registration closed after Nov 2, 2025)
 	const nitSilcharRegistrationFee = 799;
 	const otherCollegeRegistrationFee = 1499;
-	const kitPrice = 2699;
 
-	// Calculate total fee based on college type and kit selection
+	// Calculate total fee based on college type (no kit option available)
 	const calculateTotalFee = () => {
 		if (!collegeType) return 0;
 
 		if (collegeType === "other") {
-			return otherCollegeRegistrationFee; // Other colleges: only registration, no kit
+			return otherCollegeRegistrationFee; // Other colleges: Registration only
 		}
 
 		// NIT Silchar students
 		if (collegeType === "nit_silchar") {
-			if (wantsKit === true) {
-				return kitPrice; // Kit + Registration
-			}
 			return nitSilcharRegistrationFee; // Registration only
 		}
 
@@ -1288,15 +1288,7 @@ function AlgoMaze() {
 			});
 			return;
 		}
-		// Validate kit selection (only for NIT Silchar students)
-		if (collegeType === "nit_silchar" && wantsKit === null) {
-			setModal({
-				open: true,
-				message: "Please select whether you want to purchase a kit or not.",
-				success: false,
-			});
-			return;
-		}
+
 		if (!formData.paymentProofLink) {
 			setModal({
 				open: true,
@@ -1335,10 +1327,7 @@ function AlgoMaze() {
 			formBody.append("TeamMemberSecond", formData.teamMember2);
 			formBody.append("TeamMemberThird", formData.teamMember3);
 			formBody.append("TeamMemberFourth", formData.teamMember4 || "");
-			formBody.append(
-				"WantsKit",
-				collegeType === "nit_silchar" && wantsKit ? "Yes" : "No"
-			);
+			formBody.append("WantsKit", "No"); // Kit registration closed
 			formBody.append("PaymentScreenshot", formData.paymentProofLink);
 			formBody.append("TransactionNumber", formData.transactionNumber);
 			formBody.append("TotalFee", registrationFee);
@@ -1376,7 +1365,6 @@ function AlgoMaze() {
 			});
 			setFileUrl("");
 			setCollegeType(null);
-			setWantsKit(null);
 		} catch (err) {
 			setModal({
 				open: true,
@@ -1943,48 +1931,27 @@ function AlgoMaze() {
 									</div>
 
 									{/* Do you want kit? */}
+									{/* Kit Registration Closed Notice */}
 									<motion.div
-										className="form-group"
+										className="bg-yellow-950/20 border-2 border-yellow-600/50 rounded-xl p-6"
 										initial={{ opacity: 0, x: -20 }}
 										animate={{ opacity: 1, x: 0 }}
 										transition={{ delay: 0.1 }}
 									>
-										<label className="block text-yellow-600 mb-3 font-medium text-lg">
-											Do you want to purchase a Robot Kit? *
-										</label>
-										<div className="flex gap-4">
-											<motion.button
-												type="button"
-												onClick={() => setWantsKit(true)}
-												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-													wantsKit === true
-														? "bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]"
-														: "bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600"
-												}`}
-												whileHover={{ scale: 1.02 }}
-												whileTap={{ scale: 0.98 }}
-											>
-												Yes, I want a kit (₹2699)
-											</motion.button>
-											<motion.button
-												type="button"
-												onClick={() => setWantsKit(false)}
-												className={`flex-1 py-4 rounded-lg border-2 font-semibold transition-all duration-300 ${
-													wantsKit === false
-														? "bg-yellow-600 border-yellow-500 text-white shadow-[0_0_20px_rgba(255,255,0,0.5)]"
-														: "bg-black/50 border-yellow-800 text-yellow-300 hover:border-yellow-600"
-												}`}
-												whileHover={{ scale: 1.02 }}
-												whileTap={{ scale: 0.98 }}
-											>
-												No, registration only (₹799)
-											</motion.button>
+										<div className="flex items-start gap-3">
+											<AlertTriangle className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
+											<div>
+												<h4 className="text-yellow-300 font-mono font-semibold text-lg mb-2">
+													Kit Registration Closed
+												</h4>
+												<p className="text-yellow-200/80 font-mono text-sm leading-relaxed">
+													Kit registration has been closed as of <strong>November 2, 2025</strong>. 
+													Only event registration (without kits) is now available.
+													<br /><br />
+													<strong>Registration Fee:</strong> ₹{registrationFee}
+												</p>
+											</div>
 										</div>
-										{wantsKit === null && (
-											<p className="text-yellow-400/60 text-xs mt-2">
-												⚠️ Please select an option to continue
-											</p>
-										)}
 									</motion.div>
 								</div>
 							)}
@@ -2005,8 +1972,6 @@ function AlgoMaze() {
 											<p className="text-yellow-100 text-xs mt-1">
 												{collegeType === "other"
 													? "Registration Only (Other College)"
-													: wantsKit
-													? "Kit + Registration (NIT Silchar)"
 													: "Registration Only (NIT Silchar)"}
 											</p>
 										</div>
@@ -2017,11 +1982,6 @@ function AlgoMaze() {
 										</div>
 									</div>
 								</motion.div>
-							)}
-
-							{/* Show kit components only if NIT Silchar student selects kit */}
-							{collegeType === "nit_silchar" && wantsKit === true && (
-								<KitComponentsSection />
 							)}
 							<AttentionSection />
 							{/* Payment Section */}
@@ -2372,13 +2332,7 @@ function AlgoMaze() {
 													Kit Purchase:
 												</span>
 												<p className="text-yellow-100 font-medium">
-													{collegeType === "other"
-														? "Not Available"
-														: wantsKit === null
-														? "Not selected"
-														: wantsKit
-														? "Yes"
-														: "No"}
+													No (Kit registration closed)
 												</p>
 											</div>
 
