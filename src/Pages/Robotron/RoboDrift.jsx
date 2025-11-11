@@ -404,7 +404,7 @@ const AttentionSection = () => {
 							before <strong>1st November 2025, 12:00 PM</strong>.<br />
 							<br />
 							Final Closing date of Registration (without Kits) for all
-							particiapnts is <strong className="text-yellow-300"> 15th November, 2025, 12:00 PM </strong>
+							particiapnts is <strong className="text-yellow-300"> 30th December, 2025, 12:00 PM </strong>
 							<br />
 							Ensure your details are submitted on time to confirm your slot for{" "}
 							<strong>Robotron 2025</strong>.
