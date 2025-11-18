@@ -608,7 +608,7 @@ const AttentionSection = () => {
 							<br />
 							🕒 <strong>Event Dates:</strong>
 							<br />
-							Event Dates: <strong>21st to 23rd November 2025</strong>.
+							Event Dates: <strong>January 2026 (Tentatively)</strong>.
 							<br />
 							Venue: <strong>NIT Silchar, Assam</strong>
 							<br />
