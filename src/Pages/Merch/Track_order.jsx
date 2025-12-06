@@ -34,83 +34,83 @@ export function Track_order() {
 
   // Mock data that would normally come from an API
   const shipmentData = {
-    id: '--',
-    status: 'Ordered',
-    eta: '10th November, 2025',
+    id: '50934977435',
+    status: 'Delivered',
+    eta: '15th Nov, 2025',
     packageCount: 1,
-    weight:'--',
+    weight:'45Kg',
     route: [
       {
-        city: '--',
+        city: 'Pune',
         x: '15%', // left position percentage
         y: '70%', // top position percentage
         completed: true,
         current: false,
       },
-      // {
-      //   city: '--',
-      //   x: '35%',
-      //   y: '30%',
-      //   completed: false,
-      //   current: false,
-      // },
-      // {
-      //   city: '--',
-      //   x: '65%',
-      //   y: '55%',
-      //   completed: false,
-      //   current: false,
-      // },
-      // {
-      //   city: '--',
-      //   x: '85%',
-      //   y: '35%',
-      //   completed: false,
-      //   current: false, // This flag shows current location
-      // },
+      {
+        city: 'Dankuni',
+        x: '35%',
+        y: '30%',
+        completed: true,
+        current: false,
+      },
+      {
+        city: 'Kamrup',
+        x: '65%',
+        y: '55%',
+        completed: true,
+        current: false,
+      },
+      {
+        city: 'Silchar',
+        x: '85%',
+        y: '35%',
+        completed: true,
+        current: true, // This flag shows current location
+      },
     ],
     timeline: [
       {
         step: 'Ordered',
         date: '2nd Nov, 2025',
         completed: true,
-        current:true,
+        
         
       },
       {
-        step: 'Printed',
-        date: '--',
+        step: 'Packed',
+        date: '4th Nov, 2025',
         
-        completed: false,
+        completed: true,
       },
       {
         step: 'Shipped',
-        date: '--',
-        completed: false,
+        date: '5th Nov, 2025',
+        completed: true,
         
       },
       {
         step: 'In Transit',
-        date: '--',
-        completed: false,
+        date: '7th Nov, 2025',
+        completed: true,
         
       },
       {
         step: 'Delivered',
-        date: '--',
-        completed: false,
-        
+        date: '15th Nov, 2025',
+        completed: true,
+        current:true,
       },
     ],
     courier: {
-      name: '--',
-      trackingId: '--',
+      name: 'Bluedart',
+      trackingId: '50934977435',
       bot: '---',
     },
     items: [
       {
-        name: '--',
-        qty: 0,
+        name: 'Electronics Parts',
+        qty: 1,
       },
     //   {
     //     name: 'Circuit Board Array',
@@ -142,22 +142,18 @@ export function Track_order() {
         time: '03-11-2025',
         event: 'Processing Order',
       },
-      // {
-      //   time: '02-10-2025',
-      //   event: 'Shipment Shipped From Suplier',
-      // },
-      // {
-      //   time: '04-10-2025',
-      //   event: 'Shipment In Transit From Suplier',
-      // },
-      // {
-      //   time: '12-10-2025',
-      //   event: 'Delay due to poor weather conditions',
-      // },
-      // {
-      //   time: '14-10-2025',
-      //   event: 'Order Delivered Successfully',
-      // },
+      {
+        time: '05-11-2025',
+        event: 'Shipment Shipped From Suplier',
+      },
+      {
+        time: '07-11-2025',
+        event: 'Shipment In Transit From Suplier',
+      },
+      {
+        time: '15-11-2025',
+        event: 'Order Delivered Successfully',
+      },
     ],
   }
   return (
