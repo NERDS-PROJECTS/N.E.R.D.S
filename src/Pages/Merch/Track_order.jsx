@@ -240,7 +240,7 @@ export function Track_order() {
               <div className="px-4 py-2 bg-cyan-500/20 border-2 border-cyan-400/50 rounded-lg shadow-[0_0_20px_rgba(34,211,238,0.3)]">
                 <div className="flex items-center space-x-2">
                   <CpuIcon className="h-5 w-5 text-cyan-400 animate-spin" style={{ animationDuration: '3s' }} />
-                  <span className="text-cyan-400 font-bold font-spaced">SYSTEM ONLINE</span>
+                  <span className="text-cyan-400 font-bold font-spaced">SYSTEM OFFLINE</span>
                 </div>
               </div>
             </motion.div>
