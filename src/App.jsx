@@ -7,7 +7,8 @@ import Team from "./Pages/Team/Team";
 import Gallery from "./Pages/Gallery/Gallery";
 import Contact from "./Pages/Contact/Contact";
 import Navbar from "./components/Navbar/navbar";
-import Footer from "./components/Footer/footer";
+import Footer from "./components/Footer/Footer_v2";
+import Galaxy from "./components/Hero/Galaxy";
 import Error from "./Pages/Error/Error";
 import LoadingAnimation from "./components/Loader/Loader"; 
 import Merch from "./Pages/Merch/Merch";
@@ -18,6 +19,7 @@ import Robowar from "./Pages/Robotron/Robowar";
 import Robosoccer from "./Pages/Robotron/Robosoccer";
 import RoboDrift from "./Pages/Robotron/RoboDrift";
 import AlgoMaze from "./Pages/Robotron/AlgoMaze";
+import Robotron from "./Pages/Robotron/Robotron";
 
 
 
@@ -32,12 +34,63 @@ const ScrollToTop = () => {
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [splineLoaded, setSplineLoaded] = useState(false);
 
   useEffect(() => {
+    // Initial loading timer (minimum 2 seconds)
     const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+      if (splineLoaded) {
+        setLoading(false);
+      }
+    }, 2000);
     return () => clearTimeout(timer);
+  }, [splineLoaded]);
+
+  // Additional timer to ensure loading doesn't take too long
+  useEffect(() => {
+    const maxLoadingTimer = setTimeout(() => {
+      setLoading(false);
+    }, 10000); // Maximum 10 seconds
+    return () => clearTimeout(maxLoadingTimer);
+  }, []);
+
+  const handleSplineLoad = () => {
+    setSplineLoaded(true);
+  };
+
+  // Lenis smooth scroll initialization
+  useEffect(() => {
+    let rafId;
+    let lenisInstance;
+    let mounted = true;
+
+    // Dynamically import to avoid SSR issues and reduce initial bundle size
+    import('@studio-freight/lenis')
+      .then(({ default: Lenis }) => {
+        if (!mounted) return;
+        lenisInstance = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+
+        const raf = (time) => {
+          lenisInstance.raf(time);
+          rafId = requestAnimationFrame(raf);
+        };
+
+        rafId = requestAnimationFrame(raf);
+      })
+      .catch((err) => {
+        console.warn('Lenis failed to load:', err);
+      });
+
+    return () => {
+      mounted = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      if (lenisInstance && typeof lenisInstance.destroy === 'function') {
+        lenisInstance.destroy();
+      }
+    };
   }, []);
 
   return (
@@ -54,7 +107,9 @@ function App() {
 
             <div className="flex-grow w-full">
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home onSplineLoad={handleSplineLoad} />} />
+                <Route path="/galaxy" element={<Galaxy/>} />
+                <Route path="/robotron" element={<Robotron/>} />
                 <Route path="/event" element={<Event />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/team" element={<Team />} />

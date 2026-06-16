@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Unstop",
+    "logo": "/sponsor/unstop.png",
+    "website": "https://unstop.com"
+  },
+  {
+    "id": 2,
+    "name": "RoboPixel",
+    "logo": "/sponsor/robopixel.png"
+  },
+  {
+    "id": 3,
+    "name": "TechBooster",
+    "logo": "/sponsor/tech_booster.png"
+  },
+  {
+    "id": 4,
+    "name": "EaseMyTrip",
+    "logo": "/sponsor/easemytrp.png",
+    "website": "https://www.easemytrip.com/"
+  }
+]

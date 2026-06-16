@@ -2,7 +2,7 @@
 
 **Robotics Club of NIT Silchar**
 
-Welcome to the official repository of N.E.R.D.S. (NITS Embedded and Robotics Development Society), the premier robotics club of National Institute of Technology, Silchar.
+Welcome to the official repository of N.E.R.D.S. (NITS Embedded and Robotics Development Society), the premier robotics club of National Institute of Technology, Silchar
 
 ## 🚀 About Us
 
@@ -107,14 +107,12 @@ We welcome contributions from the community! Here's how you can help:
 
 
 ## 🏆 Our Achievements
-
-- 🎖️ Best Innovation Award - Tecnoesis NIT Silchar 2023
 - 📜 Multiple works in robotics and automation.
 
 ## 👥 Team
 
 ### Faculty Advisor
-- **Dr. Chandrajit Choudhury** - Department of Electronics and Communication Engineering
+- **Dr. Chandrajit Choudhury** - Department of Electronics and Communication Engineering.
 
 ### Core Team 2024-25
 - **President**: Swarup Chanda

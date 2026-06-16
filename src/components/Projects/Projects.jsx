@@ -31,8 +31,16 @@ const projects = [
     description:
       "The Spider Bot is a compact, multi-legged robot built using an Arduino Nano. It features precise motor control for smooth movement and agility. Equipped with sensors, the bot can navigate obstacles, offering a blend of mechanical engineering and coding. Ideal for robotics enthusiasts, it demonstrates how compact microcontrollers like the Arduino Nano can create sophisticated, interactive robots.",
     imageUrl:
-      "https://res.cloudinary.com/diabjuzqc/image/upload/f_auto,q_auto/dbzvweqw1xwclrijk9rh",
+      "https://res.cloudinary.com/dagggqd6g/image/upload/v1765630438/Gemini_Generated_Image_s1msmgs1msmgs1ms_mp4bgl.png",
     link: "https://youtu.be/MOtOSJDkom8?si=BG7DCMavWIUhIVg9",
+  },
+    {
+    title: "Bionic Hand",
+    description:
+      "The Bionic Robotic Hand is an advanced prosthetic concept designed to replicate natural hand movements with high precision, responsiveness, and mechanical efficiency. Built with a bio-inspired architecture, the system integrates lightweight actuators, tendon-driven mechanisms, and sensor-based feedback to deliver smooth, human-like motion. Each finger is engineered for independent control, enabling complex gestures, object grasping, and adaptive force modulation.",
+    imageUrl:
+      "https://res.cloudinary.com/dagggqd6g/image/upload/v1765630282/unnamed_udfg2a.jpg",
+    link: "#",
   },
   {
     title: "Head Motion Controlled Wheelchair",
@@ -49,7 +57,7 @@ const projects = [
     description:
       "The quadcopter drone is an unmanned aerial vehicle (UAV) that operates using four rotors for lift, stability, and maneuverability. Controlled remotely or autonomously via onboard sensors and GPS, quadcopters are used in various fields such as aerial photography, surveillance, delivery, and research. Their agile flight capabilities and ease of use make them highly versatile in both commercial and recreational applications.",
     imageUrl:
-      "https://res.cloudinary.com/dqmktpekh/image/upload/f_auto,q_auto/mwaszrp83seimayoqbl6",
+      "https://res.cloudinary.com/dagggqd6g/image/upload/v1765630946/Gemini_Generated_Image_9h1ofu9h1ofu9h1o_d2cfyd.png",
     link: "#",
   },
   {
@@ -57,7 +65,7 @@ const projects = [
     description:
       "The Bluetooth-controlled car is a small, wireless vehicle operated via a smartphone or controller using Bluetooth technology. It typically involves an embedded microcontroller like Arduino, which receives commands from a mobile app to control the car's movement, such as forward, backward, left, and right. This technology allows for remote operation, making it a fun and educational project for learning robotics and wireless communication.",
     imageUrl:
-      "https://res.cloudinary.com/dagggqd6g/image/upload/f_auto,q_auto/ea9y3xi7we9gonc2qudy",
+      "https://res.cloudinary.com/dagggqd6g/image/upload/v1765638746/Gemini_Generated_Image_gerjtrgerjtrgerj_hkxpf9.png",
     link: "https://youtu.be/KyjrGN9ZTPg?si=oehFA-BAHmJJ5sR_",
   },
 {
@@ -65,7 +73,7 @@ const projects = [
   description:
     "The 17-DOF Humanoid Robot is a sophisticated bipedal platform designed to mimic human-like movements with 17 degrees of freedom. Equipped with precise servo motors and controlled through advanced kinematics, it can walk, gesture, and perform complex actions. This project provides hands-on experience in robotics, motion planning, and embedded programming, making it perfect for exploring the intersection of mechanics, electronics, and AI-driven control systems.",
   imageUrl:
-    "https://res.cloudinary.com/dagggqd6g/image/upload/v1756380682/Blue_Futuristic_Technology_Presentation_20250828_165811_0000_qc1ldy.png", // Replace with actual Cloudinary image URL
+    "https://res.cloudinary.com/dagggqd6g/image/upload/v1765630692/Gemini_Generated_Image_gjmje4gjmje4gjmj_sm4biq.png", // Replace with actual Cloudinary image URL
   link: "#", // Optional: Add a video or GitHub repo if available
 },
 {
@@ -73,7 +81,7 @@ const projects = [
   description:
     "The Self Balancing Bot is a two-wheeled robot that uses a combination of sensors and control algorithms to maintain its balance autonomously. Powered by an MPU6050 gyroscope and accelerometer, along with PID control logic, it adjusts motor speed and direction in real time to stay upright. This project is ideal for learning control systems, embedded programming, and real-world applications of robotics and physics.",
   imageUrl:
-    "https://res.cloudinary.com/diabjuzqc/image/upload/v1744056534/image_l0t8z0.png", // Replace with actual Cloudinary image URL
+    "https://res.cloudinary.com/dagggqd6g/image/upload/v1765638878/Gemini_Generated_Image_q9rq0jq9rq0jq9rq_yb1r5b.png", // Replace with actual Cloudinary image URL
   link: "#", // Optional: Add a video or GitHub repo if available
 },
 

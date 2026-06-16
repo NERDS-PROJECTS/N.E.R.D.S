@@ -5,13 +5,37 @@ import * as random from "maath/random/dist/maath-random.esm";
 
 const Stars = (props) => {
   const ref = useRef();
-  const [sphere] = useState(() =>
-    random.inSphere(new Float32Array(5000), { radius: 1.2 })
-  );
+  const [sphere] = useState(() => {
+    try {
+      const positions = random.inSphere(new Float32Array(5000), { radius: 1.2 });
+      // Validate the positions array
+      for (let i = 0; i < positions.length; i++) {
+        if (isNaN(positions[i]) || !isFinite(positions[i])) {
+          positions[i] = 0;
+        }
+      }
+      return positions;
+    } catch (error) {
+      console.warn('Error generating star positions, using fallback:', error);
+      // Fallback: create a simple sphere manually
+      const fallback = new Float32Array(5000);
+      for (let i = 0; i < fallback.length; i += 3) {
+        const radius = 1.2;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        fallback[i] = radius * Math.sin(phi) * Math.cos(theta);
+        fallback[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
+        fallback[i + 2] = radius * Math.cos(phi);
+      }
+      return fallback;
+    }
+  });
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 10;
+      ref.current.rotation.y -= delta / 15;
+    }
   });
 
   return (
@@ -20,7 +44,7 @@ const Stars = (props) => {
         <PointMaterial
           transparent
           color="#f272c8"
-          size={0.002}
+          size={0.003}
           sizeAttenuation={true}
           depthWrite={false}
         />

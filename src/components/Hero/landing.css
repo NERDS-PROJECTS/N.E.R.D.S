@@ -1,11 +1,4 @@
-@font-face {
-    font-family: "Spaced";
-    src: url(../../assets/Fonts/Spaced\ TTF.ttf);
-}
-@font-face {
-    font-family: "Ethno";
-    src: url(../../assets/Fonts/ethnocentric\ rg\ it.otf);
-}
+/* Font declarations moved to index.css to avoid duplicates */
 .main-div{
     height: 90vh;
     background-color: black;
@@ -16,6 +9,29 @@
     flex-direction: column;
     position: relative;
     margin-bottom: 100px;
+}
+.main-div > div:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+.main-div h1.typewriter {
+    position: relative;
+    z-index: 1;
+}
+
+/* Stars component positioning */
+.main-div .stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0.5;
+    pointer-events: none;
 }
 .main-div img{
     height: 78vh;
@@ -28,6 +44,7 @@
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
   z-index: 0;
+  position: relative;
   animation: slideFromBottom 5s ease-in-out forwards;
 }
 @keyframes slideFromBottom {
@@ -39,23 +56,39 @@
     }
 }
 .typewriter{
-    font-family: "Spaced";
+    font-family: "Spaced", "Orbitron", "Arial", "sans-serif";
     font-size: 30px;
     font-weight: 600;
     color: #ffd700;
     width: 410px;
-    margin-left: 45px;
-    margin-bottom: 1rem;
+    margin: 0;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 .typewriter{
-    position: relative;
+    position: absolute;
+    z-index: 10;
+}
+
+/* Font loading states */
+.typewriter.font-loading {
+    opacity: 0.8;
+    transform: scale(0.98);
+}
+
+.typewriter.font-loaded {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
 }
 .typewriter::after{
-    content: '|';
+    content: '';
     position: absolute;
     right: 0;
     color: #ffd700;
-    background-color: #000000;
+    background-color: transparent;
     width: 100%;
     animation: typing 10s steps(26) alternate infinite,
                 line 1s infinite;
@@ -119,7 +152,11 @@
         height: 74vh;
     }
     .typewriter{
-        margin-left: 0px;
+        width: 90%;
+        max-width: 400px;
+        font-size: 1.8rem;
+        text-align: center;
+        z-index: 15;
     }
 }
 
@@ -128,11 +165,11 @@
 
 @media screen and (max-width: 448px) {
     .typewriter{
-        font-size: 1.6rem;
-        width: 350px;
-        margin-bottom: 4rem;
+        font-size: 1.4rem;
+        width: 95%;
+        max-width: 320px;
         font-weight: 600;
-        margin-top: -4rem;
+        z-index: 20;
     }
     .nerds{
         font-size: 3rem;

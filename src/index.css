@@ -6,17 +6,35 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  --font-orbitron: 'Orbitron', sans-serif;
+  --font-orbitron: 'Orbitron', sans-serif, Avenir;
+  --radius: 0.5rem; /* Define border radius variable for Tailwind */
 }
 
 @font-face {
   font-family: "Spaced";
-  src: url("/src/assets/Fonts/Spaced OTF.otf") format("opentype");
+  src: url("./assets/Fonts/Spaced OTF.otf") format("opentype");
+  font-display: block;
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "Ethenocentric";
-  src: url("/src/assets/Fonts/ethnocentric rg.otf") format("opentype");
+  src: url("./assets/Fonts/ethnocentric rg.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./assets/Fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tron";
+  src: url("./assets/Fonts/tron.ttf") format("truetype");
+  font-display: swap;
 }
 
 .main:before {
@@ -133,4 +151,42 @@
   font-weight: 900;
 }
 
+/* Roboto Font Utility Classes */
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.roboto-medium {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+/* Tron Font Utility Classes */
+.font-tron {
+  font-family: 'Tron', sans-serif;
+}
+
+.tron-regular {
+  font-family: 'Tron', sans-serif;
+  font-weight: 400;
+}
+
+/* Track Order Page Animations */
+@keyframes gridScroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(50px);
+  }
+}
+
+@keyframes gridPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
 
