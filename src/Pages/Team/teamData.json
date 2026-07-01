@@ -1484,10 +1484,10 @@
      "team": "3rd Year",
      "designation": "Joint Secretary(technical)",
      "developer_team": "No",
-     "email": "yrahulwhy@gmail.com",
-     "social": "https://www.instagram.com/agrahul776/",
-     "github": "https://github.com/xzudoxin-dashes",
-     "linkedin": "https://www.linkedin.com/in/rahul-agrahari-749392321/",
+     "email": "http.rahul@hotmail.com",
+      "social": "https://www.instagram.com/r4hul_whatt/",
+      "github": "https://github.com/r4hul-thebug",
+      "linkedin": "https://www.linkedin.com/in/r4hul-agrahari/",
      "image_id": "https://res.cloudinary.com/doquewmbh/image/upload/v1756199717/rahul-ag_hfoafo.jpg",
      "year": "2026"
    },
@@ -1508,7 +1508,7 @@
       "id": 8314,
       "name": "Antariksa Chetia",
       "team": "3rd Year",
-      "designation": "Joint Secretary(operational)",
+      "designation": "Joint Secretary(operations)",
       "developer_team": "No",
       "email": "antariksachetia@gmail.com",
       "social": "https://www.instagram.com/_arcadia_09/",
@@ -1570,6 +1570,19 @@
       "image_id": "https://res.cloudinary.com/dfll8qs0d/image/upload/v1781626858/aryan_kumar_nerds_web_image_sojxnq.jpg",
       "year": "2026"
     },
+    {
+      "id": 4444,
+      "name": "Dwaipayan Das",
+      "team": "3rd Year",
+      "designation": "Arduino Head",
+      "developer_team": "No",
+      "email": "dwaipayandas777@gmail.com",
+      "social": "",
+      "github": "https://github.com/venboi777",
+      "linkedin": "https://www.linkedin.com/in/das-dwaipayan-a82178313/?skipRedirect=true",
+      "image_id": "https://res.cloudinary.com/dv3nkxckv/image/upload/f_auto,q_auto/WhatsApp_Image_2026-06-17_at_8.28.35_PM_k9emzt",
+      "year": "2026"
+    },
  
    {
       "id": 8340,
@@ -1614,6 +1627,18 @@
       "github": "",
       "linkedin": "https://www.linkedin.com/in/shraddha-yadav-15aa89341?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       "image_id": "https://res.cloudinary.com/dkxcqf5as/image/upload/v1756396335/shradha_qyircm.webp",
+      "year": "2026"
+    },
+    {
+      "id": 8340,
+      "name": "Chintha Pranav Reddy",
+      "team": "3rd Year",
+      "designation": "Multimedia Head",
+      "developer_team": "No",
+      "email": "pranavreddychintha@gmail.com",
+      "social": "https://www.instagram.com/pranavreddy_006?igsh=bzFnMnJ5aTFlNmxv",
+      "linkedin": "https://www.linkedin.com/in/chintha-pranavreddy-a36b3a335?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      "image_id": "https://drive.google.com/file/d/1gtAnEi_HB1bLbI56lmFC4ZGmsaw8JKzw/view?usp=drivesdk",
       "year": "2026"
     },
     
@@ -1682,6 +1707,18 @@
       "year": "2026"
     }
     ,
+    {
+      "id": 9165,
+      "name": "Rahul Prasad",
+      "team": "3rd Year",
+      "designation": "Core Member",
+      "developer_team": "No",
+      "email": "rohitprasad99999@gmail.com@gmail.com",
+      "social": "https://www.instagram.com/heyits_rahul_05/",
+      "linkedin": "https://www.linkedin.com/in/rahul-prasad122/",
+      "image_id": "https://res.cloudinary.com/djnsi2pbj/image/upload/f_auto,q_auto/WhatsApp_Image_2026-06-17_at_9.51.18_PM_ab3o4n",
+      "year": "2026"
+    },
   {
     "id": 7,
     "name": "Abhinav Singh",
@@ -1753,6 +1790,7 @@
     "image_id": "https://res.cloudinary.com/dmhbmurzw/image/upload/v1728360661/edited_misba_-_MISBAHUL_KARIM_ujryao.png",
     "year": "2026"
   },
+  
  
   
   {
