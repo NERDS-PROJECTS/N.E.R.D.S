@@ -20,6 +20,7 @@ import Robosoccer from "./Pages/Robotron/Robosoccer";
 import RoboDrift from "./Pages/Robotron/RoboDrift";
 import AlgoMaze from "./Pages/Robotron/AlgoMaze";
 import Robotron from "./Pages/Robotron/Robotron";
+import Recruitment from "./Pages/Recruitment/RecruitmentPage";
 
 
 
@@ -124,6 +125,7 @@ function App() {
                 <Route path="/algomaze" element={<AlgoMaze/>} /> 
                 {/* Catch-all route for 404 page */}
                 <Route path="*" element={<Error />} />
+                <Route path="/recruit" element={<Recruitment/>}/>
               </Routes>
             </div>
 
