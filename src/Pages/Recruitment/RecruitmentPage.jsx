@@ -9,7 +9,7 @@ const Recruitment = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setRotation((prevRotation) => prevRotation + 1); // Slowly increase the rotation angle
+            setRotation((prevRotation) => prevRotation + 1); 
         }, 50);
         return () => clearInterval(interval);
     }, []);
@@ -18,39 +18,104 @@ const Recruitment = () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    setIsVisible(true); // Set visibility to true when element is in view
-                    observer.unobserve(entry.target); // Stop observing once it's visible
+                    setIsVisible(true); 
+                    observer.unobserve(entry.target); 
                 }
             });
         });
 
-        if (contentRef.current) {
-            observer.observe(contentRef.current); // Observe the content section
-        }
-
-        if (imageRef.current) {
-            observer.observe(imageRef.current); // Observe the image section
-        }
+        if (contentRef.current) observer.observe(contentRef.current);
+        if (imageRef.current) observer.observe(imageRef.current);
 
         return () => {
-            if (contentRef.current) {
-                observer.unobserve(contentRef.current); // Cleanup on unmount
-            }
-
-            if (imageRef.current) {
-                observer.unobserve(imageRef.current); // Cleanup on unmount
-            }
+            if (contentRef.current) observer.unobserve(contentRef.current);
+            if (imageRef.current) observer.unobserve(imageRef.current);
         };
     }, []);
 
     return (
         <>
+            {/* Injecting Uiverse Styles */}
+            <style>{`
+                .scrolldown {
+                    --color: #eddb0e; /* skyblue via Tailwind palette config */
+                    --sizeX: 30px;
+                    --sizeY: 50px;
+                    position: relative;
+                    width: var(--sizeX);
+                    height: var(--sizeY);
+                    margin-left: calc(var(--sizeX) / 2);
+                    border: calc(var(--sizeX) / 10) solid var(--color);
+                    border-radius: 50px;
+                    box-sizing: border-box;
+                    margin-bottom: 16px;
+                    cursor: pointer;
+                }
+
+                .scrolldown::before {
+                    content: "";
+                    position: absolute;
+                    bottom: 30px;
+                    left: 50%;
+                    width: 6px;
+                    height: 6px;
+                    margin-left: -3px;
+                    background-color: var(--color);
+                    border-radius: 100%;
+                    animation: scrolldown-anim 2s infinite;
+                    box-sizing: border-box;
+                    box-shadow: 0px -5px 3px 1px #f9660466;
+                }
+
+                @keyframes scrolldown-anim {
+                    0% { opacity: 0; height: 6px; }
+                    40% { opacity: 1; height: 10px; }
+                    80% { transform: translate(0, 20px); height: 10px; opacity: 0; }
+                    100% { height: 3px; opacity: 0; }
+                }
+
+                .chevrons {
+                    padding: 6px 0 0 0;
+                    margin-left: -3px;
+                    margin-top: 48px;
+                    width: 30px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .chevrondown {
+                    margin-top: -6px;
+                    position: relative;
+                    border: solid var(--color);
+                    border-width: 0 3px 3px 0;
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    transform: rotate(45deg);
+                }
+
+                .chevrondown:nth-child(odd) {
+                    animation: pulse54012 500ms ease infinite alternate;
+                }
+
+                .chevrondown:nth-child(even) {
+                    animation: pulse54012 500ms ease infinite alternate 250ms;
+                }
+
+                @keyframes pulse54012 {
+                    from { opacity: 0; }
+                    to { opacity: 0.5; }
+                }
+            `}</style>
+
             {/* Landing Section */}
             <div className="overflow-hidden">
-                <div className="bg-black main-section relative overflow-hidden" style={{ minHeight: '90vh', height: '90vh' }}>
-                    {/* Gradient Background - Modified for Yellow and Orange */}
+                <div className="bg-black relative overflow-hidden flex flex-col justify-center px-6 sm:px-12 md:px-20 lg:px-32" style={{ minHeight: '90vh', height: '90vh' }}>
+                    
+                    {/* Gradient Background */}
                     <div
-                        className="bg-[conic-gradient(from_134.62deg_at_50%_50%,_#111111_0deg,_#2A1D01_62.55deg,_#2A1001_189.91deg,_#FBBF24_205.08deg,_#111111_310.73deg,_#F97316_360deg)] h-[700px] w-[700px] rounded-full blur-3xl animate-gradient z-0 gradient"
+                        className="bg-[conic-gradient(from_134.62deg_at_50%_50%,_#111111_0deg,_#2A1D01_62.55deg,_#2A1001_189.91deg,_#FBBF24_205.08deg,_#111111_310.73deg,_#F97316_360deg)] rounded-full blur-3xl animate-gradient"
                         style={{
                             width: "665px",
                             height: "766px",
@@ -64,27 +129,9 @@ const Recruitment = () => {
                             transition: "transform 0.05s linear",
                         }}
                     ></div>
-                    <div className="content-section relative z-10" ref={contentRef}>
-                        <h1
-                            className={`mt-20 sm:mt-[-1.5rem] text-3xl md:text-[70px] font-ethenocentric font-xl bg-gradient-to-b from-[#ffffff] to-[#ffff00] bg-clip-text text-transparent main-heading meet-heading absolute transition-opacity duration-1000 ${isVisible ? "opacity-100" : "opacity-0"
-                                }`}
-                        >
-                            JOIN
-                        </h1>
-                        <h1
-                            className={`font-ethenocentric mt-7 text-3xl md:text-[70px] sm:mt-[-4.8rem] font-normal bg-gradient-to-b from-[#ffffff] to-[#ffff00] bg-clip-text text-transparent main-heading team-heading absolute transition-opacity duration-1000 ${isVisible ? "opacity-100" : "opacity-0"
-                                }`}
-                        >
-                            THE TEAM
-                        </h1>
-                        <p
-                            className={`font-spaced mt-6 sm:mt-[-5.5rem] text-[20px] text-white font-normal heading-subsection absolute transition-opacity duration-1000 ${isVisible ? "opacity-100" : "opacity-0"
-                                }`}
-                        >
-                            Our core unit is assembling. Submit your credentials below to sync with some of the finest engineering minds in the circuit.
-                        </p>
-                    </div>
-                    <div className="main-image py-60 relative z-10" ref={imageRef}>
+
+                    {/* Image Section - Stacked properly on mobile, responsive on desktop */}
+                    <div className="md:absolute right-0 bottom-0 top-0 w-full md:w-1/2 pointer-events-none z-20 flex items-center justify-center md:justify-end md:mr-12" ref={imageRef}>
                         <img
                             src="https://res.cloudinary.com/dqeenwawp/image/upload/v1782926809/bumblebee_fsreca.png"
                             alt="robot-image"
@@ -92,10 +139,40 @@ const Recruitment = () => {
                                 maskImage: 'linear-gradient(to bottom, black 75%, transparent 100%)',
                                 WebkitMaskImage: 'linear-gradient(to bottom, black 75%, transparent 100%)'
                             }}
-                            className={`mix-blend-whiten z-10 absolute right-4 md:right-12 top-1/2 -translate-y-1/2 w-auto max-h-[90%] object-contain transition-opacity duration-1000 ${isVisible ? "opacity-100" : "opacity-0"
-                                }`}
+                            className={`mix-blend-whiten max-h-[45%] md:max-h-[85%] w-auto object-contain transition-opacity duration-1000 ${
+                                isVisible ? "opacity-100" : "opacity-0"
+                            }`}
                         />
                     </div>
+
+                    {/* Content Section */}
+                    <div 
+                        className={`relative z-10 flex flex-col justify-center max-w-2xl transition-opacity duration-1000 ${
+                            isVisible ? "opacity-100" : "opacity-0"
+                        } mt-4 md:mt-0 pb-16 md:pb-0`} 
+                        ref={contentRef}
+                    >
+                        <h1 className="text-4xl sm:text-5xl md:text-[70px] font-ethenocentric bg-gradient-to-b from-[#ffffff] to-[#ffff00] bg-clip-text text-transparent leading-none">
+                            JOIN
+                        </h1>
+                        <h1 className="font-ethenocentric mt-2 text-4xl sm:text-5xl md:text-[70px] font-normal bg-gradient-to-b from-[#ffffff] to-[#ffff00] bg-clip-text text-transparent leading-none">
+                            THE TEAM
+                        </h1>
+                        <p className="font-spaced mt-6 w-full max-w-md md:max-w-xl text-sm sm:text-base md:text-[20px] text-white font-normal leading-relaxed">
+                            Our core unit is assembling. Submit your credentials below to sync with some of the finest engineering minds in the circuit.
+                        </p>
+                    </div>
+
+                    {/* Uiverse ScrollDown Indicator */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center">
+                        <div className="scrolldown">
+                            <div className="chevrons">
+                                <div className="chevrondown"></div>
+                                <div className="chevrondown"></div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
