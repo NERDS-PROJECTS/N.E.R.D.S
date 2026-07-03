@@ -190,6 +190,7 @@ const RecruitmentForm = () => {
                   <option value="design and media" className="bg-[#0f0c03]">Content Creation and Video Editing</option>
                   <option value="pr" className="bg-[#0f0c03]">Public Relations & Outreach</option>
                   <option value="event management" className="bg-[#0f0c03]">Event Management</option>
+                  <option value="design" className="bg-[#0f0c03]">Design Team</option>
                 </select>
                 <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-yellow-500/60">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
