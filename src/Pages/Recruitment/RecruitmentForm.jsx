@@ -63,7 +63,7 @@ const RecruitmentForm = () => {
 
   return (
     <div 
-      className="min-h-screen bg-[#050400] text-gray-200 flex flex-col justify-center items-center p-6 relative overflow-hidden font-mono"
+      className="min-h-screen bg-[#050400] text-gray-200 flex flex-col justify-center items-center px-6 py-20 md:py-32 relative overflow-hidden font-mono"
       style={{
         backgroundImage: `
           linear-gradient(to right, rgba(234, 179, 8, 0.04) 1px, transparent 1px),
