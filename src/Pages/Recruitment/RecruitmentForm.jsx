@@ -12,24 +12,20 @@ const RecruitmentForm = () => {
     reason: '',
   });
 
-  // New state variables to track submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState(null);
 
-  // Generic change handler
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Modern ASYNC form handler that stops page redirection
   const handleSubmit = async (e) => {
-    e.preventDefault(); // STOPS the page from redirecting or opening new tabs
+    e.preventDefault();
     setIsSubmitting(true);
     setError(null);
 
-    // Google Apps Script expects standard Form Data URL encoding
     const formDataToSend = new URLSearchParams();
     formDataToSend.append('Name', formData.name);
     formDataToSend.append('ScholarID', formData.scholarId);
@@ -43,15 +39,13 @@ const RecruitmentForm = () => {
     try {
       await fetch("https://script.google.com/macros/s/AKfycbwqRcLrgFbdZsoVBMSlWHat7L26UKFsh5V2890froc9RidWb9xhh9fF92dHcSr4VrrCmA/exec", {
         method: 'POST',
-        mode: 'no-cors', // Crucial for dealing with Google Script's redirection policies
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: formDataToSend.toString(),
       });
 
-      // Because 'no-cors' mode is active, we won't get a true JSON status, 
-      // but if the fetch doesn't throw an error, it succeeded.
       setIsSubmitted(true);
     } catch (err) {
       console.error("Submission error:", err);
@@ -63,7 +57,7 @@ const RecruitmentForm = () => {
 
   return (
     <div 
-      className="min-h-screen bg-[#050400] text-gray-200 flex flex-col justify-center items-center p-6 relative overflow-hidden font-mono"
+      className="min-h-screen bg-[#050400] text-gray-200 flex flex-col justify-center items-center px-6 py-20 md:py-32 relative overflow-hidden font-mono"
       style={{
         backgroundImage: `
           linear-gradient(to right, rgba(234, 179, 8, 0.04) 1px, transparent 1px),
@@ -73,14 +67,12 @@ const RecruitmentForm = () => {
       }}
     >
         
-      {/* Background Deep Glows */}
+
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-600/10 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-900/15 rounded-full blur-[130px] pointer-events-none" />
 
-      {/* Main Container Panel with Yellow Border Glow */}
       <div className="w-full max-w-2xl bg-[#0b0a02]/95 backdrop-blur-xl border border-yellow-500/40 rounded-2xl p-8 md:p-10 shadow-[0_0_50px_rgba(234,179,8,0.15)] relative z-10">
-        
-        {/* Header */}
+ 
         <div className="text-center mb-10 border-b border-amber-950/40 pb-6">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-amber-950/50 to-amber-900/30 border border-yellow-500/40 mb-4 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
             <svg className="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,7 +87,6 @@ const RecruitmentForm = () => {
           </p>
         </div>
 
-        {/* Conditional rendering for success screen */}
         {isSubmitted ? (
           <div className="text-center py-12 space-y-4">
             <div className="text-emerald-500 text-4xl">✓</div>
@@ -106,8 +97,7 @@ const RecruitmentForm = () => {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
-            
-            {/* Two Column Setup (Name & Scholar ID) */}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-widest text-yellow-500/80 mb-2">◇ Full Name</label>
@@ -134,7 +124,6 @@ const RecruitmentForm = () => {
               </div>
             </div>
 
-            {/* Two Column Setup for Contacts (Email & Phone) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-widest text-yellow-500/80 mb-2">◇ Institute Email</label>
@@ -161,7 +150,6 @@ const RecruitmentForm = () => {
               </div>
             </div>
 
-            {/* Resume Link */}
             <div>
               <label className="block text-xs font-bold uppercase tracking-widest text-yellow-500/80 mb-2">◇ Resume Drive Link</label>
               <input
@@ -175,7 +163,6 @@ const RecruitmentForm = () => {
               <span className="text-[10px] text-yellow-600/60 mt-1.5 block px-1">⚠ Set public link permissions ("anyone with the link").</span>
             </div>
 
-            {/* Primary Domain Dropdown */}
             <div>
               <label className="block text-xs font-bold uppercase tracking-widest text-yellow-500/80 mb-2">◇ Core Domain Preference</label>
               <div className="relative">
@@ -198,7 +185,6 @@ const RecruitmentForm = () => {
               </div>
             </div>
 
-            {/* Other Clubs Textarea */}
             <div>
               <label className="block text-xs font-bold uppercase tracking-widest text-yellow-500/80 mb-2">◇ Concurrent Affiliations</label>
               <textarea
@@ -210,7 +196,6 @@ const RecruitmentForm = () => {
               />
             </div>
 
-            {/* Why you want to Join Textarea */}
             <div>
               <label className="block text-xs font-bold uppercase tracking-widest text-yellow-500/80 mb-2">◇ Why do you want to join?</label>
               <textarea
@@ -222,10 +207,9 @@ const RecruitmentForm = () => {
               />
             </div>
 
-            {/* Error Message rendering if failure occurs */}
+
             {error && <div className="text-xs text-yellow-500 text-center font-bold">{error}</div>}
 
-            {/* Submit Button */}
             <div className="pt-4">
               <button
                 type="submit"
