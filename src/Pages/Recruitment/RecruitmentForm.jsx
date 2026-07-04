@@ -88,12 +88,22 @@ const RecruitmentForm = () => {
         </div>
 
         {isSubmitted ? (
-          <div className="text-center py-12 space-y-4">
-            <div className="text-emerald-500 text-4xl">✓</div>
+          <div className="text-center py-12 space-y-5 flex flex-col items-center">
+            <div className="text-emerald-500 text-4xl animate-pulse">✓</div>
             <h2 className="text-xl font-bold text-white uppercase tracking-wider">Application Received</h2>
             <p className="text-gray-400 text-sm max-w-sm mx-auto">
-              Your data has been securely logged directly into our rosters. Stand by for further transmission.
+              Your data has been successfully registered. For further updates regarding your application and the next steps, please join our official updates group.
             </p>
+            <div className="pt-2 w-full max-w-xs">
+              <a 
+                href="https://chat.whatsapp.com/L6VuTtfB594Eh0TNCIVQii"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block w-full bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-400 text-black font-black uppercase tracking-widest py-4 rounded-xl transition-all duration-300 shadow-[0_4px_25px_rgba(234,179,8,0.2)] hover:shadow-[0_0_30px_rgba(234,179,8,0.4)] active:scale-[0.99] border-t border-white/30 text-xs text-center"
+              >
+                Join WhatsApp Group
+              </a>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
