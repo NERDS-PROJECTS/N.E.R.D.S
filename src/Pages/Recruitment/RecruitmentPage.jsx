@@ -38,7 +38,7 @@ const Recruitment = () => {
             {/* Injecting Uiverse Styles */}
             <style>{`
                 .scrolldown {
-                    --color: #eddb0e; /* skyblue via Tailwind palette config */
+                    --color: #eddb0e; 
                     --sizeX: 30px;
                     --sizeY: 50px;
                     position: relative;
@@ -111,7 +111,7 @@ const Recruitment = () => {
 
             {/* Landing Section */}
             <div className="overflow-hidden">
-                <div className="bg-black relative overflow-hidden flex flex-col justify-center px-6 sm:px-12 md:px-20 lg:px-32" style={{ minHeight: '90vh', height: '90vh' }}>
+                <div className="bg-black relative overflow-hidden flex flex-col md:justify-center min-h-screen md:min-h-0 md:h-[90vh] px-6 sm:px-12 md:px-20 lg:px-32 pt-12 pb-24 md:py-0">
                     
                     {/* Gradient Background */}
                     <div
@@ -130,16 +130,17 @@ const Recruitment = () => {
                         }}
                     ></div>
 
-                    {/* Image Section - Stacked properly on mobile, responsive on desktop */}
-                    <div className="md:absolute right-0 bottom-0 top-0 w-full md:w-1/2 pointer-events-none z-20 flex items-center justify-center md:justify-end md:mr-12" ref={imageRef}>
+                    {/* Image Section */}
+                    <div className="relative md:absolute right-0 bottom-0 top-0 w-full md:w-1/2 pointer-events-none z-20 flex items-center justify-center md:justify-end md:mr-12 mb-8 md:mb-0" ref={imageRef}>
                         <img
                             src="https://res.cloudinary.com/dqeenwawp/image/upload/v1782926809/bumblebee_fsreca.png"
                             alt="robot-image"
                             style={{
-                                maskImage: 'linear-gradient(to bottom, black 75%, transparent 100%)',
-                                WebkitMaskImage: 'linear-gradient(to bottom, black 75%, transparent 100%)'
+                                maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+                                WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
                             }}
-                            className={`mix-blend-whiten max-h-[45%] md:max-h-[85%] w-auto object-contain transition-opacity duration-1000 ${
+                            /* CHANGED: Made image take full width on mobile, and scale back down dynamically on md screens */
+                            className={`mix-blend-whiten w-full h-auto md:w-auto md:max-h-[85%] object-contain transition-opacity duration-1000 ${
                                 isVisible ? "opacity-100" : "opacity-0"
                             }`}
                         />
@@ -149,7 +150,7 @@ const Recruitment = () => {
                     <div 
                         className={`relative z-10 flex flex-col justify-center max-w-2xl transition-opacity duration-1000 ${
                             isVisible ? "opacity-100" : "opacity-0"
-                        } mt-4 md:mt-0 pb-16 md:pb-0`} 
+                        }`} 
                         ref={contentRef}
                     >
                         <h1 className="text-4xl sm:text-5xl md:text-[70px] font-ethenocentric bg-gradient-to-b from-[#ffffff] to-[#ffff00] bg-clip-text text-transparent leading-none">
