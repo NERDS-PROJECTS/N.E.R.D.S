@@ -8,6 +8,7 @@ const RecruitmentForm = () => {
     phoneNumber: '',
     resumeLink: '',
     teamPreference: '',
+    secondPreference:'',
     otherClubs: '',
     reason: '',
   });
@@ -33,6 +34,7 @@ const RecruitmentForm = () => {
     formDataToSend.append('Phone', formData.phoneNumber);
     formDataToSend.append('Resume', formData.resumeLink);
     formDataToSend.append('Preference', formData.teamPreference);
+    formDataToSend.append('2nd Preference', formData.secondPreference);
     formDataToSend.append('OtherClubs', formData.otherClubs);
     formDataToSend.append('Reason', formData.reason);
 
@@ -180,6 +182,27 @@ const RecruitmentForm = () => {
                   required
                   value={formData.teamPreference}
                   onChange={(e) => setFormData({...formData, teamPreference: e.target.value})}
+                  className="w-full bg-gradient-to-b from-[#141105] to-[#0f0c03] border border-amber-950 focus:border-yellow-500/60 rounded-xl px-4 py-3 text-sm transition-all duration-300 outline-none text-white focus:shadow-[0_0_20px_rgba(234,179,8,0.15)] focus:bg-[#1a1608] appearance-none cursor-pointer"
+                >
+                  <option value="" disabled hidden>Select division segment</option>
+                  <option value="technical" className="bg-[#0f0c03]">Technical Team</option>
+                  <option value="design and media" className="bg-[#0f0c03]">Content Creation and Video Editing</option>
+                  <option value="pr" className="bg-[#0f0c03]">Public Relations & Outreach</option>
+                  <option value="event management" className="bg-[#0f0c03]">Event Management</option>
+                  <option value="design" className="bg-[#0f0c03]">Design Team</option>
+                </select>
+                <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-yellow-500/60">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+              </div>
+            </div>
+             <div>
+              <label className="block text-xs font-bold uppercase tracking-widest text-yellow-500/80 mb-2">◇ 2nd Domain Preference</label>
+              <div className="relative">
+                <select
+                  required
+                  value={formData.secondPreference}
+                  onChange={(e) => setFormData({...formData, secondPreference: e.target.value})}
                   className="w-full bg-gradient-to-b from-[#141105] to-[#0f0c03] border border-amber-950 focus:border-yellow-500/60 rounded-xl px-4 py-3 text-sm transition-all duration-300 outline-none text-white focus:shadow-[0_0_20px_rgba(234,179,8,0.15)] focus:bg-[#1a1608] appearance-none cursor-pointer"
                 >
                   <option value="" disabled hidden>Select division segment</option>
