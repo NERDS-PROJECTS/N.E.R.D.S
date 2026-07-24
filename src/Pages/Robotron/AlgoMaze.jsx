@@ -1160,7 +1160,7 @@ function AlgoMaze() {
 
 	// Change this to your actual deployed Apps Script Web App URL
 	const SCRIPT_URL =
-		"https://script.google.com/macros/s/AKfycbygPyBHVBzwtI-hPt7riJWhNq7sXK7ZanTJh-8AXXZRXxTcGk8te5AMNGMvNU8ChVFHSg/exec";
+		"";
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({
@@ -1183,7 +1183,7 @@ function AlgoMaze() {
 				fname: "uploadFilesToGoogleDrive",
 			};
 			fetch(
-				"https://script.google.com/macros/s/AKfycbyAQLKv4e4iBfdZn6sdLw-OSerztKzNbfhF_eJiJAf0WrwK7IzvIVS-cF2iKlv_qQ8EMw/exec",
+				"",
 				{
 					method: "POST",
 					body: JSON.stringify(dataSend),

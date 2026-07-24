@@ -1150,7 +1150,7 @@ function Robosoccer() {
 
 	// Change this to your actual deployed Apps Script Web App URL
 	const SCRIPT_URL =
-		"https://script.google.com/macros/s/AKfycbzXRIBrZ4-tz2F74l6zYk3tYQuDunUz49Q2XvEddBbUwtfT8UgzPGchN3cLzlO-JuqawA/exec";
+		"";
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({
@@ -1173,7 +1173,7 @@ function Robosoccer() {
 				fname: "uploadFilesToGoogleDrive",
 			};
 			fetch(
-				"https://script.google.com/macros/s/AKfycbyAQLKv4e4iBfdZn6sdLw-OSerztKzNbfhF_eJiJAf0WrwK7IzvIVS-cF2iKlv_qQ8EMw/exec",
+				"",
 				{
 					method: "POST",
 					body: JSON.stringify(dataSend),
