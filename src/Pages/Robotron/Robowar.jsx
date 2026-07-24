@@ -1212,7 +1212,7 @@ function RobowarRegistration() {
 
 	// Change this to your actual deployed Apps Script Web App URL
 	const SCRIPT_URL =
-		"https://script.google.com/macros/s/AKfycbz98t-fRbP6E_eLYVlyHdLPoYAb3A-HljuT1V_Imsgi2g0daMzjPKwAzH6T474uDYw/exec";
+		"";
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({
