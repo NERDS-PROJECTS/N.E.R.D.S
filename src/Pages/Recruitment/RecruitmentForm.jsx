@@ -163,10 +163,9 @@ const RecruitmentForm = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-widest text-yellow-500/80 mb-2">◇ Resume Drive Link</label>
+              <label className="block text-xs font-bold uppercase tracking-widest text-yellow-500/80 mb-2">◇ Resume Drive Link (Optional)</label>
               <input
                 type="url"
-                required
                 value={formData.resumeLink}
                 onChange={(e) => setFormData({...formData, resumeLink: e.target.value})}
                 placeholder="https://drive.google.com/..."
