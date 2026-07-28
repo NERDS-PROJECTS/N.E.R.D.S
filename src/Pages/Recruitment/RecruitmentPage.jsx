@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
-import RecruitmentForm from "./RecruitmentForm";
+import RecruitmentClosed from "./RecruitmentClose";
+
 
 const Recruitment = () => {
     const [rotation, setRotation] = useState(-37.96);
@@ -139,7 +140,6 @@ const Recruitment = () => {
                                 maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
                                 WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
                             }}
-                            /* CHANGED: Made image take full width on mobile, and scale back down dynamically on md screens */
                             className={`mix-blend-whiten w-full h-auto md:w-auto md:max-h-[85%] object-contain transition-opacity duration-1000 ${
                                 isVisible ? "opacity-100" : "opacity-0"
                             }`}
@@ -160,7 +160,7 @@ const Recruitment = () => {
                             THE TEAM
                         </h1>
                         <p className="font-spaced mt-6 w-full max-w-md md:max-w-xl text-sm sm:text-base md:text-[20px] text-white font-normal leading-relaxed">
-                            Our core unit is assembling. Submit your credentials below to sync with some of the finest engineering minds in the circuit.
+                            Our core unit is assembling. Online registration has closed, but manual registration is available directly at the venue.
                         </p>
                     </div>
 
@@ -177,8 +177,8 @@ const Recruitment = () => {
                 </div>
             </div>
 
-            {/* Team-Details Section */}
-            <RecruitmentForm />
+            {/* Registration Closed Notice Section */}
+            <RecruitmentClosed/>
         </>
     );
 };
