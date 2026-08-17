@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import RecruitmentClosed from "./RecruitmentClose";
-
+import Results from "./QuizResult.jsx";
 
 const Recruitment = () => {
     const [rotation, setRotation] = useState(-37.96);
     const [isVisible, setIsVisible] = useState(false);
+    
     const contentRef = useRef(null);
     const imageRef = useRef(null);
+    const resultsRef = useRef(null);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -33,6 +35,10 @@ const Recruitment = () => {
             if (imageRef.current) observer.unobserve(imageRef.current);
         };
     }, []);
+
+    const scrollToResults = () => {
+        resultsRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
     return (
         <>
@@ -154,18 +160,18 @@ const Recruitment = () => {
                         ref={contentRef}
                     >
                         <h1 className="text-4xl sm:text-5xl md:text-[70px] font-ethenocentric bg-gradient-to-b from-[#ffffff] to-[#ffff00] bg-clip-text text-transparent leading-none">
-                            JOIN
+                            INTERVIEW
                         </h1>
                         <h1 className="font-ethenocentric mt-2 text-4xl sm:text-5xl md:text-[70px] font-normal bg-gradient-to-b from-[#ffffff] to-[#ffff00] bg-clip-text text-transparent leading-none">
-                            THE TEAM
+                            RESULTS
                         </h1>
                         <p className="font-spaced mt-6 w-full max-w-md md:max-w-xl text-sm sm:text-base md:text-[20px] text-white font-normal leading-relaxed">
-                            Our core unit is assembling. Online registration has closed, but manual registration is available directly at the venue.
+                            The quiz evaluation is complete. Scroll down to check the candidates shortlisted for the interview round.
                         </p>
                     </div>
 
-                    {/* Uiverse ScrollDown Indicator */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center">
+                    {/* Scroll Down Button */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center" onClick={scrollToResults}>
                         <div className="scrolldown">
                             <div className="chevrons">
                                 <div className="chevrondown"></div>
@@ -177,8 +183,12 @@ const Recruitment = () => {
                 </div>
             </div>
 
-            {/* Registration Closed Notice Section */}
-            <RecruitmentClosed/>
+            {/* Calling Results Component */}
+            {/* <div ref={resultsRef}>
+                <Results/>
+            </div> */}
+
+            <RecruitmentClosed />
         </>
     );
 };

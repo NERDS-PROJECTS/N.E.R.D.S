@@ -84,6 +84,14 @@ const projects = [
     "https://res.cloudinary.com/dagggqd6g/image/upload/v1765638878/Gemini_Generated_Image_q9rq0jq9rq0jq9rq_yb1r5b.png", // Replace with actual Cloudinary image URL
   link: "#", // Optional: Add a video or GitHub repo if available
 },
+{
+  title: "Smart IOT & ML Enabled Irrigation System",
+  description:
+    "IRRIGO is an award-winning, end-to-end smart agriculture solution developed by Team IRRIGO, who secured a Top Performer title in the Agritech and Rural Innovation Track (Hardware+Software domain) at the national-level hackathon HACKSAGON 2026, organized by the ABV-IIITM IEEE Student Branch. At its core, the project leverages a high-performance ESP32 microcontroller to interface with multi-sensor arrays—monitoring parameters like soil moisture, ambient temperature, and humidity—and control water pumps via solid-state relays. Sensor telemetry is continuously uploaded to a Firebase real-time database, enabling seamless multi-device access through an intuitive web and mobile monitoring dashboard that grants farmers real-time field visibility, automated alerts, and manual override capabilities.",
+  imageUrl:
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1786993620/Untitled_design_tyiegu.png", // Replace with actual Cloudinary image URL
+  link: "#", // Optional: Add a video or GitHub repo if available
+},
 
 ];
 

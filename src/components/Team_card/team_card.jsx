@@ -46,19 +46,23 @@ const TeamCard = ({ member }) => {
           />
 
           {/* Profile Image */}
-          <img
-            src={image_id}
-            alt={name}
-            className={`mx-auto team_card_img object-cover transition-opacity duration-500 ${hovered ? "opacity-20" : "opacity-100"}`} // Added transition classes here
-            style={{
-              width: "209px",
-              height: "209px",
-              borderRadius: "50%",
-              marginTop: "67px",
-              boxShadow: "0px 0px 9.8px 0px #FF00E5",
-              border: "1.5px solid #FF00E5",
-            }}
-          />
+          {/* Profile Image */}
+<img
+  src={image_id}
+  alt={name}
+  className={`mx-auto team_card_img object-cover object-top transition-opacity duration-500 ${
+    hovered ? "opacity-20" : "opacity-100"
+  }`}
+  style={{
+    width: "209px",
+    height: "209px",
+    borderRadius: "50%",
+    marginTop: "67px",
+    boxShadow: "0px 0px 9.8px 0px #FF00E5",
+    border: "1.5px solid #FF00E5",
+    objectPosition: "top", // Ensures the top portion of the image is prioritized
+  }}
+/>
 
           {/* Name and Role */}
           <h2
