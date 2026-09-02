@@ -41,7 +41,7 @@ export function SparklesPreview({ loading }) {
 
             {/* Bottom Section: Text + Chevron Button */}
             <div className="flex flex-col items-center gap-4 z-20 mb-4">
-                <h4 className="text-base md:text-lg font-medium text-gray-200 text-center max-w-2xl mx-auto drop-shadow-lg">
+                <h4 className="text-base md:text-lg font-medium text-[#D28957] text-center max-w-2xl mx-auto drop-shadow-lg">
                     Complete the form below to order your exclusive Robotics club Merchandise. Scroll down to get started.
                 </h4>
 
