@@ -121,7 +121,7 @@ function App() {
                 <Route path="/robowar" element={<Robowar/>} /> 
                 <Route path="/robosoccer" element={<Robosoccer/>} /> 
                 <Route path="/robodrift" element={<RoboDrift/>} /> 
-                <Route path="/algomaze" element={<AlgoMaze/>} /> 
+                <Route path="/algomaze" element={<AlgoMaze/>} />
                 {/* Catch-all route for 404 page */}
                 <Route path="*" element={<Error />} />
               </Routes>
