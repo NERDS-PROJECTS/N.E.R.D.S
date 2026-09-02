@@ -8,10 +8,12 @@ function MerchPay() {
     name: "",
     fromNITSilchar: "No",
     scholarId: "",
+    email:"",
     type: "",
     size: "",
     wantName: "No",
     nameInTShirt: "",
+    tshirtTheme:"",
     address: "",
     phone: "",
     paymentProofLink: "",
@@ -33,10 +35,10 @@ function MerchPay() {
   const [modal, setModal] = useState({ open: false, message: "", success: false });
 
   // Toggle to close orders instantly (no backend change needed)
-  const ORDERS_CLOSED = true;
+  const ORDERS_CLOSED = false;
 
   // Change this to your actual deployed Apps Script Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5p3omtAO6t1MPeTFP9kL0ruKR4lyjxhwWhnw9VG42O-ts8-SxYk-sjMVycqKV0vU3gw/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxwihTQ_L0z7CVHEgbr2SlMiUF5Q80WlDvlLmlErJYq3E-BvNrg_WzL-3SNKI2ufrI/exec";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -61,7 +63,7 @@ function MerchPay() {
         fname: "uploadFilesToGoogleDrive",
       };
       fetch(
-        "https://script.google.com/macros/s/AKfycbyhMyvbLwGEqCjVGC0gJCwvAOS_KyJnfVleU4h3iUUG88VeUXoWyujKKjRxMSuzT9AoHA/exec",
+        "https://script.google.com/macros/s/AKfycbyxwihTQ_L0z7CVHEgbr2SlMiUF5Q80WlDvlLmlErJYq3E-BvNrg_WzL-3SNKI2ufrI/exec",
         {
           method: "POST",
           body: JSON.stringify(dataSend),
@@ -102,6 +104,10 @@ function MerchPay() {
       setModal({ open: true, message: "Please enter your address.", success: false });
       return;
     }
+    if (!formData.email.trim()) {
+      setModal({ open: true, message: "Please enter your email address.", success: false });
+      return;
+    }
     if (formData.fromNITSilchar === "Yes" && !formData.scholarId.trim()) {
       setModal({ open: true, message: "Please enter your Scholar ID.", success: false });
       return;
@@ -135,12 +141,14 @@ function MerchPay() {
       params.append("IsNITS", formData.fromNITSilchar);
       params.append("ScholarId", formData.fromNITSilchar === "Yes" ? formData.scholarId : "0000000");
       params.append("Type", formData.type);
+      params.append("Email", formData.email);
       params.append("Size", formData.size);
       params.append("WantName", formData.wantName);
       params.append("NameOnTShirt", formData.wantName === "Yes" ? formData.nameInTShirt : "");
       params.append("Address", formData.address);
       params.append("Phone", formData.phone);
       params.append("ScreenshotLink", formData.paymentProofLink);
+      params.append("TshirtTheme",formData.tshirtTheme);
       const res = await fetch(SCRIPT_URL, {
         method: "POST",
         headers: {
@@ -154,6 +162,7 @@ function MerchPay() {
         name: "",
         fromNITSilchar: "No",
         scholarId: "",
+        email:"",
         type: "",
         size: "",
         wantName: "No",
@@ -161,6 +170,7 @@ function MerchPay() {
         address: "",
         phone: "",
         paymentProofLink: "",
+        tshirtTheme:""
       });
       setFileUrl("");
     } catch (err) {
@@ -180,27 +190,27 @@ function MerchPay() {
     }
   };
 
-  return (
-    <div className="bg-black min-h-screen w-full font-sans relative overflow-x-hidden">
+ return (
+    <div className="bg-[#080305] min-h-screen w-full font-sans relative overflow-x-hidden text-red-100 selection:bg-red-600 selection:text-white">
       {/* Modal for alerts */}
       {modal.open && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm px-2">
-          <div className={`w-full max-w-md md:max-w-md sm:max-w-xs rounded-2xl shadow-2xl p-6 sm:p-4 border-2 ${modal.success ? 'border-cyan-400 bg-gradient-to-br from-cyan-900/90 to-cyan-700/80' : 'border-fuchsia-400 bg-gradient-to-br from-fuchsia-900/90 to-fuchsia-700/80'} animate-fade-in`}>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-md px-2">
+          <div className={`w-full max-w-md md:max-w-md sm:max-w-xs rounded-2xl shadow-[0_0_50px_rgba(225,29,72,0.4)] p-6 sm:p-4 border-2 ${modal.success ? 'border-red-500 bg-gradient-to-br from-red-950 via-[#1a0509] to-black' : 'border-rose-600 bg-gradient-to-br from-rose-950 via-[#1a0005] to-black'} animate-fade-in`}>
             <div className="flex flex-col items-center gap-4">
-              <div className={`rounded-full p-3 ${modal.success ? 'bg-cyan-400/20' : 'bg-fuchsia-400/20'}`}>
+              <div className={`rounded-full p-3 ${modal.success ? 'bg-red-500/20 shadow-[0_0_15px_#ef4444]' : 'bg-rose-500/20 shadow-[0_0_15px_#f43f5e]'}`}>
                 {modal.success ? (
-                  <svg className="w-10 h-10 text-cyan-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  <svg className="w-10 h-10 text-red-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                 ) : (
-                  <svg className="w-10 h-10 text-fuchsia-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                  <svg className="w-10 h-10 text-rose-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                 )}
               </div>
               <div className="text-center">
-                <h3 className={`text-xl sm:text-lg font-bold mb-2 ${modal.success ? 'text-cyan-200' : 'text-fuchsia-200'}`}>{modal.success ? 'Order Status' : 'Error'}</h3>
-                <p className="text-base sm:text-sm text-white whitespace-pre-line break-words">{modal.message}</p>
+                <h3 className={`text-xl sm:text-lg font-bold mb-2 tracking-wider uppercase ${modal.success ? 'text-red-400 drop-shadow-[0_0_8px_#ef4444]' : 'text-rose-400 drop-shadow-[0_0_8px_#f43f5e]'}`}>{modal.success ? 'Order Status' : 'Error'}</h3>
+                <p className="text-base sm:text-sm text-zinc-300 whitespace-pre-line break-words">{modal.message}</p>
               </div>
               <button
                 onClick={() => setModal({ ...modal, open: false })}
-                className={`mt-4 px-6 py-2 rounded-lg font-semibold shadow transition-all duration-200 w-full max-w-[200px] ${modal.success ? 'bg-cyan-400 text-cyan-900 hover:bg-cyan-300' : 'bg-fuchsia-400 text-fuchsia-900 hover:bg-fuchsia-300'}`}
+                className={`mt-4 px-6 py-2 rounded-lg font-bold uppercase tracking-wider shadow-lg transition-all duration-300 w-full max-w-[200px] ${modal.success ? 'bg-red-600 text-black hover:bg-red-500 hover:shadow-[0_0_20px_#ef4444]' : 'bg-rose-600 text-black hover:bg-rose-500 hover:shadow-[0_0_20px_#f43f5e]'}`}
               >
                 Close
               </button>
@@ -224,23 +234,23 @@ function MerchPay() {
 
       {ORDERS_CLOSED && (
         <div className="mx-auto max-w-3xl px-4 mt-6">
-          <div className="rounded-2xl border-2 border-rose-400/60 bg-gradient-to-r from-rose-900/70 to-rose-700/60 text-rose-100 shadow-[0_8px_32px_0_rgba(244,63,94,0.35)] p-4 text-center">
-            <p className="text-base md:text-lg font-semibold tracking-wide">
+          <div className="rounded-2xl border-2 border-red-600/80 bg-gradient-to-r from-red-950/90 via-black to-red-950/90 text-red-200 shadow-[0_0_30px_rgba(225,29,72,0.5)] p-4 text-center">
+            <p className="text-base md:text-lg font-bold tracking-widest uppercase text-red-400 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]">
               Orders are closed now. Form submissions are disabled.
             </p>
           </div>
         </div>
       )}
 
-      {/* Navigation dots with neon effect */}
+      {/* Navigation dots with neon Ultron effect */}
       <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-4">
         {[0, 1, 2, 3].map((index) => (
           <button
             key={index}
             onClick={() => scrollToSection(index)}
-            className={`w-3 h-3 rounded-full border-2 border-cyan-400 shadow-[0_0_8px_2px_#22d3ee] transition-all duration-300 ${currentSection === index
-              ? "bg-cyan-400 scale-150 shadow-[0_0_16px_4px_#22d3ee]"
-              : "bg-slate-700 hover:bg-cyan-500"
+            className={`w-3 h-3 rounded-full border-2 border-red-500 shadow-[0_0_10px_#ef4444] transition-all duration-300 ${currentSection === index
+              ? "bg-red-600 scale-150 shadow-[0_0_20px_#ef4444]"
+              : "bg-zinc-900 hover:bg-red-700"
               }`}
             aria-label={`Navigate to section ${index + 1}`}
           />
@@ -251,15 +261,15 @@ function MerchPay() {
 
         {/* Personal Details Section */}
         <section className="form-section min-h-screen py-16 flex flex-col justify-center">
-          <div className="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/90 border border-cyan-400/30 shadow-[0_8px_32px_0_#22d3ee33] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
+          <div className="bg-gradient-to-br from-[#120306]/90 via-[#0a0204]/95 to-black border border-red-600/40 shadow-[0_0_35px_rgba(225,29,72,0.25)] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
 
-            <div className="absolute -top-8 -right-8 w-32 h-32 bg-cyan-400 opacity-10 rounded-full blur-2xl animate-pulse" />
-            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-cyan-300 mb-6 border-b border-cyan-700 pb-4 tracking-wide drop-shadow-lg">
+            <div className="absolute -top-8 -right-8 w-32 h-32 bg-red-600 opacity-20 rounded-full blur-3xl animate-pulse" />
+            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-red-500 mb-6 border-b border-red-900/80 pb-4 tracking-widest uppercase drop-shadow-[0_0_12px_rgba(239,68,68,0.7)]">
               Personal Details
             </h2>
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-slate-200 mb-1">
+                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
                   Full Name
                 </label>
                 <input
@@ -267,30 +277,30 @@ function MerchPay() {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-cyan-700 bg-[#0f172a]/60 text-cyan-100 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-cyan-400/60 shadow-inner"
+                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
                   placeholder="Enter your full name"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-200 mb-1">
+                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
                   From NIT Silchar?
                 </label>
                 <select
                   name="fromNITSilchar"
                   value={formData.fromNITSilchar}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-cyan-700 bg-[#0f172a]/60 text-cyan-100 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all"
                 >
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
+                  <option value="Yes" className="bg-black text-red-100">Yes</option>
+                  <option value="No" className="bg-black text-red-100">No</option>
                 </select>
               </div>
 
               {formData.fromNITSilchar === "Yes" && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">
+                  <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
                     Scholar ID
                   </label>
                   <input
@@ -298,15 +308,29 @@ function MerchPay() {
                     name="scholarId"
                     value={formData.scholarId}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-cyan-700 bg-[#0f172a]/60 text-cyan-100 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-cyan-400/60 shadow-inner"
+                    className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
                     placeholder="Enter Scholar ID"
                     required
                   />
                 </div>
               )}
+              <div>
+                  <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
+                    placeholder="Enter Email ID"
+                    required
+                  />
+                </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-200 mb-1">
+                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
                   Phone Number (10 Digits)
                 </label>
                 <input
@@ -315,21 +339,21 @@ function MerchPay() {
                   value={formData.phone}
                   onChange={handleInputChange}
                   pattern="[0-9]{10,15}"
-                  className="w-full px-4 py-3 rounded-xl border border-cyan-700 bg-[#0f172a]/60 text-cyan-100 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-cyan-400/60 shadow-inner"
+                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
                   placeholder="Enter your phone number"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-200 mb-1">
+                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
                   Address
                 </label>
                 <textarea
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-cyan-700 bg-[#0f172a]/60 text-cyan-100 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all placeholder:text-cyan-400/60 shadow-inner"
+                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
                   placeholder={
                     formData.fromNITSilchar === "Yes"
                       ? "Enter Hostel Number"
@@ -343,14 +367,14 @@ function MerchPay() {
           <div className="flex justify-center mt-8">
             <button
               onClick={() => scrollToSection(1)}
-              className="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none"
+              className="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-lg p-[1px] focus:outline-none"
             >
               <span
-                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"
+                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#990000_0%,#ff1a1a_50%,#400000_100%)]"
               >
               </span>
               <span
-                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined"
+                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-bold tracking-wider text-red-400 backdrop-blur-3xl gap-2 hover:text-white transition-colors"
               >
                 Continue to Merchandise Selection
               </span>
@@ -360,76 +384,91 @@ function MerchPay() {
 
         {/* Merchandise Section */}
         <section className="form-section min-h-screen py-16 flex flex-col justify-center">
-          <div className="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/90 border border-fuchsia-400/30 shadow-[0_8px_32px_0_#a21caf33] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
-            <div className="absolute -top-8 -left-8 w-32 h-32 bg-fuchsia-400 opacity-10 rounded-full blur-2xl animate-pulse" />
-            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-fuchsia-300 mb-6 border-b border-fuchsia-700 pb-4 tracking-wide drop-shadow-lg">
+          <div className="bg-gradient-to-br from-[#120306]/90 via-[#0a0204]/95 to-black border border-red-600/40 shadow-[0_0_35px_rgba(225,29,72,0.25)] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
+            <div className="absolute -top-8 -left-8 w-32 h-32 bg-red-600 opacity-20 rounded-full blur-3xl animate-pulse" />
+            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-red-500 mb-6 border-b border-red-900/80 pb-4 tracking-widest uppercase drop-shadow-[0_0_12px_rgba(239,68,68,0.7)]">
               Merchandise Selection
             </h2>
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-slate-200 mb-1">
+                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
                   Type
                 </label>
                 <select
                   name="type"
                   value={formData.type}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-fuchsia-700 bg-[#0f172a]/60 text-fuchsia-100 focus:ring-2 focus:ring-fuchsia-400 focus:border-fuchsia-400 transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all"
                 >
-                  <option value="">Select Type</option>
-                  <option value="Regular">Regular-sized</option>
-                  <option value="Oversized">Over-sized</option>
+                  <option value="" className="bg-black text-red-100">Select Type</option>
+                  <option value="Regular" className="bg-black text-red-100">Regular-sized</option>
+                  <option value="Oversized" className="bg-black text-red-100">Over-sized</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
+                  COLOR
+                </label>
+                <select
+                  name="tshirtTheme"
+                  value={formData.tshirtTheme}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all"
+                >
+                  <option value="" className="bg-black text-red-100">Select Color</option>
+                  <option value="White" className="bg-black text-red-100">White</option>
+                  <option value="Black" className="bg-black text-red-100">Black</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-200 mb-1">
+                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
                   Size
                 </label>
                 {/* Size Chart Tables */}
                 <div className="mb-4">
                   {formData.type === "Regular" && (
                     <div className="w-full overflow-x-auto animate-fade-in">
-                      <table className="w-full text-xs md:text-sm text-cyan-100 border-separate border-spacing-y-1 bg-[#0f172a]/80 rounded-xl shadow-lg">
-                        <caption className="text-cyan-300 font-bold mb-2 text-base md:text-lg">Regular-sized Size Chart (in inches)</caption>
+                      <table className="w-full text-xs md:text-sm text-red-100 border-separate border-spacing-y-1 bg-black/80 rounded-xl shadow-lg border border-red-900/50">
+                        <caption className="text-red-400 font-bold mb-2 text-base md:text-lg tracking-wider uppercase drop-shadow-[0_0_8px_#ef4444]">Regular-sized Size Chart (in inches)</caption>
                         <thead>
-                          <tr className="bg-cyan-900/60">
-                            <th className="px-3 py-2 rounded-tl-xl">Size</th>
-                            <th className="px-3 py-2">Chest</th>
-                            <th className="px-3 py-2">Length</th>
-                            <th className="px-3 py-2 rounded-tr-xl">Sleeve</th>
+                          <tr className="bg-red-950/80 text-red-300">
+                            <th className="px-3 py-2 rounded-tl-xl border-b border-red-900">Size</th>
+                            <th className="px-3 py-2 border-b border-red-900">Chest</th>
+                            <th className="px-3 py-2 border-b border-red-900">Length</th>
+                            <th className="px-3 py-2 rounded-tr-xl border-b border-red-900">Sleeve</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr className="hover:bg-cyan-800/30">
-                            <td className="px-6 py-2">S</td>
-                            <td className="px-6 py-2">38</td>
-                            <td className="px-6 py-2">26</td>
-                            <td className="px-6 py-2">7</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">S</td>
+                            <td className="px-6 py-2 text-center">38</td>
+                            <td className="px-6 py-2 text-center">26</td>
+                            <td className="px-6 py-2 text-center">7</td>
                           </tr>
-                          <tr className="hover:bg-cyan-800/30">
-                            <td className="px-6 py-2">M</td>
-                            <td className="px-6 py-2">40</td>
-                            <td className="px-6 py-2">27</td>
-                            <td className="px-6 py-2">7.5</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">M</td>
+                            <td className="px-6 py-2 text-center">40</td>
+                            <td className="px-6 py-2 text-center">27</td>
+                            <td className="px-6 py-2 text-center">7.5</td>
                           </tr>
-                          <tr className="hover:bg-cyan-800/30">
-                            <td className="px-6 py-2">L</td>
-                            <td className="px-6 py-2">42</td>
-                            <td className="px-6 py-2">28</td>
-                            <td className="px-6 py-2">8</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">L</td>
+                            <td className="px-6 py-2 text-center">42</td>
+                            <td className="px-6 py-2 text-center">28</td>
+                            <td className="px-6 py-2 text-center">8</td>
                           </tr>
-                          <tr className="hover:bg-cyan-800/30">
-                            <td className="px-6 py-2">XL</td>
-                            <td className="px-6 py-2">44</td>
-                            <td className="px-6 py-2">29</td>
-                            <td className="px-6 py-2">8.5</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">XL</td>
+                            <td className="px-6 py-2 text-center">44</td>
+                            <td className="px-6 py-2 text-center">29</td>
+                            <td className="px-6 py-2 text-center">8.5</td>
                           </tr>
-                          <tr className="hover:bg-cyan-800/30">
-                            <td className="px-6 py-2">XXL</td>
-                            <td className="px-6 py-2">46</td>
-                            <td className="px-6 py-2">30</td>
-                            <td className="px-6 py-2">9</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">XXL</td>
+                            <td className="px-6 py-2 text-center">46</td>
+                            <td className="px-6 py-2 text-center">30</td>
+                            <td className="px-6 py-2 text-center">9</td>
                           </tr>
                         </tbody>
                       </table>
@@ -437,58 +476,58 @@ function MerchPay() {
                   )}
                   {formData.type === "Oversized" && (
                     <div className="w-full overflow-x-auto animate-fade-in">
-                      <table className="w-full text-xs md:text-sm text-fuchsia-100 border-separate border-spacing-y-1 bg-[#1e193b]/80 rounded-xl shadow-lg">
-                        <caption className="text-fuchsia-300 font-bold mb-2 text-base md:text-lg">Over-sized Size Chart (in inches)</caption>
+                      <table className="w-full text-xs md:text-sm text-red-100 border-separate border-spacing-y-1 bg-black/80 rounded-xl shadow-lg border border-red-900/50">
+                        <caption className="text-red-400 font-bold mb-2 text-base md:text-lg tracking-wider uppercase drop-shadow-[0_0_8px_#ef4444]">Over-sized Size Chart (in inches)</caption>
                         <thead>
-                          <tr className="bg-fuchsia-900/60">
-                            <th className="px-3 py-2 rounded-tl-xl">Size</th>
-                            <th className="px-3 py-2">Chest</th>
-                            <th className="px-3 py-2">Body Length</th>
-                            <th className="px-3 py-2">Sleeve Length</th>
-                            <th className="px-3 py-2">Sleeve Open</th>
-                            <th className="px-3 py-2 rounded-tr-xl">Shoulder</th>
+                          <tr className="bg-red-950/80 text-red-300">
+                            <th className="px-3 py-2 rounded-tl-xl border-b border-red-900">Size</th>
+                            <th className="px-3 py-2 border-b border-red-900">Chest</th>
+                            <th className="px-3 py-2 border-b border-red-900">Body Length</th>
+                            <th className="px-3 py-2 border-b border-red-900">Sleeve Length</th>
+                            <th className="px-3 py-2 border-b border-red-900">Sleeve Open</th>
+                            <th className="px-3 py-2 rounded-tr-xl border-b border-red-900">Shoulder</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr className="hover:bg-fuchsia-800/30">
-                            <td className="px-6 py-2">S</td>
-                            <td className="px-6 py-2">21</td>
-                            <td className="px-6 py-2">26.5</td>
-                            <td className="px-6 py-2">9.5</td>
-                            <td className="px-6 py-2">7.5</td>
-                            <td className="px-6 py-2">20</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">S</td>
+                            <td className="px-6 py-2 text-center">21</td>
+                            <td className="px-6 py-2 text-center">26.5</td>
+                            <td className="px-6 py-2 text-center">9.5</td>
+                            <td className="px-6 py-2 text-center">7.5</td>
+                            <td className="px-6 py-2 text-center">20</td>
                           </tr>
-                          <tr className="hover:bg-fuchsia-800/30">
-                            <td className="px-6 py-2">M</td>
-                            <td className="px-6 py-2">22</td>
-                            <td className="px-6 py-2">27.5</td>
-                            <td className="px-6 py-2">10</td>
-                            <td className="px-6 py-2">8</td>
-                            <td className="px-6 py-2">21</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">M</td>
+                            <td className="px-6 py-2 text-center">22</td>
+                            <td className="px-6 py-2 text-center">27.5</td>
+                            <td className="px-6 py-2 text-center">10</td>
+                            <td className="px-6 py-2 text-center">8</td>
+                            <td className="px-6 py-2 text-center">21</td>
                           </tr>
-                          <tr className="hover:bg-fuchsia-800/30">
-                            <td className="px-6 py-2">L</td>
-                            <td className="px-6 py-2">23</td>
-                            <td className="px-6 py-2">28.5</td>
-                            <td className="px-6 py-2">10.5</td>
-                            <td className="px-6 py-2">8.5</td>
-                            <td className="px-6 py-2">22</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">L</td>
+                            <td className="px-6 py-2 text-center">23</td>
+                            <td className="px-6 py-2 text-center">28.5</td>
+                            <td className="px-6 py-2 text-center">10.5</td>
+                            <td className="px-6 py-2 text-center">8.5</td>
+                            <td className="px-6 py-2 text-center">22</td>
                           </tr>
-                          <tr className="hover:bg-fuchsia-800/30">
-                            <td className="px-6 py-2">XL</td>
-                            <td className="px-6 py-2">24</td>
-                            <td className="px-6 py-2">29.5</td>
-                            <td className="px-6 py-2">11</td>
-                            <td className="px-6 py-2">9</td>
-                            <td className="px-6 py-2">23</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">XL</td>
+                            <td className="px-6 py-2 text-center">24</td>
+                            <td className="px-6 py-2 text-center">29.5</td>
+                            <td className="px-6 py-2 text-center">11</td>
+                            <td className="px-6 py-2 text-center">9</td>
+                            <td className="px-6 py-2 text-center">23</td>
                           </tr>
-                          <tr className="hover:bg-fuchsia-800/30">
-                            <td className="px-6 py-2">XXL</td>
-                            <td className="px-6 py-2">25</td>
-                            <td className="px-6 py-2">30.5</td>
-                            <td className="px-6 py-2">11</td>
-                            <td className="px-6 py-2">9</td>
-                            <td className="px-6 py-2">23</td>
+                          <tr className="hover:bg-red-900/30 transition-colors">
+                            <td className="px-6 py-2 text-center">XXL</td>
+                            <td className="px-6 py-2 text-center">25</td>
+                            <td className="px-6 py-2 text-center">30.5</td>
+                            <td className="px-6 py-2 text-center">11</td>
+                            <td className="px-6 py-2 text-center">9</td>
+                            <td className="px-6 py-2 text-center">23</td>
                           </tr>
                         </tbody>
                       </table>
@@ -508,14 +547,14 @@ function MerchPay() {
                       />
                       <div
                         className={`flex items-center justify-center p-4 rounded-xl border-2 transition-all duration-200 shadow-inner ${formData.size === size
-                          ? (formData.type === "T-Shirt" ? "border-fuchsia-400 bg-fuchsia-900/30 shadow-[0_0_16px_2px_#a21caf55] scale-105" : "border-cyan-400 bg-cyan-900/30 shadow-[0_0_16px_2px_#22d3ee55] scale-105")
-                          : (formData.type === "T-Shirt" ? "border-fuchsia-900 bg-[#0f172a]/60 hover:border-fuchsia-400" : "border-cyan-900 bg-[#0f172a]/60 hover:border-cyan-400")
+                          ? "border-red-500 bg-red-950/50 shadow-[0_0_20px_rgba(239,68,68,0.6)] scale-105"
+                          : "border-red-950 bg-black/60 hover:border-red-600"
                           }`}
                       >
                         <span
                           className={`font-bold text-lg tracking-wider ${formData.size === size
-                            ? (formData.type === "T-Shirt" ? "text-fuchsia-200" : "text-cyan-200")
-                            : (formData.type === "T-Shirt" ? "text-fuchsia-400/70" : "text-cyan-400/70")
+                            ? "text-red-300 drop-shadow-[0_0_8px_#ef4444]"
+                            : "text-red-700 hover:text-red-400"
                             }`}
                         >
                           {size}
@@ -527,23 +566,23 @@ function MerchPay() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-200 mb-1">
+                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
                   Want Name in T-Shirt?
                 </label>
                 <select
                   name="wantName"
                   value={formData.wantName}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-fuchsia-700 bg-[#0f172a]/60 text-fuchsia-100 focus:ring-2 focus:ring-fuchsia-400 focus:border-fuchsia-400 transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all"
                 >
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
+                  <option value="Yes" className="bg-black text-red-100">Yes</option>
+                  <option value="No" className="bg-black text-red-100">No</option>
                 </select>
               </div>
 
               {formData.wantName === "Yes" && (
                 <div>
-                  <label className="block text-sm font-medium text-fuchsia-200 mb-1">
+                  <label className="block text-sm font-medium text-red-400 mb-1 tracking-wide">
                     Name in T-Shirt (Max 7 Letters)
                   </label>
                   <input
@@ -551,7 +590,7 @@ function MerchPay() {
                     name="nameInTShirt"
                     value={formData.nameInTShirt}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-fuchsia-700 bg-[#0f172a]/60 text-fuchsia-100 focus:ring-2 focus:ring-fuchsia-400 focus:border-fuchsia-400 transition-all placeholder:text-fuchsia-400/60 shadow-inner"
+                    className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
                     placeholder="Enter name to be printed"
                   />
                 </div>
@@ -561,14 +600,14 @@ function MerchPay() {
           <div className="flex justify-center mt-8">
             <button
               onClick={() => scrollToSection(2)}
-              className="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none"
+              className="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-lg p-[1px] focus:outline-none"
             >
               <span
-                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"
+                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#990000_0%,#ff1a1a_50%,#400000_100%)]"
               >
               </span>
               <span
-                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined"
+                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-bold tracking-wider text-red-400 backdrop-blur-3xl gap-2 hover:text-white transition-colors"
               >
                 Continue to Payment
               </span>
@@ -578,41 +617,41 @@ function MerchPay() {
 
         {/* Payment Section */}
         <section className="form-section min-h-screen py-16 flex flex-col justify-center">
-          <div className="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/90 border border-cyan-400/30 shadow-[0_8px_32px_0_#22d3ee33] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
-            <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-cyan-400 opacity-10 rounded-full blur-2xl animate-pulse" />
-            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-cyan-300 mb-6 border-b border-cyan-700 pb-4 tracking-wide drop-shadow-lg">
+          <div className="bg-gradient-to-br from-[#120306]/90 via-[#0a0204]/95 to-black border border-red-600/40 shadow-[0_0_35px_rgba(225,29,72,0.25)] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
+            <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-red-600 opacity-20 rounded-full blur-3xl animate-pulse" />
+            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-red-500 mb-6 border-b border-red-900/80 pb-4 tracking-widest uppercase drop-shadow-[0_0_12px_rgba(239,68,68,0.7)]">
               Payment
             </h2>
             {/* Pricing Details */}
-            <div className="mb-8 w-full max-w-lg mx-auto bg-cyan-900/30 border border-cyan-400/40 rounded-xl p-4 shadow-md animate-fade-in">
-              <h3 className="text-lg font-bold text-cyan-200 mb-2 text-center">T-Shirt Pricing</h3>
-              <table className="w-full text-sm text-cyan-100">
+            <div className="mb-8 w-full max-w-lg mx-auto bg-black/80 border border-red-900/80 rounded-xl p-4 shadow-[0_0_15px_rgba(225,29,72,0.15)] animate-fade-in">
+              <h3 className="text-lg font-bold text-red-400 mb-2 text-center tracking-wider uppercase drop-shadow-[0_0_6px_#ef4444]">T-Shirt Pricing</h3>
+              <table className="w-full text-sm text-red-100">
                 <thead>
-                  <tr>
+                  <tr className="text-red-300">
                     <th className="py-1 px-2 text-left">Variant</th>
                     <th className="py-1 px-2 text-left">With Name</th>
                     <th className="py-1 px-2 text-left">Without Name</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-t border-cyan-400/20">
-                    <td className="py-1 px-2 font-semibold">Regular-sized T-Shirt</td>
-                    <td className="py-1 px-2">₹409</td>
-                    <td className="py-1 px-2">₹399</td>
+                  <tr className="border-t border-red-900/50">
+                    <td className="py-1 px-2 font-semibold text-zinc-300">Regular-sized T-Shirt</td>
+                    <td className="py-1 px-2 text-red-400 font-mono">₹409</td>
+                    <td className="py-1 px-2 text-red-400 font-mono">₹399</td>
                   </tr>
-                  <tr className="border-t border-cyan-400/20">
-                    <td className="py-1 px-2 font-semibold">Over-sized T-shirt</td>
-                    <td className="py-1 px-2">₹489</td>
-                    <td className="py-1 px-2">₹479</td>
+                  <tr className="border-t border-red-900/50">
+                    <td className="py-1 px-2 font-semibold text-zinc-300">Over-sized T-shirt</td>
+                    <td className="py-1 px-2 text-red-400 font-mono">₹489</td>
+                    <td className="py-1 px-2 text-red-400 font-mono">₹479</td>
                   </tr>
-                  <tr className="border-t border-cyan-400/20">
-                    <td className="py-1 px-2 font-semibold">Non-nitians</td>
-                    <td className="py-1 px-2">₹649</td>
-                    <td className="py-1 px-2">₹639</td>
+                  <tr className="border-t border-red-900/50">
+                    <td className="py-1 px-2 font-semibold text-zinc-300">Non-nitians</td>
+                    <td className="py-1 px-2 text-red-400 font-mono">₹649</td>
+                    <td className="py-1 px-2 text-red-400 font-mono">₹639</td>
                   </tr>
                 </tbody>
               </table>
-              <p className="text-xs text-cyan-300 mt-2 text-center">Please pay the exact amount as per your selection below.</p>
+              <p className="text-xs text-red-400/80 mt-2 text-center italic">Please pay the exact amount as per your selection below.</p>
             </div>
             <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
               {/* QR Code and UPI Pay */}
@@ -620,9 +659,9 @@ function MerchPay() {
                 <img
                   src="/tshirt/qr_code.jpg"
                   alt="Payment QR Code"
-                  className="w-48 h-48 rounded-xl shadow-lg border-2 border-cyan-400 mb-4 bg-white object-contain"
+                  className="w-48 h-48 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.3)] border-2 border-red-600 mb-4 bg-white object-contain"
                 />
-                <p className="text-cyan-200 text-sm mb-2 text-center">Scan this QR code to pay via any UPI app</p>
+                <p className="text-red-200 text-sm mb-2 text-center">Scan this QR code to pay via any UPI app</p>
                 <a
                   href={upiLink}
                   target="_blank"
@@ -631,40 +670,40 @@ function MerchPay() {
                 >
                   <button
                     type="button"
-                    className="flex items-center gap-3 px-5 py-1 bg-gradient-to-r from-[#00897B] to-[#4DD0E1] text-white font-bold rounded-2xl shadow-lg border-2 border-[#00897B]/60 hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 w-9/12 max-w-xs justify-center"
+                    className="flex items-center gap-3 px-5 py-1 bg-gradient-to-r from-red-900 via-red-700 to-red-900 text-white font-bold rounded-2xl shadow-[0_0_20px_rgba(225,29,72,0.4)] border-2 border-red-500 hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-400 w-9/12 max-w-xs justify-center uppercase tracking-wider"
                   >
-                    <img src="/tshirt/UPI-Logo-vector.svg" alt="BHIM UPI Logo" className="w-11 h-11 bg-transparent rounded p-1 " />
+                    <img src="/tshirt/UPI-Logo-vector.svg" alt="BHIM UPI Logo" className="w-11 h-11 bg-transparent rounded p-1" />
                     <span className="text-md font-bold tracking-wide">Pay with UPI</span>
                   </button>
-                  <span className="text-xs text-cyan-100 mt-2 text-center"></span>
+                  <span className="text-xs text-red-100 mt-2 text-center"></span>
                 </a>
-                <p className="text-sm text-cyan-400 text-center mt-2">Click to pay via any UPI app (GPay/Phonepe/Paytm.)</p>
+                <p className="text-sm text-red-400/90 text-center mt-2">Click to pay via any UPI app (GPay/Phonepe/Paytm.)</p>
               </div>
               {/* Upload Section */}
               <div className="flex-1 flex flex-col items-center justify-center mt-6 md:mt-0">
                 <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-sm flex flex-col items-center">
-                  <label className="block text-base font-semibold text-cyan-200 mb-3 text-center tracking-wide">
-                    Upload Payment Receipt <span className="text-cyan-400">*</span>
+                  <label className="block text-base font-semibold text-red-300 mb-3 text-center tracking-wide">
+                    Upload Payment Receipt <span className="text-red-500">*</span>
                   </label>
-                  <div className="relative w-full rounded-2xl border-2 border-dashed border-cyan-400/60 bg-gradient-to-br from-[#0f172a]/70 to-[#1e293b]/80 shadow-lg p-4 sm:p-6 flex flex-col items-center transition-all duration-300 hover:border-cyan-300">
+                  <div className="relative w-full rounded-2xl border-2 border-dashed border-red-600/60 bg-black/80 shadow-[0_0_20px_rgba(225,29,72,0.2)] p-4 sm:p-6 flex flex-col items-center transition-all duration-300 hover:border-red-400 hover:shadow-[0_0_25px_rgba(239,68,68,0.4)]">
                     <input
                       type="file"
                       accept="application/pdf,image/*"
                       onChange={uploader}
                       required={!fileUrl}
-                      className="block w-full text-sm text-cyan-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-cyan-900/80 file:text-cyan-300 hover:file:bg-cyan-800/80 focus:outline-none focus:ring-2 focus:ring-cyan-400 mb-2 cursor-pointer"
+                      className="block w-full text-sm text-red-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-950 file:text-red-300 hover:file:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 mb-2 cursor-pointer"
                     />
                     {uploading && (
-                      <span className="text-cyan-400 animate-pulse mt-2">Uploading...</span>
+                      <span className="text-red-400 animate-pulse mt-2 font-semibold">Uploading...</span>
                     )}
                     {fileUrl && (
-                      <span className="text-green-400 mt-2 flex flex-col items-center">
-                        <svg className="w-7 h-7 mb-1 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                        Uploaded! <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="underline text-cyan-300 break-all">View File</a>
+                      <span className="text-emerald-400 mt-2 flex flex-col items-center font-medium">
+                        <svg className="w-7 h-7 mb-1 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Uploaded! <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="underline text-red-400 hover:text-red-300 break-all">View File</a>
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-cyan-400 mt-3 text-center leading-snug">Attach a screenshot or PDF of your payment receipt.<br />Accepted: JPG, PNG, PDF. Max size: 5MB.</p>
+                  <p className="text-xs text-red-400/80 mt-3 text-center leading-snug">Attach a screenshot or PDF of your payment receipt.<br />Accepted: JPG, PNG, PDF. Max size: 5MB.</p>
                 </div>
               </div>
             </div>
@@ -672,14 +711,14 @@ function MerchPay() {
           <div className="flex justify-center mt-8">
             <button
               onClick={() => scrollToSection(3)}
-              className="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none"
+              className="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-lg p-[1px] focus:outline-none"
             >
               <span
-                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"
+                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#990000_0%,#ff1a1a_50%,#400000_100%)]"
               >
               </span>
               <span
-                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined"
+                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-bold tracking-wider text-red-400 backdrop-blur-3xl gap-2 hover:text-white transition-colors"
               >
                 Continue to Review Order
               </span>
@@ -689,51 +728,54 @@ function MerchPay() {
 
         {/* Summary Section */}
         <section className="form-section min-h-screen py-16 flex flex-col justify-center">
-          <div className="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/90 border border-fuchsia-400/30 shadow-[0_8px_32px_0_#a21caf33] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
-            <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-fuchsia-400 opacity-10 rounded-full blur-2xl animate-pulse" />
-            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-fuchsia-300 mb-6 border-b border-fuchsia-700 pb-4 tracking-wide drop-shadow-lg">
+          <div className="bg-gradient-to-br from-[#120306]/90 via-[#0a0204]/95 to-black border border-red-600/40 shadow-[0_0_35px_rgba(225,29,72,0.25)] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
+            <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-red-600 opacity-20 rounded-full blur-3xl animate-pulse" />
+            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-red-500 mb-6 border-b border-red-900/80 pb-4 tracking-widest uppercase drop-shadow-[0_0_12px_rgba(239,68,68,0.7)]">
               Order Summary
             </h2>
-            <div className="space-y-4 text-fuchsia-100">
+            <div className="space-y-4 text-red-100">
               <p>
-                <b>Name:</b> {formData.name}
+                <b className="text-red-400">Name:</b> {formData.name}
               </p>
               <p>
-                <b>From NIT Silchar:</b> {formData.fromNITSilchar}
+                <b className="text-red-400">From NIT Silchar:</b> {formData.fromNITSilchar}
               </p>
               {formData.fromNITSilchar === "Yes" && (
                 <p>
-                  <b>Scholar ID:</b> {formData.scholarId}
+                  <b className="text-red-400">Scholar ID:</b> {formData.scholarId}
                 </p>
               )}
               <p>
-                <b>Phone:</b> {formData.phone}
+                <b className="text-red-400">Phone:</b> {formData.phone}
               </p>
               <p>
-                <b>Address:</b> {formData.address}
+                <b className="text-red-400">Address:</b> {formData.address}
               </p>
               <p>
-                <b>Type:</b> {formData.type}
+                <b className="text-red-400">Email:</b> {formData.email}
               </p>
               <p>
-                <b>Size:</b> {formData.size}
+                <b className="text-red-400">Type:</b> {formData.type}
               </p>
               <p>
-                <b>Want Name in T-Shirt:</b> {formData.wantName}
+                <b className="text-red-400">Size:</b> {formData.size}
+              </p>
+              <p>
+                <b className="text-red-400">Want Name in T-Shirt:</b> {formData.wantName}
               </p>
               {formData.wantName === "Yes" && (
                 <p>
-                  <b>Name in T-Shirt:</b> {formData.nameInTShirt}
+                  <b className="text-red-400">Name in T-Shirt:</b> {formData.nameInTShirt}
                 </p>
               )}
               <p>
-                <b>Payment Proof:</b> {formData.paymentProofLink ? (
-                  <a href={formData.paymentProofLink} className="text-blue-600 underline break-all" target="_blank" rel="noopener noreferrer">View File</a>
+                <b className="text-red-400">Payment Proof:</b> {formData.paymentProofLink ? (
+                  <a href={formData.paymentProofLink} className="text-red-400 underline hover:text-red-300 break-all" target="_blank" rel="noopener noreferrer">View File</a>
                 ) : "Pending"}
               </p>
             </div>
-            <div className="mt-5 p-4 rounded-lg border border-fuchsia-700">
-              <p className="text-center text-blue-400">
+            <div className="mt-5 p-4 rounded-lg border border-red-900/80 bg-red-950/20">
+              <p className="text-center text-red-400/90 text-sm">
                 Please verify all details before submitting your order. Once
                 submitted, changes cannot be made.
               </p>
@@ -742,42 +784,42 @@ function MerchPay() {
               <button
                 onClick={handleSubmit}
                 disabled={ORDERS_CLOSED}
-                className="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none disabled:opacity-60 disabled:cursor-not-allowed"
+                className="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-lg p-[1px] focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span
-                  className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"
+                  className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#990000_0%,#ff1a1a_50%,#400000_100%)]"
                 >
                 </span>
                 <span
-                  className="inline-flex h-full w-full items-center justify-center rounded-lg bg-slate-950 px-7 text-md font-medium text-white backdrop-blur-3xl gap-2"
+                  className="inline-flex h-full w-full items-center justify-center rounded-lg bg-black px-7 text-md font-bold uppercase tracking-widest text-red-400 backdrop-blur-3xl gap-2 hover:text-white transition-colors"
                 >
                   {ORDERS_CLOSED ? 'Orders Closed' : 'Submit Order'}
                 </span>
               </button>
             </div>
           </div>
-          <div className="text-center mt-8 text-gray-600">
-            <p>Thank you for your order!</p>
+          <div className="text-center mt-8 text-zinc-500">
+            <p className="font-semibold text-zinc-400 uppercase tracking-wider">Thank you for your order!</p>
             <p className="mt-2 text-sm">
               For any queries, contact:{' '}
               <a
-                href="mailto:nerds@robotics.club"
-                className="text-blue-600 hover:underline"
+                href="mailto:nerds@nits.ac.in"
+                className="text-red-400 hover:underline"
               >
                 nerds@nits.ac.in
               </a>
             </p>
           </div>
-          <div className="mt-8 text-center">
-            <h3 className="text-lg font-semibold text-cyan-200 mb-2">
+          <div className="mt-8 text-center bg-black/60 p-6 rounded-2xl border border-red-900/40">
+            <h3 className="text-lg font-bold text-red-500 uppercase tracking-wider mb-2 drop-shadow-[0_0_6px_#ef4444]">
               Facing Payment Issues?
             </h3>
-            <p className="text-sm text-cyan-400 leading-relaxed">
+            <p className="text-sm text-zinc-400 leading-relaxed">
               If you encounter any problems with the payment process, please reach out to our team:
             </p>
-            <p className="text-sm text-cyan-300 mt-2">
-              📧 Email: <a href="mailto:nerds@nits.ac.in" className="underline text-cyan-200 hover:text-cyan-100">nerds.merch@club.com</a><br />
-              📱 Phone/WhatsApp: <a href="tel:+916003501567" className="underline text-cyan-200 hover:text-cyan-100">+91 60035 01567</a>
+            <p className="text-sm text-red-300 mt-2 font-mono">
+              📧 Email: <a href="mailto:nerds@nits.ac.in" className="underline text-red-400 hover:text-red-300">nerds.merch@club.com</a><br />
+              📱 Phone/WhatsApp: <a href="tel:+916003501567" className="underline text-red-400 hover:text-red-300">+91 60035 01567</a>
             </p>
           </div>
         </section>

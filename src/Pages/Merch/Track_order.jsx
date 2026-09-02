@@ -45,7 +45,7 @@ export function Track_order() {
         x: '15%', // left position percentage
         y: '70%', // top position percentage
         completed: true,
-        current: false,
+        current: true,
       },
       {
         city: 'Dankuni',
@@ -66,7 +66,7 @@ export function Track_order() {
         x: '85%',
         y: '35%',
         completed: true,
-        current: true, // This flag shows current location
+        current: false, // This flag shows current location
       },
     ],
     timeline: [
@@ -81,35 +81,35 @@ export function Track_order() {
         step: 'Packed',
         date: '4th Nov, 2025',
         
-        completed: true,
+        completed: false,
       },
       {
         step: 'Shipped',
         date: '5th Nov, 2025',
-        completed: true,
+        completed: false,
         
       },
       {
         step: 'In Transit',
         date: '7th Nov, 2025',
-        completed: true,
+        completed: false,
         
       },
       {
         step: 'Delivered',
         date: '15th Nov, 2025',
-        completed: true,
-        current:true,
+        completed: false,
+        current:false,
       },
     ],
     courier: {
       name: 'Bluedart',
-      trackingId: '50934977435',
+      trackingId: '76546******',
       bot: '---',
     },
     items: [
       {
-        name: 'Electronics Parts',
+        name: 'T-shirt',
         qty: 1,
       },
     //   {
@@ -128,8 +128,8 @@ export function Track_order() {
     dimensions: '---',
     Weight:"---",
     recipient: {
-      name: 'Swarup Chanda',
-      phone: '+91-60035-01567',
+      name: 'Abhinav Singh',
+      phone: '+91 863 867 2009',
       address:
         'Hostel-9D, NIT Silchar, NIT Road, 788010, Cachar, Assam',
     },
@@ -142,18 +142,18 @@ export function Track_order() {
         time: '03-11-2025',
         event: 'Processing Order',
       },
-      {
-        time: '05-11-2025',
-        event: 'Shipment Shipped From Suplier',
-      },
-      {
-        time: '07-11-2025',
-        event: 'Shipment In Transit From Suplier',
-      },
-      {
-        time: '15-11-2025',
-        event: 'Order Delivered Successfully',
-      },
+      // {
+      //   time: '05-11-2025',
+      //   event: 'Shipment Shipped From Suplier',
+      // },
+      // {
+      //   time: '07-11-2025',
+      //   event: 'Shipment In Transit From Suplier',
+      // },
+      // {
+      //   time: '15-11-2025',
+      //   event: 'Order Delivered Successfully',
+      // },
     ],
   }
   return (
@@ -162,8 +162,8 @@ export function Track_order() {
       <div className="fixed inset-0 z-0 opacity-20">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(90deg, #00ff88 1px, transparent 1px),
-            linear-gradient(0deg, #00ff88 1px, transparent 1px)
+            linear-gradient(90deg, #ff0000 1px, transparent 1px),
+            linear-gradient(0deg, #ff4800 1px, transparent 1px)
           `,
           backgroundSize: '50px 50px',
           animation: 'gridScroll 20s linear infinite',
@@ -212,9 +212,9 @@ export function Track_order() {
                 className="h-14 w-14 rounded-xl bg-gradient-to-br from-cyan-500/30 to-blue-600/30 flex items-center justify-center mr-4 border border-cyan-400/50 shadow-[0_0_20px_rgba(34,211,238,0.4)]"
                 animate={{ 
                   boxShadow: [
-                    '0 0 20px rgba(34,211,238,0.4)',
-                    '0 0 40px rgba(34,211,238,0.6)',
-                    '0 0 20px rgba(34,211,238,0.4)',
+                    '0 0 20px rgba(238, 82, 34, 0.4)',
+                    '0 0 40px rgba(196, 35, 10, 0.6)',
+                    '0 0 20px rgba(117, 26, 6, 0.4)',
                   ]
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -300,9 +300,9 @@ export function Track_order() {
                       className="bg-gradient-to-r from-cyan-500/30 to-blue-500/30 text-cyan-400 px-6 py-2 rounded-lg inline-block font-bold border-2 border-cyan-400/50 shadow-[0_0_20px_rgba(34,211,238,0.4)] font-orbitron"
                       animate={{ 
                         boxShadow: [
-                          '0 0 20px rgba(34,211,238,0.4)',
-                          '0 0 30px rgba(34,211,238,0.6)',
-                          '0 0 20px rgba(34,211,238,0.4)',
+                          '0 0 20px rgba(248, 4, 4, 0.4)',
+                          '0 0 30px rgba(249, 2, 2, 0.6)',
+                          '0 0 20px rgba(222, 10, 10, 0.4)',
                         ]
                       }}
                       transition={{ duration: 2, repeat: Infinity }}
@@ -337,9 +337,9 @@ export function Track_order() {
                             animate={step.current ? {
                               scale: [1, 1.1, 1],
                               boxShadow: [
-                                '0 0 25px rgba(34,211,238,0.8)',
-                                '0 0 40px rgba(34,211,238,1)',
-                                '0 0 25px rgba(34,211,238,0.8)',
+                                '0 0 25px rgba(238, 68, 34, 0.8)',
+                                '0 0 40px rgb(238, 99, 34)',
+                                '0 0 25px rgba(238, 51, 34, 0.8)',
                               ]
                             } : {}}
                             transition={{ duration: 2, repeat: Infinity }}
@@ -425,9 +425,9 @@ export function Track_order() {
                     className="absolute inset-0 bg-black"
                     style={{
                       backgroundImage: `
-                        radial-gradient(circle, rgba(34, 211, 238, 0.2) 1px, transparent 1px),
-                        linear-gradient(to right, rgba(34, 211, 238, 0.1) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(34, 211, 238, 0.1) 1px, transparent 1px)
+                        radial-gradient(circle, rgba(251, 46, 10, 0.2) 1px, transparent 1px),
+                        linear-gradient(to right, rgba(243, 49, 19, 0.1) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(238, 54, 34, 0.1) 1px, transparent 1px)
                       `,
                       backgroundSize: '30px 30px, 15px 15px, 15px 15px',
                       animation: 'gridPulse 3s ease-in-out infinite',
@@ -445,9 +445,9 @@ export function Track_order() {
                   <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
                     <defs>
                       <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="rgb(6, 182, 212)" stopOpacity="0.8" />
-                        <stop offset="50%" stopColor="rgb(59, 130, 246)" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="rgb(6, 182, 212)" stopOpacity="0.8" />
+                        <stop offset="0%" stopColor="rgb(212, 123, 6)" stopOpacity="0.8" />
+                        <stop offset="50%" stopColor="rgb(246, 75, 59)" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="rgb(212, 51, 6)" stopOpacity="0.8" />
                       </linearGradient>
                       <filter id="glow">
                         <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
@@ -502,9 +502,9 @@ export function Track_order() {
                           animate={{ 
                             scale: [1, 1.1, 1],
                             boxShadow: [
-                              '0 0 30px rgba(34,211,238,1)',
-                              '0 0 50px rgba(34,211,238,1)',
-                              '0 0 30px rgba(34,211,238,1)',
+                              '0 0 30px rgb(238, 34, 34)',
+                              '0 0 50px rgb(238, 34, 34)',
+                              '0 0 30px rgb(238, 34, 34)',
                             ]
                           }}
                           transition={{ duration: 2, repeat: Infinity }}
@@ -648,9 +648,9 @@ export function Track_order() {
                         className="ml-2 h-3 w-3 rounded-full bg-cyan-400"
                         animate={{ 
                           boxShadow: [
-                            '0 0 5px rgba(34,211,238,0.5)',
-                            '0 0 15px rgba(34,211,238,1)',
-                            '0 0 5px rgba(34,211,238,0.5)',
+                            '0 0 5px rgba(238, 34, 34, 0.5)',
+                            '0 0 15px rgb(238, 34, 34)',
+                            '0 0 5px rgba(238, 78, 34, 0.5)',
                           ]
                         }}
                         transition={{ duration: 2, repeat: Infinity }}
@@ -662,7 +662,7 @@ export function Track_order() {
                       className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 px-4 rounded-lg font-spaced font-bold flex items-center justify-center border-2 border-cyan-400/50 shadow-[0_0_20px_rgba(34,211,238,0.3)]"
                       whileHover={{ 
                         scale: 1.05,
-                        boxShadow: '0 0 30px rgba(34,211,238,0.6)',
+                        boxShadow: '0 0 30px rgba(238, 119, 34, 0.6)',
                       }}
                       whileTap={{ scale: 0.95 }}
                     >
