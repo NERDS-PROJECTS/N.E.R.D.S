@@ -18,9 +18,10 @@ export function SparklesPreview({ loading }) {
     }
 
     return (
-        <div className="h-[90vh] w-full bg-[url('https://res.cloudinary.com/dqeenwawp/image/upload/v1788373819/nerds_1_sxvt7o.png')] md:bg-[url('https://res.cloudinary.com/dqeenwawp/image/upload/v1788372371/ECS_3_kerhsy.png')] bg-cover bg-no-repeat bg-center flex flex-col justify-between items-center overflow-hidden rounded-md relative p-8">
+        /* Container spans 2 viewports (200vh) on desktop so scrolling moves down the portrait image */
+        <div className="h-[90vh] md:h-[200vh] w-full bg-[url('https://res.cloudinary.com/dqeenwawp/image/upload/v1788434582/nerds_6_r5a106.png')] md:bg-[url('https://res.cloudinary.com/dqeenwawp/image/upload/v1788433652/nerds_3_xumgqu.png')] bg-cover bg-no-repeat bg-top flex flex-col justify-between items-center overflow-hidden rounded-md relative p-8">
             
-            {/* Fullscreen Canvas for Sparkles */}
+            {/* Sparkles Overlay */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-10">
                 <SparklesCore
                     background="transparent"
@@ -32,16 +33,23 @@ export function SparklesPreview({ loading }) {
                 />
             </div>
 
-            {/* Top Heading */}
+            {/* Top Heading with styled Cyan Dots and Black Merch */}
             <div className="pt-12 z-20">
-                <h1 className="md:text-7xl text-3xl lg:text-7xl font-ethenocentric text-center text-white drop-shadow-xl tracking-tight">
-                    {/* N.E.R.D.S. Merch */}
+                <h1 className="md:text-9xl text-3xl lg:text-7xl font-ethenocentric text-center text-white drop-shadow-xl tracking-tight">
+                    N<span className="text-cyan-400">.</span>
+                    E<span className="text-cyan-400">.</span>
+                    R<span className="text-cyan-400">.</span>
+                    D<span className="text-cyan-400">.</span>
+                    S<span className="text-cyan-400">.</span>{" "}
+                    <span className="text-black drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]">
+                        Merch
+                    </span>
                 </h1>
             </div>
 
-            {/* Bottom Section: Text + Chevron Button */}
-            <div className="flex flex-col items-center gap-4 z-20 mb-4">
-                <h4 className="text-base md:text-lg font-medium text-gray-200 text-center max-w-2xl mx-auto drop-shadow-lg">
+            {/* Bottom Section: Text + Chevron Button at the end of the scroll */}
+            <div className="flex flex-col items-center gap-4 z-20 mb-8">
+                <h4 className="text-base md:text-lg font-medium text-[#D28957] text-center max-w-2xl mx-auto drop-shadow-lg">
                     Complete the form below to order your exclusive Robotics club Merchandise. Scroll down to get started.
                 </h4>
 
