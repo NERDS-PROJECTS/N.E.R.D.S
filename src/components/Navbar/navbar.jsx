@@ -6,7 +6,7 @@ const links = [
 	{ name: "Event", path: "/event" },
 	{ name: "Gallery", path: "/gallery" },
 	{ name: "Team", path: "/team" },
-	{ name: "Merch", path: "/merch" },
+	{ name: "Merch", path: "/merchPay" },
 	{ name: "Robotron", path: "/robotron" },
 	{ name: "Contact", path: "/contact" },
 	
