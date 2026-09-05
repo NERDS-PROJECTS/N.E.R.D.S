@@ -116,6 +116,10 @@ function MerchPay() {
       setModal({ open: true, message: "Please enter your Scholar ID.", success: false });
       return;
     }
+    if (formData.tshirtTheme1 === "") {
+      setModal({ open: true, message: "Please enter your Tshirt Color.", success: false });
+      return;
+    }
     if (!formData.type1) {
       setModal({ open: true, message: "Please select merchandise type1.", success: false });
       return;
