@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useMemo } from "react";
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
 import Merch_form_landing from './Merch_form_landing'
 import ProgressBar from "react-scroll-progress-bar";
@@ -9,14 +9,18 @@ function MerchPay() {
     fromNITSilchar: "No",
     scholarId: "",
     email:"",
-    type: "",
-    size: "",
+    type1: "",
+    type2:"",
+    size1: "",
+    size2:"",
     wantName: "No",
     nameInTShirt: "",
-    tshirtTheme:"",
+    tshirtTheme1:"",
     address: "",
     phone: "",
+    twotshirt:"No",
     paymentProofLink: "",
+    tshirtTheme2:"Beige"
   });
   // Dynamically determine UPI amount based on selection
   let upiAmount = 0;
@@ -26,7 +30,7 @@ function MerchPay() {
   else if (formData.type === "Regular" && formData.wantName === "No") upiAmount = 399;
   else if (formData.type === "Regular" && formData.fromNITSilchar === "No") upiAmount = 649;
   // UPI link 
-  const upiLink = `upi://pay?pa=swarupchanda1963-1@okhdfcbank&pn=Swarup%20Chanda${upiAmount ? `&am=${upiAmount}` : ""}&cu=INR`;
+  const upiLink = `upi://pay?pa=s${upiAmount ? `&am=${upiAmount}` : ""}&cu=INR`;
   const [fileUrl, setFileUrl] = useState("");
   const [uploading, setUploading] = useState(false);
 
@@ -38,7 +42,7 @@ function MerchPay() {
   const ORDERS_CLOSED = false;
 
   // Change this to your actual deployed Apps Script Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxwihTQ_L0z7CVHEgbr2SlMiUF5Q80WlDvlLmlErJYq3E-BvNrg_WzL-3SNKI2ufrI/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHBwyu6oHIUEXcaRmA4cagUXryfAXFRfjSe7M91IzN1bsJbZ-b6eB7PlvRg9OzZ9vK/exec";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -63,7 +67,7 @@ function MerchPay() {
         fname: "uploadFilesToGoogleDrive",
       };
       fetch(
-        "https://script.google.com/macros/s/AKfycbyxwihTQ_L0z7CVHEgbr2SlMiUF5Q80WlDvlLmlErJYq3E-BvNrg_WzL-3SNKI2ufrI/exec",
+        "https://script.google.com/macros/s/AKfycbzHBwyu6oHIUEXcaRmA4cagUXryfAXFRfjSe7M91IzN1bsJbZ-b6eB7PlvRg9OzZ9vK/exec",
         {
           method: "POST",
           body: JSON.stringify(dataSend),
@@ -112,14 +116,19 @@ function MerchPay() {
       setModal({ open: true, message: "Please enter your Scholar ID.", success: false });
       return;
     }
-    if (!formData.type) {
-      setModal({ open: true, message: "Please select merchandise type.", success: false });
+    if (!formData.type1) {
+      setModal({ open: true, message: "Please select merchandise type1.", success: false });
       return;
     }
-    if (!formData.size) {
+
+    if (!formData.size1) {
       setModal({ open: true, message: "Please select merchandise size.", success: false });
       return;
     }
+    // if (!formData.size2) {
+    //   setModal({ open: true, message: "Please select merchandise size.", success: false });
+    //   return;
+    // }
     if (!formData.wantName) {
       setModal({ open: true, message: "Please select if you want your name on the T-shirt.", success: false });
       return;
@@ -136,19 +145,24 @@ function MerchPay() {
     try {
       const timestamp = new Date().toISOString();
       const params = new URLSearchParams();
+      let two=formData.twotshirt==="Yes";
       params.append("Timestamp", timestamp);
       params.append("Name", formData.name);
       params.append("IsNITS", formData.fromNITSilchar);
       params.append("ScholarId", formData.fromNITSilchar === "Yes" ? formData.scholarId : "0000000");
-      params.append("Type", formData.type);
+      params.append("Type1", formData.type1);
+      params.append("Type2", two?formData.type2:"");
       params.append("Email", formData.email);
-      params.append("Size", formData.size);
+      params.append("Size1", formData.size1);
+      params.append("Size2", two?formData.size2:"");
       params.append("WantName", formData.wantName);
       params.append("NameOnTShirt", formData.wantName === "Yes" ? formData.nameInTShirt : "");
       params.append("Address", formData.address);
       params.append("Phone", formData.phone);
       params.append("ScreenshotLink", formData.paymentProofLink);
-      params.append("TshirtTheme",formData.tshirtTheme);
+      params.append("TshirtTheme1",formData.tshirtTheme1);
+      params.append("TshirtTheme2",two?formData.tshirtTheme2:"");
+      params.append("Twotshirt",formData.twotshirt);
       const res = await fetch(SCRIPT_URL, {
         method: "POST",
         headers: {
@@ -163,14 +177,18 @@ function MerchPay() {
         fromNITSilchar: "No",
         scholarId: "",
         email:"",
-        type: "",
-        size: "",
+        type1: "",
+        type2:"",
+        size1: "",
+        size2: "",
+        twotshirt:"No",
         wantName: "No",
         nameInTShirt: "",
         address: "",
         phone: "",
         paymentProofLink: "",
-        tshirtTheme:""
+        tshirtTheme1:"",
+        tshirtTheme2:"Beige"
       });
       setFileUrl("");
     } catch (err) {
@@ -189,7 +207,56 @@ function MerchPay() {
       sections[index].scrollIntoView({ behavior: "smooth" });
     }
   };
+const bill = useMemo(() => {
+  const isNitian = formData.fromNITSilchar === "Yes";
+  const isTwoTshirts = formData.twotshirt === "Yes";
+  const wantsName = formData.wantName === "Yes";
 
+  const getBasePrice = (type) => {
+    if (isNitian) {
+      return type === "Oversized" ? 449 : 389;
+    }
+    return type === "Oversized" ? 549 : 459;
+  };
+
+  const basePrice1 = getBasePrice(formData.type1);
+  const nameFee1 = wantsName ? 10 : 0;
+  const item1Total = basePrice1 + nameFee1;
+
+  let basePrice2 = 0;
+  let nameFee2 = 0;
+  let item2Total = 0;
+
+  if (isTwoTshirts) {
+    basePrice2 = getBasePrice(formData.type2);
+    nameFee2 = wantsName ? 10 : 0;
+    item2Total = basePrice2 + nameFee2;
+  }
+
+  const subtotal = item1Total + item2Total;
+  const isComboDiscountEligible = isTwoTshirts && wantsName;
+  const discount = isComboDiscountEligible ? 50 : 0;
+  const total = subtotal - discount;
+
+  return {
+    basePrice1,
+    nameFee1,
+    item1Total,
+    basePrice2,
+    nameFee2,
+    item2Total,
+    subtotal,
+    discount,
+    isComboDiscountEligible,
+    total,
+  };
+}, [
+  formData.fromNITSilchar,
+  formData.twotshirt,
+  formData.wantName,
+  formData.type1,
+  formData.type2,
+]);
  return (
     <div className="bg-[#080305] min-h-screen w-full font-sans relative overflow-x-hidden text-red-100 selection:bg-red-600 selection:text-white">
       {/* Modal for alerts */}
@@ -244,7 +311,7 @@ function MerchPay() {
 
       {/* Navigation dots with neon Ultron effect */}
       <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-4">
-        {[0, 1, 2, 3].map((index) => (
+        {[0, 1, 2, 3, 4, 5].map((index) => (
           <button
             key={index}
             onClick={() => scrollToSection(index)}
@@ -256,574 +323,901 @@ function MerchPay() {
           />
         ))}
       </div>
+<div className="bg-black text-black min-h-screen">
+    <main className="max-w-4xl mx-auto px-4">
+      {/* Promo Offer Banner Section */}
+<section className="form-section py-8">
+  <div className="bg-[#F5F5DC] border-2 border-black rounded-3xl p-6 md:p-8 relative overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+    
+    {/* Badge */}
+    <div className="inline-block bg-black text-[#F5F5DC] text-xs md:text-sm font-black uppercase tracking-widest px-4 py-1.5 rounded-xl mb-4 border-2 border-black">
+      Special Combo Offer
+    </div>
 
-      <main className="relative z-10 w-full max-w-3xl mx-auto px-4 py-8">
+    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <h2 className="text-2xl md:text-4xl font-black text-black uppercase tracking-wider leading-tight">
+          Get <span className="underline decoration-4 underline-offset-4">₹50 OFF</span> On Combo!
+        </h2>
+        <p className="mt-2 text-sm md:text-base font-bold text-black/80 max-w-xl">
+          Buy both <span className="bg-black text-white px-1.5 py-0.5 rounded">Ultron</span> &amp; <span className="bg-black text-white px-1.5 py-0.5 rounded">Baymax</span> T-Shirts with customized name tags to instantly unlock a flat ₹50 discount on your order.
+        </p>
+      </div>
 
-        {/* Personal Details Section */}
-        <section className="form-section min-h-screen py-16 flex flex-col justify-center">
-          <div className="bg-gradient-to-br from-[#120306]/90 via-[#0a0204]/95 to-black border border-red-600/40 shadow-[0_0_35px_rgba(225,29,72,0.25)] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
+      {/* Discount Tag Visual */}
+      <div className="self-stretch md:self-auto flex items-center justify-center bg-black text-[#F5F5DC] p-4 rounded-2xl border-2 border-black min-w-[140px] text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]">
+        <div>
+          <span className="block text-xs font-bold uppercase tracking-wider">Save Total</span>
+          <span className="block text-3xl font-black tracking-tight">₹50 OFF</span>
+        </div>
+      </div>
+    </div>
 
-            <div className="absolute -top-8 -right-8 w-32 h-32 bg-red-600 opacity-20 rounded-full blur-3xl animate-pulse" />
-            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-red-500 mb-6 border-b border-red-900/80 pb-4 tracking-widest uppercase drop-shadow-[0_0_12px_rgba(239,68,68,0.7)]">
-              Personal Details
-            </h2>
-            <div className="space-y-6">
+  </div>
+</section>
+      {/* Basic Info Section */}
+      <section className="form-section min-h-screen py-16 flex flex-col justify-center">
+        <div className="bg-[#F5F5DC] border-2 border-black rounded-3xl p-8 mb-8">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-black mb-6 border-b-2 border-black pb-4 tracking-widest uppercase">
+            Personal Details
+          </h2>
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Full Name <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all placeholder:text-zinc-500"
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Are you from NIT Silchar? <span className="text-red-600">*</span>
+              </label>
+              <select
+                name="fromNITSilchar"
+                value={formData.fromNITSilchar}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all"
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            {formData.fromNITSilchar === "Yes" && (
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                  Full Name
+                <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                  Scholar ID <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  value={formData.name}
+                  name="scholarId"
+                  value={formData.scholarId}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
-                  placeholder="Enter your full name"
-                  required
+                  required={formData.fromNITSilchar === "Yes"}
+                  className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all placeholder:text-zinc-500"
+                  placeholder="e.g. 2112001"
                 />
               </div>
+            )}
 
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Phone Number <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all placeholder:text-zinc-500"
+                placeholder="10-digit mobile number"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Address <span className="text-red-600">*</span>
+              </label>
+              <textarea
+                name="address"
+                value={formData.address}
+                onChange={handleInputChange}
+                required
+                rows={3}
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all placeholder:text-zinc-500"
+                placeholder="Enter complete delivery address"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Email Address <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all placeholder:text-zinc-500"
+                placeholder="your.email@example.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Are you buying both Ultron and Baymax? <span className="text-red-600">*</span>
+              </label>
+              <select
+                name="twotshirt"
+                value={formData.twotshirt}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all"
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+
+            
+          </div>
+        </div>
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => scrollToSection(2)}
+            className="h-12 px-8 bg-black text-[#F5F5DC] font-bold text-sm tracking-wider uppercase rounded-xl border-2 border-[#F5F5DC] hover:bg-[#F5F5DC] hover:text-black hover:border-black transition-all duration-200 active:scale-95"
+          >
+            Continue to Size & Customization
+          </button>
+        </div>
+      </section>
+
+      {/* Size & Customization Section */}
+      <section className="form-section min-h-screen py-16 flex flex-col justify-center">
+        <div className="bg-[#F5F5DC] border-2 border-black rounded-3xl p-8 mb-8">
+          <h1 className="text-2xl md:text-3xl font-black text-black tracking-wider uppercase mb-6 pb-2 border-b-2 border-black inline-block">
+  {formData.twotshirt==="Yes"?"First T-Shirt":"T-Shirt Specification"}
+</h1>
+          <div className="space-y-6">
+            <div>
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                  From NIT Silchar?
-                </label>
-                <select
-                  name="fromNITSilchar"
-                  value={formData.fromNITSilchar}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all"
-                >
-                  <option value="Yes" className="bg-black text-red-100">Yes</option>
-                  <option value="No" className="bg-black text-red-100">No</option>
-                </select>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                T-Shirt Type <span className="text-red-600">*</span>
+              </label>
+              <select
+                name="type1"
+                value={formData.type1}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all"
+              >
+                <option value="">Choose</option>
+                <option value="Regular">Regular</option>
+                <option value="Oversized">Oversized</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                T-Shirt Theme<span className="text-red-600">*</span>
+              </label>
+              <select
+  name="tshirtTheme1"
+  value={formData.tshirtTheme1}
+  onChange={handleInputChange}
+  required
+  className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all"
+>
+  <option value="">Choose</option>
+  <option value="Black">Ultron</option>
+  {formData.twotshirt === "No" && (
+    <option value="Beige">Baymax</option>
+  )}
+</select>
+            </div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Size
+              </label>
+              {/* Size Chart Tables */}
+              <div className="mb-4">
+                {formData.type1 === "Regular" && (
+                  <div className="w-full overflow-x-auto">
+                    <table className="w-full text-xs md:text-sm text-black border-collapse bg-white rounded-xl border-2 border-black">
+                      <caption className="text-black font-bold mb-2 text-base md:text-lg tracking-wider uppercase text-left">
+                        Regular-sized Size Chart (in inches)
+                      </caption>
+                      <thead>
+                        <tr className="bg-black text-[#F5F5DC]">
+                          <th className="px-3 py-2 text-center border border-black">Size</th>
+                          <th className="px-3 py-2 text-center border border-black">Chest</th>
+                          <th className="px-3 py-2 text-center border border-black">Length</th>
+                          <th className="px-3 py-2 text-center border border-black">Sleeve</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">S</td>
+                          <td className="px-6 py-2 text-center border border-black">38</td>
+                          <td className="px-6 py-2 text-center border border-black">26</td>
+                          <td className="px-6 py-2 text-center border border-black">7</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">M</td>
+                          <td className="px-6 py-2 text-center border border-black">40</td>
+                          <td className="px-6 py-2 text-center border border-black">27</td>
+                          <td className="px-6 py-2 text-center border border-black">7.5</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">L</td>
+                          <td className="px-6 py-2 text-center border border-black">42</td>
+                          <td className="px-6 py-2 text-center border border-black">28</td>
+                          <td className="px-6 py-2 text-center border border-black">8</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XL</td>
+                          <td className="px-6 py-2 text-center border border-black">44</td>
+                          <td className="px-6 py-2 text-center border border-black">29</td>
+                          <td className="px-6 py-2 text-center border border-black">8.5</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XXL</td>
+                          <td className="px-6 py-2 text-center border border-black">46</td>
+                          <td className="px-6 py-2 text-center border border-black">30</td>
+                          <td className="px-6 py-2 text-center border border-black">9</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {formData.type1 === "Oversized" && (
+                  <div className="w-full overflow-x-auto">
+                    <table className="w-full text-xs md:text-sm text-black border-collapse bg-white rounded-xl border-2 border-black">
+                      <caption className="text-black font-bold mb-2 text-base md:text-lg tracking-wider uppercase text-left">
+                        Over-sized Size Chart (in inches)
+                      </caption>
+                      <thead>
+                        <tr className="bg-black text-[#F5F5DC]">
+                          <th className="px-3 py-2 text-center border border-black">Size</th>
+                          <th className="px-3 py-2 text-center border border-black">Chest</th>
+                          <th className="px-3 py-2 text-center border border-black">Body Length</th>
+                          <th className="px-3 py-2 text-center border border-black">Sleeve Length</th>
+                          <th className="px-3 py-2 text-center border border-black">Sleeve Open</th>
+                          <th className="px-3 py-2 text-center border border-black">Shoulder</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">S</td>
+                          <td className="px-6 py-2 text-center border border-black">21</td>
+                          <td className="px-6 py-2 text-center border border-black">26.5</td>
+                          <td className="px-6 py-2 text-center border border-black">9.5</td>
+                          <td className="px-6 py-2 text-center border border-black">7.5</td>
+                          <td className="px-6 py-2 text-center border border-black">20</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">M</td>
+                          <td className="px-6 py-2 text-center border border-black">22</td>
+                          <td className="px-6 py-2 text-center border border-black">27.5</td>
+                          <td className="px-6 py-2 text-center border border-black">10</td>
+                          <td className="px-6 py-2 text-center border border-black">8</td>
+                          <td className="px-6 py-2 text-center border border-black">21</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">L</td>
+                          <td className="px-6 py-2 text-center border border-black">23</td>
+                          <td className="px-6 py-2 text-center border border-black">28.5</td>
+                          <td className="px-6 py-2 text-center border border-black">10.5</td>
+                          <td className="px-6 py-2 text-center border border-black">8.5</td>
+                          <td className="px-6 py-2 text-center border border-black">22</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XL</td>
+                          <td className="px-6 py-2 text-center border border-black">24</td>
+                          <td className="px-6 py-2 text-center border border-black">29.5</td>
+                          <td className="px-6 py-2 text-center border border-black">11</td>
+                          <td className="px-6 py-2 text-center border border-black">9</td>
+                          <td className="px-6 py-2 text-center border border-black">23</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XXL</td>
+                          <td className="px-6 py-2 text-center border border-black">25</td>
+                          <td className="px-6 py-2 text-center border border-black">30.5</td>
+                          <td className="px-6 py-2 text-center border border-black">11</td>
+                          <td className="px-6 py-2 text-center border border-black">9</td>
+                          <td className="px-6 py-2 text-center border border-black">23</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
-
-              {formData.fromNITSilchar === "Yes" && (
-                <div>
-                  <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                    Scholar ID
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-2">
+                {["S", "M", "L", "XL", "XXL"].map((size1) => (
+                  <label key={size1} className="cursor-pointer">
+                    <input
+                      type="radio"
+                      name="size1"
+                      value={size1}
+                      checked={formData.size1 === size1}
+                      onChange={handleInputChange}
+                      className="sr-only"
+                    />
+                    <div
+                      className={`flex items-center justify-center p-4 rounded-xl border-2 transition-all duration-200 ${
+                        formData.size1 === size1
+                          ? "border-black bg-black text-[#F5F5DC] scale-105"
+                          : "border-black bg-white text-black hover:bg-black hover:text-[#F5F5DC]"
+                      }`}
+                    >
+                      <span className="font-bold text-lg tracking-wider">
+                        {size1}
+                      </span>
+                    </div>
                   </label>
-                  <input
-                    type="text"
-                    name="scholarId"
-                    value={formData.scholarId}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
-                    placeholder="Enter Scholar ID"
-                    required
-                  />
-                </div>
-              )}
-              <div>
-                  <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
-                    placeholder="Enter Email ID"
-                    required
-                  />
-                </div>
+                ))}
+              </div>
+            </div>
 
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Want Name in T-Shirt?
+              </label>
+              <select
+                name="wantName"
+                value={formData.wantName}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all"
+              >
+                <option value="Yes" className="bg-white text-black">Yes</option>
+                <option value="No" className="bg-white text-black">No</option>
+              </select>
+            </div>
+
+            {formData.wantName === "Yes" && (
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                  Phone Number (10 Digits)
+                <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                  Name in T-Shirt (Max 7 Letters)
                 </label>
                 <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
+                  type="text"
+                  name="nameInTShirt"
+                  value={formData.nameInTShirt}
                   onChange={handleInputChange}
-                  pattern="[0-9]{10,15}"
-                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
-                  placeholder="Enter your phone number"
-                  required
+                  className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all placeholder:text-zinc-500"
+                  placeholder="Enter name to be printed"
                 />
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                  Address
-                </label>
-                <textarea
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
-                  placeholder={
-                    formData.fromNITSilchar === "Yes"
-                      ? "Enter Hostel Number"
-                      : "Enter Full Address"
-                  }
-                  required
-                />
-              </div>
-            </div>
+            )}
           </div>
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={() => scrollToSection(1)}
-              className="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-lg p-[1px] focus:outline-none"
-            >
-              <span
-                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#990000_0%,#ff1a1a_50%,#400000_100%)]"
-              >
-              </span>
-              <span
-                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-bold tracking-wider text-red-400 backdrop-blur-3xl gap-2 hover:text-white transition-colors"
-              >
-                Continue to Merchandise Selection
-              </span>
-            </button>
-          </div>
-        </section>
-
-        {/* Merchandise Section */}
+        </div>
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => scrollToSection(2)}
+            className="h-12 px-8 bg-black text-[#F5F5DC] font-bold text-sm tracking-wider uppercase rounded-xl border-2 border-[#F5F5DC] hover:bg-[#F5F5DC] hover:text-black hover:border-black transition-all duration-200 active:scale-95"
+          >
+            Continue to Payment
+          </button>
+        </div>
+      </section>
+      {
+        formData.twotshirt==="Yes" &&
         <section className="form-section min-h-screen py-16 flex flex-col justify-center">
-          <div className="bg-gradient-to-br from-[#120306]/90 via-[#0a0204]/95 to-black border border-red-600/40 shadow-[0_0_35px_rgba(225,29,72,0.25)] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
-            <div className="absolute -top-8 -left-8 w-32 h-32 bg-red-600 opacity-20 rounded-full blur-3xl animate-pulse" />
-            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-red-500 mb-6 border-b border-red-900/80 pb-4 tracking-widest uppercase drop-shadow-[0_0_12px_rgba(239,68,68,0.7)]">
-              Merchandise Selection
-            </h2>
-            <div className="space-y-6">
+        <div className="bg-[#F5F5DC] border-2 border-black rounded-3xl p-8 mb-8">
+          <h1 className="text-2xl md:text-3xl font-black text-black tracking-wider uppercase mb-6 pb-2 border-b-2 border-black inline-block">
+  Second T-Shirt</h1>
+          <div className="space-y-6">
+            <div>
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                  Type
-                </label>
-                <select
-                  name="type"
-                  value={formData.type}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all"
-                >
-                  <option value="" className="bg-black text-red-100">Select Type</option>
-                  <option value="Regular" className="bg-black text-red-100">Regular-sized</option>
-                  <option value="Oversized" className="bg-black text-red-100">Over-sized</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                  COLOR
-                </label>
-                <select
-                  name="tshirtTheme"
-                  value={formData.tshirtTheme}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all"
-                >
-                  <option value="" className="bg-black text-red-100">Select Color</option>
-                  <option value="White" className="bg-black text-red-100">White</option>
-                  <option value="Black" className="bg-black text-red-100">Black</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                  Size
-                </label>
-                {/* Size Chart Tables */}
-                <div className="mb-4">
-                  {formData.type === "Regular" && (
-                    <div className="w-full overflow-x-auto animate-fade-in">
-                      <table className="w-full text-xs md:text-sm text-red-100 border-separate border-spacing-y-1 bg-black/80 rounded-xl shadow-lg border border-red-900/50">
-                        <caption className="text-red-400 font-bold mb-2 text-base md:text-lg tracking-wider uppercase drop-shadow-[0_0_8px_#ef4444]">Regular-sized Size Chart (in inches)</caption>
-                        <thead>
-                          <tr className="bg-red-950/80 text-red-300">
-                            <th className="px-3 py-2 rounded-tl-xl border-b border-red-900">Size</th>
-                            <th className="px-3 py-2 border-b border-red-900">Chest</th>
-                            <th className="px-3 py-2 border-b border-red-900">Length</th>
-                            <th className="px-3 py-2 rounded-tr-xl border-b border-red-900">Sleeve</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">S</td>
-                            <td className="px-6 py-2 text-center">38</td>
-                            <td className="px-6 py-2 text-center">26</td>
-                            <td className="px-6 py-2 text-center">7</td>
-                          </tr>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">M</td>
-                            <td className="px-6 py-2 text-center">40</td>
-                            <td className="px-6 py-2 text-center">27</td>
-                            <td className="px-6 py-2 text-center">7.5</td>
-                          </tr>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">L</td>
-                            <td className="px-6 py-2 text-center">42</td>
-                            <td className="px-6 py-2 text-center">28</td>
-                            <td className="px-6 py-2 text-center">8</td>
-                          </tr>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">XL</td>
-                            <td className="px-6 py-2 text-center">44</td>
-                            <td className="px-6 py-2 text-center">29</td>
-                            <td className="px-6 py-2 text-center">8.5</td>
-                          </tr>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">XXL</td>
-                            <td className="px-6 py-2 text-center">46</td>
-                            <td className="px-6 py-2 text-center">30</td>
-                            <td className="px-6 py-2 text-center">9</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-                  {formData.type === "Oversized" && (
-                    <div className="w-full overflow-x-auto animate-fade-in">
-                      <table className="w-full text-xs md:text-sm text-red-100 border-separate border-spacing-y-1 bg-black/80 rounded-xl shadow-lg border border-red-900/50">
-                        <caption className="text-red-400 font-bold mb-2 text-base md:text-lg tracking-wider uppercase drop-shadow-[0_0_8px_#ef4444]">Over-sized Size Chart (in inches)</caption>
-                        <thead>
-                          <tr className="bg-red-950/80 text-red-300">
-                            <th className="px-3 py-2 rounded-tl-xl border-b border-red-900">Size</th>
-                            <th className="px-3 py-2 border-b border-red-900">Chest</th>
-                            <th className="px-3 py-2 border-b border-red-900">Body Length</th>
-                            <th className="px-3 py-2 border-b border-red-900">Sleeve Length</th>
-                            <th className="px-3 py-2 border-b border-red-900">Sleeve Open</th>
-                            <th className="px-3 py-2 rounded-tr-xl border-b border-red-900">Shoulder</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">S</td>
-                            <td className="px-6 py-2 text-center">21</td>
-                            <td className="px-6 py-2 text-center">26.5</td>
-                            <td className="px-6 py-2 text-center">9.5</td>
-                            <td className="px-6 py-2 text-center">7.5</td>
-                            <td className="px-6 py-2 text-center">20</td>
-                          </tr>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">M</td>
-                            <td className="px-6 py-2 text-center">22</td>
-                            <td className="px-6 py-2 text-center">27.5</td>
-                            <td className="px-6 py-2 text-center">10</td>
-                            <td className="px-6 py-2 text-center">8</td>
-                            <td className="px-6 py-2 text-center">21</td>
-                          </tr>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">L</td>
-                            <td className="px-6 py-2 text-center">23</td>
-                            <td className="px-6 py-2 text-center">28.5</td>
-                            <td className="px-6 py-2 text-center">10.5</td>
-                            <td className="px-6 py-2 text-center">8.5</td>
-                            <td className="px-6 py-2 text-center">22</td>
-                          </tr>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">XL</td>
-                            <td className="px-6 py-2 text-center">24</td>
-                            <td className="px-6 py-2 text-center">29.5</td>
-                            <td className="px-6 py-2 text-center">11</td>
-                            <td className="px-6 py-2 text-center">9</td>
-                            <td className="px-6 py-2 text-center">23</td>
-                          </tr>
-                          <tr className="hover:bg-red-900/30 transition-colors">
-                            <td className="px-6 py-2 text-center">XXL</td>
-                            <td className="px-6 py-2 text-center">25</td>
-                            <td className="px-6 py-2 text-center">30.5</td>
-                            <td className="px-6 py-2 text-center">11</td>
-                            <td className="px-6 py-2 text-center">9</td>
-                            <td className="px-6 py-2 text-center">23</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-2">
-                  {["S", "M", "L", "XL", "XXL"].map((size) => (
-                    <label key={size} className="cursor-pointer">
-                      <input
-                        type="radio"
-                        name="size"
-                        value={size}
-                        checked={formData.size === size}
-                        onChange={handleInputChange}
-                        className="sr-only"
-                      />
-                      <div
-                        className={`flex items-center justify-center p-4 rounded-xl border-2 transition-all duration-200 shadow-inner ${formData.size === size
-                          ? "border-red-500 bg-red-950/50 shadow-[0_0_20px_rgba(239,68,68,0.6)] scale-105"
-                          : "border-red-950 bg-black/60 hover:border-red-600"
-                          }`}
-                      >
-                        <span
-                          className={`font-bold text-lg tracking-wider ${formData.size === size
-                            ? "text-red-300 drop-shadow-[0_0_8px_#ef4444]"
-                            : "text-red-700 hover:text-red-400"
-                            }`}
-                        >
-                          {size}
-                        </span>
-                      </div>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1 tracking-wide">
-                  Want Name in T-Shirt?
-                </label>
-                <select
-                  name="wantName"
-                  value={formData.wantName}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all"
-                >
-                  <option value="Yes" className="bg-black text-red-100">Yes</option>
-                  <option value="No" className="bg-black text-red-100">No</option>
-                </select>
-              </div>
-
-              {formData.wantName === "Yes" && (
-                <div>
-                  <label className="block text-sm font-medium text-red-400 mb-1 tracking-wide">
-                    Name in T-Shirt (Max 7 Letters)
-                  </label>
-                  <input
-                    type="text"
-                    name="nameInTShirt"
-                    value={formData.nameInTShirt}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-red-900/80 bg-black/70 text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all placeholder:text-red-900/60 shadow-inner"
-                    placeholder="Enter name to be printed"
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={() => scrollToSection(2)}
-              className="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-lg p-[1px] focus:outline-none"
-            >
-              <span
-                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#990000_0%,#ff1a1a_50%,#400000_100%)]"
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                T-Shirt Type <span className="text-red-600">*</span>
+              </label>
+              <select
+                name="type2"
+                value={formData.type2}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all"
               >
-              </span>
-              <span
-                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-bold tracking-wider text-red-400 backdrop-blur-3xl gap-2 hover:text-white transition-colors"
-              >
-                Continue to Payment
-              </span>
-            </button>
-          </div>
-        </section>
-
-        {/* Payment Section */}
-        <section className="form-section min-h-screen py-16 flex flex-col justify-center">
-          <div className="bg-gradient-to-br from-[#120306]/90 via-[#0a0204]/95 to-black border border-red-600/40 shadow-[0_0_35px_rgba(225,29,72,0.25)] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
-            <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-red-600 opacity-20 rounded-full blur-3xl animate-pulse" />
-            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-red-500 mb-6 border-b border-red-900/80 pb-4 tracking-widest uppercase drop-shadow-[0_0_12px_rgba(239,68,68,0.7)]">
-              Payment
-            </h2>
-            {/* Pricing Details */}
-            <div className="mb-8 w-full max-w-lg mx-auto bg-black/80 border border-red-900/80 rounded-xl p-4 shadow-[0_0_15px_rgba(225,29,72,0.15)] animate-fade-in">
-              <h3 className="text-lg font-bold text-red-400 mb-2 text-center tracking-wider uppercase drop-shadow-[0_0_6px_#ef4444]">T-Shirt Pricing</h3>
-              <table className="w-full text-sm text-red-100">
-                <thead>
-                  <tr className="text-red-300">
-                    <th className="py-1 px-2 text-left">Variant</th>
-                    <th className="py-1 px-2 text-left">With Name</th>
-                    <th className="py-1 px-2 text-left">Without Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-t border-red-900/50">
-                    <td className="py-1 px-2 font-semibold text-zinc-300">Regular-sized T-Shirt</td>
-                    <td className="py-1 px-2 text-red-400 font-mono">₹409</td>
-                    <td className="py-1 px-2 text-red-400 font-mono">₹399</td>
-                  </tr>
-                  <tr className="border-t border-red-900/50">
-                    <td className="py-1 px-2 font-semibold text-zinc-300">Over-sized T-shirt</td>
-                    <td className="py-1 px-2 text-red-400 font-mono">₹489</td>
-                    <td className="py-1 px-2 text-red-400 font-mono">₹479</td>
-                  </tr>
-                  <tr className="border-t border-red-900/50">
-                    <td className="py-1 px-2 font-semibold text-zinc-300">Non-nitians</td>
-                    <td className="py-1 px-2 text-red-400 font-mono">₹649</td>
-                    <td className="py-1 px-2 text-red-400 font-mono">₹639</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p className="text-xs text-red-400/80 mt-2 text-center italic">Please pay the exact amount as per your selection below.</p>
+                <option value="">Choose</option>
+                <option value="Regular">Regular</option>
+                <option value="Oversized">Oversized</option>
+              </select>
             </div>
-            <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
-              {/* QR Code and UPI Pay */}
-              <div className="flex-1 flex flex-col items-center justify-center">
-                <img
-                  src="/tshirt/qr_code.jpg"
-                  alt="Payment QR Code"
-                  className="w-48 h-48 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.3)] border-2 border-red-600 mb-4 bg-white object-contain"
-                />
-                <p className="text-red-200 text-sm mb-2 text-center">Scan this QR code to pay via any UPI app</p>
-                <a
-                  href={upiLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center w-full"
-                >
-                  <button
-                    type="button"
-                    className="flex items-center gap-3 px-5 py-1 bg-gradient-to-r from-red-900 via-red-700 to-red-900 text-white font-bold rounded-2xl shadow-[0_0_20px_rgba(225,29,72,0.4)] border-2 border-red-500 hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-400 w-9/12 max-w-xs justify-center uppercase tracking-wider"
-                  >
-                    <img src="/tshirt/UPI-Logo-vector.svg" alt="BHIM UPI Logo" className="w-11 h-11 bg-transparent rounded p-1" />
-                    <span className="text-md font-bold tracking-wide">Pay with UPI</span>
-                  </button>
-                  <span className="text-xs text-red-100 mt-2 text-center"></span>
-                </a>
-                <p className="text-sm text-red-400/90 text-center mt-2">Click to pay via any UPI app (GPay/Phonepe/Paytm.)</p>
-              </div>
-              {/* Upload Section */}
-              <div className="flex-1 flex flex-col items-center justify-center mt-6 md:mt-0">
-                <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-sm flex flex-col items-center">
-                  <label className="block text-base font-semibold text-red-300 mb-3 text-center tracking-wide">
-                    Upload Payment Receipt <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative w-full rounded-2xl border-2 border-dashed border-red-600/60 bg-black/80 shadow-[0_0_20px_rgba(225,29,72,0.2)] p-4 sm:p-6 flex flex-col items-center transition-all duration-300 hover:border-red-400 hover:shadow-[0_0_25px_rgba(239,68,68,0.4)]">
-                    <input
-                      type="file"
-                      accept="application/pdf,image/*"
-                      onChange={uploader}
-                      required={!fileUrl}
-                      className="block w-full text-sm text-red-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-950 file:text-red-300 hover:file:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 mb-2 cursor-pointer"
-                    />
-                    {uploading && (
-                      <span className="text-red-400 animate-pulse mt-2 font-semibold">Uploading...</span>
-                    )}
-                    {fileUrl && (
-                      <span className="text-emerald-400 mt-2 flex flex-col items-center font-medium">
-                        <svg className="w-7 h-7 mb-1 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                        Uploaded! <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="underline text-red-400 hover:text-red-300 break-all">View File</a>
-                      </span>
-                    )}
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                T-Shirt Theme<span className="text-red-600">*</span>
+              </label>
+              <select
+                name="tshirtTheme2"
+                value={formData.tshirtTheme2}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all"
+              >
+                <option value="Beige">Baymax</option>
+              </select>
+            </div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Size
+              </label>
+              {/* Size Chart Tables */}
+              <div className="mb-4">
+                {formData.type2 === "Regular" && (
+                  <div className="w-full overflow-x-auto">
+                    <table className="w-full text-xs md:text-sm text-black border-collapse bg-white rounded-xl border-2 border-black">
+                      <caption className="text-black font-bold mb-2 text-base md:text-lg tracking-wider uppercase text-left">
+                        Regular-sized Size Chart (in inches)
+                      </caption>
+                      <thead>
+                        <tr className="bg-black text-[#F5F5DC]">
+                          <th className="px-3 py-2 text-center border border-black">Size</th>
+                          <th className="px-3 py-2 text-center border border-black">Chest</th>
+                          <th className="px-3 py-2 text-center border border-black">Length</th>
+                          <th className="px-3 py-2 text-center border border-black">Sleeve</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">S</td>
+                          <td className="px-6 py-2 text-center border border-black">38</td>
+                          <td className="px-6 py-2 text-center border border-black">26</td>
+                          <td className="px-6 py-2 text-center border border-black">7</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">M</td>
+                          <td className="px-6 py-2 text-center border border-black">40</td>
+                          <td className="px-6 py-2 text-center border border-black">27</td>
+                          <td className="px-6 py-2 text-center border border-black">7.5</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">L</td>
+                          <td className="px-6 py-2 text-center border border-black">42</td>
+                          <td className="px-6 py-2 text-center border border-black">28</td>
+                          <td className="px-6 py-2 text-center border border-black">8</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XL</td>
+                          <td className="px-6 py-2 text-center border border-black">44</td>
+                          <td className="px-6 py-2 text-center border border-black">29</td>
+                          <td className="px-6 py-2 text-center border border-black">8.5</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XXL</td>
+                          <td className="px-6 py-2 text-center border border-black">46</td>
+                          <td className="px-6 py-2 text-center border border-black">30</td>
+                          <td className="px-6 py-2 text-center border border-black">9</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <p className="text-xs text-red-400/80 mt-3 text-center leading-snug">Attach a screenshot or PDF of your payment receipt.<br />Accepted: JPG, PNG, PDF. Max size: 5MB.</p>
+                )}
+                {formData.type2 === "Oversized" && (
+                  <div className="w-full overflow-x-auto">
+                    <table className="w-full text-xs md:text-sm text-black border-collapse bg-white rounded-xl border-2 border-black">
+                      <caption className="text-black font-bold mb-2 text-base md:text-lg tracking-wider uppercase text-left">
+                        Over-sized Size Chart (in inches)
+                      </caption>
+                      <thead>
+                        <tr className="bg-black text-[#F5F5DC]">
+                          <th className="px-3 py-2 text-center border border-black">Size</th>
+                          <th className="px-3 py-2 text-center border border-black">Chest</th>
+                          <th className="px-3 py-2 text-center border border-black">Body Length</th>
+                          <th className="px-3 py-2 text-center border border-black">Sleeve Length</th>
+                          <th className="px-3 py-2 text-center border border-black">Sleeve Open</th>
+                          <th className="px-3 py-2 text-center border border-black">Shoulder</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">S</td>
+                          <td className="px-6 py-2 text-center border border-black">21</td>
+                          <td className="px-6 py-2 text-center border border-black">26.5</td>
+                          <td className="px-6 py-2 text-center border border-black">9.5</td>
+                          <td className="px-6 py-2 text-center border border-black">7.5</td>
+                          <td className="px-6 py-2 text-center border border-black">20</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">M</td>
+                          <td className="px-6 py-2 text-center border border-black">22</td>
+                          <td className="px-6 py-2 text-center border border-black">27.5</td>
+                          <td className="px-6 py-2 text-center border border-black">10</td>
+                          <td className="px-6 py-2 text-center border border-black">8</td>
+                          <td className="px-6 py-2 text-center border border-black">21</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">L</td>
+                          <td className="px-6 py-2 text-center border border-black">23</td>
+                          <td className="px-6 py-2 text-center border border-black">28.5</td>
+                          <td className="px-6 py-2 text-center border border-black">10.5</td>
+                          <td className="px-6 py-2 text-center border border-black">8.5</td>
+                          <td className="px-6 py-2 text-center border border-black">22</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XL</td>
+                          <td className="px-6 py-2 text-center border border-black">24</td>
+                          <td className="px-6 py-2 text-center border border-black">29.5</td>
+                          <td className="px-6 py-2 text-center border border-black">11</td>
+                          <td className="px-6 py-2 text-center border border-black">9</td>
+                          <td className="px-6 py-2 text-center border border-black">23</td>
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XXL</td>
+                          <td className="px-6 py-2 text-center border border-black">25</td>
+                          <td className="px-6 py-2 text-center border border-black">30.5</td>
+                          <td className="px-6 py-2 text-center border border-black">11</td>
+                          <td className="px-6 py-2 text-center border border-black">9</td>
+                          <td className="px-6 py-2 text-center border border-black">23</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-2">
+                {["S", "M", "L", "XL", "XXL"].map((size2) => (
+                  <label key={size2} className="cursor-pointer">
+                    <input
+                      type="radio"
+                      name="size2"
+                      value={size2}
+                      checked={formData.size2 === size2}
+                      onChange={handleInputChange}
+                      className="sr-only"
+                    />
+                    <div
+                      className={`flex items-center justify-center p-4 rounded-xl border-2 transition-all duration-200 ${
+                        formData.size2 === size2
+                          ? "border-black bg-black text-[#F5F5DC] scale-105"
+                          : "border-black bg-white text-black hover:bg-black hover:text-[#F5F5DC]"
+                      }`}
+                    >
+                      <span className="font-bold text-lg tracking-wider">
+                        {size2}
+                      </span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                Want Name in T-Shirt?
+              </label>
+              <select
+                name="wantName"
+                value={formData.wantName}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all"
+              >
+                <option value="Yes" className="bg-white text-black">Yes</option>
+                <option value="No" className="bg-white text-black">No</option>
+              </select>
+            </div>
+
+            {formData.wantName === "Yes" && (
+              <div>
+                <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
+                  Name in T-Shirt (Max 7 Letters)
+                </label>
+                <input
+                  type="text"
+                  name="nameInTShirt"
+                  value={formData.nameInTShirt}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-xl border-2 border-black bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-black transition-all placeholder:text-zinc-500"
+                  placeholder="Enter name to be printed"
+                />
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => scrollToSection(3)}
+            className="h-12 px-8 bg-black text-[#F5F5DC] font-bold text-sm tracking-wider uppercase rounded-xl border-2 border-[#F5F5DC] hover:bg-[#F5F5DC] hover:text-black hover:border-black transition-all duration-200 active:scale-95"
+          >
+            Continue to Payment
+          </button>
+        </div>
+      </section>
+      }
+
+      {/* Payment Section */}
+      <section className="form-section min-h-screen py-16 flex flex-col justify-center">
+        <div className="bg-[#F5F5DC] border-2 border-black rounded-3xl p-8 mb-8 relative">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-black mb-6 border-b-2 border-black pb-4 tracking-widest uppercase">
+            Payment
+          </h2>
+          {/* Pricing Details */}
+          <div className="mb-8 w-full max-w-lg mx-auto bg-white border-2 border-black rounded-xl p-4">
+            <h3 className="text-lg font-bold text-black mb-2 text-center tracking-wider uppercase">T-Shirt Pricing</h3>
+            <div className="space-y-6">
+  {/* Pricing Table */}
+  <div className="overflow-x-auto rounded-2xl border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+    <table className="w-full text-sm text-black border-collapse">
+      <thead>
+        <tr className="bg-black text-[#F5F5DC]">
+          <th className="py-3 px-4 text-left font-bold uppercase tracking-wider">Variant</th>
+          <th className="py-3 px-4 text-left font-bold uppercase tracking-wider">Without Name</th>
+          <th className="py-3 px-4 text-left font-bold uppercase tracking-wider">With Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr className="border-b border-black hover:bg-[#F5F5DC]/40 transition-colors">
+          <td className="py-2.5 px-4 font-bold">Regular-sized T-Shirt</td>
+          <td className="py-2.5 px-4 font-mono font-bold">₹389</td>
+          <td className="py-2.5 px-4 font-mono font-bold">₹399</td>
+        </tr>
+        <tr className="border-b border-black hover:bg-[#F5F5DC]/40 transition-colors">
+          <td className="py-2.5 px-4 font-bold">Over-sized T-shirt</td>
+          <td className="py-2.5 px-4 font-mono font-bold">₹449</td>
+          <td className="py-2.5 px-4 font-mono font-bold">₹459</td>
+        </tr>
+        <tr className="border-b border-black hover:bg-[#F5F5DC]/40 transition-colors">
+          <td className="py-2.5 px-4 font-bold">Non-Nitians (Regular-sized)</td>
+          <td className="py-2.5 px-4 font-mono font-bold">₹459</td>
+          <td className="py-2.5 px-4 font-mono font-bold">₹469</td>
+        </tr>
+        <tr className="hover:bg-[#F5F5DC]/40 transition-colors">
+          <td className="py-2.5 px-4 font-bold">Non-Nitians (Oversized)</td>
+          <td className="py-2.5 px-4 font-mono font-bold">₹549</td>
+          <td className="py-2.5 px-4 font-mono font-bold">₹559</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {/* Dynamic Calculated Bill Card */}
+  <div className="bg-white border-2 border-black rounded-2xl p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] space-y-4">
+    <div className="flex items-center justify-between border-b-2 border-black pb-3">
+      <h3 className="text-lg font-black uppercase tracking-wider text-black flex items-center gap-2">
+        <span>🧾</span> Order Summary
+      </h3>
+      <span className="text-xs font-bold uppercase px-2.5 py-1 bg-[#F5F5DC] border border-black rounded-lg">
+        {formData.fromNITSilchar === "Yes" ? "NITian Rate" : "Non-NITian Rate"}
+      </span>
+    </div>
+
+    <div className="space-y-2 text-sm font-medium text-black">
+      {/* T-Shirt 1 Details */}
+      <div className="flex justify-between items-center">
+        <span>
+          1x First T-Shirt ({formData.type1 || "Regular"}
+          {formData.tshirtTheme1 ? ` - ${formData.tshirtTheme1}` : ""})
+        </span>
+        <span className="font-mono font-bold">₹{bill.basePrice1}</span>
+      </div>
+
+      {/* Custom Name Fee 1 */}
+      {formData.wantName === "Yes" && (
+        <div className="flex justify-between items-center text-xs text-zinc-600 pl-4 border-l-2 border-black">
+          <span>Custom Name Tag ("{formData.nameInTShirt || "Custom"}")</span>
+          <span className="font-mono font-bold text-black">+₹{bill.nameFee1}</span>
+        </div>
+      )}
+
+      {/* T-Shirt 2 Details (If Combo Selected) */}
+      {formData.twotshirt === "Yes" && (
+        <>
+          <div className="flex justify-between items-center pt-2 border-t border-dashed border-zinc-300">
+            <span>
+              1x Second T-Shirt ({formData.type2 || "Regular"}
+              {formData.tshirtTheme2 ? ` - ${formData.tshirtTheme2}` : ""})
+            </span>
+            <span className="font-mono font-bold">₹{bill.basePrice2}</span>
+          </div>
+
+          {formData.wantName === "Yes" && (
+            <div className="flex justify-between items-center text-xs text-zinc-600 pl-4 border-l-2 border-black">
+              <span>Custom Name Tag</span>
+              <span className="font-mono font-bold text-black">+₹{bill.nameFee2}</span>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Subtotal */}
+      <div className="flex justify-between items-center pt-3 border-t-2 border-black font-bold">
+        <span>Subtotal</span>
+        <span className="font-mono">₹{bill.subtotal}</span>
+      </div>
+
+      {/* Discount Row */}
+      {bill.discount > 0 ? (
+        <div className="flex justify-between items-center text-green-700 bg-green-100 p-2.5 rounded-xl border border-green-800 font-bold">
+          <span className="flex items-center gap-1">
+            Combo Offer Discount
+          </span>
+          <span className="font-mono text-base">-₹{bill.discount}</span>
+        </div>
+      ) : formData.twotshirt === "Yes" && formData.wantName !== "Yes" ? (
+        <p className="text-xs font-semibold text-red-800 bg-amber-50 p-2 rounded-lg border border-amber-300">
+          !!!Add custom name tags to unlock ₹50 combo discount!!!
+        </p>
+      ) : null}
+    </div>
+
+    {/* Grand Total */}
+    <div className="flex justify-between items-center pt-4 border-t-2 border-black bg-[#F5F5DC] p-4 rounded-xl border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+      <span className="text-base font-black uppercase tracking-wider">Final Payable Amount</span>
+      <span className="text-2xl font-black font-mono tracking-tight text-black">
+        ₹{bill.total}
+      </span>
+    </div>
+  </div>
+</div>
+            <p className="text-xs text-black mt-2 text-center font-medium italic">Please pay the exact amount as per your selection below.</p>
+          </div>
+          <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
+            {/* QR Code and UPI Pay */}
+            <div className="flex-1 flex flex-col items-center justify-center">
+              <img
+                src="/tshirt/abhinav_qr.jpeg"
+                alt="Payment QR Code"
+                className="w-48 h-48 rounded-xl border-2 border-black mb-4 bg-white"
+              />
+              <p className="text-black text-sm mb-2 text-center font-medium">Primary QR</p>
+              <img
+                src="/tshirt/ayushman_qr.jpeg"
+                alt="Payment QR Code"
+                className="w-48 h-48 rounded-xl border-2 border-black mb-4 bg-white"
+              />
+              <p className="text-black text-sm mb-2 text-center font-medium">Sencondary QR</p>
+            </div>
+            {/* Upload Section */}
+            <div className="flex-1 flex flex-col items-center justify-center mt-6 md:mt-0">
+              <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-sm flex flex-col items-center">
+                <label className="block text-base font-bold text-black mb-3 text-center tracking-wide uppercase">
+                  Upload Payment Receipt <span className="text-red-600">*</span>
+                </label>
+                <div className="relative w-full rounded-2xl border-2 border-dashed border-black bg-white p-4 sm:p-6 flex flex-col items-center">
+                  <input
+                    type="file"
+                    accept="application/pdf,image/*"
+                    onChange={uploader}
+                    required={!fileUrl}
+                    className="block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-2 file:border-black file:text-sm file:font-bold file:bg-[#F5F5DC] file:text-black hover:file:bg-black hover:file:text-[#F5F5DC] focus:outline-none mb-2 cursor-pointer"
+                  />
+                  {uploading && (
+                    <span className="text-black font-bold animate-pulse mt-2">Uploading...</span>
+                  )}
+                  {fileUrl && (
+                    <span className="text-emerald-700 mt-2 flex flex-col items-center font-bold">
+                      <svg className="w-7 h-7 mb-1 text-emerald-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      Uploaded! <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="underline text-black hover:text-zinc-700 break-all">View File</a>
+                    </span>
+                  )}
                 </div>
+                <p className="text-xs text-black mt-3 text-center font-medium leading-snug">Attach a screenshot or PDF of your payment receipt.<br />Accepted: JPG, PNG, PDF. Max size: 5MB.</p>
               </div>
             </div>
           </div>
-          <div className="flex justify-center mt-8">
+        </div>
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => scrollToSection(3)}
+            className="h-12 px-8 bg-black text-[#F5F5DC] font-bold text-sm tracking-wider uppercase rounded-xl border-2 border-[#F5F5DC] hover:bg-[#F5F5DC] hover:text-black hover:border-black transition-all duration-200 active:scale-95"
+          >
+            Continue to Review Order
+          </button>
+        </div>
+      </section>
+
+      {/* Summary Section */}
+      <section className="form-section min-h-screen py-16 flex flex-col justify-center">
+        <div className="bg-[#F5F5DC] border-2 border-black rounded-3xl p-8 mb-8 relative">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-black mb-6 border-b-2 border-black pb-4 tracking-widest uppercase">
+            Order Summary
+          </h2>
+          <div className="space-y-4 text-black font-medium">
+            <p>
+              <b className="uppercase">Name:</b> {formData.name}
+            </p>
+            <p>
+              <b className="uppercase">From NIT Silchar:</b> {formData.fromNITSilchar}
+            </p>
+            {formData.fromNITSilchar === "Yes" && (
+              <p>
+                <b className="uppercase">Scholar ID:</b> {formData.scholarId}
+              </p>
+            )}
+            <p>
+              <b className="uppercase">Phone:</b> {formData.phone}
+            </p>
+            <p>
+              <b className="uppercase">Address:</b> {formData.address}
+            </p>
+            <p>
+              <b className="uppercase">Email:</b> {formData.email}
+            <p>
+              <b className="uppercase">Want both T-Shirt:</b> {formData.twotshirt}
+            </p>
+            </p>
+            <p>
+              <b className="uppercase">Type 1:</b> {formData.type1}
+            </p>
+            <p>
+              <b className="uppercase">Size 1:</b> {formData.size1}
+            </p>
+            {formData.twotshirt === "Yes" && (
+              <>
+              <p>
+                <b className="uppercase">Type 2:</b> {formData.type2}
+              </p>
+              <p>
+                <b className="uppercase">Size 2:</b> {formData.size2}
+              </p>
+              </>
+            )}
+            <p>
+              <b className="uppercase">Want Name in T-Shirt:</b> {formData.wantName}
+            </p>
+            {formData.wantName === "Yes" && (
+              <p>
+                <b className="uppercase">Name in T-Shirt:</b> {formData.nameInTShirt}
+              </p>
+            )}
+            <p>
+              <b className="uppercase">Payment Proof:</b> {formData.paymentProofLink ? (
+                <a href={formData.paymentProofLink} className="text-black underline font-bold hover:text-zinc-700 break-all" target="_blank" rel="noopener noreferrer">View File</a>
+              ) : "Pending"}
+            </p>
+          </div>
+          <div className="mt-5 p-4 rounded-lg border-2 border-black bg-white">
+            <p className="text-center text-black text-sm font-bold">
+              Please verify all details before submitting your order. Once
+              submitted, changes cannot be made.
+            </p>
+          </div>
+          <div className="flex justify-center pt-6">
             <button
-              onClick={() => scrollToSection(3)}
-              className="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-lg p-[1px] focus:outline-none"
+              onClick={handleSubmit}
+              disabled={ORDERS_CLOSED}
+              className="h-12 px-8 bg-black text-[#F5F5DC] font-bold text-md uppercase tracking-widest rounded-xl border-2 border-black hover:bg-white hover:text-black transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span
-                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#990000_0%,#ff1a1a_50%,#400000_100%)]"
-              >
-              </span>
-              <span
-                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-black px-7 text-sm font-bold tracking-wider text-red-400 backdrop-blur-3xl gap-2 hover:text-white transition-colors"
-              >
-                Continue to Review Order
-              </span>
+              {ORDERS_CLOSED ? 'Orders Closed' : 'Submit Order'}
             </button>
           </div>
-        </section>
-
-        {/* Summary Section */}
-        <section className="form-section min-h-screen py-16 flex flex-col justify-center">
-          <div className="bg-gradient-to-br from-[#120306]/90 via-[#0a0204]/95 to-black border border-red-600/40 shadow-[0_0_35px_rgba(225,29,72,0.25)] rounded-3xl backdrop-blur-xl p-8 mb-8 relative overflow-hidden">
-            <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-red-600 opacity-20 rounded-full blur-3xl animate-pulse" />
-            <h2 className="text-2xl font-spaced md:text-3xl font-extrabold text-red-500 mb-6 border-b border-red-900/80 pb-4 tracking-widest uppercase drop-shadow-[0_0_12px_rgba(239,68,68,0.7)]">
-              Order Summary
-            </h2>
-            <div className="space-y-4 text-red-100">
-              <p>
-                <b className="text-red-400">Name:</b> {formData.name}
-              </p>
-              <p>
-                <b className="text-red-400">From NIT Silchar:</b> {formData.fromNITSilchar}
-              </p>
-              {formData.fromNITSilchar === "Yes" && (
-                <p>
-                  <b className="text-red-400">Scholar ID:</b> {formData.scholarId}
-                </p>
-              )}
-              <p>
-                <b className="text-red-400">Phone:</b> {formData.phone}
-              </p>
-              <p>
-                <b className="text-red-400">Address:</b> {formData.address}
-              </p>
-              <p>
-                <b className="text-red-400">Email:</b> {formData.email}
-              </p>
-              <p>
-                <b className="text-red-400">Type:</b> {formData.type}
-              </p>
-              <p>
-                <b className="text-red-400">Size:</b> {formData.size}
-              </p>
-              <p>
-                <b className="text-red-400">Want Name in T-Shirt:</b> {formData.wantName}
-              </p>
-              {formData.wantName === "Yes" && (
-                <p>
-                  <b className="text-red-400">Name in T-Shirt:</b> {formData.nameInTShirt}
-                </p>
-              )}
-              <p>
-                <b className="text-red-400">Payment Proof:</b> {formData.paymentProofLink ? (
-                  <a href={formData.paymentProofLink} className="text-red-400 underline hover:text-red-300 break-all" target="_blank" rel="noopener noreferrer">View File</a>
-                ) : "Pending"}
-              </p>
-            </div>
-            <div className="mt-5 p-4 rounded-lg border border-red-900/80 bg-red-950/20">
-              <p className="text-center text-red-400/90 text-sm">
-                Please verify all details before submitting your order. Once
-                submitted, changes cannot be made.
-              </p>
-            </div>
-            <div className="flex justify-center pt-6">
-              <button
-                onClick={handleSubmit}
-                disabled={ORDERS_CLOSED}
-                className="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-lg p-[1px] focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <span
-                  className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#990000_0%,#ff1a1a_50%,#400000_100%)]"
-                >
-                </span>
-                <span
-                  className="inline-flex h-full w-full items-center justify-center rounded-lg bg-black px-7 text-md font-bold uppercase tracking-widest text-red-400 backdrop-blur-3xl gap-2 hover:text-white transition-colors"
-                >
-                  {ORDERS_CLOSED ? 'Orders Closed' : 'Submit Order'}
-                </span>
-              </button>
-            </div>
-          </div>
-          <div className="text-center mt-8 text-zinc-500">
-            <p className="font-semibold text-zinc-400 uppercase tracking-wider">Thank you for your order!</p>
-            <p className="mt-2 text-sm">
-              For any queries, contact:{' '}
-              <a
-                href="mailto:nerds@nits.ac.in"
-                className="text-red-400 hover:underline"
-              >
-                nerds@nits.ac.in
-              </a>
-            </p>
-          </div>
-          <div className="mt-8 text-center bg-black/60 p-6 rounded-2xl border border-red-900/40">
-            <h3 className="text-lg font-bold text-red-500 uppercase tracking-wider mb-2 drop-shadow-[0_0_6px_#ef4444]">
-              Facing Payment Issues?
-            </h3>
-            <p className="text-sm text-zinc-400 leading-relaxed">
-              If you encounter any problems with the payment process, please reach out to our team:
-            </p>
-            <p className="text-sm text-red-300 mt-2 font-mono">
-              📧 Email: <a href="mailto:nerds@nits.ac.in" className="underline text-red-400 hover:text-red-300">nerds.merch@club.com</a><br />
-              📱 Phone/WhatsApp: <a href="tel:+916003501567" className="underline text-red-400 hover:text-red-300">+91 60035 01567</a>
-            </p>
-          </div>
-        </section>
-      </main>
+        </div>
+        <div className="text-center mt-8 text-[#F5F5DC]">
+          <p className="font-bold uppercase tracking-wider">Thank you for your order!</p>
+          <p className="mt-2 text-sm">
+            For any queries, contact:{' '}
+            <a
+              href="mailto:nerds@nits.ac.in"
+              className="text-[#F5F5DC] underline hover:text-white"
+            >
+              nerds@nits.ac.in
+            </a>
+          </p>
+        </div>
+        <div className="mt-8 text-center bg-[#F5F5DC] p-6 rounded-2xl border-2 border-black text-black">
+          <h3 className="text-lg font-bold uppercase tracking-wider mb-2">
+            Facing Payment Issues?
+          </h3>
+          <p className="text-sm font-medium leading-relaxed">
+            If you encounter any problems with the payment process, please reach out to our team:
+          </p>
+          <p className="text-sm font-bold font-mono mt-2">
+            📧 Email: <a href="mailto:nerds@nits.ac.in" className="underline hover:text-zinc-700">nerds@nits.ac.in</a><br />
+            📱 Phone/WhatsApp: <a href="tel:+916003501567" className="underline hover:text-zinc-700">+91 8638672009</a>
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
     </div>
   );
 }

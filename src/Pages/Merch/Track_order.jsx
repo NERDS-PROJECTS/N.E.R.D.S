@@ -34,9 +34,9 @@ export function Track_order() {
 
   // Mock data that would normally come from an API
   const shipmentData = {
-    id: '50934977435',
-    status: 'Delivered',
-    eta: '15th Nov, 2025',
+    id: '5093XXXXXXX',
+    status: 'Ordered',
+    eta: 'Update soon',
     packageCount: 1,
     weight:'45Kg',
     route: [
@@ -72,32 +72,32 @@ export function Track_order() {
     timeline: [
       {
         step: 'Ordered',
-        date: '2nd Nov, 2025',
+        date: '',
         completed: true,
         
         
       },
       {
         step: 'Packed',
-        date: '4th Nov, 2025',
+        date: '',
         
         completed: false,
       },
       {
         step: 'Shipped',
-        date: '5th Nov, 2025',
+        date: '',
         completed: false,
         
       },
       {
         step: 'In Transit',
-        date: '7th Nov, 2025',
+        date: '',
         completed: false,
         
       },
       {
         step: 'Delivered',
-        date: '15th Nov, 2025',
+        date: '',
         completed: false,
         current:false,
       },
@@ -135,11 +135,11 @@ export function Track_order() {
     },
     activity: [
       {
-        time: '02-11-2025',
-        event: 'Ordered up from supplier',
+        time: '',
+        event: 'Ordered up from you',
       },
       {
-        time: '03-11-2025',
+        time: '',
         event: 'Processing Order',
       },
       // {

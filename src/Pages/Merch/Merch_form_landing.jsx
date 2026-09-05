@@ -35,16 +35,17 @@ export function SparklesPreview({ loading }) {
 
             {/* Top Heading with styled Cyan Dots and Black Merch */}
             <div className="pt-12 z-20">
-                <h1 className="md:text-9xl text-3xl lg:text-7xl font-ethenocentric text-center text-white drop-shadow-xl tracking-tight">
-                    N<span className="text-cyan-400">.</span>
-                    E<span className="text-cyan-400">.</span>
-                    R<span className="text-cyan-400">.</span>
-                    D<span className="text-cyan-400">.</span>
-                    S<span className="text-cyan-400">.</span>{" "}
-                    <span className="text-black drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]">
-                        Merch
-                    </span>
-                </h1>
+                {/* Added whitespace-nowrap to keep on one line, and adjusted text scale */}
+<h1 className="whitespace-nowrap text-2xl sm:text-4xl md:text-6xl lg:text-8xl font-ethenocentric text-center text-white drop-shadow-xl tracking-tight">
+    N<span className="text-[#f5f5dc]">.</span>
+    E<span className="text-[#f5f5dc]">.</span>
+    R<span className="text-[#f5f5dc]">.</span>
+    D<span className="text-[#f5f5dc]">.</span>
+    S<span className="text-[#f5f5dc]">.</span>{" "}
+    <span className="text-black drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]">
+        Merch
+    </span>
+</h1>
             </div>
 
             {/* Bottom Section: Text + Chevron Button at the end of the scroll */}
