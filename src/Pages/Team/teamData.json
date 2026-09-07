@@ -1819,21 +1819,7 @@
     "image_id": "https://res.cloudinary.com/diabjuzqc/image/upload/v1749237795/IMG_20250606_002628_h4ujyb.jpg",
     "year": "2026"
   }
-  ,
-
- {
-"id": 8313,
-      "name": "Sajan Kumar Jaiswal",
-      "team": "2nd Year",
-      "designation": "Junior Member",
-      "developer_team": "No",
-      "email": "jaissajan911376@gmail.com",
-      "social": "https://www.instagram.com/_.sajan_95/",
-      "github": "NA",
-      "linkedin": "www.linkedin.com/in/sajan-jaiswal-5a7b98395 ",
-      "image_id": "https://res.cloudinary.com/oheys5tu/image/upload/v1786786460/WhatsApp_Image_2026-08-10_at_9.08.40_PM.jpg ",
-	"year": "2026"
-},
+,
 {
 	 "id": 8314,
       "name": "Sujal Ojha",
@@ -1899,7 +1885,7 @@
       "linkedin": "https://www.linkedin.com/in/rishi-raj-sahu-3b1b94363?utm_source=share_via&utm_content=profile&utm_medium=member_android",
       "image_id": "https://res.cloudinary.com/xnd2tffb/image/upload/v1786647469/20260630_150713_2.jpg",
       "year": "2026"
-},     
+},    
 {
 "id": 8334,
       "name": "Prachi Phukan",
@@ -2176,8 +2162,6 @@
 
          },
 {
-
-
       "id": 8336,
       "name": "Angana Borah",
       "team": "2nd Year",

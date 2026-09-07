@@ -23,9 +23,9 @@ const testimonials = [
     ),
   },
   {
-    name: "Swarup Chanda",
+    name: "Abhinav Singh",
     role: "President",
-    image: "https://res.cloudinary.com/dagggqd6g/image/upload/v1760649725/20251016_185151_edt9wj.webp",
+    image: "https://res.cloudinary.com/dqmktpekh/image/upload/v1727726865/vhlc0a5bpvgs5ctzbghp.webp",
     text: (
       <>
         <span className="quote">“</span>
@@ -36,9 +36,9 @@ const testimonials = [
     ),
   },
   {
-    name: "Md. Fayjan",
+    name: "Ayushman Sagar",
     role: "Vice President",
-    image: "https://res.cloudinary.com/dqmktpekh/image/upload/v1727726868/fl7s9efn5nrfilh30rrl.webp",
+    image: "https://res.cloudinary.com/dqmktpekh/image/upload/v1727726868/fq5es2m3mo5shev4eygz.webp",
     text: (
       <>
         <span className="quote">“</span>
@@ -49,9 +49,9 @@ const testimonials = [
     ),
   },
   {
-    name: "Anwesha Duara",
+    name: "Akshat Anil Dighade",
     role: "Vice President",
-    image: "https://res.cloudinary.com/dmhbmurzw/image/upload/v1728360594/IMG-20240822-WA0002_-_ECE_070_ANWESHA_DUARA_w90q9d.jpg",
+    image: "https://res.cloudinary.com/dqmktpekh/image/upload/v1727726866/als7qgn8sw8jhede6uwr.webp",
     text: (
       <>
         <span className="quote">“</span>
@@ -62,9 +62,9 @@ const testimonials = [
     ),
   },
   {
-    name: "Adarsh Sharma",
+    name: "Syed Asshar Abbas",
     role: "General Secretary",
-    image: "https://res.cloudinary.com/dqmktpekh/image/upload/v1727726867/zocna1qwjbuexcqg0jy3.webp",
+    image: "https://res.cloudinary.com/drb6tjhx6/image/upload/v1756210831/ppppp_iuowaj.jpg",
     text: (
       <>
         <span className="quote">"</span>
