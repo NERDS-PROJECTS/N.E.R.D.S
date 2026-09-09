@@ -1,4 +1,4 @@
-import React, {
+﻿import React, {
   Suspense,
   useEffect,
   useState,
@@ -47,7 +47,7 @@ const VIEWER_FILL = 0.65;
 // works the same whether the viewer is a small card or a full modal.
 // Tune this value until the shirt looks centred.
 // ---------------------------------------------------------------------------
-const VIEWER_OFFSET_X = 0.02;
+const VIEWER_OFFSET_X = 0.15;
 
 // ---------------------------------------------------------------------------
 // Global model reference
@@ -223,7 +223,7 @@ function LoadError() {
       <div className="flex flex-col items-center gap-3 text-center p-6">
 
         <div className="text-red-400 text-2xl">
-          ⚠
+          âš 
         </div>
 
         <span className="text-red-400 font-orbitron text-sm">
@@ -733,7 +733,7 @@ export default function Merch3DViewer({
         <div className="flex flex-col items-center gap-3 text-center p-8">
 
           <div className="text-red-400 text-3xl">
-            ⚠
+            âš 
           </div>
 
           <span className="text-red-400 font-orbitron text-sm">
