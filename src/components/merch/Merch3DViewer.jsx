@@ -21,6 +21,14 @@ import * as THREE from 'three';
 const BACKGROUND_IMAGE = '/background.jpg';
 
 // ---------------------------------------------------------------------------
+// How much of the 3D viewer's visible height the model should fill.
+// e.g. 0.8 = the model occupies ~80% of the viewer height (10% margin
+// on top and bottom). The model is rescaled to keep this ratio whenever
+// the 3D viewer container is resized, so it always matches the viewer.
+// ---------------------------------------------------------------------------
+const VIEWER_FILL = 0.7;
+
+// ---------------------------------------------------------------------------
 // Global model reference
 // ---------------------------------------------------------------------------
 // Used by resetViewerCamera() to reset the shirt rotation without changing
@@ -38,86 +46,116 @@ function LoadedModel({ url, onFramed }) {
 
   const groupRef = useRef(null);
 
+  // Largest model dimension (computed once when the model loads).
+  const maxDimRef = useRef(0);
+
+  // Tracks the model scene we have already centered/formatted, so resizing
+  // the viewer rescales the model without re-centering or resetting rotation.
+  const formattedSceneRef = useRef(null);
+
+  // Reactive height of the visible area in three.js units.
+  //
+  // THREE.js mirrors the on-screen size of the 3D viewer canvas into this
+  // "viewport", so when the viewer is resized (e.g. a small card becomes a
+  // full modal) this value grows/shrinks accordingly. Subscribing to it lets
+  // us rescale the model so it always matches the current viewer size.
+  const { height: viewerHeight } = useThree(
+    (s) => s.viewport
+  );
+
   useEffect(() => {
     if (!gltf?.scene || !groupRef.current) return;
 
     const scene = gltf.scene;
     const group = groupRef.current;
 
-    // ---------------------------------------------------------
-    // Reset transforms
-    // ---------------------------------------------------------
-    group.position.set(0, 0, 0);
-    group.rotation.set(0, 0, 0);
-    group.scale.set(1, 1, 1);
-
-    scene.position.set(0, 0, 0);
-    scene.rotation.set(0, 0, 0);
-    scene.scale.set(1, 1, 1);
+    // Always re-expose the group for rotation/reset.
+    //
+    // This must run on EVERY effect re-run (not just once): when the viewer
+    // is resized the effect's cleanup nulls `modelGroupRef.current` before
+    // re-running, and re-assigning it here guarantees the rotation controller
+    // keeps a valid reference so the model can always be rotated.
+    modelGroupRef.current = group;
 
     // ---------------------------------------------------------
-    // Calculate actual model bounds
+    // Center + prepare the model, but only once per loaded model.
+    // (A viewer resize must NOT re-center or reset the rotation.)
     // ---------------------------------------------------------
-    const box = new THREE.Box3().setFromObject(scene);
+    if (formattedSceneRef.current !== scene) {
+      formattedSceneRef.current = scene;
 
-    const size = box.getSize(
-      new THREE.Vector3()
-    );
+      // Reset transforms
+      group.position.set(0, 0, 0);
+      group.rotation.set(0, 0, 0);
+      group.scale.set(1, 1, 1);
 
-    const center = box.getCenter(
-      new THREE.Vector3()
-    );
+      scene.position.set(0, 0, 0);
+      scene.rotation.set(0, 0, 0);
+      scene.scale.set(1, 1, 1);
 
-    // ---------------------------------------------------------
-    // Center model around world origin
-    // ---------------------------------------------------------
-    scene.position.set(
-      -center.x,
-      -center.y,
-      -center.z
-    );
+      // -----------------------------------------------------
+      // Calculate actual model bounds
+      // -----------------------------------------------------
+      const box = new THREE.Box3().setFromObject(scene);
 
-    // ---------------------------------------------------------
-    // Consistent model size
-    // ---------------------------------------------------------
-    const maxDim = Math.max(
-      size.x,
-      size.y,
-      size.z
-    );
+      const size = box.getSize(
+        new THREE.Vector3()
+      );
 
-    const targetSize = 2.0;
+      const center = box.getCenter(
+        new THREE.Vector3()
+      );
 
-    if (maxDim > 0) {
-      const scale = targetSize / maxDim;
+      // Center the model around the world origin
+      scene.position.set(
+        -center.x,
+        -center.y,
+        -center.z
+      );
 
-      group.scale.setScalar(scale);
+      maxDimRef.current = Math.max(
+        size.x,
+        size.y,
+        size.z
+      );
+
+      // -----------------------------------------------------
+      // Enable shadows
+      // -----------------------------------------------------
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+
+      // -----------------------------------------------------
+      // Notify the parent the model finished loading
+      // -----------------------------------------------------
+      onFramed?.();
     }
 
     // ---------------------------------------------------------
-    // Enable shadows
+    // Scale the model to fill the current viewer height.
+    // This runs on load and again whenever the viewer is resized
+    // (the effect depends on `viewerHeight`).
     // ---------------------------------------------------------
-    scene.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-
-    // ---------------------------------------------------------
-    // Expose group for rotation/reset
-    // ---------------------------------------------------------
-    modelGroupRef.current = group;
-
-    onFramed?.();
+    if (maxDimRef.current > 0 && viewerHeight > 0) {
+      group.scale.setScalar(
+        (viewerHeight * VIEWER_FILL) / maxDimRef.current
+      );
+    }
 
     // Cleanup reference if this model unmounts
     return () => {
-      if (modelGroupRef.current === group) {
+      if (
+        formattedSceneRef.current === scene &&
+        modelGroupRef.current === group
+      ) {
         modelGroupRef.current = null;
       }
     };
-  }, [gltf, url, onFramed]);
+  }, [gltf, url, onFramed, viewerHeight]);
 
   return (
     <group
@@ -588,12 +626,19 @@ export function preloadMerchModel(url) {
 // ---------------------------------------------------------------------------
 export default function Merch3DViewer({
   model,
+  background,
 }) {
   const [hasError, setHasError] =
     useState(false);
 
   const [isLoaded, setIsLoaded] =
     useState(false);
+
+  // Effective background image: the product-specific one if provided,
+  // otherwise fall back to the default global background.
+  const backgroundImage =
+    background ||
+    BACKGROUND_IMAGE;
 
   // ---------------------------------------------------------
   // WebGL setup
@@ -708,7 +753,7 @@ export default function Merch3DViewer({
           BACKGROUND IMAGE
           ===================================================== */}
       <img
-        src={BACKGROUND_IMAGE}
+        src={backgroundImage}
         alt=""
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
         draggable={false}

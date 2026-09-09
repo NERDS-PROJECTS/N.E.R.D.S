@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { resetViewerCamera } from './Merch3DViewer';
 
@@ -121,7 +123,7 @@ export default function MerchViewerModal({
     }
   }, [isOpen]);
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <div
@@ -252,16 +254,40 @@ export default function MerchViewerModal({
             </div>
 
             {/* Bottom instruction */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
               <div className="px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/5">
                 <span className="text-gray-400 text-xs font-orbitron tracking-wider">
                   DRAG TO ROTATE
                 </span>
               </div>
             </div>
+
+            {/* Buy Now */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
+              <Link
+                to="/merchPay"
+                className="inline-flex items-center gap-2 px-7 py-2.5 rounded-xl bg-cyan-400 text-black font-orbitron text-sm tracking-wider transition-all duration-200 hover:bg-cyan-300 hover:shadow-lg hover:shadow-cyan-500/30 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 2h5m7 2v6l-5 0l5 6h5m-5-6v-1m4 6v4M12 2v4l-4 0l4 6M12 6v6-1m-5 0l5 6h5"
+                  />
+                </svg>
+                Buy Now
+              </Link>
+            </div>
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

@@ -359,6 +359,22 @@ const bill = useMemo(() => {
 
   </div>
 </section>
+
+      {/* Free Keychain Offer Section */}
+      <section className="form-section py-8">
+        <div className="bg-[#F5F5DC] border-2 border-black rounded-3xl p-6 md:p-8 relative overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+          <div className="flex items-center gap-4">
+            <div className="flex-1">
+              <p className="text-base md:text-lg font-bold text-black/90 leading-snug">
+                Free <span className="bg-black text-white px-1.5 py-0.5 rounded">N.E.R.D.S.</span> Keychain with first 50 orders!
+              </p>
+            </div>
+            <span className="hidden md:inline-flex items-center justify-center bg-black text-[#F5F5DC] text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full border-2 border-black whitespace-nowrap">
+              Limited Offer
+            </span>
+          </div>
+        </div>
+      </section>
       {/* Basic Info Section */}
       <section className="form-section min-h-screen py-16 flex flex-col justify-center">
         <div className="bg-[#F5F5DC] border-2 border-black rounded-3xl p-8 mb-8">
