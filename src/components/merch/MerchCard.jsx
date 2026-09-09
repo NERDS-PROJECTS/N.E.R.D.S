@@ -93,7 +93,7 @@ export default function MerchCard({ product, index = 0 }) {
                   View 3D
                 </button>
                 <Link
-                  to={`/merchPay/${product.id}`}
+                  to="/merchPay"
                   className="w-full py-2.5 rounded-xl bg-cyan-400 text-black text-center font-orbitron text-sm tracking-wider transition-all duration-200 hover:bg-cyan-300 active:scale-[0.98]"
                 >
                   Buy Now
@@ -127,7 +127,7 @@ export default function MerchCard({ product, index = 0 }) {
             onClose={handleCloseViewer}
             productName={product.name}
           >
-            <Merch3DViewer model={product.model} />
+            <Merch3DViewer model={product.model} background={product.viewerBackground} />
           </MerchViewerModal>
         </Suspense>
       )}

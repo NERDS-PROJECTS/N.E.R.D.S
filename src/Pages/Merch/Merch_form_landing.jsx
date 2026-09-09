@@ -19,7 +19,7 @@ export function SparklesPreview({ loading }) {
 
     return (
         /* Container spans 2 viewports (200vh) on desktop so scrolling moves down the portrait image */
-        <div className="h-[90vh] md:h-[200vh] w-full bg-[url('https://res.cloudinary.com/dqeenwawp/image/upload/v1788434582/nerds_6_r5a106.png')] md:bg-[url('https://res.cloudinary.com/dqeenwawp/image/upload/v1788433652/nerds_3_xumgqu.png')] bg-cover bg-no-repeat bg-top flex flex-col justify-between items-center overflow-hidden rounded-md relative p-8">
+        <div className="h-[90vh] md:h-[200vh] w-full bg-[url('https://res.cloudinary.com/df6ucvwym/image/upload/v1788986407/nerds_6_r5a106_xzenbw.png')] md:bg-[url('https://res.cloudinary.com/df6ucvwym/image/upload/v1788986724/nerds_3_xumgqu_yrxnnk.png')] bg-cover bg-no-repeat bg-top flex flex-col justify-between items-center overflow-hidden rounded-md relative p-8">
             
             {/* Sparkles Overlay */}
             <div className="absolute inset-0 w-full h-full pointer-events-none z-10">
