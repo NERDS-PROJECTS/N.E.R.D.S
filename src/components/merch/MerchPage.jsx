@@ -2,11 +2,13 @@ import { motion } from 'framer-motion';
 import MerchGrid from './MerchGrid';
 import {
   getArchivedProducts,
+  getAvailableProducts,
   getUpcomingProducts,
 } from '../../data/merchProducts';
 
 export default function MerchPage() {
   const archivedProducts = getArchivedProducts();
+  const availableProducts = getAvailableProducts();
   const upcomingProducts = getUpcomingProducts();
 
   return (
@@ -53,9 +55,9 @@ export default function MerchPage() {
             2026 COLLECTION
             ===================================================== */}
         <MerchGrid
-          products={upcomingProducts}
+          products={[...availableProducts, ...upcomingProducts]}
           title="2026 Collection"
-          subtitle="Releasing Soon"
+          subtitle={availableProducts.length > 0 ? 'Available Now' : 'Releasing Soon'}
         />
 
         {/* Divider */}

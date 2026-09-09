@@ -148,6 +148,16 @@ export function UpcomingBadge() {
   );
 }
 
+export function AvailableBadge() {
+  return (
+    <div className="absolute top-4 right-4 z-20">
+      <span className="px-3 py-1 rounded-full bg-cyan-500/15 backdrop-blur-md border border-cyan-400/40 text-cyan-300 text-xs font-orbitron tracking-wider shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
+        AVAILABLE NOW
+      </span>
+    </div>
+  );
+}
+
 
 /**
  * Archived badge

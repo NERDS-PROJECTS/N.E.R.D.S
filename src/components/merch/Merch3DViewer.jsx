@@ -86,7 +86,7 @@ function LoadedModel({ url, onFramed }) {
       size.z
     );
 
-    const targetSize = 2.5;
+    const targetSize = 2.0;
 
     if (maxDim > 0) {
       const scale = targetSize / maxDim;

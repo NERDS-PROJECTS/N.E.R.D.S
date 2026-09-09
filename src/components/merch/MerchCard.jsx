@@ -1,6 +1,7 @@
 import { useState, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ProductPreviewWithModel, ProductPreviewUpcoming, UpcomingBadge, ArchivedBadge } from './MerchCardParts';
+import { Link } from 'react-router-dom';
+import { ProductPreviewWithModel, ProductPreviewUpcoming, UpcomingBadge, AvailableBadge, ArchivedBadge } from './MerchCardParts';
 
 const Merch3DViewer = lazy(() => import('./Merch3DViewer'));
 const MerchViewerModal = lazy(() => import('./MerchViewerModal'));
@@ -35,6 +36,7 @@ export default function MerchCard({ product, index = 0 }) {
           )}
 
           {product.status === 'upcoming' && <UpcomingBadge />}
+          {product.status === 'available' && <AvailableBadge />}
           {product.status === 'archived' && <ArchivedBadge year={product.year} />}
         </div>
 
@@ -81,7 +83,23 @@ export default function MerchCard({ product, index = 0 }) {
           )}
 
           <div className="mt-2">
-            {hasModel ? (
+            {product.status === 'available' ? (
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={handleOpenViewer}
+                  className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-cyan-400 font-orbitron text-sm tracking-wider transition-all duration-200 hover:bg-cyan-500/10 hover:border-cyan-500/30 hover:text-cyan-300 active:scale-[0.98]"
+                  aria-label={`View 3D model of ${product.name}`}
+                >
+                  View 3D
+                </button>
+                <Link
+                  to={`/merchPay/${product.id}`}
+                  className="w-full py-2.5 rounded-xl bg-cyan-400 text-black text-center font-orbitron text-sm tracking-wider transition-all duration-200 hover:bg-cyan-300 active:scale-[0.98]"
+                >
+                  Buy Now
+                </Link>
+              </div>
+            ) : hasModel ? (
               <button
                 onClick={handleOpenViewer}
                 className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-cyan-400 font-orbitron text-sm tracking-wider transition-all duration-200 hover:bg-cyan-500/10 hover:border-cyan-500/30 hover:text-cyan-300 active:scale-[0.98]"
