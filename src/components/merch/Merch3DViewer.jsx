@@ -26,7 +26,7 @@ const BACKGROUND_IMAGE = '/background.jpg';
 // on top and bottom). The model is rescaled to keep this ratio whenever
 // the 3D viewer container is resized, so it always matches the viewer.
 // ---------------------------------------------------------------------------
-const VIEWER_FILL = 0.7;
+const VIEWER_FILL = 0.65;
 
 // ---------------------------------------------------------------------------
 // Global model reference
