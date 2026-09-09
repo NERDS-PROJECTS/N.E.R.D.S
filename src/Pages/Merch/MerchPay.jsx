@@ -1216,7 +1216,7 @@ const bill = useMemo(() => {
           </p>
           <p className="text-sm font-bold font-mono mt-2">
             📧 Email: <a href="mailto:nerds@nits.ac.in" className="underline hover:text-zinc-700">nerds@nits.ac.in</a><br />
-            📱 Phone/WhatsApp: <a href="tel:+916003501567" className="underline hover:text-zinc-700">+91 8638672009</a>
+            📱 Phone/WhatsApp: <a href="tel:+918638672009" className="underline hover:text-zinc-700">+91 8638672009</a>
           </p>
         </div>
       </section>
