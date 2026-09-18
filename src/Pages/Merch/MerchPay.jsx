@@ -929,7 +929,7 @@ const bill = useMemo(() => {
             {formData.wantName === "Yes" && (
               <div>
                 <label className="block text-sm font-bold text-black mb-1 tracking-wide uppercase">
-                  Name in T-Shirt (Max 7 Letters)
+                  Name in T-Shirt (Max 10 Letters)
                 </label>
                 <input
                   type="text"
