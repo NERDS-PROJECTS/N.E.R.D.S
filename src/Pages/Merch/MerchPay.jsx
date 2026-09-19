@@ -562,40 +562,47 @@ const bill = useMemo(() => {
                           <th className="px-3 py-2 text-center border border-black">Size</th>
                           <th className="px-3 py-2 text-center border border-black">Chest</th>
                           <th className="px-3 py-2 text-center border border-black">Length</th>
-                          <th className="px-3 py-2 text-center border border-black">Sleeve</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XS</td>
+                          <td className="px-6 py-2 text-center border border-black">36</td>
+                          <td className="px-6 py-2 text-center border border-black">26</td>
+                          
+                        </tr>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">S</td>
                           <td className="px-6 py-2 text-center border border-black">38</td>
-                          <td className="px-6 py-2 text-center border border-black">26</td>
-                          <td className="px-6 py-2 text-center border border-black">7</td>
+                          <td className="px-6 py-2 text-center border border-black">27</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">M</td>
                           <td className="px-6 py-2 text-center border border-black">40</td>
-                          <td className="px-6 py-2 text-center border border-black">27</td>
-                          <td className="px-6 py-2 text-center border border-black">7.5</td>
+                          <td className="px-6 py-2 text-center border border-black">28</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">L</td>
                           <td className="px-6 py-2 text-center border border-black">42</td>
-                          <td className="px-6 py-2 text-center border border-black">28</td>
-                          <td className="px-6 py-2 text-center border border-black">8</td>
+                          <td className="px-6 py-2 text-center border border-black">29</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">XL</td>
                           <td className="px-6 py-2 text-center border border-black">44</td>
-                          <td className="px-6 py-2 text-center border border-black">29</td>
-                          <td className="px-6 py-2 text-center border border-black">8.5</td>
+                          <td className="px-6 py-2 text-center border border-black">30</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">XXL</td>
                           <td className="px-6 py-2 text-center border border-black">46</td>
-                          <td className="px-6 py-2 text-center border border-black">30</td>
-                          <td className="px-6 py-2 text-center border border-black">9</td>
+                          <td className="px-6 py-2 text-center border border-black">31</td>
+                          
                         </tr>
+                        
                       </tbody>
                     </table>
                   </div>
@@ -611,51 +618,39 @@ const bill = useMemo(() => {
                           <th className="px-3 py-2 text-center border border-black">Size</th>
                           <th className="px-3 py-2 text-center border border-black">Chest</th>
                           <th className="px-3 py-2 text-center border border-black">Body Length</th>
-                          <th className="px-3 py-2 text-center border border-black">Sleeve Length</th>
-                          <th className="px-3 py-2 text-center border border-black">Sleeve Open</th>
-                          <th className="px-3 py-2 text-center border border-black">Shoulder</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">S</td>
-                          <td className="px-6 py-2 text-center border border-black">21</td>
-                          <td className="px-6 py-2 text-center border border-black">26.5</td>
-                          <td className="px-6 py-2 text-center border border-black">9.5</td>
-                          <td className="px-6 py-2 text-center border border-black">7.5</td>
-                          <td className="px-6 py-2 text-center border border-black">20</td>
+                          <td className="px-6 py-2 text-center border border-black">40-42</td>
+                          <td className="px-6 py-2 text-center border border-black">24</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">M</td>
-                          <td className="px-6 py-2 text-center border border-black">22</td>
-                          <td className="px-6 py-2 text-center border border-black">27.5</td>
-                          <td className="px-6 py-2 text-center border border-black">10</td>
-                          <td className="px-6 py-2 text-center border border-black">8</td>
-                          <td className="px-6 py-2 text-center border border-black">21</td>
+                          <td className="px-6 py-2 text-center border border-black">42-44</td>
+                          <td className="px-6 py-2 text-center border border-black">25</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">L</td>
-                          <td className="px-6 py-2 text-center border border-black">23</td>
-                          <td className="px-6 py-2 text-center border border-black">28.5</td>
-                          <td className="px-6 py-2 text-center border border-black">10.5</td>
-                          <td className="px-6 py-2 text-center border border-black">8.5</td>
-                          <td className="px-6 py-2 text-center border border-black">22</td>
+                          <td className="px-6 py-2 text-center border border-black">44-46</td>
+                          <td className="px-6 py-2 text-center border border-black">26</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">XL</td>
-                          <td className="px-6 py-2 text-center border border-black">24</td>
-                          <td className="px-6 py-2 text-center border border-black">29.5</td>
-                          <td className="px-6 py-2 text-center border border-black">11</td>
-                          <td className="px-6 py-2 text-center border border-black">9</td>
-                          <td className="px-6 py-2 text-center border border-black">23</td>
+                          <td className="px-6 py-2 text-center border border-black">46-48</td>
+                          <td className="px-6 py-2 text-center border border-black">27</td>
+                        
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">XXL</td>
-                          <td className="px-6 py-2 text-center border border-black">25</td>
-                          <td className="px-6 py-2 text-center border border-black">30.5</td>
-                          <td className="px-6 py-2 text-center border border-black">11</td>
-                          <td className="px-6 py-2 text-center border border-black">9</td>
-                          <td className="px-6 py-2 text-center border border-black">23</td>
+                          <td className="px-6 py-2 text-center border border-black">48-50</td>
+                          <td className="px-6 py-2 text-center border border-black">28</td>
+                        
                         </tr>
                       </tbody>
                     </table>
@@ -663,7 +658,7 @@ const bill = useMemo(() => {
                 )}
               </div>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-2">
-                {["S", "M", "L", "XL", "XXL"].map((size1) => (
+                {["XS","S", "M", "L", "XL", "XXL"].map((size1) => (
                   <label key={size1} className="cursor-pointer">
                     <input
                       type="radio"
@@ -779,45 +774,44 @@ const bill = useMemo(() => {
                       <caption className="text-black font-bold mb-2 text-base md:text-lg tracking-wider uppercase text-left">
                         Regular-sized Size Chart (in inches)
                       </caption>
-                      <thead>
-                        <tr className="bg-black text-[#F5F5DC]">
-                          <th className="px-3 py-2 text-center border border-black">Size</th>
-                          <th className="px-3 py-2 text-center border border-black">Chest</th>
-                          <th className="px-3 py-2 text-center border border-black">Length</th>
-                          <th className="px-3 py-2 text-center border border-black">Sleeve</th>
-                        </tr>
-                      </thead>
                       <tbody>
+                        <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
+                          <td className="px-6 py-2 text-center border border-black font-medium">XS</td>
+                          <td className="px-6 py-2 text-center border border-black">36</td>
+                          <td className="px-6 py-2 text-center border border-black">26</td>
+                          
+                        </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">S</td>
                           <td className="px-6 py-2 text-center border border-black">38</td>
-                          <td className="px-6 py-2 text-center border border-black">26</td>
-                          <td className="px-6 py-2 text-center border border-black">7</td>
+                          <td className="px-6 py-2 text-center border border-black">27</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">M</td>
                           <td className="px-6 py-2 text-center border border-black">40</td>
-                          <td className="px-6 py-2 text-center border border-black">27</td>
-                          <td className="px-6 py-2 text-center border border-black">7.5</td>
+                          <td className="px-6 py-2 text-center border border-black">28</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">L</td>
                           <td className="px-6 py-2 text-center border border-black">42</td>
-                          <td className="px-6 py-2 text-center border border-black">28</td>
-                          <td className="px-6 py-2 text-center border border-black">8</td>
+                          <td className="px-6 py-2 text-center border border-black">29</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">XL</td>
                           <td className="px-6 py-2 text-center border border-black">44</td>
-                          <td className="px-6 py-2 text-center border border-black">29</td>
-                          <td className="px-6 py-2 text-center border border-black">8.5</td>
+                          <td className="px-6 py-2 text-center border border-black">30</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">XXL</td>
                           <td className="px-6 py-2 text-center border border-black">46</td>
-                          <td className="px-6 py-2 text-center border border-black">30</td>
-                          <td className="px-6 py-2 text-center border border-black">9</td>
+                          <td className="px-6 py-2 text-center border border-black">31</td>
+                          
                         </tr>
+                        
                       </tbody>
                     </table>
                   </div>
@@ -828,56 +822,44 @@ const bill = useMemo(() => {
                       <caption className="text-black font-bold mb-2 text-base md:text-lg tracking-wider uppercase text-left">
                         Over-sized Size Chart (in inches)
                       </caption>
-                      <thead>
+                       <thead>
                         <tr className="bg-black text-[#F5F5DC]">
                           <th className="px-3 py-2 text-center border border-black">Size</th>
                           <th className="px-3 py-2 text-center border border-black">Chest</th>
                           <th className="px-3 py-2 text-center border border-black">Body Length</th>
-                          <th className="px-3 py-2 text-center border border-black">Sleeve Length</th>
-                          <th className="px-3 py-2 text-center border border-black">Sleeve Open</th>
-                          <th className="px-3 py-2 text-center border border-black">Shoulder</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">S</td>
-                          <td className="px-6 py-2 text-center border border-black">21</td>
-                          <td className="px-6 py-2 text-center border border-black">26.5</td>
-                          <td className="px-6 py-2 text-center border border-black">9.5</td>
-                          <td className="px-6 py-2 text-center border border-black">7.5</td>
-                          <td className="px-6 py-2 text-center border border-black">20</td>
+                          <td className="px-6 py-2 text-center border border-black">40-42</td>
+                          <td className="px-6 py-2 text-center border border-black">24</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">M</td>
-                          <td className="px-6 py-2 text-center border border-black">22</td>
-                          <td className="px-6 py-2 text-center border border-black">27.5</td>
-                          <td className="px-6 py-2 text-center border border-black">10</td>
-                          <td className="px-6 py-2 text-center border border-black">8</td>
-                          <td className="px-6 py-2 text-center border border-black">21</td>
+                          <td className="px-6 py-2 text-center border border-black">42-44</td>
+                          <td className="px-6 py-2 text-center border border-black">25</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">L</td>
-                          <td className="px-6 py-2 text-center border border-black">23</td>
-                          <td className="px-6 py-2 text-center border border-black">28.5</td>
-                          <td className="px-6 py-2 text-center border border-black">10.5</td>
-                          <td className="px-6 py-2 text-center border border-black">8.5</td>
-                          <td className="px-6 py-2 text-center border border-black">22</td>
+                          <td className="px-6 py-2 text-center border border-black">44-46</td>
+                          <td className="px-6 py-2 text-center border border-black">26</td>
+                          
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">XL</td>
-                          <td className="px-6 py-2 text-center border border-black">24</td>
-                          <td className="px-6 py-2 text-center border border-black">29.5</td>
-                          <td className="px-6 py-2 text-center border border-black">11</td>
-                          <td className="px-6 py-2 text-center border border-black">9</td>
-                          <td className="px-6 py-2 text-center border border-black">23</td>
+                          <td className="px-6 py-2 text-center border border-black">46-48</td>
+                          <td className="px-6 py-2 text-center border border-black">27</td>
+                        
                         </tr>
                         <tr className="hover:bg-[#F5F5DC]/50 transition-colors">
                           <td className="px-6 py-2 text-center border border-black font-medium">XXL</td>
-                          <td className="px-6 py-2 text-center border border-black">25</td>
-                          <td className="px-6 py-2 text-center border border-black">30.5</td>
-                          <td className="px-6 py-2 text-center border border-black">11</td>
-                          <td className="px-6 py-2 text-center border border-black">9</td>
-                          <td className="px-6 py-2 text-center border border-black">23</td>
+                          <td className="px-6 py-2 text-center border border-black">48-50</td>
+                          <td className="px-6 py-2 text-center border border-black">28</td>
+                        
                         </tr>
                       </tbody>
                     </table>
@@ -885,7 +867,7 @@ const bill = useMemo(() => {
                 )}
               </div>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-2">
-                {["S", "M", "L", "XL", "XXL"].map((size2) => (
+                {["XS","S", "M", "L", "XL", "XXL"].map((size2) => (
                   <label key={size2} className="cursor-pointer">
                     <input
                       type="radio"
