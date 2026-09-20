@@ -266,22 +266,24 @@ const bill = useMemo(() => {
       {/* Modal for alerts */}
       {modal.open && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-md px-2">
-          <div className={`w-full max-w-md md:max-w-md sm:max-w-xs rounded-2xl shadow-[0_0_50px_rgba(225,29,72,0.4)] p-6 sm:p-4 border-2 ${modal.success ? 'border-red-500 bg-gradient-to-br from-red-950 via-[#1a0509] to-black' : 'border-rose-600 bg-gradient-to-br from-rose-950 via-[#1a0005] to-black'} animate-fade-in`}>
+          <div className={`w-full max-w-md md:max-w-md sm:max-w-xs rounded-2xl shadow-[0_0_50px_rgba(34,197,94,0.4)] p-6 sm:p-4 border-2 ${modal.success ? 'border-emerald-500 bg-gradient-to-br from-emerald-950 via-[#051a0e] to-black' : 'border-rose-600 bg-gradient-to-br from-rose-950 via-[#1a0005] to-black'} animate-fade-in`}>
             <div className="flex flex-col items-center gap-4">
-              <div className={`rounded-full p-3 ${modal.success ? 'bg-red-500/20 shadow-[0_0_15px_#ef4444]' : 'bg-rose-500/20 shadow-[0_0_15px_#f43f5e]'}`}>
+              <div className={`rounded-full p-3 ${modal.success ? 'bg-emerald-500/20 shadow-[0_0_15px_#10b981]' : 'bg-rose-500/20 shadow-[0_0_15px_#f43f5e]'}`}>
                 {modal.success ? (
-                  <svg className="w-10 h-10 text-red-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  <svg className="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                 ) : (
                   <svg className="w-10 h-10 text-rose-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                 )}
               </div>
               <div className="text-center">
-                <h3 className={`text-xl sm:text-lg font-bold mb-2 tracking-wider uppercase ${modal.success ? 'text-red-400 drop-shadow-[0_0_8px_#ef4444]' : 'text-rose-400 drop-shadow-[0_0_8px_#f43f5e]'}`}>{modal.success ? 'Order Status' : 'Error'}</h3>
-                <p className="text-base sm:text-sm text-zinc-300 whitespace-pre-line break-words">{modal.message}</p>
+                <h3 className={`text-xl sm:text-lg font-bold mb-2 tracking-wider uppercase ${modal.success ? 'text-emerald-400 drop-shadow-[0_0_8px_#10b981]' : 'text-rose-400 drop-shadow-[0_0_8px_#f43f5e]'}`}>{modal.success ? 'Order Status' : 'Error'}</h3>
+                <p className="text-base sm:text-sm text-zinc-300 whitespace-pre-line break-words">
+                  {modal.success ? "Order placed! Check your mail." : modal.message}
+                </p>
               </div>
               <button
                 onClick={() => setModal({ ...modal, open: false })}
-                className={`mt-4 px-6 py-2 rounded-lg font-bold uppercase tracking-wider shadow-lg transition-all duration-300 w-full max-w-[200px] ${modal.success ? 'bg-red-600 text-black hover:bg-red-500 hover:shadow-[0_0_20px_#ef4444]' : 'bg-rose-600 text-black hover:bg-rose-500 hover:shadow-[0_0_20px_#f43f5e]'}`}
+                className={`mt-4 px-6 py-2 rounded-lg font-bold uppercase tracking-wider shadow-lg transition-all duration-300 w-full max-w-[200px] ${modal.success ? 'bg-emerald-500 text-black hover:bg-emerald-400 hover:shadow-[0_0_20px_#10b981]' : 'bg-rose-600 text-black hover:bg-rose-500 hover:shadow-[0_0_20px_#f43f5e]'}`}
               >
                 Close
               </button>
