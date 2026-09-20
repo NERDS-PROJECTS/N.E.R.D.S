@@ -9,10 +9,10 @@ import "./testimonial_styles.css";
 
 const testimonials = [
   {
-    name: "Dr. Chandrajit Choudhury",
+    name: "Dr. Devendra Singh Gurjar",
     role: "Faculty Incharge",
     image:
-      "https://res.cloudinary.com/dqmktpekh/image/upload/f_auto,q_auto/faazwbq6kkkwek2accan",
+      "https://res.cloudinary.com/dqeenwawp/image/upload/v1789900153/Screenshot_2026-09-20_155842_mc1gpr.png",
     text: (
       <>
         <span className="quote">“</span>
@@ -64,7 +64,7 @@ const testimonials = [
   {
     name: "Syed Asshar Abbas",
     role: "General Secretary",
-    image: "https://res.cloudinary.com/drb6tjhx6/image/upload/v1756210831/ppppp_iuowaj.jpg",
+    image: "https://res.cloudinary.com/dqeenwawp/image/upload/v1789900233/b9f4e2d7-f96a-432a-873a-87ff8a8759d4.png",
     text: (
       <>
         <span className="quote">"</span>
