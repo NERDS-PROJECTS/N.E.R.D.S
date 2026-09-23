@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" role="presentation">
+  <defs>
+    <linearGradient id="sil_build" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c1733"/>
+      <stop offset="1" stop-color="#0c0a18"/>
+    </linearGradient>
+    <linearGradient id="island_top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f0d24"/>
+      <stop offset="1" stop-color="#0a0916"/>
+    </linearGradient>
+    <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b1630"/>
+      <stop offset="1" stop-color="#0a0918"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ============ Distant floating islands ============ -->
+  <g opacity="0.9">
+    <!-- island A (left) -->
+    <g transform="translate(200,190)">
+      <path d="M0 40 L80 26 L170 46 L260 22 L360 52 Z" fill="url(#island_top)"/>
+      <path d="M10 40 L60 210 L90 150 L150 230 L210 160 L300 52 Z" fill="url(#rock)" opacity="0.9"/>
+    </g>
+    <!-- island B (center-right) -->
+    <g transform="translate(760,150)">
+      <path d="M0 30 L120 16 L260 34 L380 20 Z" fill="url(#island_top)"/>
+      <path d="M20 30 L90 170 L170 240 L300 60 L360 30 Z" fill="url(#rock)" opacity="0.85"/>
+    </g>
+    <!-- island C (far right top) -->
+    <g transform="translate(1100,96)">
+      <path d="M0 24 L100 12 L210 28 Z" fill="url(#island_top)"/>
+      <path d="M10 24 L70 130 L150 190 L190 30 Z" fill="url(#rock)" opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- ============ Distant towers / architecture ============ -->
+  <g opacity="0.85">
+    <g transform="translate(320,240)">
+      <rect x="0" y="-140" width="16" height="140" fill="url(#sil_build)"/>
+      <rect x="22" y="-210" width="22" height="210" fill="url(#sil_build)"/>
+      <rect x="52" y="-120" width="14" height="120" fill="url(#sil_build)"/>
+      <rect x="74" y="-150" width="18" height="150" fill="url(#sil_build)"/>
+      <!-- lit windows -->
+      <g stroke="#22d3ee" stroke-opacity="0.5" stroke-width="1">
+        <line x1="24" y1="-190" x2="42" y2="-190"/>
+        <line x1="24" y1="-150" x2="42" y2="-150"/>
+        <line x1="24" y1="-80" x2="42" y2="-80"/>
+      </g>
+    </g>
+    <g transform="translate(640,250)">
+      <rect x="0" y="-120" width="12" height="120" fill="url(#sil_build)"/>
+      <rect x="18" y="-180" width="26" height="180" fill="url(#sil_build)"/>
+      <rect x="54" y="-100" width="12" height="100" fill="url(#sil_build)"/>
+    </g>
+    <g transform="translate(930,210)">
+      <rect x="0" y="-160" width="20" height="160" fill="url(#sil_build)"/>
+      <rect x="26" y="-230" width="28" height="230" fill="url(#sil_build)"/>
+      <rect x="60" y="-130" width="16" height="130" fill="url(#sil_build)"/>
+    </g>
+  </g>
+
+  <!-- ============ distant spacecraft ============ -->
+  <g transform="translate(1120,140)">
+    <path d="M-40 10 L-8 -6 L26 12 L-4 22 L-46 16 Z" fill="#191332" opacity="0.9"/>
+    <path d="M-14 0 l 0 6 m 8 0 l 0 -5 M 8 8 l 0 6" fill="none" stroke="#22d3ee" stroke-opacity="0.6" stroke-width="1"/>
+  </g>
+</svg>

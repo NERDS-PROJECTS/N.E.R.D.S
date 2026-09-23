@@ -1,0 +1,86 @@
+@import '../../styles/tokens.css';
+
+.robotron-landing .timeline-head {
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+.robotron-landing .timeline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 40px);
+}
+.robotron-landing .timeline-item {
+  position: relative;
+  border-top: 1px solid var(--line-strong);
+  padding-top: 22px;
+  height: 100%;
+}
+.robotron-landing .tl-node {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--accent);
+  background: rgba(228, 26, 122, 0.15);
+}
+.robotron-landing .tl-node i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  margin: -1.5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.robotron-landing .tl-body {
+  padding: 4px 0 0 0;
+}
+.robotron-landing .tl-year {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  color: var(--accent-3);
+}
+.robotron-landing .tl-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.92rem, 1.4vw, 1.15rem);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  margin-top: 10px;
+}
+.robotron-landing .tl-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-soft);
+  margin-top: 8px;
+}
+.robotron-landing .tl-idx {
+  position: absolute;
+  right: 0;
+  top: -22px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+}
+
+@media (max-width: 980px) {
+  .robotron-landing .timeline-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .robotron-landing .timeline-item:last-child:nth-child(odd) {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 640px) {
+  .robotron-landing .timeline-list {
+    grid-template-columns: 1fr;
+  }
+}

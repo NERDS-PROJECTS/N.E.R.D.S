@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="presentation">
+  <defs>
+    <radialGradient id="atmo" cx="0.4" cy="0.38" r="0.8">
+      <stop offset="0.72" stop-color="#8b5cf6" stop-opacity="0.45"/>
+      <stop offset="0.9" stop-color="#8b5cf6" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="body" cx="0.4" cy="0.36" r="0.62">
+      <stop offset="0" stop-color="#4a3f78"/>
+      <stop offset="0.45" stop-color="#241b3e"/>
+      <stop offset="0.8" stop-color="#150f26"/>
+      <stop offset="1" stop-color="#0a0714"/>
+    </radialGradient>
+    <linearGradient id="band" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5b4c8a" stop-opacity="0.26"/>
+      <stop offset="0.5" stop-color="#8b5cf6" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#3b2f63" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0.2">
+      <stop offset="0" stop-color="#e41a7a"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- outer atmosphere glow -->
+  <circle cx="460" cy="440" r="392" fill="url(#atmo)"/>
+
+  <!-- gibbous planet body (partial disc clipped toward upper-left light) -->
+  <clipPath id="planetClip">
+    <circle cx="460" cy="452" r="330"/>
+  </clipPath>
+  <g clip-path="url(#planetClip)">
+    <circle cx="460" cy="452" r="330" fill="url(#body)"/>
+    <ellipse cx="442" cy="452" rx="336" ry="332" fill="url(#band)" opacity="0.5"/>
+    <!-- cloud bands -->
+    <path d="M60 360 q 20 -120 90 -230 q 8 -140 96 -320 M66 392 q 26 150 106 286"
+          fill="none" stroke="#8b5cf6" stroke-opacity="0.10" stroke-width="30"/>
+    <path d="M620 330 q -18 -150 -92 -262 M616 366 q -24 170 -104 300"
+          fill="none" stroke="#22d3ee" stroke-opacity="0.07" stroke-width="20"/>
+    <!-- terminator shade (right/dark side) -->
+    <ellipse cx="590" cy="452" rx="250" ry="330" fill="#0a0714" opacity="0.55"/>
+    <!-- soft lit edge -->
+    <path d="M70 400 q 40 -180 140 -330 M74 468 q 44 170 150 330"
+          fill="none" stroke="url(#rim)" stroke-width="14" opacity="0.85" stroke-linecap="round"/>
+    <path d="M96 470 q 34 120 130 300" fill="none" stroke="#ffffff" stroke-opacity="0.4" stroke-width="2"/>
+    <!-- faint craters -->
+    <circle cx="330" cy="620" r="34" fill="#0d0a1c" opacity="0.5"/>
+    <circle cx="362" cy="618" r="28" fill="none" stroke="#3a2f66" stroke-opacity="0.4" stroke-width="3"/>
+    <circle cx="600" cy="520" r="24" fill="none" stroke="#2c2450" stroke-opacity="0.4" stroke-width="3"/>
+  </g>
+</svg>

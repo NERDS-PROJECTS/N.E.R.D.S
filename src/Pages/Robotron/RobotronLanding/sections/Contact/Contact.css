@@ -1,0 +1,106 @@
+@import '../../styles/tokens.css';
+
+.robotron-landing .contact-inner {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(28px, 5vw, 64px);
+}
+.robotron-landing .contact-lede {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(0.98rem, 1.6vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--text-soft);
+  max-width: 50ch;
+  margin-top: 20px;
+}
+
+.robotron-landing .contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(12px, 1.6vw, 22px) clamp(16px, 3vw, 40px);
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid var(--line-strong);
+  background: rgba(14, 11, 26, 0.55);
+  border-radius: 4px;
+}
+.robotron-landing .c-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.robotron-landing .c-field span {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-3);
+  text-transform: uppercase;
+}
+.robotron-landing .c-field input,
+.robotron-landing .c-field textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-bottom: 1px solid var(--accent-2);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.3s;
+}
+.robotron-landing .c-field input:focus,
+.robotron-landing .c-field textarea:focus {
+  border-bottom-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.robotron-landing .c-field--full {
+  grid-column: span 2;
+}
+.robotron-landing textarea { resize: vertical; min-height: 96px; }
+
+.robotron-landing .c-submit {
+  grid-column: span 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(228, 26, 122, 0.28), rgba(139, 92, 246, 0.18));
+  border: 1px solid var(--accent);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.92rem;
+  border-radius: 2px;
+  cursor: none;
+  transition: background 0.3s, translate 0.3s;
+}
+.robotron-landing .c-submit:hover {
+  background: rgba(228, 26, 122, 0.45);
+  translate: 0 -1px;
+}
+.robotron-landing .c-submit i {
+  color: var(--accent-3);
+}
+.robotron-landing .c-ack {
+  grid-column: span 2;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-3);
+}
+
+@media (max-width: 900px) {
+  .robotron-landing .contact-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+  .robotron-landing .contact-form { grid-template-columns: 1fr; }
+  .robotron-landing .c-field--full,
+.robotron-landing .c-submit,
+.robotron-landing .c-ack { grid-column: auto; }
+}

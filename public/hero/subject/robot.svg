@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 820" role="presentation">
+  <defs>
+    <linearGradient id="s_body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c2348"/>
+      <stop offset="0.5" stop-color="#151024"/>
+      <stop offset="1" stop-color="#0a0714"/>
+    </linearGradient>
+    <linearGradient id="s_visor" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#e41a7a"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="s_edge" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#e41a7a"/>
+    </linearGradient>
+  </defs>
+
+  <g>
+    <!-- head -->
+    <path d="M150 120 L150 60 L250 44 L360 60 L360 120 L390 168 L234 168 L150 120 Z" fill="url(#s_body)"/>
+    <!-- neck -->
+    <path d="M228 170 L228 210 L292 210 L292 170 Z" fill="url(#s_body)"/>
+    <!-- shoulders / torso -->
+    <path d="M120 210 L120 300 L402 300 L402 210 L388 300 L132 300 L120 210 Z" fill="url(#s_body)"/>
+    <path d="M120 210 L402 210 L402 320 L120 320 Z" fill="url(#s_body)"/>
+    <path d="M120 320 L120 520 L402 520 L402 320 Z" fill="url(#s_body)"/>
+
+    <!-- visor -->
+    <path d="M168 132 L352 132 L352 158 L168 158 Z" fill="url(#s_visor)"/>
+    <path d="M176 138 L344 138 L344 152 L176 152 Z" fill="#0a0714" opacity="0.25"/>
+    <!-- visor glow -->
+    <path d="M168 158 L352 158" stroke="#e41a7a" stroke-width="3" opacity="0.9"/>
+    <path d="M168 132 L352 132" stroke="#22d3ee" stroke-width="2" opacity="0.6"/>
+
+    <!-- chest core -->
+    <circle cx="261" cy="300" r="42" fill="#0d0a1c"/>
+    <circle cx="261" cy="300" r="20" fill="url(#s_visor)"/>
+    <circle cx="261" cy="300" r="30" fill="none" stroke="#8b5cf6" stroke-opacity="0.6" stroke-width="3"/>
+
+    <!-- panel line details -->
+    <path d="M140 330 L140 500 M380 330 L380 500 M160 360 L160 470 M340 360 L340 470"
+          stroke="#2a2050" stroke-opacity="0.5" stroke-width="3" fill="none"/>
+    <path d="M200 420 L200 390 L240 390 M300 420 L300 390 L260 390"
+          stroke="#2a2050" stroke-opacity="0.5" stroke-width="3" fill="none"/>
+
+    <!-- rim light on shoulder -->
+    <path d="M132 210 L132 300 L120 300 M388 210 L388 300 L402 300"
+          stroke="url(#s_edge)" stroke-width="4" fill="none" opacity="0.7"/>
+  </g>
+
+  <!-- platform under subject (front-most) -->
+  <path d="M120 520 L120 620 L420 620 L420 520 L420 560 L120 560 L120 520 Z" fill="#0a0612"/>
+  <path d="M140 520 L400 520" stroke="#e41a7a" stroke-width="4" opacity="0.85"/>
+  <path d="M120 560 L420 560" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="2"/>
+</svg>

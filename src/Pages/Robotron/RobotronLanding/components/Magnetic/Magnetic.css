@@ -1,0 +1,16 @@
+@import '../../styles/tokens.css';
+
+.robotron-landing .magnetic {
+  position: relative;
+  display: inline-block;
+}
+.robotron-landing .magnetic-inner {
+  display: inline-block;
+  transform-origin: center center;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce), (max-width: 1024px) {
+  .robotron-landing .magnetic-inner {
+    transform: none;
+  }
+}

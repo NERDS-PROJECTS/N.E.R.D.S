@@ -1,0 +1,49 @@
+/* ============================================================
+   ROBOTRON 2026 — Design tokens
+   Scoped to .robotron-landing (not :root) so these variables and
+   the reduced-motion override never leak into the rest of the site.
+   ============================================================ */
+.robotron-landing {
+  /* Colors */
+  --bg-0: #05040a;      /* near-black  */
+  --bg-1: #08060f;      /* deep navy   */
+  --bg-2: #12101f;      /* dark violet */
+  --bg-3: #1a1628;
+
+  --surface: #0c0a14;
+  --line: rgba(173, 178, 255, 0.12);
+  --line-strong: rgba(173, 178, 255, 0.22);
+
+  --accent: #e41a7a;    /* neon magenta   */
+  --accent-2: #8b5cf6;  /* electric violet */
+  --accent-3: #22d3ee;  /* cyan            */
+  --text: #eceaf6;      /* off-white  */
+  --text-soft: #b7b2cc;
+  --text-dim: #6f6c85;
+
+  /* Type */
+  --font-display: 'Orbitron', 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', 'Zen Kaku Gothic New', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Easing */
+  --ez-cine: cubic-bezier(0.22, 1, 0.36, 1);
+  --ez-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --nav-h: 76px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .robotron-landing,
+  .robotron-landing *,
+  .robotron-landing *::before,
+  .robotron-landing *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
