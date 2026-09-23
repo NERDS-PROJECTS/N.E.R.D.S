@@ -1,0 +1,80 @@
+.robotron-landing .audio-widget {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.robotron-landing .audio-hint {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  background: rgba(5, 4, 10, 0.72);
+  border: 1px solid var(--line-strong);
+  padding: 7px 12px;
+  border-radius: 3px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: audio-hint-pulse 1.8s ease-in-out infinite;
+}
+@keyframes audio-hint-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.robotron-landing .audio-toggle {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 4, 10, 0.55);
+  border: 1px solid var(--line-strong);
+  backdrop-filter: blur(6px);
+  color: var(--text);
+  transition: background 0.25s, border-color 0.25s, transform 0.2s;
+}
+.robotron-landing .audio-toggle:hover {
+  border-color: var(--accent-3);
+  background: rgba(5, 4, 10, 0.78);
+}
+.robotron-landing .audio-toggle:active {
+  transform: scale(0.92);
+}
+.robotron-landing .audio-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Glowing pulse pointing at the button while it's still waiting for the
+   gesture that unlocks audible playback. */
+.robotron-landing .audio-toggle--pulse {
+  border-color: var(--accent);
+  animation: audio-glow-pulse 1.8s ease-in-out infinite;
+}
+@keyframes audio-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(228, 26, 122, 0.5); }
+  50% { box-shadow: 0 0 16px 6px rgba(228, 26, 122, 0.5); }
+}
+
+@media (max-width: 640px) {
+  .robotron-landing .audio-widget {
+    right: 16px;
+    bottom: 16px;
+  }
+  .robotron-landing .audio-toggle {
+    width: 42px;
+    height: 42px;
+  }
+  .robotron-landing .audio-hint {
+    font-size: 0.56rem;
+    padding: 6px 10px;
+  }
+}

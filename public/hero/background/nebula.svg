@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="presentation">
+  <defs>
+    <radialGradient id="n1" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#3b2a6b" stop-opacity="0.5"/>
+      <stop offset="0.5" stop-color="#2a1e52" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#2a1e52" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="n2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4a2f7a" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#4a2f7a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="n3" cx="0.5" cy="0.5" r="0.55">
+      <stop offset="0" stop-color="#30304a" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#30304a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="nebblur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="60"/>
+    </filter>
+    <filter id="nebblur2" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+  </defs>
+  <g filter="url(#nebblur)">
+    <ellipse cx="360" cy="330" rx="420" ry="290" fill="url(#n1)"/>
+    <ellipse cx="860" cy="300" rx="330" ry="240" fill="url(#n2)"/>
+  </g>
+  <g filter="url(#nebblur2)">
+    <ellipse cx="600" cy="440" rx="420" ry="180" fill="url(#n3)"/>
+    <ellipse cx="640" cy="160" rx="380" ry="140" fill="url(#n3)"/>
+  </g>
+</svg>

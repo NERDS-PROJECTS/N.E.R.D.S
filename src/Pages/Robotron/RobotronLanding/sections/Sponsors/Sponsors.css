@@ -1,0 +1,54 @@
+@import '../../styles/tokens.css';
+
+.robotron-landing .sponsors-head {
+  margin-bottom: clamp(28px, 5vw, 52px);
+}
+.robotron-landing .sponsors-row {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(10px, 1.6vw, 22px);
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.robotron-landing .sponsor {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16/7;
+  border: 1px solid var(--line);
+  background: rgba(16, 13, 30, 0.5);
+  transition: border-color 0.3s, background 0.3s;
+}
+.robotron-landing .sponsor:hover {
+  border-color: var(--accent);
+  background: rgba(30, 24, 50, 0.6);
+}
+.robotron-landing .sponsor-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.robotron-landing .sponsor-n {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+}
+.robotron-landing .sponsor-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.72rem, 1.4vw, 1.05rem);
+  letter-spacing: 0.06em;
+  color: var(--text-soft);
+}
+
+@media (max-width: 1000px) {
+  .robotron-landing .sponsors-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .robotron-landing .sponsors-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

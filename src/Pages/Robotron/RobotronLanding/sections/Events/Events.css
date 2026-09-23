@@ -1,0 +1,94 @@
+@import '../../styles/tokens.css';
+
+.robotron-landing .events-head {
+  margin-bottom: clamp(32px, 5vw, 60px);
+}
+.robotron-landing .events-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.4vw, 30px);
+}
+.robotron-landing .event {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(22, 18, 40, 0.5), rgba(8, 6, 16, 0.72));
+  border-radius: 4px;
+  overflow: hidden;
+}
+.robotron-landing .event-art {
+  border: none;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  aspect-ratio: 4/3;
+  position: relative;
+  background:
+    radial-gradient(70% 90% at 30% 20%, rgba(139, 92, 246, 0.18), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(139, 92, 246, 0.06) 0 1px, transparent 1px 14px);
+  display: grid;
+  place-items: center;
+  will-change: transform;
+  transition: filter 0.4s;
+}
+.robotron-landing .event-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(228, 26, 122, 0.25);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.robotron-landing .event-art:hover::after { opacity: 1; }
+.robotron-landing .event-art:hover { filter: saturate(1.25) brightness(1.05); }
+.robotron-landing .event-icon {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--text);
+  opacity: 0.85;
+}
+.robotron-landing .event-body {
+  padding: 16px 18px 22px;
+}
+.robotron-landing .event-code {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+}
+.robotron-landing .event-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.98rem, 1.5vw, 1.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  line-height: 1.25;
+}
+.robotron-landing .event-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-soft);
+  margin-top: 10px;
+}
+.robotron-landing .event-meta {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+}
+
+@media (max-width: 1000px) {
+  .robotron-landing .events-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 680px) {
+  .robotron-landing .events-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,179 @@
+@import '../../styles/tokens.css';
+
+/* ============================================================
+   CustomCursor
+   ============================================================ */
+
+.robotron-landing .cursor-group {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* --- Primary reticle (crosshair) --------------------------- */
+.robotron-landing .cc-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  translate: -50% -50%;
+  will-change: transform;
+}
+.robotron-landing .cc-dot [class] {
+  position: absolute;
+}
+.robotron-landing .cc-h,
+.robotron-landing .cc-v {
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(228, 26, 122, 0.45);
+}
+.robotron-landing .cc-h {
+  width: 18px;
+  height: 1px;
+  left: -9px;
+  top: -0.5px;
+}
+.robotron-landing .cc-v {
+  width: 1px;
+  height: 18px;
+  left: -0.5px;
+  top: -9px;
+}
+.robotron-landing .cc-center {
+  width: 3px;
+  height: 3px;
+  left: -1.5px;
+  top: -1.5px;
+  border-radius: 50%;
+  background: #fff;
+}
+/* Small gaps in the crosshair arms */
+.robotron-landing .cc-h {
+  background-image: linear-gradient(90deg, transparent 0 38%, var(--accent) 38% 62%, transparent 62% 100%);
+}
+.robotron-landing .cc-v {
+  background-image: linear-gradient(180deg, transparent 0 38%, var(--accent) 38% 62%, transparent 62% 100%);
+}
+
+/* --- Trailing ring ------------------------------------------ */
+.robotron-landing .cc-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  translate: -50% -50%;
+  will-change: transform;
+}
+.robotron-landing .cc-ring::before {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: -22px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(139, 92, 246, 0.65);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.25), inset 0 0 10px rgba(139, 92, 246, 0.12);
+  transition: width 0.28s var(--ez-soft), height 0.28s var(--ez-soft),
+    border-color 0.28s, opacity 0.3s;
+}
+/* rotating HUD segments */
+.robotron-landing .cc-seg {
+  position: absolute;
+  left: -30px;
+  top: -14px;
+  width: 16px;
+  height: 2px;
+  background: var(--accent-3);
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.5);
+}
+.robotron-landing .cc-seg--b {
+  left: 14px;
+  top: 12px;
+  width: 2px;
+  height: 14px;
+}
+.robotron-landing .cc-axis {
+  position: absolute;
+  left: -34px;
+  top: -0.5px;
+  width: 68px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.35) 50%, transparent);
+}
+.robotron-landing .cc-label {
+  position: absolute;
+  left: -1px;
+  top: -30px;
+  font: 500 8px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+  color: var(--accent-3);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+.robotron-landing .cc-label::before {
+  content: 'TARGET';
+}
+.robotron-landing .cc-label[data-state='view']::before {
+  content: 'VIEW +';
+}
+
+/* --- State: link / view -------------------------------------- */
+.robotron-landing .cc-ring[data-state='link'],
+.robotron-landing .cc-ring[data-state='view'] {
+  --state-on: 1;
+}
+.robotron-landing .cc-ring[data-state='link']::before {
+  width: 58px;
+  height: 58px;
+  border-color: var(--accent);
+}
+.robotron-landing .cc-ring[data-state='link'] .cc-label {
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--accent);
+}
+.robotron-landing .cc-ring[data-state='view']::before {
+  width: 64px;
+  height: 64px;
+  border-color: #fff;
+}
+.robotron-landing .cc-ring[data-state='view'] .cc-label {
+  opacity: 1;
+  transform: translateY(0);
+  color: #fff;
+}
+
+/* Emphasise the crosshair over interactive elements */
+.robotron-landing .cc-dot[data-state='link'] .cc-h,
+.robotron-landing .cc-dot[data-state='link'] .cc-v {
+  background-image: none;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.8);
+}
+
+/* --- Reduced-motion / touch fallback ------------------------- */
+.robotron-landing .cursor-group--static .cc-dot--static {
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(228, 26, 122, 0.7);
+  border-radius: 50%;
+}
+.robotron-landing .cursor-group--static .cc-dot--static::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+}

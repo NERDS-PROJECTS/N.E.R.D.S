@@ -1,0 +1,71 @@
+@import '../../styles/tokens.css';
+
+.robotron-landing .team-head {
+  margin-bottom: clamp(28px, 5vw, 52px);
+}
+.robotron-landing .team-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 2.2vw, 30px);
+}
+.robotron-landing .crew {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  background: rgba(16, 13, 30, 0.5);
+  transition: border-color 0.3s, translate 0.3s;
+}
+.robotron-landing .crew:hover {
+  border-color: var(--accent-2);
+  translate: 0 -2px;
+}
+.robotron-landing .crew-glyph {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.22), transparent 70%);
+  display: grid;
+  place-items: center;
+}
+.robotron-landing .crew-glyph i {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--text);
+}
+.robotron-landing .crew-info .crew-id {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-3);
+}
+.robotron-landing .crew-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin-top: 3px;
+}
+.robotron-landing .crew-role {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  margin-top: 5px;
+}
+
+@media (max-width: 960px) {
+  .robotron-landing .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .robotron-landing .team-grid { grid-template-columns: 1fr; }
+}

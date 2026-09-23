@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 760" role="presentation">
+  <defs>
+    <linearGradient id="m_arch" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#221a3e"/>
+      <stop offset="1" stop-color="#0d0b1c"/>
+    </linearGradient>
+    <linearGradient id="m_pylon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e1838"/>
+      <stop offset="1" stop-color="#0c0a1a"/>
+    </linearGradient>
+    <linearGradient id="m_edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e41a7a"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ============ Grand arch (left-center) ============ -->
+  <g transform="translate(120,40)">
+    <!-- left pillar -->
+    <path d="M60 700 L60 240 L120 240 L120 700 Z" fill="url(#m_arch)"/>
+    <path d="M78 216 L78 660 M104 216 L104 660" stroke="#8b5cf6" stroke-opacity="0.25" stroke-width="2" fill="none"/>
+    <!-- right pillar -->
+    <path d="M540 700 L540 240 L600 240 L600 700 Z" fill="url(#m_arch)"/>
+    <path d="M558 216 L558 660 M582 216 L582 660" stroke="#8b5cf6" stroke-opacity="0.25" stroke-width="2" fill="none"/>
+    <!-- arch crown -->
+    <path d="M120 240 Q 330 -40 540 240 L600 240 L540 240 Q 330 -40 120 240 Z" fill="url(#m_arch)"/>
+    <path d="M120 250 Q 330 -30 540 250 M120 180 Q 330 -90 540 180"
+          stroke="#8b5cf6" stroke-opacity="0.2" stroke-width="2" fill="none"/>
+    <!-- magenta crown edge -->
+    <path d="M120 210 Q 330 -36 540 210" stroke="url(#m_edge)" stroke-width="6" fill="none" opacity="0.85" stroke-linecap="round"/>
+    <!-- inner glow ring -->
+    <path d="M150 300 Q 300 120 480 300" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+    <!-- platform on arch -->
+    <path d="M210 250 L420 250 L420 234 L210 234 Z" fill="#151128" opacity="0.9"/>
+  </g>
+
+  <!-- ============ Twinned pylon (right-center) ============ -->
+  <g transform="translate(1020,80)">
+    <path d="M120 680 L120 300 L200 300 L200 680 Z" fill="url(#m_pylon)"/>
+    <path d="M360 680 L360 240 L440 240 L440 680 Z" fill="url(#m_pylon)"/>
+    <!-- connecting beam -->
+    <path d="M200 320 L360 320 L360 342 L200 342 Z" fill="#151128"/>
+    <path d="M200 322 L360 322" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="2"/>
+    <!-- top lights -->
+    <circle cx="300" cy="268" r="10" fill="#e41a7a"/>
+    <circle cx="300" cy="268" r="3" fill="#ffffff" opacity="0.9"/>
+    <circle cx="300" cy="268" r="24" fill="none" stroke="#e41a7a" stroke-opacity="0.4" stroke-width="1"/>
+    <!-- antenna -->
+    <path d="M140 300 L140 150" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="3" fill="none"/>
+    <circle cx="140" cy="150" r="4" fill="#22d3ee"/>
+    <path d="M418 240 L418 130" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="3" fill="none"/>
+    <circle cx="418" cy="130" r="4" fill="#e41a7a"/>
+    <!-- crosses / bracing -->
+    <path d="M220 470 L340 600 M340 470 L220 600" stroke="#0f0c20" stroke-width="6" fill="none" opacity="0.6"/>
+  </g>
+
+  <!-- ============ low floating platform strip (mid) ============ -->
+  <g transform="translate(0,560)">
+    <path d="M-40 40 L420 26 L900 60 L1500 30 L1640 70 Z" fill="#0f0c22" opacity="0.9"/>
+    <path d="M-40 46 L1640 46" stroke="#8b5cf6" stroke-opacity="0.18" stroke-width="2"/>
+  </g>
+</svg>

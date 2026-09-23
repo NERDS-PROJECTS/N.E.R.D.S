@@ -1,0 +1,49 @@
+@import '../../styles/tokens.css';
+
+/* ============================================================
+   ParallaxLayer — the 2.5D depth primitive.
+   ============================================================ */
+
+.robotron-landing .pl {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Mouse/scroll translation, static per-layer offset, subtle tilt, and
+     per-layer scale are composed in one transform so the shared parallax
+     engine remains responsible for movement. --off-x/--off-y default to
+     0px via the fallback, so layers that don't set them are unaffected. */
+  transform:
+    translate3d(
+      calc(var(--mx, 0px) + var(--sx, 0px) + var(--off-x, 0px)),
+      calc(var(--my, 0px) + var(--sy, 0px) + var(--off-y, 0px)),
+      0
+    )
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    scale(var(--scale, 1));
+}
+
+/* Only layers we actually move reserve a compositing layer. */
+.robotron-landing .pl-anim {
+  will-change: transform;
+}
+
+/* A positioned "piece" rather than a full-bleed layer. */
+.robotron-landing .pl-inset-piece {
+  inset: auto;
+  width: auto;
+  height: auto;
+}
+
+/* Interactive layer — restore pointer events. */
+.robotron-landing .pl-pointer {
+  pointer-events: auto;
+}
+
+/* Images inside a layer are positioned by their per-asset classes
+   (e.g. .planet-img, .robot-img). Do NOT force a dimension here —
+   that would override the composition classes in Hero.css. */
+.robotron-landing .pl img {
+  display: block;
+  max-width: 100%;
+}

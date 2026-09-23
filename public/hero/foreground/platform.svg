@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 620" role="presentation">
+  <defs>
+    <linearGradient id="fg_rock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1430"/>
+      <stop offset="1" stop-color="#06040e"/>
+    </linearGradient>
+    <linearGradient id="fg_metal" x1="0" y1="0" x2="1" y2="0.6">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#e41a7a"/>
+    </linearGradient>
+    <linearGradient id="fg_glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Left rocky mass entering from bottom-left -->
+  <path d="M-60 620 L-40 440 L110 340 L220 300 L330 330 L400 450 L460 620 Z" fill="url(#fg_rock)"/>
+  <!-- facets -->
+  <path d="M-20 470 L90 380 L150 360 M40 300 L120 280 M200 360 L300 420"
+        stroke="#2a2050" stroke-opacity="0.5" stroke-width="3" fill="none"/>
+  <!-- rim light -->
+  <path d="M-50 470 L40 404 L110 340 L220 300 L330 330 M40 404 L60 340"
+        stroke="url(#fg_metal)" stroke-width="5" fill="none" opacity="0.8" stroke-linecap="round"/>
+
+  <!-- Right rocky mass entering from bottom-right -->
+  <path d="M1600 620 L1600 520 L1460 380 L1360 370 L1260 300 L1190 340 L1120 620 Z" fill="url(#fg_rock)"/>
+  <path d="M1580 470 L1480 400 L1420 370 M1300 350 L1240 330 L1210 380"
+        stroke="#2a2050" stroke-opacity="0.5" stroke-width="3" fill="none"/>
+  <path d="M1560 480 L1460 380 L1360 370 L1260 300"
+        stroke="url(#fg_metal)" stroke-width="5" fill="none" opacity="0.8" stroke-linecap="round"/>
+
+  <!-- Center-left platform slab (metallic top) -->
+  <path d="M400 620 L400 470 L560 470 L680 430 L820 470 L900 620 Z" fill="url(#fg_rock)"/>
+  <path d="M420 470 L560 470 L680 430 L800 470" stroke="#3a2f70" stroke-width="6" fill="none" opacity="0.7"/>
+  <path d="M430 470 L552 470 L672 430 L792 470" stroke="url(#fg_metal)" stroke-width="3" fill="none" opacity="0.9"/>
+  <!-- vertical support --> 
+  <rect x="560" y="470" width="22" height="150" fill="#0d0a1c"/>
+  <path d="M600 472 L600 600" stroke="#22d3ee" stroke-opacity="0.25" stroke-width="2"/>
+
+  <!-- neon strip on left rock -->
+  <path d="M80 560 L200 560 L300 470" stroke="#e41a7a" stroke-width="4" fill="none" opacity="0.8" stroke-linecap="round"/>
+  <!-- glow pool center-right -->
+  <ellipse cx="1080" cy="470" rx="90" ry="120" fill="url(#fg_glow)"/>
+</svg>

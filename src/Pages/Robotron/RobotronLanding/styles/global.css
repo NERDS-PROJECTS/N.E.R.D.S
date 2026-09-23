@@ -1,0 +1,134 @@
+@import './tokens.css';
+
+/* ============================================================
+   Base styles for the ROBOTRON landing, scoped under
+   .robotron-landing so nothing here touches the rest of the site
+   (the real <html>/<body> and NERDS's own global styles are left
+   untouched).
+   ============================================================ */
+.robotron-landing,
+.robotron-landing *,
+.robotron-landing *::before,
+.robotron-landing *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.robotron-landing {
+  position: relative;
+  isolation: isolate;
+  background: var(--bg-0);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+/* Hide the native cursor for the custom cursor, scoped to this page only.
+   CustomCursor.jsx toggles `custom-cursor` on <body>; the rule below keeps
+   the effect confined to elements inside .robotron-landing. */
+body.custom-cursor .robotron-landing,
+body.custom-cursor .robotron-landing * {
+  cursor: none;
+}
+
+.robotron-landing ::selection {
+  background: rgba(228, 26, 122, 0.35);
+  color: #fff;
+}
+
+.robotron-landing a {
+  color: inherit;
+  text-decoration: none;
+}
+.robotron-landing a:focus-visible,
+.robotron-landing button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.robotron-landing img {
+  display: block;
+  max-width: 100%;
+}
+
+.robotron-landing section {
+  position: relative;
+}
+
+.robotron-landing .container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Cyberpunk background grid (extremely low contrast) */
+.robotron-landing .grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 0%, transparent 75%);
+}
+
+/* Section heading primitive elements */
+.robotron-landing .kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.robotron-landing .kicker::before {
+  content: '';
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-3), transparent);
+}
+.robotron-landing .kicker::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--accent-3);
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
+
+.robotron-landing .section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  font-size: clamp(2.1rem, 4.4vw, 3.8rem);
+  margin-top: 20px;
+}
+.robotron-landing .section-title .hl {
+  background: linear-gradient(100deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Utility */
+.robotron-landing .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+@media (max-width: 640px) {
+  .robotron-landing .container {
+    padding: 0 20px;
+  }
+}

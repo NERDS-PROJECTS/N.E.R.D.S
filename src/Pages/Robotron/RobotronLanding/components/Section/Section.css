@@ -1,0 +1,40 @@
+@import '../../styles/tokens.css';
+
+/* ============================================================
+   Section — base panel
+   ============================================================ */
+.robotron-landing .section-base {
+  position: relative;
+  padding: clamp(96px, 14vh, 168px) 0;
+  overflow: hidden;
+}
+.robotron-landing .section--dark {
+  background:
+    radial-gradient(90% 60% at 20% 0%, rgba(139, 92, 246, 0.06), transparent 60%),
+    radial-gradient(90% 60% at 90% 100%, rgba(228, 26, 122, 0.05), transparent 60%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2) 60%, var(--bg-1));
+  color: var(--text);
+}
+
+/* Subtle cyberpunk grid, very low contrast */
+.robotron-landing .section--grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 0%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 0%, transparent 78%);
+}
+
+/* Prefer reduced motion => no reveal transform */
+@media (prefers-reduced-motion: reduce) {
+  .robotron-landing [data-reveal],
+.robotron-landing .section-base > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

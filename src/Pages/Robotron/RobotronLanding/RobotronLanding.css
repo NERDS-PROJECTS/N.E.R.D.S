@@ -1,0 +1,19 @@
+.robotron-landing #robotron-content {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+/* Background veins of color behind every section */
+.robotron-landing #robotron-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background:
+    radial-gradient(120% 60% at 15% 30%, rgba(139, 92, 246, 0.06), transparent 60%),
+    radial-gradient(120% 60% at 88% 55%, rgba(228, 26, 122, 0.05), transparent 60%);
+  z-index: -1;
+}

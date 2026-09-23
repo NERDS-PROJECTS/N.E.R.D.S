@@ -1,0 +1,95 @@
+@import '../../styles/tokens.css';
+
+.robotron-landing .about-inner {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(20px, 4vw, 56px);
+}
+.robotron-landing .about-head {
+  grid-column: span 12;
+}
+.robotron-landing .about-body {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: 5fr 4fr 3fr;
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+.robotron-landing .about-lead {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(1.02rem, 1.8vw, 1.35rem);
+  line-height: 1.75;
+  color: var(--text-soft);
+  max-width: 72ch;
+  padding: 0 0 0 26px;
+  border-left: 2px solid var(--line-strong);
+}
+
+.robotron-landing .about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 20px;
+}
+.robotron-landing .about-stat {
+  border: 1px solid var(--line);
+  background: rgba(20, 16, 34, 0.5);
+  padding: 16px 14px;
+  border-radius: var(--radius);
+}
+.robotron-landing .about-stat b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  color: var(--text);
+  line-height: 1;
+}
+.robotron-landing .about-stat span {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+}
+
+.robotron-landing .about-diag {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5/6;
+  border: 1px solid var(--line-strong);
+}
+.robotron-landing .about-diag::before,
+.robotron-landing .about-diag::after {
+  content: '';
+  position: absolute;
+  inset: 12%;
+  border: 1px dashed rgba(34, 211, 238, 0.25);
+  border-radius: 50%;
+}
+.robotron-landing .about-diag::after {
+  inset: 30%;
+  border: 1px solid rgba(228, 26, 122, 0.35);
+  border-radius: 0;
+  transform: rotate(45deg);
+}
+.robotron-landing .about-side figcaption {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .robotron-landing .about-body {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .robotron-landing .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

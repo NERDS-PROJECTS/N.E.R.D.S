@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Event from "./Pages/Event/Event";
 import Team from "./Pages/Team/Team";
@@ -30,6 +30,56 @@ const ScrollToTop = () => {
     window.scrollTo(0, 0);
   }, []);
   return null;
+};
+
+// Robotron ships its own fixed cyberpunk navbar, so the site's global
+// navbar (and the top padding reserved for it) is hidden on that route.
+const AppShell = ({ loading, handleSplineLoad }) => {
+  const location = useLocation();
+  // Robotron ships its own fixed navbar and doesn't use the global footer,
+  // so both are skipped on that route.
+  const isRobotronPage = location.pathname === "/robotron";
+
+  return (
+    <div className={`flex flex-col min-h-screen overflow-x-hidden ${loading || isRobotronPage ? '' : 'pt-24'}`}>
+      <ScrollToTop />
+      {loading ? (
+        <LoadingAnimation />
+      ) : (
+        <>
+          {!isRobotronPage && (
+            <div className="sticky top-0 z-50 w-full">
+              <Navbar />
+            </div>
+          )}
+
+          <div className="flex-grow w-full">
+            <Routes>
+              <Route path="/" element={<Home onSplineLoad={handleSplineLoad} />} />
+              <Route path="/galaxy" element={<Galaxy/>} />
+              <Route path="/robotron" element={<Robotron/>} />
+              <Route path="/event" element={<Event />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/merch" element={<Merch />} />
+              <Route path="/merchPay" element={<MerchPay />} />
+              <Route path="/giveaway" element={<Giveaway />} />
+              <Route path="/trackOrder" element={<Track_order/>} />
+              <Route path="/robowar" element={<Robowar/>} />
+              <Route path="/robosoccer" element={<Robosoccer/>} />
+              <Route path="/robodrift" element={<RoboDrift/>} />
+              <Route path="/algomaze" element={<AlgoMaze/>} />
+              {/* Catch-all route for 404 page */}
+              <Route path="*" element={<Error />} />
+            </Routes>
+          </div>
+
+          {!isRobotronPage && <Footer />}
+        </>
+      )}
+    </div>
+  );
 };
 
 function App() {
@@ -94,44 +144,9 @@ function App() {
   }, []);
 
   return (
-    <div className={`flex flex-col min-h-screen overflow-x-hidden ${loading ? '' : 'pt-24'}`}>
-      <Router>
-        <ScrollToTop />
-        {loading ? (
-          <LoadingAnimation />
-        ) : (
-          <>
-            <div className="sticky top-0 z-50 w-full">
-              <Navbar />
-            </div>
-
-            <div className="flex-grow w-full">
-              <Routes>
-                <Route path="/" element={<Home onSplineLoad={handleSplineLoad} />} />
-                <Route path="/galaxy" element={<Galaxy/>} />
-                <Route path="/robotron" element={<Robotron/>} />
-                <Route path="/event" element={<Event />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/team" element={<Team />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/merch" element={<Merch />} />
-                <Route path="/merchPay" element={<MerchPay />} />
-                <Route path="/giveaway" element={<Giveaway />} /> 
-                <Route path="/trackOrder" element={<Track_order/>} /> 
-                <Route path="/robowar" element={<Robowar/>} /> 
-                <Route path="/robosoccer" element={<Robosoccer/>} /> 
-                <Route path="/robodrift" element={<RoboDrift/>} /> 
-                <Route path="/algomaze" element={<AlgoMaze/>} />
-                {/* Catch-all route for 404 page */}
-                <Route path="*" element={<Error />} />
-              </Routes>
-            </div>
-
-            <Footer />
-          </>
-        )}
-      </Router>
-    </div>
+    <Router>
+      <AppShell loading={loading} handleSplineLoad={handleSplineLoad} />
+    </Router>
   );
 }
 
