@@ -135,7 +135,13 @@ export default function Ships() {
 
   return (
     <div className="ships-layer" aria-hidden="true">
-      <Canvas orthographic camera={{ position: [0, 0, 10], zoom: 1 }} gl={{ alpha: true, antialias: true }} dpr={[1, 2]}>
+      {/* dpr capped at 1 (not [1, 2]): on a Retina/HiDPI screen — every
+          MacBook — [1, 2] renders this canvas at a full 2x pixel density,
+          4x the raster/composite work for the same CSS size versus a
+          standard-DPI Windows display. Two small ship sprites don't need
+          that sharpness, and this was a real, measurable source of the
+          Mac-only scroll jitter. */}
+      <Canvas orthographic camera={{ position: [0, 0, 10], zoom: 1 }} gl={{ alpha: true, antialias: true }} dpr={1}>
         <Suspense fallback={null}>
           {SHIPS.map((cfg) => (
             <Ship key={cfg.src} config={cfg} />
