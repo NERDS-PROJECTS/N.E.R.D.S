@@ -38,20 +38,41 @@ export default function Hero() {
      it's a newer unit (Chrome 108+/Safari 15.4+) — an older WebView some
      in-app browsers still bundle (seen: WhatsApp's Android in-app
      browser) silently falls back past svh to the plain 100vh declared
-     before it, which reintroduces the scroll. `window.innerHeight`
-     always reflects whatever's ACTUALLY visible regardless of unit
-     support, so it's written to a CSS var here as a universal
-     belt-and-suspenders fallback Hero.css can key off directly. */
+     before it, which reintroduces the scroll. `window.innerHeight` always
+     reflects whatever's ACTUALLY visible regardless of unit support, so
+     it's written to a CSS var here as a universal belt-and-suspenders
+     fallback Hero.css can key off directly.
+
+     A single measurement isn't enough, though: mobile browser chrome
+     (address bar / bottom toolbar) can collapse AFTER first paint — on
+     scroll, on a tap, or just settling a moment after load — which grows
+     the real visible area without necessarily firing a plain `resize`
+     event on every engine. If Hero was sized from the earlier, SMALLER
+     reading, that growth exposes a gap below it showing the page's own
+     background — a black band at the bottom on tall phones specifically,
+     because that's where the extra space lands. `visualViewport` is the
+     API built to track exactly this (it fires its own `resize` for
+     toolbar changes that don't always trigger `window`'s), so it's
+     preferred where available; `window.innerHeight` stays as the
+     fallback for engines without it. */
   useEffect(() => {
+    const vv = window.visualViewport;
     const setVh = () => {
-      document.documentElement.style.setProperty('--vh100', `${window.innerHeight}px`);
+      const h = vv ? vv.height : window.innerHeight;
+      document.documentElement.style.setProperty('--vh100', `${h}px`);
     };
     setVh();
     window.addEventListener('resize', setVh);
     window.addEventListener('orientationchange', setVh);
+    vv?.addEventListener('resize', setVh);
+    /* Re-check a beat after mount too, in case the toolbar was still
+       settling when the listeners above were attached. */
+    const settleTimer = setTimeout(setVh, 300);
     return () => {
       window.removeEventListener('resize', setVh);
       window.removeEventListener('orientationchange', setVh);
+      vv?.removeEventListener('resize', setVh);
+      clearTimeout(settleTimer);
     };
   }, []);
 
