@@ -12,10 +12,22 @@
    below (--sx/--sy/--hero-scroll-scale writes on every scroll frame),
    which was the root cause of every scroll-triggered jitter report: no
    scrollable distance means that effect never fires at all. 100vh removes
-   the scroll capability entirely rather than papering over its cost. */
+   the scroll capability entirely rather than papering over its cost.
+
+   100vh alone still leaves a real scroll on phones, though: mobile
+   Safari/Chrome resolve `vh` against the LARGEST possible viewport (chrome
+   hidden), not the shorter one actually visible on first paint (address
+   bar showing), so a 100vh element renders taller than what's on screen —
+   exactly enough to make the page scroll a few px, which is what was
+   driving the scroll-triggered jitter on phones specifically. `100svh`
+   ("small viewport height") resolves against the viewport with browser
+   UI fully shown, i.e. the smallest it will ever be, so the section can
+   never exceed what's visible. Declared after the 100vh fallback so
+   browsers without svh support (keeps 100vh) still get a value. */
 .robotron-landing .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   isolation: isolate;
 }
@@ -568,7 +580,7 @@
    whole stack into one stacking context.
    ============================================================ */
 @media (max-width: 1024px) {
-  .robotron-landing .hero { min-height: 100vh; }
+  .robotron-landing .hero { min-height: 100vh; min-height: 100svh; }
   /* A hair of extra zoom guarantees edge coverage once the mouse parallax
      budget grows relative to a narrower viewport. Must repeat the
      config-driven offset, since this overrides .scene-plate's transform. */
@@ -595,31 +607,76 @@
 }
 
 @media (max-width: 767px) {
-  .robotron-landing .hero { min-height: 100vh; }
-  /* Mouse parallax is disabled at this size (see ParallaxProvider), so the
-     overscan only has to absorb the float drift. */
+  .robotron-landing .hero { min-height: 100vh; min-height: 100svh; }
+  /* Mouse parallax is disabled at this size (see ParallaxProvider), and the
+     hero has no scrollable distance either (min-height:100vh, no section
+     follows it — see the note at the top of this file), so the only
+     motion left on mobile is the small float drift. That means the old
+     8% overscan zoom this rule used to carry is no longer earning its
+     keep — freed up, that headroom goes toward showing more of the scene
+     instead (below). */
   .robotron-landing .scene-plate {
-    transform: translate3d(var(--off-x, 0px), var(--off-y, 0px), 0) scale(1.08);
-    /* All twelve plates are registered to the same 1920x1080 canvas, and
-       on a tall narrow crop `object-fit: cover` scales to match the
-       viewport HEIGHT exactly (no vertical slack) and crops purely on
-       width — the default 50% object-position shows only the horizontal
-       centre third of that canvas. The composition's foreground subject
-       (layer 12: rock + rover) and the nearest floating rocks (layer 9)
-       both sit in roughly the LEFT 15-35% of the canvas, well outside
-       that centred window, so the rover was being cropped out entirely
-       while the far-right ring/planet (layers 1-2) showed only a
-       confusing cropped sliver at the edge — neither read as intentional.
-       Shifting the shared crop window left brings the rover fully into
-       frame; every plate gets the SAME shift so registration between
-       layers is untouched, they just pan together. */
-    object-position: 18% center;
+    /* Full-height object-fit:cover on a ~0.56-ratio phone screen scales
+       to match the viewport HEIGHT and crops almost 70% of the 1920px
+       canvas's WIDTH away — only the centre third-ish survives, however
+       object-position is aimed. Sampling the actual scene plates: the
+       rover (layer 12) and the floating rocks (layers 6, 9) sit in
+       roughly the left 13-38% of the canvas, and the next cluster
+       (layer 4) sits around 48-56% — comfortably more than a single
+       cover-fit centre-third can ever include no matter where it's
+       aimed. Shrinking each plate's own box to 70% height (rather than
+       zooming via `transform`, which only resizes what's already been
+       cropped and reveals nothing new) gives `object-fit: cover` a
+       LESS extreme box to cover, so it naturally needs less zoom — width
+       coverage goes from ~30% of the canvas to ~45%. Anchored to the
+       BOTTOM (not top) because the ground-level content — rover,
+       platform, city base — is what needs to read clearly; the resulting
+       gap above (filled by .hero's own near-black background, close in
+       tone to the top of the sky plate) reads as a soft vignette rather
+       than a hard crop. Every plate gets the identical box change, so
+       registration between layers holds — they're still one rigid
+       group, just less tightly zoomed. */
+    top: auto;
+    bottom: 0;
+    height: 70%;
+    transform: translate3d(var(--off-x, 0px), var(--off-y, 0px), 0) scale(1.04);
+    /* Even at the wider 70%-height crop, the full width still can't
+       include every layer (the ring/planet, layers 1-2's rightmost
+       content, and the farthest-right rocks — layers 3 and 5 — sit past
+       55% of the canvas and would need to sacrifice the rover to reach).
+       22% keeps the rover and the layer 9/6/4 cluster fully in frame,
+       which is the best achievable coverage without either losing the
+       rover or breaking registration by scaling layers independently. */
+    object-position: 22% center;
   }
 
-  /* Eleven simultaneously animating full-screen layers is a lot for a
-     phone GPU; freeze the drift (positions/parallax are unaffected) so the
-     scene stays smooth. */
-  .robotron-landing .scene-float { animation: none; }
+  /* Scroll-driven motion is now impossible on mobile (see above), so the
+     float drift is the only thing actually animating these layers — safe
+     to leave running; it's what makes the scene read as ALIVE rather than
+     a static poster, matching the desktop view. */
+  .robotron-landing .scene-float { animation-play-state: running; }
+
+  /* Shrinking the plates to 70% height (above) exposes .hero's own
+     near-black background above them — close in tone to the top of the
+     sky plate, but still a visible hard seam where the image starts. A
+     soft gradient over the top of the scene blends the two: solid through
+     roughly the exposed area, then fades out over the next slice so the
+     transition into the actual scene reads as atmospheric haze rather
+     than a cut line. Sits above the scene layers (z-index 15 is the
+     highest any of them use) but below the text/HUD content (z-index 30+). */
+  .robotron-landing .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      var(--bg-0) 0%,
+      var(--bg-0) 26%,
+      transparent 42%
+    );
+  }
 
   /* ============================================================
      MOBILE LOCKUP — tighter but still readable
