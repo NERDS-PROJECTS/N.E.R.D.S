@@ -95,4 +95,12 @@
 .robotron-landing .hud--tr {
     max-width: calc(50% - var(--gutter) - 8px);
   }
+  /* The mobile scene crop (Hero.css) is shifted left so the rover (layer
+     12) is actually visible, which also brings more of its rock formation
+     up behind this corner's text than the desktop crop ever showed. A
+     soft dark shadow keeps the label readable against ANY of the scene's
+     busier textures without having to hand-tune the crop to dodge them. */
+  .robotron-landing .hud-el {
+    text-shadow: 0 1px 4px rgba(5, 4, 10, 0.85);
+  }
 }
