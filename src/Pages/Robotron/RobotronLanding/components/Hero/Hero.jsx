@@ -14,12 +14,17 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Hero
  * ----------------------------------------------------------------------
- * The cinematic 2.5D environment occupying ~105vh. Composed from depth
- * slots (background â†’ subject) plus the UI/text layer. Two GSAP tweens:
+ * The cinematic 2.5D environment occupying exactly 100vh — this page has
+ * no section after Hero (see RobotronLanding.jsx), so Hero IS the whole
+ * document and there is deliberately no scrollable distance. Composed
+ * from depth slots (background â†’ subject) plus the UI/text layer. Two
+ * GSAP tweens:
  *  1. load reveal   â€” mask/scale/fade the scene into being
  *  2. scroll scrub  â€” writes per-layer --sx/--sy + fade + scale as the
- *                     hero leaves the viewport, feeding a smooth
- *                     transition into the next section.
+ *                     hero leaves the viewport. Currently inert (no
+ *                     scroll distance to drive it); left in place so a
+ *                     future section after Hero gets the transition for
+ *                     free rather than needing this rebuilt.
  */
 export default function Hero() {
   const ref = useRef(null);

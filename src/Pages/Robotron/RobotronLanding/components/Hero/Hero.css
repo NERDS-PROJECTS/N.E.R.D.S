@@ -1,11 +1,21 @@
 @import '../../styles/tokens.css';
 
 /* ============================================================
-   Hero — cinematic landing viewport (~105vh)
-   ============================================================ */
+   Hero — cinematic landing viewport (100vh)
+   ------------------------------------------------------------
+   This page has no content after Hero (Navbar/AudioPlayer are fixed
+   overlays, the site footer is hidden — see RobotronLanding.jsx), so
+   Hero's own height IS the document's height. It was previously 105vh,
+   which bought nothing — there's no next section to reveal — and just
+   forced a pointless ~40-60px scroll on every desktop viewport. That
+   forced scroll was also the ONLY thing driving the scroll-scrub effect
+   below (--sx/--sy/--hero-scroll-scale writes on every scroll frame),
+   which was the root cause of every scroll-triggered jitter report: no
+   scrollable distance means that effect never fires at all. 100vh removes
+   the scroll capability entirely rather than papering over its cost. */
 .robotron-landing .hero {
   position: relative;
-  min-height: 105vh;
+  min-height: 100vh;
   overflow: hidden;
   isolation: isolate;
 }
@@ -590,6 +600,20 @@
      overscan only has to absorb the float drift. */
   .robotron-landing .scene-plate {
     transform: translate3d(var(--off-x, 0px), var(--off-y, 0px), 0) scale(1.08);
+    /* All twelve plates are registered to the same 1920x1080 canvas, and
+       on a tall narrow crop `object-fit: cover` scales to match the
+       viewport HEIGHT exactly (no vertical slack) and crops purely on
+       width — the default 50% object-position shows only the horizontal
+       centre third of that canvas. The composition's foreground subject
+       (layer 12: rock + rover) and the nearest floating rocks (layer 9)
+       both sit in roughly the LEFT 15-35% of the canvas, well outside
+       that centred window, so the rover was being cropped out entirely
+       while the far-right ring/planet (layers 1-2) showed only a
+       confusing cropped sliver at the edge — neither read as intentional.
+       Shifting the shared crop window left brings the rover fully into
+       frame; every plate gets the SAME shift so registration between
+       layers is untouched, they just pan together. */
+    object-position: 18% center;
   }
 
   /* Eleven simultaneously animating full-screen layers is a lot for a
