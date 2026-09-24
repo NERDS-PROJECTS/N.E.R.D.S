@@ -31,6 +31,30 @@ export default function Hero() {
   const reduced = useReducedMotion();
   const titleRef = useRef(null);
 
+  /* ---------------- Real viewport height (mobile) ----------------
+     Hero is sized to exactly one screen (100svh, with a 100vh fallback
+     in Hero.css) so the page never scrolls. `svh` is the CSS-native fix
+     for the classic mobile `100vh`-is-taller-than-what's-visible bug, but
+     it's a newer unit (Chrome 108+/Safari 15.4+) — an older WebView some
+     in-app browsers still bundle (seen: WhatsApp's Android in-app
+     browser) silently falls back past svh to the plain 100vh declared
+     before it, which reintroduces the scroll. `window.innerHeight`
+     always reflects whatever's ACTUALLY visible regardless of unit
+     support, so it's written to a CSS var here as a universal
+     belt-and-suspenders fallback Hero.css can key off directly. */
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty('--vh100', `${window.innerHeight}px`);
+    };
+    setVh();
+    window.addEventListener('resize', setVh);
+    window.addEventListener('orientationchange', setVh);
+    return () => {
+      window.removeEventListener('resize', setVh);
+      window.removeEventListener('orientationchange', setVh);
+    };
+  }, []);
+
   /* ---------------- Width-aware wordmark sizing ----------------
      The wordmark (ROBOTRON) must be BIG but it must also FIT. CSS alone
      cannot express this: `font-size` sizes the glyph HEIGHT, and nothing
