@@ -30,13 +30,25 @@
    the way back to the plain 100vh above — which brings the scroll right
    back. `--vh100` (Hero.jsx) is `window.innerHeight` in px, which always
    matches whatever's ACTUALLY visible regardless of which CSS viewport
-   units that engine understands; declared last so it wins over both
-   when JS has run, without needing a browser/unit support check. */
+   units that engine understands; declared before dvh below so it still
+   applies as a fallback on browsers that support neither.
+
+   `100dvh` ("dynamic viewport height") is declared LAST/highest-priority
+   of all: unlike svh (pinned to the smallest the viewport will ever be),
+   dvh tracks the CURRENTLY visible viewport live as browser chrome
+   toggles, which is exactly what was missing — svh alone never grows
+   back when an address bar auto-hides after load, leaving a gap below
+   Hero that shows the page's own dark background (the "black patch"
+   reported at the bottom on a tall phone: more chrome hides on a taller
+   screen, so there's more freed-up space to leave exposed). Browsers
+   without dvh support simply ignore this line and keep whichever of the
+   earlier values applied. */
 .robotron-landing .hero {
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
   min-height: var(--vh100, 100svh);
+  min-height: 100dvh;
   overflow: hidden;
   isolation: isolate;
 }
@@ -589,7 +601,7 @@
    whole stack into one stacking context.
    ============================================================ */
 @media (max-width: 1024px) {
-  .robotron-landing .hero { min-height: 100vh; min-height: 100svh; min-height: var(--vh100, 100svh); }
+  .robotron-landing .hero { min-height: 100vh; min-height: 100svh; min-height: var(--vh100, 100svh); min-height: 100dvh; }
   /* A hair of extra zoom guarantees edge coverage once the mouse parallax
      budget grows relative to a narrower viewport. Must repeat the
      config-driven offset, since this overrides .scene-plate's transform. */
@@ -616,7 +628,7 @@
 }
 
 @media (max-width: 767px) {
-  .robotron-landing .hero { min-height: 100vh; min-height: 100svh; min-height: var(--vh100, 100svh); }
+  .robotron-landing .hero { min-height: 100vh; min-height: 100svh; min-height: var(--vh100, 100svh); min-height: 100dvh; }
   /* Mouse parallax is disabled at this size (see ParallaxProvider), and the
      hero has no scrollable distance either (min-height:100vh, no section
      follows it — see the note at the top of this file), so the only
