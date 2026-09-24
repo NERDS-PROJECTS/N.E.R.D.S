@@ -168,6 +168,25 @@
   will-change: transform;
 }
 
+/* Touch/phone scroll (<=1024px, same breakpoint useIsDesktop treats as
+   non-desktop) hits a wider version of the same problem: a flick-scroll
+   can move the page many px in a single frame, so on a small screen EVERY
+   scroll-parallax layer sees a large per-frame delta, not just the two
+   biggest — and a phone GPU has proportionally less headroom than a
+   desktop one to absorb an un-promoted transform's paint/composite cost
+   every tick. Promoting every layer that actually carries scroll travel
+   ([data-sy]/[data-sx] — set by ParallaxLayer only when sy/sx is non-zero,
+   i.e. exactly the layers Hero.jsx's scrub loop touches) keeps this scoped
+   to layers that move at all; static ones gain nothing from promotion.
+   Desktop is untouched — it keeps only the 2-layer promotion above, so its
+   VRAM cost doesn't change. */
+@media (max-width: 1024px) {
+  .robotron-landing .hero-techno .pl-anim[data-sy],
+  .robotron-landing .hero-techno .pl-anim[data-sx] {
+    will-change: transform;
+  }
+}
+
 /* --- Continuous float (layers 3..11) ------------------------
    A SEPARATE element from the .pl parallax wrapper. A single element can
    only hold one `transform`, so putting the float here is what allows
