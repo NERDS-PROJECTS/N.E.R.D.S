@@ -152,6 +152,22 @@
   will-change: auto;
 }
 
+/* Layers 1-2 (background sky + distant environment/mountains) are the two
+   biggest-coverage plates AND carry the largest scroll travel of the whole
+   stack (sy: 70 / 62 in sceneLayers.js — nearly double the next layer), so
+   their --sx/--sy CSS-var writes on every scroll tick are the most visible
+   place a non-promoted layer stutters. Un-promoted (will-change: auto,
+   above), macOS's compositor has to decide whether to spin up a new
+   compositing surface for the transform on every scroll frame rather than
+   just updating one that's already live — which is exactly the "tries to
+   render it" stutter reported only on Mac, not Windows. Re-promoting just
+   these two (not all twelve, which is the VRAM cost the rule above exists
+   to avoid) keeps the extra cost to two layers instead of ten. */
+.robotron-landing .hero-techno .pl-anim[data-scene-id="1"],
+.robotron-landing .hero-techno .pl-anim[data-scene-id="2"] {
+  will-change: transform;
+}
+
 /* --- Continuous float (layers 3..11) ------------------------
    A SEPARATE element from the .pl parallax wrapper. A single element can
    only hold one `transform`, so putting the float here is what allows
@@ -325,7 +341,7 @@
   position: relative;
   margin: 0;
   max-width: 100%;
-  filter: drop-shadow(0 0 34px rgba(139, 92, 246, 0.4));
+  filter: drop-shadow(0 0 22px rgba(139, 92, 246, 0.4)); /* was 34px — this glow recomputes on every parallax frame; a smaller radius is measurably cheaper on Retina/HiDPI (Mac) screens without reading as a visibly weaker glow */
 }
 
 .robotron-landing .hero-title-main .title-mask {
@@ -377,7 +393,7 @@
   background: linear-gradient(180deg, #ff7ab8 0%, var(--accent) 55%, #8b1049 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  filter: drop-shadow(0 0 22px rgba(228, 26, 122, 0.45));
+  filter: drop-shadow(0 0 14px rgba(228, 26, 122, 0.45)); /* was 22px, same reasoning as .hero-title-main above */
 }
 
 /* ---- LINE 3 : COMING SOON + supporting copy ------------------------- */
@@ -569,26 +585,25 @@
      We tighten the supporting type, gaps and rules here so the complete
      lockup fits one screen without crowding.
      ============================================================ */
-  .robotron-landing .hero-title { gap: clamp(4px, 1.2vw, 12px); }
+  .robotron-landing .hero-title { gap: clamp(8px, 2vw, 18px); }
   .robotron-landing .hero-title-main {
-    /* Keep the width-aware --title-fit as the primary sizing driver.
-       Loosen the vh guard from 24vh to 28vh so tall phones can use their
-       extra vertical room, while the width-driven fit keeps ROBOTRON from
-       overflowing horizontally. */
-    font-size: clamp(2.2rem, min(var(--title-fit, 20vw), 28vh), 8rem);
+    /* Keep the width-aware --title-fit as the primary sizing driver, but
+       give it more vertical headroom (28vh -> 34vh) and a higher ceiling
+       (8rem -> 9.5rem) — the previous caps were tighter than they needed
+       to be on most phones, making the wordmark read smaller than the
+       lockup had room for. */
+    font-size: clamp(2.8rem, min(var(--title-fit, 22vw), 34vh), 9.5rem);
   }
   .robotron-landing .hero-year {
     /* Scale 2026 proportionally to ROBOTRON via the same vh guard so the
-       lockup proportions hold on every screen. 10vw alone would render the
-       year too small on wide-but-short phones and too large on narrow-tall
-       ones; the min() with vh keeps it in frame. */
-    font-size: clamp(1.4rem, min(10vw, 18vh), 4rem);
+       lockup proportions hold on every screen. */
+    font-size: clamp(1.9rem, min(13vw, 23vh), 5rem);
   }
   .robotron-landing .hero-coming-soon {
     /* COMING SOON must stay visible and centered at every width. Reduce
        letter-spacing slightly and keep text-indent in sync so the trailing
        space does not push the line off-centre or overflow. */
-    font-size: clamp(0.75rem, min(5vw, 10vh), 2.4rem);
+    font-size: clamp(1.05rem, min(6.5vw, 13vh), 3rem);
     letter-spacing: 0.22em;
     text-indent: 0.22em;
   }
@@ -598,23 +613,10 @@
     align-items: center;
     gap: clamp(6px, 1vw, 12px);
     text-align: center;
-    margin-top: clamp(6px, 0.8vw, 14px);
-  }
-  .robotron-landing .hero-subtitle {
-    text-align: center;
-    font-size: clamp(0.85rem, 2.4vw, 1.2rem);
-    line-height: 1.5;
-    max-width: 100%;
-  }
-  .robotron-landing .hero-meta {
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-    padding: 6px 12px;
-    gap: 8px;
-    margin-top: clamp(8px, 1vw, 16px);
+    margin-top: clamp(10px, 1.6vw, 20px);
   }
   .robotron-landing .kicker-line {
-    font-size: clamp(0.5rem, 1.6vw, 0.7rem);
+    font-size: clamp(0.62rem, 2vw, 0.85rem);
     letter-spacing: 0.4em;
     text-indent: 0.4em;
     padding: 2px 0 4px;
@@ -629,36 +631,25 @@
    need a little extra care so nothing crowds the edges.
    ============================================================ */
 @media (max-width: 480px) {
-  .robotron-landing .hero-title { gap: clamp(3px, 1vw, 8px); }
+  .robotron-landing .hero-title { gap: clamp(6px, 1.6vw, 12px); }
   .robotron-landing .hero-title-main {
     /* On phones narrower than 480px the width-driven fit is the dominant
-       constraint; nudge the vh ceiling down slightly so short phones keep
-       the lockup on screen without the width shrinking too much. */
-    font-size: clamp(2rem, min(var(--title-fit, 18vw), 26vh), 7rem);
+       constraint; the vh/rem ceilings just stop it growing taller than
+       the lockup has room for, raised here to match the bump above. */
+    font-size: clamp(2.4rem, min(var(--title-fit, 20vw), 30vh), 8rem);
   }
   .robotron-landing .hero-year {
-    font-size: clamp(1.2rem, min(9vw, 16vh), 3.2rem);
+    font-size: clamp(1.55rem, min(11.5vw, 19vh), 4rem);
   }
   .robotron-landing .hero-coming-soon {
-    font-size: clamp(0.7rem, min(4.5vw, 9vh), 2rem);
+    font-size: clamp(0.9rem, min(5.5vw, 11vh), 2.3rem);
     letter-spacing: 0.18em;
     text-indent: 0.18em;
   }
   .robotron-landing .hero-rule { width: clamp(60px, 44vw, 160px); }
-  .robotron-landing .hero-title-sub { gap: clamp(4px, 0.8vw, 8px); margin-top: clamp(4px, 0.6vw, 10px); }
-  .robotron-landing .hero-subtitle {
-    font-size: clamp(0.8rem, 2.2vw, 1rem);
-    line-height: 1.45;
-  }
-  .robotron-landing .hero-meta {
-    font-size: 0.58rem;
-    letter-spacing: 0.16em;
-    padding: 5px 10px;
-    gap: 6px;
-    margin-top: clamp(6px, 0.8vw, 12px);
-  }
+  .robotron-landing .hero-title-sub { gap: clamp(4px, 0.8vw, 8px); margin-top: clamp(8px, 1.2vw, 14px); }
   .robotron-landing .kicker-line {
-    font-size: clamp(0.45rem, 1.4vw, 0.6rem);
+    font-size: clamp(0.52rem, 1.7vw, 0.7rem);
     letter-spacing: 0.35em;
     text-indent: 0.35em;
     padding: 2px 0 3px;
@@ -674,38 +665,25 @@
    centred with comfortable gutters.
    ============================================================ */
 @media (max-width: 360px) {
-  .robotron-landing .hero-title { gap: 2px; }
+  .robotron-landing .hero-title { gap: 5px; }
   .robotron-landing .hero-title-main {
-    /* The width-aware fit keeps ROBOTRON inside the gutters; the vh guard
-       is loosened to 24vh here because very narrow screens are rarely short
-       enough to need a tighter ceiling, and we do not want the wordmark to
-       collapse unnecessarily on a 360x740 phone. */
-    font-size: clamp(1.8rem, min(var(--title-fit, 16vw), 24vh), 6rem);
+    /* The width-aware fit keeps ROBOTRON inside the gutters; raised to
+       match the bumps above so even the narrowest phones get a lockup
+       that reads as intentionally large, not shrunk to fit. */
+    font-size: clamp(2.15rem, min(var(--title-fit, 18vw), 27vh), 6.5rem);
   }
   .robotron-landing .hero-year {
-    font-size: clamp(1rem, min(8vw, 14vh), 2.6rem);
+    font-size: clamp(1.3rem, min(10vw, 17vh), 3.2rem);
   }
   .robotron-landing .hero-coming-soon {
-    font-size: clamp(0.65rem, min(4vw, 8vh), 1.6rem);
+    font-size: clamp(0.78rem, min(5vw, 10vh), 2rem);
     letter-spacing: 0.14em;
     text-indent: 0.14em;
   }
   .robotron-landing .hero-rule { width: clamp(44px, 38vw, 120px); }
-  .robotron-landing .hero-title-sub { gap: 3px; margin-top: clamp(3px, 0.5vw, 8px); }
-  .robotron-landing .hero-subtitle {
-    font-size: clamp(0.75rem, 2vw, 0.9rem);
-    line-height: 1.4;
-    max-width: 100%;
-  }
-  .robotron-landing .hero-meta {
-    font-size: 0.52rem;
-    letter-spacing: 0.14em;
-    padding: 4px 8px;
-    gap: 5px;
-    margin-top: clamp(5px, 0.7vw, 10px);
-  }
+  .robotron-landing .hero-title-sub { gap: 4px; margin-top: clamp(6px, 1vw, 12px); }
   .robotron-landing .kicker-line {
-    font-size: clamp(0.4rem, 1.2vw, 0.52rem);
+    font-size: clamp(0.46rem, 1.4vw, 0.6rem);
     letter-spacing: 0.3em;
     text-indent: 0.3em;
     padding: 1px 0 2px;

@@ -15,7 +15,15 @@
   justify-content: space-between;
   padding: 0 var(--gutter);
   background: rgba(5, 4, 10, 0.05);
-  backdrop-filter: blur(6px);
+  /* was blur(6px): this bar is fixed over a hero that's ALWAYS animating
+     behind it (floating scene layers, ships, parallax), so the browser
+     has to re-blur whatever's behind it on essentially every frame of
+     the page's life, not just while scrolling. backdrop-filter is
+     considerably pricier on macOS's compositor than Windows' for that
+     kind of continuous re-blur, which is why this alone was a large
+     piece of the Mac-only jitter. A smaller radius keeps the frosted
+     look while cutting that recurring cost. */
+  backdrop-filter: blur(3px);
 }
 .robotron-landing .nav-inner {
   display: flex;
