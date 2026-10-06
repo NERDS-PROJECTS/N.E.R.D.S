@@ -458,7 +458,7 @@
   filter: drop-shadow(0 0 14px rgba(228, 26, 122, 0.45)); /* was 22px, same reasoning as .hero-title-main above */
 }
 
-/* ---- LINE 3 : COMING SOON + supporting copy ------------------------- */
+/* ---- LINE 3 : event selector --------------------------------------- */
 .robotron-landing .hero-title-sub {
   display: flex;
   flex-direction: column;
@@ -466,24 +466,123 @@
   gap: clamp(10px, 1.5vw, 22px);
   margin-top: clamp(10px, 1.4vw, 24px);
 }
-.robotron-landing .hero-coming-soon {
-  font-family: var(--font-display);
-  font-weight: 600;
-  /* Roughly one-third of the wordmark height (~11vh), enough to read as a
-     strong caption without competing with ROBOTRON. */
-  font-size: clamp(0.9rem, min(4.5vw, 11vh), 4rem);
-  line-height: 1;
+.robotron-landing .hero-event-select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 1.8vw, 20px);
+}
+.robotron-landing .hero-event-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 20px);
+  font-family: var(--font-mono);
+  font-size: clamp(0.62rem, 1vw, 0.78rem);
   letter-spacing: 0.4em;
   /* letter-spacing adds trailing space after the final letter, which
      would push the line visually off-centre — cancel it. */
   text-indent: 0.4em;
   text-transform: uppercase;
-  color: var(--text);
-  margin: 0;
+  color: var(--text-soft);
 }
-/* the trailing period, in the accent colour:  COMING SOON. */
-.robotron-landing .hero-dot {
-  color: var(--accent);
+.robotron-landing .hero-event-kicker-line {
+  width: clamp(24px, 4vw, 54px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+}
+
+/* Pill buttons — each event gets its own hand-drawn HUD frame (SVG,
+   /public/robotron/borders/) as its background chrome instead of a
+   CSS-drawn hexagon; the frame's own stroke + glow IS the border, so
+   the old clip-path/border/gradient background are dropped entirely. */
+.robotron-landing .hero-event-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(10px, 1.6vw, 20px);
+}
+.robotron-landing .hero-event-btn {
+  --tone: var(--accent);
+  --tone-soft: rgba(228, 26, 122, 0.3);
+  /* .hero-content/.pl are pointer-events:none (the hero is a decorative,
+     click-through overlay elsewhere) — opt these actual links back in,
+     same pattern as the existing .pl-pointer utility. */
+  pointer-events: auto;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: clamp(20px, 2.2vw, 28px) clamp(34px, 3.6vw, 48px);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.02rem, 1.55vw, 1.32rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: rgba(8, 6, 16, 0.55);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  border: none;
+  /* Clips the dark fill (and the frame image) to the SAME chamfered
+     hex the border SVG draws, in percentages of this element's own
+     box — without it, background-color paints the full rectangle and
+     shows as a dark box poking out past the frame's cut corners.
+     This polygon is the SVG's own path scaled ~1% inward from centre
+     (not traced exactly) — tracing it exactly left a 1-2px sliver of
+     the opaque fill poking past the border's actual drawn stroke at
+     every corner (worse on phones, where the button's aspect ratio
+     stretches further from the source art's own 800:220, magnifying
+     the mismatch). A tiny inward margin keeps the mask safely inside
+     the visible stroke without leaving a visible gap. */
+  clip-path: polygon(
+    7.18% 8.6%, 36.88% 8.6%, 39.11% 14%, 60.89% 14%, 63.12% 8.6%,
+    92.82% 8.6%, 97.27% 24.8%, 97.27% 75.2%, 92.82% 91.4%,
+    63.12% 91.4%, 60.89% 86%, 39.11% 86%, 36.88% 91.4%, 7.18% 91.4%,
+    2.73% 75.2%, 2.73% 24.8%
+  );
+  transition: transform 0.3s var(--ez-cine), filter 0.3s var(--ez-cine);
+}
+.robotron-landing .hero-event-btn svg:first-child {
+  color: var(--tone);
+  flex-shrink: 0;
+}
+.robotron-landing .hero-event-chevron {
+  color: var(--text-dim);
+  transition: transform 0.3s var(--ez-cine), color 0.3s;
+}
+.robotron-landing .hero-event-btn:hover,
+.robotron-landing .hero-event-btn:focus-visible {
+  transform: translateY(-3px) scale(1.015);
+  filter: drop-shadow(0 8px 20px var(--tone-soft)) brightness(1.08);
+  outline: none;
+}
+.robotron-landing .hero-event-btn:hover .hero-event-chevron,
+.robotron-landing .hero-event-btn:focus-visible .hero-event-chevron {
+  color: var(--tone);
+  transform: translateX(3px);
+}
+/* --tone here matches each border SVG's own stroke colour (not the
+   site-wide --accent/--accent-2/--accent-3 tokens used elsewhere) so
+   the icon, hover chevron and glow all key off the frame actually
+   drawn behind them. */
+.robotron-landing .hero-event-btn.tone-war {
+  --tone: #ff2c2c; --tone-soft: rgba(255, 44, 44, 0.35);
+  background-image: url('/robotron/borders/RoboWar_border.svg');
+}
+.robotron-landing .hero-event-btn.tone-soccer {
+  --tone: #ffbf00; --tone-soft: rgba(255, 191, 0, 0.35);
+  background-image: url('/robotron/borders/RoboSoccer_border.svg');
+}
+.robotron-landing .hero-event-btn.tone-sumo {
+  --tone: #0041c2; --tone-soft: rgba(0, 65, 194, 0.35);
+  background-image: url('/robotron/borders/RoboSumo_border.svg');
+}
+.robotron-landing .hero-event-btn.tone-drift {
+  --tone: #a100ff; --tone-soft: rgba(161, 0, 255, 0.35);
+  background-image: url('/robotron/borders/RoboDrift_border.svg');
 }
 .robotron-landing .hero-subtitle {
   font-family: var(--font-body);
@@ -559,7 +658,7 @@
 
      1. Continuous — every display line carries a `min(..vw, ..vh)`
         font-size, so the block shrinks smoothly as height runs out.
-       ROBOTRON is gated at 32vh, 2026 at 20vh, COMING SOON at 11vh.
+       ROBOTRON is gated at 32vh, 2026 at 20vh.
 
      2. Coarse — these `--lockup-scale` tiers apply a final compositor-level
         scale for very short windows. `.hero-title` reads it via
@@ -681,13 +780,22 @@
        lockup proportions hold on every screen. */
     font-size: clamp(1.9rem, min(13vw, 23vh), 5rem);
   }
-  .robotron-landing .hero-coming-soon {
-    /* COMING SOON must stay visible and centered at every width. Reduce
-       letter-spacing slightly and keep text-indent in sync so the trailing
-       space does not push the line off-centre or overflow. */
-    font-size: clamp(1.05rem, min(6.5vw, 13vh), 3rem);
-    letter-spacing: 0.22em;
-    text-indent: 0.22em;
+  .robotron-landing .hero-event-kicker {
+    font-size: clamp(0.56rem, 2vw, 0.68rem);
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+  }
+  .robotron-landing .hero-event-kicker-line { width: clamp(18px, 6vw, 36px); }
+  /* Two-up grid instead of one unbroken row, so four pill buttons never
+     force the lockup wider than the viewport on phones/tablets. */
+  .robotron-landing .hero-event-row { gap: 10px; }
+  .robotron-landing .hero-event-btn {
+    flex: 1 1 calc(50% - 10px);
+    justify-content: center;
+    padding: 13px 14px;
+    font-size: 0.94rem;
+    font-weight: 800;
+    gap: 8px;
   }
   .robotron-landing .hero-rule { width: clamp(80px, 50vw, 220px); }
   .robotron-landing .hero-title-sub {
@@ -723,10 +831,16 @@
   .robotron-landing .hero-year {
     font-size: clamp(1.55rem, min(11.5vw, 19vh), 4rem);
   }
-  .robotron-landing .hero-coming-soon {
-    font-size: clamp(0.9rem, min(5.5vw, 11vh), 2.3rem);
-    letter-spacing: 0.18em;
-    text-indent: 0.18em;
+  .robotron-landing .hero-event-kicker {
+    font-size: clamp(0.5rem, 1.8vw, 0.6rem);
+    letter-spacing: 0.26em;
+    text-indent: 0.26em;
+  }
+  .robotron-landing .hero-event-btn {
+    padding: 11px 10px;
+    font-size: 0.84rem;
+    font-weight: 800;
+    gap: 7px;
   }
   .robotron-landing .hero-rule { width: clamp(60px, 44vw, 160px); }
   .robotron-landing .hero-title-sub { gap: clamp(4px, 0.8vw, 8px); margin-top: clamp(8px, 1.2vw, 14px); }
@@ -757,10 +871,19 @@
   .robotron-landing .hero-year {
     font-size: clamp(1.3rem, min(10vw, 17vh), 3.2rem);
   }
-  .robotron-landing .hero-coming-soon {
-    font-size: clamp(0.78rem, min(5vw, 10vh), 2rem);
-    letter-spacing: 0.14em;
-    text-indent: 0.14em;
+  .robotron-landing .hero-event-kicker {
+    font-size: 0.48rem;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+  }
+  .robotron-landing .hero-event-kicker-line { width: 14px; }
+  /* Single column: at this width two pills per row would clip titles
+     like ROBOSOCCER even at the smallest readable font-size. */
+  .robotron-landing .hero-event-btn {
+    flex: 1 1 100%;
+    padding: 11px 14px;
+    font-size: 0.9rem;
+    font-weight: 800;
   }
   .robotron-landing .hero-rule { width: clamp(44px, 38vw, 120px); }
   .robotron-landing .hero-title-sub { gap: 4px; margin-top: clamp(6px, 1vw, 12px); }

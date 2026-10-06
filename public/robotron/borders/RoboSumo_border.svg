@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="220" viewBox="0 0 800 220" fill="none">
+<defs>
+ <filter id="glow" x="-30%" y="-60%" width="160%" height="220%">
+  <feGaussianBlur stdDeviation="5" result="b1"/>
+  <feGaussianBlur in="SourceGraphic" stdDeviation="11" result="b2"/>
+  <feMerge><feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
+ </filter>
+ <linearGradient id="edge" x1="20" y1="20" x2="780" y2="200" gradientUnits="userSpaceOnUse">
+  <stop stop-color="#0041c2"/><stop offset=".5" stop-color="#0041c2" stop-opacity=".78"/><stop offset="1" stop-color="#0041c2"/>
+ </linearGradient>
+</defs>
+<path d="M54 18H294L312 30H488L506 18H746L782 54V166L746 202H506L488 190H312L294 202H54L18 166V54Z" stroke="#0041c2" stroke-width="8" opacity=".28" filter="url(#glow)"/>
+<path d="M54 18H294L312 30H488L506 18H746L782 54V166L746 202H506L488 190H312L294 202H54L18 166V54Z" stroke="url(#edge)" stroke-width="3" filter="url(#glow)"/>
+<path d="M62 38H288L304 48H496L512 38H738L762 62V158L738 182H512L496 172H304L288 182H62L38 158V62Z" stroke="#0041c2" stroke-width="1.5" opacity=".72"/>
+<path d="M116 18L138 38H214L232 18M568 202L586 182H662L684 202" stroke="#0041c2" stroke-width="3"/>
+<path d="M142 22L158 34M160 22L176 34M178 22L194 34M594 198L610 186M612 198L628 186M630 198L646 186" stroke="#0041c2" stroke-width="3" opacity=".85"/>
+<path d="M18 76H38M18 144H38M762 76H782M762 144H782" stroke="#0041c2" stroke-width="3"/>
+<circle cx="268" cy="28" r="3" fill="#0041c2"/><circle cx="280" cy="28" r="3" fill="#0041c2" opacity=".75"/><circle cx="292" cy="28" r="3" fill="#0041c2" opacity=".5"/>
+<path d="M54 18L42 30M746 18L758 30M54 202L42 190M746 202L758 190" stroke="white" stroke-width="1" opacity=".65"/>
+</svg>

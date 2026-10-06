@@ -3,7 +3,7 @@
  * TITLE PARALLAX — configurable depth for the typography
  * ==================================================
  *
- * The ROBOTRON / 2026 / COMING SOON typography lives INSIDE the scene's
+ * The ROBOTRON / 2026 / event-selector block lives INSIDE the scene's
  * existing parallax system: it is registered with the same
  * ParallaxProvider mouse engine that drives the twelve plates (there is
  * deliberately NO second mouse system). This module only says HOW MUCH
@@ -26,7 +26,7 @@
  * ONE LAYER, ONE TRANSFORM
  * ------------------------
  * `groupId` is registered with the parallax engine exactly once, and the
- * whole composed graphic (kicker line, ROBOTRON, 2026, COMING SOON,
+ * whole composed graphic (kicker line, ROBOTRON, 2026, event selector,
  * divider, decorative lines) is rendered inside that single wrapper. The
  * engine therefore moves the group as a rigid unit and the words can
  * never drift apart from each other. Individual letters/words are NEVER
