@@ -1,71 +1,183 @@
 @import '../../styles/tokens.css';
 
+/* ============================================================
+   Team — grouped crew cards, driven by data/team.json
+   ------------------------------------------------------------
+   Deliberately NOT the angular chamfer language used by the
+   Events cards — rounded "ID badge" cards instead, so the two
+   sections read as distinct families. The photo is never filtered,
+   darkened or blurred: no grayscale, no gradient scrim over the
+   image, no backdrop-filter. Contact icons live in the info panel
+   below the photo, not as an overlay on top of it.
+   ============================================================ */
+
 .robotron-landing .team-head {
-  margin-bottom: clamp(28px, 5vw, 52px);
+  margin-bottom: clamp(32px, 5vw, 56px);
 }
+
+.robotron-landing .team-group {
+  margin-top: clamp(36px, 5vw, 54px);
+}
+.robotron-landing .team-group:first-of-type {
+  margin-top: 0;
+}
+.robotron-landing .team-group-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: clamp(18px, 2.6vw, 28px);
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+}
+.robotron-landing .team-group-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line-strong), transparent);
+}
+
 .robotron-landing .team-grid {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(14px, 2.2vw, 30px);
-}
-.robotron-landing .crew {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 16px;
-  border: 1px solid var(--line);
-  background: rgba(16, 13, 30, 0.5);
-  transition: border-color 0.3s, translate 0.3s;
-}
-.robotron-landing .crew:hover {
-  border-color: var(--accent-2);
-  translate: 0 -2px;
-}
-.robotron-landing .crew-glyph {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--line-strong);
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.22), transparent 70%);
-  display: grid;
-  place-items: center;
-}
-.robotron-landing .crew-glyph i {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.3rem;
-  color: var(--text);
-}
-.robotron-landing .crew-info .crew-id {
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.2em;
-  color: var(--accent-3);
-}
-.robotron-landing .crew-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
-  letter-spacing: 0.05em;
-  color: var(--text);
-  margin-top: 3px;
-}
-.robotron-landing .crew-role {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.14em;
-  color: var(--text-dim);
-  margin-top: 5px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 28px);
 }
 
-@media (max-width: 960px) {
+.robotron-landing .crew {
+  --crew-tone: var(--accent-3);
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: linear-gradient(165deg, rgba(22, 19, 38, 0.88), rgba(8, 6, 16, 0.95));
+  overflow: hidden;
+  transition: transform 0.4s var(--ez-cine), border-color 0.4s var(--ez-cine), box-shadow 0.4s var(--ez-cine);
+}
+.robotron-landing .crew:nth-child(3n+2) { --crew-tone: var(--accent); }
+.robotron-landing .crew:nth-child(3n+3) { --crew-tone: var(--accent-2); }
+.robotron-landing .crew:hover,
+.robotron-landing .crew:focus-within {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--crew-tone) 55%, transparent);
+  box-shadow: 0 18px 40px -14px color-mix(in srgb, var(--crew-tone) 45%, transparent);
+}
+
+/* ---- top accent bar, replaces a border-image entirely ---- */
+.robotron-landing .crew::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--crew-tone), transparent 85%);
+  z-index: 2;
+}
+
+/* ---- photo: always full colour, always sharp, never scrimmed ---- */
+.robotron-landing .crew-photo-wrap {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.robotron-landing .crew-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s var(--ez-cine);
+}
+.robotron-landing .crew:hover .crew-photo {
+  transform: scale(1.05);
+}
+
+/* ---- corner ID badge, sits inside the photo without dimming it ---- */
+.robotron-landing .crew-id {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 3px 9px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--crew-tone);
+  background: rgba(6, 5, 12, 0.72);
+  border: 1px solid color-mix(in srgb, var(--crew-tone) 70%, transparent);
+  border-radius: 999px;
+}
+
+/* ---- info panel ---- */
+.robotron-landing .crew-info {
+  position: relative;
+  padding: 16px 18px 18px;
+}
+.robotron-landing .crew-role {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--crew-tone);
+  opacity: 0.9;
+}
+.robotron-landing .crew-name {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.96rem, 1.4vw, 1.1rem);
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+.robotron-landing .crew-phone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+}
+.robotron-landing .crew-phone svg {
+  color: var(--crew-tone);
+  flex-shrink: 0;
+}
+
+/* ---- contact icons, live in the panel — never over the photo ---- */
+.robotron-landing .crew-contact {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+.robotron-landing .crew-contact-link {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--text-dim);
+  transition: border-color 0.3s, background 0.3s, color 0.3s, transform 0.3s;
+}
+.robotron-landing .crew-contact-link:hover {
+  background: var(--crew-tone);
+  border-color: var(--crew-tone);
+  color: var(--bg-0);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
   .robotron-landing .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-@media (max-width: 560px) {
-  .robotron-landing .team-grid { grid-template-columns: 1fr; }
+@media (max-width: 520px) {
+  .robotron-landing .team-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .robotron-landing .crew-photo-wrap { aspect-ratio: 4 / 3; }
 }

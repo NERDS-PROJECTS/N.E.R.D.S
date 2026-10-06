@@ -1,0 +1,989 @@
+/* ============================================================
+   ROBOTRON — Registration page design system
+   ------------------------------------------------------------
+   Shared by all four event registration pages — Robowar, Robosoccer,
+   RoboDrift and AlgoMaze (Robosumo). Each page sets its own hue via a
+   `.tone-*` class on the `.robo-page` root; every component below
+   reads `var(--tone)`, so this one file renders four differently
+   coloured but structurally identical pages.
+
+   Every box on these pages is a plain rectangle — no clip-path
+   chamfers anywhere. An earlier pass used diagonal cut corners with
+   a background-clip gradient-border trick to keep borders visible
+   along the cuts; dropped per explicit request, which also removes
+   that whole category of border/clip-path bugs since there's no
+   clip-path left to fight with a plain CSS `border`.
+
+   Fonts read the exact same tokens as the landing page (Orbitron /
+   Space Grotesk / JetBrains Mono). Backdrop is the Hero's own
+   layer-1 scene art, moderately blurred and darkened. Tone colours
+   for war/soccer/drift/sumo match the hues used for these events
+   elsewhere on the site (e.g. the Hero's "select your event"
+   buttons), not an independently-invented palette.
+
+   Structural change: a clean two-column hero (copy + a glowing bot
+   render, no bordered panel around it), everything else full-width,
+   and a sticky vertical stepper beside the registration form itself
+   (the classic checkout-wizard pattern) instead of the old
+   horizontal rail. No JSX changes anywhere — every page's content
+   and form logic is untouched; this file is pure presentation.
+   ============================================================ */
+
+.robo-page {
+  --tone: #ff3864;
+  --tone-soft: rgba(255, 56, 100, 0.24);
+  --tone-dim: rgba(255, 56, 100, 0.12);
+  --ink: #0a0810;
+
+  /* Same type + easing tokens as the ROBOTRON landing page. */
+  --font-display: 'Orbitron', 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', 'Zen Kaku Gothic New', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --ez-cine: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* No overflow-x:clip here on purpose: ANY non-visible overflow on
+     an ancestor breaks position:sticky for every descendant unless
+     that ancestor is the actual scrolling viewport — this one line
+     was silently disabling every sticky element on the page. The
+     ambient blobs and background plates that overflow-x:clip used
+     to contain are already self-clipped via their own `overflow:
+     hidden` wrappers, so dropping it here doesn't reopen that. */
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  width: 100%;
+  color: #e9e7f3;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  padding-bottom: 80px;
+}
+
+/* tone-sumo and tone-drift match the exact hues used for these two
+   events on the landing page's Hero/Events sections (#0041c2 and
+   #a100ff) — the registration pages were drifting off-brand with
+   their own unrelated orange/green before. */
+.robo-page.tone-war    { --tone: #ff3864; --tone-soft: rgba(255, 56, 100, 0.24); --tone-dim: rgba(255, 56, 100, 0.12); --tone2: #8b5cf6; }
+.robo-page.tone-soccer { --tone: #ffbf00; --tone-soft: rgba(255, 191, 0, 0.26); --tone-dim: rgba(255, 191, 0, 0.14); --tone2: #ff6b35; }
+.robo-page.tone-drift  { --tone: #a100ff; --tone-soft: rgba(161, 0, 255, 0.24); --tone-dim: rgba(161, 0, 255, 0.12); --tone2: #f472b6; }
+.robo-page.tone-sumo   { --tone: #0041c2; --tone-soft: rgba(0, 65, 194, 0.26); --tone-dim: rgba(0, 65, 194, 0.14); --tone2: #4f7fff; }
+
+/* ---- Ambient colour blobs — now a quiet accent, not the dominant
+   layer, so the scene photo behind them stays the recognisable one. */
+.robo-ambient { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
+.robo-ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.18;
+  mix-blend-mode: screen;
+}
+.robo-ambient-blob.a { top: -12%; left: -10%; width: 42vw; height: 42vw; background: radial-gradient(circle, var(--tone), transparent 70%); }
+.robo-ambient-blob.b { bottom: -18%; right: -12%; width: 46vw; height: 46vw; background: radial-gradient(circle, var(--tone2), transparent 70%); }
+.robo-ambient-blob.c { top: 38%; right: 8%; width: 22vw; height: 22vw; opacity: 0.12; background: radial-gradient(circle, var(--tone2), transparent 70%); }
+
+/* ---- Backdrop: the Hero's own layer-1 scene plate (/scene/new scene 1
+   (alpha).png), blurred and darkened but still legible as a scene —
+   plus a tone-tinted wash so each page still reads as its own colour. */
+.robo-page::before {
+  content: '';
+  position: fixed;
+  inset: -60px;
+  z-index: -3;
+  background-image: url("/scene/new scene 1 (alpha).png");
+  background-size: cover;
+  background-position: center 30%;
+  filter: blur(20px) saturate(1.25) brightness(0.62);
+  transform: scale(1.08);
+  pointer-events: none;
+}
+.robo-page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(5, 4, 10, 0.1), rgba(5, 4, 10, 0.6) 75%),
+    linear-gradient(180deg, color-mix(in srgb, var(--tone) 14%, transparent) 0%, rgba(5, 4, 10, 0.45) 50%, rgba(5, 4, 10, 0.86) 100%);
+  pointer-events: none;
+}
+
+.robo-page * { box-sizing: border-box; }
+
+/* ============================================================
+   Panels — plain rectangles, solid tone border. (An earlier pass
+   used clip-path chamfers with a background-clip gradient-border
+   trick to work around clip-path eating plain CSS borders. Dropped
+   per explicit request: every box on these pages is a pure
+   rectangle now, no diagonal cuts anywhere — which also means the
+   border can just be a normal `border`, no trick required.)
+   ============================================================ */
+.robo-panel {
+  position: relative;
+  border: 1.5px solid var(--tone);
+  background-image:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.05), transparent 45%),
+    radial-gradient(130% 130% at 100% 100%, var(--tone-dim), transparent 60%),
+    linear-gradient(180deg, rgba(18, 16, 30, 0.9), rgba(7, 6, 14, 0.96));
+  transition: filter 0.35s var(--ez-cine);
+  filter: drop-shadow(0 0 0 transparent);
+}
+.robo-panel--tone:hover { filter: drop-shadow(0 16px 36px var(--tone-soft)); }
+
+/* ============================================================
+   Section header (eyebrow + title + description) — reused by every
+   major section so the page reads as one consistent system.
+   ============================================================ */
+.robo-section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: clamp(28px, 4vw, 40px);
+  text-align: left;
+  align-items: flex-start;
+}
+.robo-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  text-transform: uppercase;
+  color: var(--tone);
+}
+.robo-eyebrow::before, .robo-eyebrow::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tone), transparent);
+}
+.robo-section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #f4f3fb;
+}
+.robo-section-desc {
+  max-width: 54ch;
+  color: #a7a3bc;
+  font-size: 0.96rem;
+}
+
+/* ============================================================
+   PAGE SHELL — a conventional vertical stack of full-width sections.
+   (An earlier pass tried a page-spanning sticky sidebar here; it
+   left a huge, mostly-empty colour panel running the length of the
+   page once the hero scrolled past. Dropped in favour of a clean
+   two-column hero — the one place a second column earns its keep —
+   with everything else full-width, and the form's own stepper
+   handling "something sticky beside the content" at a scale that
+   actually has enough going on to fill the space — see below.)
+   ============================================================ */
+.robo-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.robo-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(56px, 8vw, 96px);
+  padding-top: clamp(24px, 4vw, 48px);
+}
+
+.robo-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .robo-hero { grid-template-columns: 1fr; text-align: center; }
+  .robo-hero-copy { order: 2; align-items: center; }
+  .robo-hero-art { order: 1; }
+}
+.robo-hero-copy { display: flex; flex-direction: column; gap: 18px; }
+
+/* ============================================================
+   HERO ART — a large glowing medallion behind the bot render,
+   not a bordered panel; reads as a product hero shot, not chrome.
+   ============================================================ */
+.robo-hero-art {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+}
+.robo-hero-art-glow {
+  position: absolute;
+  inset: 8%;
+  background: radial-gradient(circle, var(--tone-soft), transparent 70%);
+  filter: blur(40px);
+  border-radius: 50%;
+}
+.robo-hero-art img {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px var(--tone-soft));
+}
+.robo-hero-bracket { position: absolute; width: 26px; height: 26px; border: 2px solid var(--tone); opacity: 0.65; }
+.robo-hero-bracket.tl { top: 4%; left: 4%; border-right: none; border-bottom: none; }
+.robo-hero-bracket.tr { top: 4%; right: 4%; border-left: none; border-bottom: none; }
+.robo-hero-bracket.bl { bottom: 4%; left: 4%; border-right: none; border-top: none; }
+.robo-hero-bracket.br { bottom: 4%; right: 4%; border-left: none; border-top: none; }
+.robo-hero-scan {
+  position: absolute;
+  left: 6%; right: 6%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--tone), transparent);
+  opacity: 0.6;
+  animation: robo-scan 4.5s linear infinite;
+}
+@keyframes robo-scan { 0% { top: 6%; opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { top: 92%; opacity: 0; } }
+
+.robo-hero-tag {
+  display: inline-flex;
+  align-self: start;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--tone);
+  padding: 7px 14px;
+  border: 1px solid color-mix(in srgb, var(--tone) 50%, transparent);
+  background: var(--tone-dim);
+}
+.robo-hero-tag-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--tone);
+  box-shadow: 0 0 8px var(--tone);
+}
+.robo-hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: transparent;
+  background-image: linear-gradient(180deg, #fff 0%, var(--tone) 65%, color-mix(in srgb, var(--tone) 60%, #000 20%) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 0 28px var(--tone-soft));
+}
+.robo-hero-subtitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: #cfccdf;
+}
+.robo-hero-desc { color: #b4b0c8; max-width: 52ch; font-size: 1rem; }
+
+.robo-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 6px; }
+
+.robo-prize-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--tone), color-mix(in srgb, var(--tone) 65%, #fff 18%));
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+}
+.robo-prize-pill b { font-size: 1.15em; margin-left: 2px; }
+
+.robo-cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid color-mix(in srgb, var(--tone) 55%, rgba(173, 178, 255, 0.2));
+  color: #f1effa;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: rgba(10, 9, 18, 0.4);
+  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.robo-cta-ghost:hover { border-color: var(--tone); transform: translateY(-2px); }
+
+/* ---- Quick-jump pills — now stacked vertically in the sidebar flow ---- */
+.robo-subnav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.robo-subnav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b4b0c8;
+  text-decoration: none;
+  background: rgba(10, 9, 18, 0.55);
+  border: 1px solid rgba(173, 178, 255, 0.16);
+  transition: all 0.25s ease;
+}
+.robo-subnav-pill:hover { border-color: var(--tone); color: var(--tone); transform: translateY(-2px); }
+
+/* ---- Stat row ---- */
+.robo-stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: color-mix(in srgb, var(--tone) 40%, rgba(173, 178, 255, 0.14));
+  border: 1px solid color-mix(in srgb, var(--tone) 55%, rgba(173, 178, 255, 0.2));
+}
+@media (max-width: 640px) { .robo-stat-row { grid-template-columns: repeat(2, 1fr); } }
+.robo-stat-card {
+  background: rgba(8, 7, 15, 0.82);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+.robo-stat-card svg { color: var(--tone); }
+.robo-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8f8ba6;
+}
+.robo-stat-value { font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; color: #f1effa; }
+
+/* ============================================================
+   INTEL — rules + notices side by side, one merged section instead of
+   two stacked full-width ones.
+   ============================================================ */
+.robo-intel { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: clamp(20px, 3vw, 36px); align-items: start; }
+@media (max-width: 760px) { .robo-intel { grid-template-columns: 1fr; } }
+.robo-intel-aside { display: flex; flex-direction: column; gap: 20px; }
+.robo-intel-feed { display: flex; flex-direction: column; gap: 14px; }
+
+/* ============================================================
+   RULES / BROCHURE
+   ============================================================ */
+.robo-rules-panel { padding: clamp(24px, 4vw, 40px); }
+.robo-rules-top { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 22px; }
+.robo-icon-chip {
+  flex-shrink: 0;
+  width: 54px; height: 54px;
+  display: grid; place-items: center;
+  background: var(--tone-dim);
+  border: 1px solid color-mix(in srgb, var(--tone) 45%, transparent);
+  color: var(--tone);
+}
+.robo-rules-top h3 { font-family: var(--font-display); font-size: 1.3rem; color: #f4f3fb; margin-bottom: 6px; text-transform: uppercase; }
+.robo-rules-top p { color: #a7a3bc; font-size: 0.92rem; max-width: 60ch; }
+
+.robo-checklist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 24px; margin-bottom: 26px; }
+@media (max-width: 560px) { .robo-checklist { grid-template-columns: 1fr; } }
+.robo-checklist-item { display: flex; align-items: center; gap: 10px; color: #d6d3e4; font-size: 0.9rem; }
+.robo-checklist-item svg { color: var(--tone); flex-shrink: 0; }
+
+.robo-btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.robo-btn {
+  flex: 1 1 200px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.25s ease, filter 0.25s ease, border-color 0.25s ease;
+}
+.robo-btn-primary { background: linear-gradient(135deg, var(--tone), color-mix(in srgb, var(--tone) 65%, #fff 18%)); color: var(--ink); }
+.robo-btn-primary:hover { filter: drop-shadow(0 8px 20px var(--tone-soft)); transform: translateY(-2px); }
+.robo-btn-ghost { background: rgba(10, 9, 18, 0.5); color: #f1effa; border-color: rgba(173, 178, 255, 0.22); }
+.robo-btn-ghost:hover { border-color: var(--tone); transform: translateY(-2px); }
+
+.robo-fineprint { text-align: center; color: #8f8ba6; font-size: 0.8rem; margin: 22px 0; }
+
+.robo-contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+@media (max-width: 560px) { .robo-contact-grid { grid-template-columns: 1fr; } }
+.robo-contact-card {
+  position: relative;
+  padding: 18px;
+  border: 1px solid var(--tone);
+  background: rgba(9, 8, 16, 0.94);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  filter: drop-shadow(0 0 0 transparent);
+}
+.robo-contact-card:hover { transform: translateY(-3px); filter: drop-shadow(0 10px 24px var(--tone-soft)); }
+.robo-contact-avatar {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  background: var(--tone-dim);
+  color: var(--tone);
+  font-family: var(--font-display);
+  font-weight: 700;
+  border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent);
+}
+.robo-contact-card h4 { font-size: 0.98rem; color: #f1effa; font-weight: 700; }
+.robo-contact-card .role { font-size: 0.78rem; color: var(--tone); font-family: var(--font-mono); }
+.robo-contact-links { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.robo-contact-links a {
+  display: flex; align-items: center; gap: 8px;
+  color: #b4b0c8; text-decoration: none; font-size: 0.82rem;
+  font-family: var(--font-mono);
+  transition: color 0.2s ease;
+  word-break: break-all;
+}
+.robo-contact-links a:hover { color: var(--tone); }
+.robo-contact-links svg { flex-shrink: 0; color: var(--tone); }
+
+/* ============================================================
+   NOTICE GRID
+   ============================================================ */
+.robo-notice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 760px) { .robo-notice-grid { grid-template-columns: 1fr; } }
+.robo-notice-card {
+  position: relative;
+  padding: 20px;
+  border: 1px solid var(--tone);
+  background: rgba(9, 8, 16, 0.94);
+}
+.robo-notice-card--critical {
+  border-color: #fb7185;
+  background: rgba(46, 10, 16, 0.92);
+}
+.robo-notice-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.robo-notice-head svg { color: var(--tone); flex-shrink: 0; }
+.robo-notice-card--critical .robo-notice-head svg { color: #fb7185; }
+.robo-notice-head h4 {
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #f1effa;
+}
+.robo-notice-card p { color: #b4b0c8; font-size: 0.88rem; }
+.robo-notice-card p + p { margin-top: 8px; }
+.robo-notice-card strong { color: #e9e7f3; }
+
+.robo-notice-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.robo-notice-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--tone);
+  border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent);
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.robo-notice-link:hover { background: var(--tone); color: var(--ink); }
+
+/* ============================================================
+   FORM — a sticky vertical stepper beside the step panels, the
+   classic "checkout wizard" pattern. `.robo-form-panel` is a 2-col
+   grid of its three real children (head / rail / form — all direct
+   children already, no wrapper to dissolve this time): the head
+   spans both columns, the rail sticks in column 1 for as long as
+   the (much taller) form fills column 2.
+   ============================================================ */
+.robo-form-panel {
+  padding: clamp(24px, 4vw, 44px);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  column-gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+.robo-form-panel > .robo-form-head { grid-column: 1 / -1; text-align: center; margin-bottom: clamp(28px, 5vw, 44px); }
+.robo-form-event {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: #cfccdf;
+  margin-top: 10px;
+}
+.robo-form-event b { color: var(--tone); }
+
+.robo-form-panel > .robo-form { grid-column: 2; display: flex; flex-direction: column; gap: 0; max-width: 680px; }
+
+/* ---- Vertical progress rail ---- */
+.robo-form-panel > .robo-rail {
+  grid-column: 1;
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  max-width: none;
+}
+@media (max-width: 900px) { .robo-form-panel > .robo-rail { display: none; } }
+.robo-rail::before {
+  content: '';
+  position: absolute;
+  top: 19px; bottom: 19px; left: 19px;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(173, 178, 255, 0.3), transparent);
+}
+.robo-rail-node {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 0;
+  text-decoration: none;
+}
+.robo-rail-dot {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(10, 9, 18, 0.92);
+  border: 1px solid rgba(173, 178, 255, 0.3);
+  display: grid; place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #8f8ba6;
+  transition: all 0.25s ease;
+}
+.robo-rail-node:hover .robo-rail-dot { border-color: var(--tone); color: var(--tone); box-shadow: 0 0 14px var(--tone-soft); }
+/* .is-active is toggled by useRailScrollSpy.js as the matching step
+   panel scrolls through view — a filled, theme-coloured dot (not just
+   an outline) so the current step reads clearly while scrolling, not
+   only on hover. */
+.robo-rail-node.is-active .robo-rail-dot {
+  background: var(--tone);
+  border-color: var(--tone);
+  color: var(--ink);
+  box-shadow: 0 0 16px var(--tone-soft);
+}
+/* .is-complete marks every step BEFORE the current one (e.g. on step 3,
+   nodes 1 and 2) — filled solid like .is-active but without the glow,
+   so progress already made stays visibly highlighted, not just the one
+   step you're currently on. */
+.robo-rail-node.is-complete .robo-rail-dot {
+  background: var(--tone);
+  border-color: var(--tone);
+  color: var(--ink);
+}
+.robo-rail-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #716d87;
+  text-align: left;
+  transition: color 0.25s ease;
+}
+.robo-rail-node:hover .robo-rail-label,
+.robo-rail-node.is-active .robo-rail-label,
+.robo-rail-node.is-complete .robo-rail-label { color: var(--tone); }
+
+@media (max-width: 900px) {
+  .robo-form-panel { grid-template-columns: 1fr; }
+  .robo-form-panel > .robo-form { grid-column: 1; margin: 0 auto; }
+}
+
+/* ---- Step panels — full-bleed colour-blocked cards with a giant ghost
+   numeral in the corner ---- */
+.robo-panel-step {
+  position: relative;
+  padding: clamp(26px, 4vw, 42px);
+  margin-bottom: 26px;
+  border: 1px solid transparent;
+  border-left: 3px solid var(--tone);
+  background-image:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.04), transparent 45%),
+    linear-gradient(180deg, rgba(14, 12, 22, 0.8), rgba(7, 6, 14, 0.92));
+  background-origin: border-box;
+  background-clip: padding-box;
+  overflow: hidden;
+  scroll-margin-top: 24px;
+  transition: background-color 0.3s ease;
+}
+/* .is-active is toggled by useRailScrollSpy.js as this exact panel
+   scrolls through the "active band" — a steady tone-tinted wash for
+   as long as it's the current step, not just the rail dot. */
+.robo-panel-step.is-active {
+  background-image:
+    linear-gradient(165deg, var(--tone-dim), transparent 55%),
+    linear-gradient(180deg, rgba(14, 12, 22, 0.8), rgba(7, 6, 14, 0.92));
+}
+/* Completed (already-scrolled-past) steps keep a faint tint too, so the
+   highlight doesn't look like it "resets" the moment you move on. */
+.robo-panel-step.is-complete {
+  border-left-color: var(--tone);
+  background-image:
+    linear-gradient(165deg, color-mix(in srgb, var(--tone) 6%, transparent), transparent 45%),
+    linear-gradient(180deg, rgba(14, 12, 22, 0.8), rgba(7, 6, 14, 0.92));
+}
+.robo-panel-step-numeral {
+  position: absolute;
+  top: -0.2em; right: 0.1em;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(5rem, 11vw, 7.5rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(173, 178, 255, 0.14);
+  pointer-events: none;
+  user-select: none;
+}
+.robo-panel-step-head { position: relative; display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.robo-panel-step-icon {
+  flex-shrink: 0;
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  background: var(--tone-dim);
+  border: 1px solid color-mix(in srgb, var(--tone) 45%, transparent);
+  color: var(--tone);
+}
+.robo-panel-step-head h3 { font-family: var(--font-display); font-size: 1.1rem; text-transform: uppercase; color: #f4f3fb; letter-spacing: 0.02em; }
+.robo-panel-step-head p { color: #8f8ba6; font-size: 0.82rem; margin-top: 2px; }
+.robo-panel-step-body { position: relative; display: flex; flex-direction: column; gap: 18px; }
+
+.robo-field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 560px) { .robo-field-grid { grid-template-columns: 1fr; } }
+
+.robo-field { display: flex; flex-direction: column; gap: 8px; }
+.robo-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tone);
+}
+.robo-label .opt { color: #716d87; text-transform: none; letter-spacing: 0; }
+
+.robo-input, .robo-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  background: rgba(6, 5, 12, 0.75);
+  border: 1px solid rgba(173, 178, 255, 0.22);
+  color: #f1effa;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.robo-input::placeholder { color: rgba(233, 231, 243, 0.34); }
+.robo-input:focus, .robo-select:focus {
+  border-color: var(--tone);
+  box-shadow: 0 0 0 1px var(--tone), 0 0 18px var(--tone-soft);
+}
+.robo-hint { font-size: 0.78rem; color: #8f8ba6; }
+.robo-hint--warn { color: #fbbf24; }
+.robo-hint--info {
+  padding: 10px 14px;
+  background: var(--tone-dim);
+  border: 1px solid color-mix(in srgb, var(--tone) 35%, transparent);
+  color: #d6d3e4;
+}
+
+/* ---- Selectable cards (college type / weight category) ---- */
+.robo-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 560px) { .robo-choice-grid { grid-template-columns: 1fr; } }
+.robo-choice-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  padding: 18px;
+  border: 1px solid rgba(173, 178, 255, 0.18);
+  background: rgba(9, 8, 16, 0.94);
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, filter 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  filter: drop-shadow(0 0 0 transparent);
+}
+.robo-choice-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--tone), var(--tone2));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.robo-choice-card:hover { transform: translateY(-2px); filter: drop-shadow(0 8px 20px var(--tone-soft)); border-color: color-mix(in srgb, var(--tone) 45%, transparent); }
+/* Selected/fixed state: a dark card with a solid tone border and a
+   restrained tint, NOT a full vivid gradient fill — the gradient
+   used to wash out the body copy's contrast on every tone. */
+.robo-choice-card.is-selected {
+  border-color: var(--tone);
+  background:
+    linear-gradient(165deg, var(--tone-dim), transparent 60%),
+    rgba(9, 8, 16, 0.94);
+  filter: drop-shadow(0 0 24px var(--tone-soft));
+}
+.robo-choice-card.is-selected::before { opacity: 1; }
+.robo-choice-icon {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  background: rgba(173, 178, 255, 0.08);
+  color: var(--tone);
+}
+.robo-choice-card.is-selected .robo-choice-icon { background: var(--tone); color: var(--ink); }
+.robo-choice-ribbon {
+  position: absolute;
+  top: 10px; right: -30px;
+  transform: rotate(45deg);
+  background: var(--tone);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  padding: 3px 34px;
+}
+.robo-choice-radio {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  margin-top: 2px;
+  border-radius: 50%;
+  border: 2px solid rgba(173, 178, 255, 0.35);
+  display: grid;
+  place-items: center;
+  transition: border-color 0.25s ease;
+}
+.robo-choice-card.is-selected .robo-choice-radio { border-color: var(--tone); }
+.robo-choice-radio-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--tone); }
+.robo-choice-copy h4 { font-family: var(--font-display); font-size: 1rem; color: #f1effa; margin-bottom: 2px; }
+.robo-choice-copy .meta { color: var(--tone); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+.robo-choice-copy p { color: #8f8ba6; font-size: 0.82rem; }
+
+.robo-price-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--tone-dim);
+  border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent);
+}
+.robo-price-banner .label { font-size: 0.82rem; color: #b4b0c8; }
+.robo-price-banner .sub { font-size: 0.72rem; color: #8f8ba6; margin-top: 2px; }
+.robo-price-banner .amount { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; color: var(--tone); }
+
+/* ---- Payment method tabs (QR vs bank transfer, in one step) ---- */
+.robo-pay-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.robo-pay-tab {
+  flex: 1;
+  padding: 12px 16px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(10, 9, 18, 0.5);
+  border: 1px solid rgba(173, 178, 255, 0.18);
+  color: #8f8ba6;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.robo-pay-tab.is-active { border-color: var(--tone); color: var(--tone); background: var(--tone-dim); }
+
+/* ---- QR payment cards ---- */
+.robo-qr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 620px) { .robo-qr-grid { grid-template-columns: 1fr; } }
+.robo-qr-card {
+  position: relative;
+  padding: 18px;
+  text-align: center;
+  border: 1px solid var(--tone);
+  background: rgba(9, 8, 16, 0.94);
+}
+.robo-qr-tag {
+  position: absolute; top: 10px; right: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  background: var(--tone);
+  color: var(--ink);
+  font-weight: 700;
+}
+.robo-qr-image { aspect-ratio: 1; background: #fff; display: grid; place-items: center; overflow: hidden; margin-bottom: 12px; }
+.robo-qr-image img { width: 100%; height: 100%; object-fit: contain; }
+.robo-qr-card .name { color: #f1effa; font-weight: 600; }
+.robo-qr-card .upi { color: var(--tone); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 2px; }
+
+/* ---- File upload dropzone ---- */
+.robo-upload {
+  position: relative;
+  padding: 36px 20px;
+  text-align: center;
+  background: rgba(6, 5, 12, 0.6);
+  border: 1.5px dashed rgba(173, 178, 255, 0.3);
+  cursor: pointer;
+  transition: border-color 0.25s ease;
+}
+.robo-upload:hover { border-color: var(--tone); }
+.robo-upload.is-done { border-style: solid; border-color: #34d399; }
+.robo-upload-icon {
+  width: 60px; height: 60px;
+  margin: 0 auto 14px;
+  display: grid; place-items: center;
+  background: var(--tone-dim);
+  color: var(--tone);
+}
+.robo-upload.is-done .robo-upload-icon { background: rgba(52, 211, 153, 0.16); color: #34d399; }
+.robo-upload-title { color: #f1effa; font-weight: 600; margin-bottom: 4px; }
+.robo-upload-sub { color: #8f8ba6; font-size: 0.8rem; }
+.robo-upload-bar { width: 200px; height: 4px; background: rgba(173, 178, 255, 0.16); margin: 10px auto 0; overflow: hidden; }
+.robo-upload-bar-fill { height: 100%; background: var(--tone); }
+.robo-upload-link { color: var(--tone); font-size: 0.82rem; text-decoration: underline; }
+
+/* ---- Summary ---- */
+.robo-summary { padding: clamp(20px, 3vw, 28px); display: flex; flex-direction: column; gap: 16px; }
+.robo-summary-group {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(173, 178, 255, 0.1);
+  padding: 16px 18px;
+}
+.robo-summary-group h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  color: var(--tone);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(173, 178, 255, 0.16);
+  margin-bottom: 12px;
+}
+.robo-summary-group h4 svg { flex-shrink: 0; }
+.robo-summary-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; }
+@media (max-width: 560px) { .robo-summary-rows { grid-template-columns: 1fr; } }
+.robo-summary-row .k { font-size: 0.74rem; color: #8f8ba6; text-transform: uppercase; letter-spacing: 0.04em; }
+.robo-summary-row .v { color: #f1effa; font-weight: 500; margin-top: 2px; }
+.robo-summary-row .v.ok { color: #34d399; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+
+.robo-submit-wrap { display: flex; justify-content: center; padding-top: 12px; }
+.robo-submit-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+  padding: 18px 32px;
+  background: linear-gradient(135deg, var(--tone), color-mix(in srgb, var(--tone) 65%, #fff 18%));
+  border: none;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+.robo-submit-btn:hover { filter: drop-shadow(0 10px 28px var(--tone-soft)); }
+
+/* ---- Bank transfer cards ---- */
+.robo-bank-grid { display: flex; flex-direction: column; gap: 16px; max-width: 560px; margin: 0 auto; }
+.robo-bank-card {
+  position: relative;
+  padding: 20px;
+  border: 1px solid var(--tone);
+  background: rgba(9, 8, 16, 0.94);
+}
+.robo-bank-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.robo-bank-head h4 { font-family: var(--font-display); color: #f1effa; font-size: 1rem; }
+.robo-bank-icon { width: 36px; height: 36px; display: grid; place-items: center; background: var(--tone-dim); color: var(--tone); }
+.robo-bank-rows { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-mono); font-size: 0.86rem; color: #d6d3e4; }
+.robo-bank-rows b { color: var(--tone); font-weight: 600; margin-right: 6px; }
+
+/* ============================================================
+   Modal
+   ============================================================ */
+.robo-modal-backdrop {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(5, 4, 10, 0.72);
+  backdrop-filter: blur(6px);
+  padding: 16px;
+}
+.robo-modal {
+  width: 100%; max-width: 420px;
+  padding: 28px 24px;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  text-align: center;
+  border: 1px solid rgba(173, 178, 255, 0.18);
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.05), transparent 45%),
+    linear-gradient(180deg, rgba(20, 18, 32, 0.92), rgba(7, 6, 14, 0.97));
+}
+.robo-modal.is-success { border-color: #34d399; }
+.robo-modal.is-error { border-color: #fb7185; }
+.robo-modal-icon { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; }
+.robo-modal.is-success .robo-modal-icon { background: rgba(52, 211, 153, 0.16); color: #34d399; }
+.robo-modal.is-error .robo-modal-icon { background: rgba(251, 113, 133, 0.16); color: #fb7185; }
+.robo-modal-title { font-family: var(--font-display); font-size: 1.1rem; }
+.robo-modal.is-success .robo-modal-title { color: #34d399; }
+.robo-modal.is-error .robo-modal-title { color: #fb7185; }
+.robo-modal-message { color: #d6d3e4; font-size: 0.88rem; white-space: pre-line; }
+.robo-modal-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.robo-modal-btn {
+  padding: 12px 20px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.robo-modal-btn-success { background: #34d399; color: #052e1f; }
+.robo-modal-btn-success:hover { background: #6ee7b7; }
+.robo-modal-btn-error { background: #fb7185; color: #2e0a10; }
+.robo-modal-btn-error:hover { background: #fda4af; }
+.robo-modal-btn-whatsapp { background: #25d366; color: #052e1f; }
+.robo-modal-btn-whatsapp:hover { background: #4ddb82; }
+
+/* ============================================================
+   Responsive tightening
+   ============================================================ */
+@media (max-width: 560px) {
+  .robo-contact-grid, .robo-notice-grid { grid-template-columns: 1fr; }
+}

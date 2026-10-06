@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Swords, Goal, Disc, Gauge, ChevronRight } from 'lucide-react';
 import useReducedMotion from '../../hooks/useReducedMotion';
 import ParallaxLayer from '../ParallaxLayer/ParallaxLayer';
 import HUD from '../HUD/HUD';
@@ -10,6 +12,15 @@ import { titleParallax, titleMouse } from './titleParallax';
 import './Hero.css';
 
 gsap.registerPlugin(ScrollTrigger);
+
+/* Registration is open, so the former "COMING SOON" caption is now this
+   clickable event row. */
+const HERO_EVENTS = [
+  { code: '01', tone: 'war', title: 'ROBOWAR', Icon: Swords, path: '/robowar' },
+  { code: '02', tone: 'soccer', title: 'ROBOSOCCER', Icon: Goal, path: '/robosoccer' },
+  { code: '03', tone: 'sumo', title: 'ROBOSUMO', Icon: Disc, path: '/robosumo' },
+  { code: '04', tone: 'drift', title: 'ROBODRIFT', Icon: Gauge, path: '/robodrift' },
+];
 
 /**
  * Hero
@@ -254,9 +265,9 @@ export default function Hero() {
         '-=0.5'
       )
       .from('.hud-el', { opacity: 0, duration: 0.8, stagger: 0.09 }, '-=0.9')
-      /* TITLE GROUP — the whole composition (ROBOTRON / 2026 / COMING SOON
-         / divider / decorative lines) reveals as ONE unit, so its exact
-         internal composition is never disturbed.
+      /* TITLE GROUP — the whole composition (ROBOTRON / 2026 / event
+         selector / divider / decorative lines) reveals as ONE unit, so its
+         exact internal composition is never disturbed.
 
          This tween runs on .hero-type-anim, NOT on the .pl parallax
          wrapper and NOT on .hero-title itself. Two systems write
@@ -286,7 +297,7 @@ export default function Hero() {
         '-=0.9'
       )
 
-      /* Three display lines (ROBOTRON / 2026 / COMING SOON) rise into
+      /* Three display lines (ROBOTRON / 2026 / event selector) rise into
          place one after another as the startup lockup resolves, so the
          big centrepiece types itself on. Each line fades and scales in on
          its own, staggered from the others, rather than relying solely on
@@ -294,7 +305,7 @@ export default function Hero() {
 
       .from('.hero-title-main', { y: 52, opacity: 0, scale: 0.9, duration: 1.4 }, '-=0.5')
       .from('.hero-year', { y: 40, opacity: 0, scale: 0.9, duration: 1.2 }, '-=0.65')
-      .from('.hero-coming-soon', { y: 28, opacity: 0, scale: 0.9, duration: 1.0 }, '-=0.6')
+      .from('.hero-event-select', { y: 28, opacity: 0, scale: 0.9, duration: 1.0 }, '-=0.6')
       /* Secondary detail (kicker, subtitle, rules, meta) — each on its OWN
          child element, never the group, so the group transform — and
          therefore the parallax — stays pristine. */
@@ -474,7 +485,7 @@ export default function Hero() {
               STARTUP LOCKUP — three stacked display lines, centred:
                 ROBOTRON
                 2026
-                COMING SOON
+                [ event selector ]
               with decorative rules above/below, exactly as one composed
               graphic block.
 
@@ -487,7 +498,7 @@ export default function Hero() {
                     .hero-title      <- the composed graphic, untransformed
 
               The group is a single registered layer, so ROBOTRON, 2026,
-              COMING SOON and the decorative lines keep their exact
+              the event selector and the decorative lines keep their exact
               relative positions — no per-word or per-letter parallax. */}
           <ParallaxLayer id={titleParallax.groupId} slot="ui" depth={titleParallax.depth}
             zIndex={11} animated
@@ -508,10 +519,28 @@ export default function Hero() {
                 {/* display line 2 */}
                 <p className="hero-year">2026</p>
 
-                {/* display line 3 + subtitle + meta */}
+                {/* display line 3 — clickable event selector, replaces the
+                    former COMING SOON caption now that registration is
+                    open. Reuses the event-card tones (tone-war/soccer/
+                    sumo/drift from Events.css) so the colour language
+                    matches the card grid further down the page. */}
                 <div className="hero-title-sub">
-                  <p className="hero-coming-soon">COMING SOON<span className="hero-dot" aria-hidden="true">.</span></p>
-
+                  <div className="hero-event-select">
+                    <span className="hero-event-kicker">
+                      <span className="hero-event-kicker-line" aria-hidden="true" />
+                      Select your event
+                      <span className="hero-event-kicker-line" aria-hidden="true" />
+                    </span>
+                    <nav className="hero-event-row" aria-label="ROBOTRON 2026 events">
+                      {HERO_EVENTS.map(({ code, tone, title, Icon, path }) => (
+                        <Link key={code} to={path} className={`hero-event-btn tone-${tone}`}>
+                          <Icon size={22} strokeWidth={1.85} aria-hidden="true" />
+                          <span>{title}</span>
+                          <ChevronRight size={18} className="hero-event-chevron" aria-hidden="true" />
+                        </Link>
+                      ))}
+                    </nav>
+                  </div>
                 </div>
 
                 {/* decorative rule + meta below the lockup */}

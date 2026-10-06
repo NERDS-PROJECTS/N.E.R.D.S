@@ -20,17 +20,18 @@ export default function Timeline() {
         </div>
 
         <ol className="timeline-list">
+          <span className="tl-rail" aria-hidden="true" />
           {PHASES.map(([year, name, desc], i) => (
             <li key={year} className="timeline-item" data-reveal>
-              <span className="tl-node">
+              <span className="tl-node" aria-hidden="true">
                 <i />
               </span>
+              <span className="tl-idx">/{String(i + 1).padStart(2, '0')}</span>
               <div className="tl-body">
                 <span className="tl-year">{year}</span>
                 <h3 className="tl-title">{name}</h3>
                 <p className="tl-desc">{desc}</p>
               </div>
-              <span className="tl-idx">/{String(i).padStart(2, '0')}</span>
             </li>
           ))}
         </ol>

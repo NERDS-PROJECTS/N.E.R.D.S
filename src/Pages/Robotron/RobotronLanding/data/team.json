@@ -1,0 +1,172 @@
+{
+  "_readme": "Placeholder roster for ROBOTRON 2026 — every name/photo/contact below is a dummy. Replace the fields per person and redeploy; the Team section reads this file directly, no code changes needed. `photo` accepts any image URL (drop real photos in /public and reference them as \"/team/yourfile.jpg\" instead of a remote URL if you prefer). Leave `linkedin` or `email` as an empty string to hide that link on the card.",
+  "groups": [
+    {
+      "id": "chief-coordinator",
+      "label": "Chief Coordinator",
+      "members": [
+        {
+          "name": "Abhinav Singh",
+          "photo": "https://res.cloudinary.com/dqmktpekh/image/upload/v1727726865/vhlc0a5bpvgs5ctzbghp.webp",
+          "phone": "+91 86386 72009",
+          "email": "abhinav8723@gmail.com",
+          "linkedin": "https://www.linkedin.com/in/abhinav-singh321"
+        }
+      ]
+    },
+    {
+      "id": "convenor",
+      "label": "Convenor",
+      "members": [
+        {
+          "name": "Ayushman Sagar Baruah",
+          "photo": "https://res.cloudinary.com/dqmktpekh/image/upload/v1727726868/fq5es2m3mo5shev4eygz.webp",
+          "phone": "+91 91271 47825",
+          "email": "ayushmanbaruah0101@gmail.com",
+          "linkedin": "https://www.instagram.com/ayushman___sagar/"
+        },
+        {
+          "name": "Jubaraj Talukdar",
+          "photo": "https://res.cloudinary.com/dmhbmurzw/image/upload/v1728361653/Image_-_Jubaraj_Talukdar_hvqfrx.jpg",
+          "phone": "+91 60033 81240",
+          "email": "jubaraj.t3006@gmail.com",
+          "linkedin": "https://www.linkedin.com/in/jubaraj-talukdar-7603b1285/"
+        }
+      ]
+    },
+    {
+      "id": "module head",
+      "label": "Module Head",
+      "members": [
+        {
+          "name": "Syed Ashhar Abbas",
+          "photo": "https://res.cloudinary.com/dqeenwawp/image/upload/v1789900233/b9f4e2d7-f96a-432a-873a-87ff8a8759d4.png",
+          "phone": "+91 96958 70616",
+          "email": "syed_ug_24@ece.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/syed-ashhar-abbas-840a86332"
+        }
+      ]
+    },
+    {
+      "id": "marketing-heads",
+      "label": "Marketing Heads",
+      "members": [
+        {
+          "name": "Rahul Agrahari",
+          "photo": "https://res.cloudinary.com/doquewmbh/image/upload/v1756199717/rahul-ag_hfoafo.jpg",
+          "phone": "7892695164",
+          "email": "rahula_ug_24@ei.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/rahul-agrahari-749392321/"
+        },
+        {
+          "name": "Vaibhav Singh Rajput",
+          "photo": "https://res.cloudinary.com/dkxcqf5as/image/upload/v1756399628/vaibhav_zydlvb.webp",
+          "phone": "7905200802",
+          "email": "vaibhav_ug_24@ece.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/vaibhav-singh-40b60b312"
+        }
+      ]
+    },
+    {
+      "id": "robowar-head",
+      "label": "Robowar Head",
+      "members": [
+        {
+          "name": "Vaibhav Singh Rajput",
+          "photo": "https://res.cloudinary.com/dkxcqf5as/image/upload/v1756399628/vaibhav_zydlvb.webp",
+          "phone": "7905200802",
+          "email": "vaibhav_ug_24@ece.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/vaibhav-singh-40b60b312"
+        },
+        {
+          "name": "Rahul Agrahari",
+          "photo": "https://res.cloudinary.com/doquewmbh/image/upload/v1756199717/rahul-ag_hfoafo.jpg",
+          "phone": "7892695164",
+          "email": "rahula_ug_24@ei.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/rahul-agrahari-749392321/"
+        },{
+          "name": "Shraddha yadav",
+          "photo": "https://res.cloudinary.com/dkxcqf5as/image/upload/v1756396335/shradha_qyircm.webp",
+          "phone": "8739079217",
+          "email": "shraddha_ug_24@ee.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/shraddha-yadav-15aa89341?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+        }
+      ]
+    },
+    {
+      "id": "robosoccer-head",
+      "label": "Robosoccer Head",
+      "members": [
+        {
+          "name": "Piyush Sharma",
+          "photo": "https://res.cloudinary.com/dqeenwawp/image/upload/v1756228054/WhatsApp_Image_2025-08-26_at_22.32.39_aa7e777b_xjhph1.jpg",
+          "phone": "+91 60038 38283",
+          "email": "piyushs_ug_24@ece.nits.ac.in",
+          "linkedin": "www.linkedin.com/in/piyush-sharma-175042325"
+        },{
+          "name": "Rahul Prasad",
+          "photo": "https://res.cloudinary.com/djnsi2pbj/image/upload/f_auto,q_auto/WhatsApp_Image_2026-06-17_at_9.51.18_PM_ab3o4n",
+          "phone": "7002938847",
+          "email": "rahul_ug_24@ece.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/rahul-prasad122/"
+        },{
+          "name": "Shayan Bakshi",
+          "photo": "https://res.cloudinary.com/db5oavrze/image/upload/v1756282561/ShayanBakshi_2416034_acjvxr.jpg",
+          "phone": "9435928065",
+          "email": "shayan_ug_24@mech.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/shayan~"
+        }
+      ]
+    },
+    {
+      "id": "robosumo-head",
+      "label": "Robosumo Head",
+      "members": [
+        {
+          "name": "Aditya Pratap Singh",
+          "photo": "https://res.cloudinary.com/dqeenwawp/image/upload/v1756228936/WhatsApp_Image_2025-08-26_at_22.21.09_83951bd4_gcciw7.jpg",
+          "phone": "6392826475",
+          "email": "adityaps_ug_24@ece.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/aditya-pratap-singh-0a845b373/"
+        },{
+          "name": "Aryan Kumar",
+          "photo": "https://res.cloudinary.com/dfll8qs0d/image/upload/v1781626858/aryan_kumar_nerds_web_image_sojxnq.jpg",
+          "phone": "9289097369",
+          "email": "aryankr_ug_24@ee.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/aryan-kumar-ak/"
+        },{
+          "name": "Chetna R ",
+          "photo": "https://res.cloudinary.com/dqeenwawp/image/upload/v1783087627/c_soyyhh.jpg",
+          "phone": "6383630597",
+          "email": "chetna_ug_24@ece.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/chetna-r-947a65380"
+        }
+      ]
+    },
+    {
+      "id": "robodrift-head",
+      "label": "Robodrift Head",
+      "members": [
+        {
+          "name": "Ahiron Sharma",
+          "photo": "https://res.cloudinary.com/df6ucvwym/image/upload/v1789157841/239763fhg_d5mdup.jpg",
+          "phone": "9395650847",
+          "email": "ahiron_ug_24@ece.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/ahiron-sharma-1a4972332/"
+        },{
+          "name": "Antariksa Chetia",
+          "photo": "https://res.cloudinary.com/dkxcqf5as/image/upload/v1756396627/antariksa_jhsnan.webp",
+          "phone": "7002982935",
+          "email": "antariksa_ug_24@ece.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/antariksa-chetia-099ab3314?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+        },{
+          "name": "Krrish Khandelia",
+          "photo": "https://res.cloudinary.com/df6ucvwym/image/upload/v1789158664/zcasdasdasdasd_ee7yyn.png",
+          "phone": "9864847837",
+          "email": "krrish_ug_24@ece.nits.ac.in",
+          "linkedin": "https://www.linkedin.com/in/krrish-khandelia-095362187?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+        }
+      ]
+    }
+  ]
+}

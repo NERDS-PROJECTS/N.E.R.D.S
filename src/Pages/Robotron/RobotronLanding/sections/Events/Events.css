@@ -1,94 +1,278 @@
 @import '../../styles/tokens.css';
 
+/* ============================================================
+   Events — module cards
+   ------------------------------------------------------------
+   Pure-CSS frame, no image assets: an asymmetric chamfer (cut
+   top-right / bottom-left corners only, sharp top-left / bottom-
+   right) makes the silhouette read differently from a generic
+   symmetric octagon. `clip-path` uses px-based `calc()` points,
+   so the shape is always exactly right regardless of the card's
+   rendered size — no percentage/asset-alignment math to get wrong.
+   `clip-path` only clips rendering — it doesn't stroke its own
+   path, so a plain CSS `border` vanishes along the cut diagonal
+   (only the straight edges show). To get a border that traces the
+   diagonal too, `.event-card-frame` is a solid `--tone` fill clipped
+   to the OUTER chamfer, and `.event-card-inner` sits inset by the
+   border width with its OWN (slightly smaller) chamfer clip-path —
+   the gap between the two shapes reads as a border on every edge.
+   The neon glow is `filter: drop-shadow()` (not box-shadow, which
+   would get clipped away outside the shape). Targeting-bracket
+   accents sit on the two sharp (uncut) corners.
+   ============================================================ */
+
 .robotron-landing .events-head {
-  margin-bottom: clamp(32px, 5vw, 60px);
+  margin-bottom: clamp(36px, 5vw, 64px);
 }
+
 .robotron-landing .events-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(16px, 2.4vw, 30px);
-}
-.robotron-landing .event {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(22, 18, 40, 0.5), rgba(8, 6, 16, 0.72));
-  border-radius: 4px;
-  overflow: hidden;
-}
-.robotron-landing .event-art {
-  border: none;
-  width: 100%;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  aspect-ratio: 4/3;
-  position: relative;
-  background:
-    radial-gradient(70% 90% at 30% 20%, rgba(139, 92, 246, 0.18), transparent 60%),
-    repeating-linear-gradient(90deg, rgba(139, 92, 246, 0.06) 0 1px, transparent 1px 14px);
-  display: grid;
-  place-items: center;
-  will-change: transform;
-  transition: filter 0.4s;
-}
-.robotron-landing .event-art::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(228, 26, 122, 0.25);
-  opacity: 0;
-  transition: opacity 0.35s;
-}
-.robotron-landing .event-art:hover::after { opacity: 1; }
-.robotron-landing .event-art:hover { filter: saturate(1.25) brightness(1.05); }
-.robotron-landing .event-icon {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 2.2rem;
-  color: var(--text);
-  opacity: 0.85;
-}
-.robotron-landing .event-body {
-  padding: 16px 18px 22px;
-}
-.robotron-landing .event-code {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  color: var(--accent-2);
-  margin-bottom: 10px;
-}
-.robotron-landing .event-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(0.98rem, 1.5vw, 1.2rem);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: var(--text);
-  line-height: 1.25;
-}
-.robotron-landing .event-desc {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 0.88rem;
-  line-height: 1.65;
-  color: var(--text-soft);
-  margin-top: 10px;
-}
-.robotron-landing .event-meta {
-  display: block;
-  margin-top: 14px;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.16em;
-  color: var(--text-dim);
+  gap: clamp(24px, 3vw, 40px);
 }
 
-@media (max-width: 1000px) {
+.robotron-landing .event-card {
+  --tone: #ff2c2c;
+  --tone-soft: rgba(255, 44, 44, 0.16);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.robotron-landing .event-card[role='button'] {
+  cursor: pointer;
+}
+.robotron-landing .event-card.tone-war    { --tone: #ff2c2c; --tone-soft: rgba(255, 44, 44, 0.2); }
+.robotron-landing .event-card.tone-soccer { --tone: #ffbf00; --tone-soft: rgba(255, 191, 0, 0.2); }
+.robotron-landing .event-card.tone-sumo   { --tone: #0041c2; --tone-soft: rgba(0, 65, 194, 0.24); }
+.robotron-landing .event-card.tone-drift  { --tone: #a100ff; --tone-soft: rgba(161, 0, 255, 0.2); }
+
+.robotron-landing .event-card-frame {
+  --cut: 30px;
+  --border: 2px;
+  position: relative;
+  height: 100%;
+}
+.robotron-landing .event-card-frame::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--border) * -1);
+  background: var(--tone);
+  clip-path: polygon(
+    0 0, calc(100% - (var(--cut) + var(--border))) 0, 100% calc(var(--cut) + var(--border)),
+    100% 100%, calc(var(--cut) + var(--border)) 100%, 0 calc(100% - (var(--cut) + var(--border)))
+  );
+  transition: filter 0.35s var(--ez-cine);
+}
+.robotron-landing .event-card-inner {
+  position: relative;
+  padding: 30px 26px 28px;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--tone) 7%, transparent), transparent 42%),
+    linear-gradient(165deg, rgba(255, 255, 255, 0.04), transparent 38%),
+    linear-gradient(180deg, rgba(17, 14, 30, 0.95), rgba(7, 6, 14, 0.98));
+  clip-path: polygon(
+    0 0, calc(100% - var(--cut)) 0, 100% var(--cut),
+    100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))
+  );
+  transition: background 0.35s var(--ez-cine);
+}
+.robotron-landing .event-card {
+  transition: transform 0.4s var(--ez-cine), filter 0.4s var(--ez-cine);
+  filter: drop-shadow(0 0 0 transparent);
+}
+.robotron-landing .event-card:hover,
+.robotron-landing .event-card:focus-visible {
+  transform: translateY(-6px);
+  filter:
+    drop-shadow(0 14px 30px var(--tone-soft))
+    drop-shadow(0 0 16px var(--tone-soft));
+  outline: none;
+}
+.robotron-landing .event-card:hover .event-card-inner,
+.robotron-landing .event-card:focus-visible .event-card-inner {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--tone) 12%, transparent), transparent 48%),
+    linear-gradient(165deg, rgba(255, 255, 255, 0.06), transparent 42%),
+    linear-gradient(180deg, rgba(20, 17, 34, 0.96), rgba(7, 6, 14, 0.99));
+}
+
+/* ---- targeting-bracket accents on the two sharp corners ---- */
+.robotron-landing .event-card-bracket {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+.robotron-landing .event-card-bracket.tl {
+  top: -1.5px;
+  left: -1.5px;
+  border-top: 2px solid var(--tone);
+  border-left: 2px solid var(--tone);
+}
+.robotron-landing .event-card-bracket.br {
+  bottom: -1.5px;
+  right: -1.5px;
+  border-bottom: 2px solid var(--tone);
+  border-right: 2px solid var(--tone);
+}
+
+/* ---- top row: index + chevron ---- */
+.robotron-landing .event-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.robotron-landing .event-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--tone);
+  opacity: 0.9;
+}
+.robotron-landing .event-chevron {
+  display: inline-flex;
+  color: var(--text-dim);
+  transition: transform 0.35s var(--ez-cine), color 0.35s;
+}
+.robotron-landing .event-card:hover .event-chevron {
+  color: var(--tone);
+  transform: translateX(4px);
+}
+
+/* ---- visual placeholder plate ---- */
+.robotron-landing .event-visual {
+  position: relative;
+  margin-top: 18px;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 100% at 50% 100%, var(--tone-soft), transparent 65%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 16px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 16px);
+  border: 1px solid var(--line);
+}
+.robotron-landing .event-visual-glow {
+  position: absolute;
+  width: 68%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--tone-soft), transparent 70%);
+  filter: blur(2px);
+}
+.robotron-landing .event-visual-rings {
+  position: absolute;
+  width: 58%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--tone) 55%, transparent);
+  opacity: 0.55;
+  animation: event-ring-spin 18s linear infinite;
+}
+@keyframes event-ring-spin {
+  to { transform: rotate(360deg); }
+}
+.robotron-landing .event-visual-img {
+  position: relative;
+  width: 92%;
+  height: auto;
+  max-height: 96%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px var(--tone-soft));
+  transition: transform 0.45s var(--ez-cine);
+}
+.robotron-landing .event-card:hover .event-visual-img {
+  transform: scale(1.08);
+}
+
+/* ---- icon badge + title ---- */
+.robotron-landing .event-icon-badge {
+  width: 36px;
+  height: 36px;
+  margin-top: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--tone);
+  color: var(--tone);
+  transform: rotate(45deg);
+}
+.robotron-landing .event-icon-badge svg {
+  transform: rotate(-45deg);
+}
+.robotron-landing .event-title {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.1rem, 1.7vw, 1.38rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.robotron-landing .event-desc {
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.87rem;
+  line-height: 1.65;
+  color: var(--text-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- meta: prize pool / venue, stacked in their own column each ---- */
+.robotron-landing .event-meta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.robotron-landing .event-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-mono);
+}
+.robotron-landing .event-meta-item svg {
+  color: var(--tone);
+  margin-bottom: 2px;
+}
+.robotron-landing .event-meta-item span {
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.robotron-landing .event-meta-item b {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+/* ---- footer dotted strip ---- */
+.robotron-landing .event-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 20px;
+}
+.robotron-landing .event-dots i {
+  width: 4px;
+  height: 4px;
+  background: var(--line-strong);
+  transition: background 0.3s;
+}
+.robotron-landing .event-card:hover .event-dots i:nth-child(-n+4) {
+  background: var(--tone);
+}
+
+@media (max-width: 1080px) {
   .robotron-landing .events-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 680px) {
-  .robotron-landing .events-grid { grid-template-columns: 1fr; }
+@media (max-width: 560px) {
+  .robotron-landing .events-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .robotron-landing .event-card-frame { --cut: 24px; }
 }
