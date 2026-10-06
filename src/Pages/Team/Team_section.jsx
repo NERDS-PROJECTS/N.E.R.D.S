@@ -15,7 +15,7 @@ const Team = () => {
   const [isLaptopView, setIsLaptopView] = useState(window.innerWidth >= 1024);
   const [teamData, setTeamData] = useState([]);
   const [developerData, setDeveloperData] = useState([]);
-  const [selectedYear, setSelectedYear] = useState("2026"); 
+  const [selectedYear, setSelectedYear] = useState("2026");
 
   useEffect(() => {
     setTeamData(data);
@@ -36,10 +36,21 @@ const Team = () => {
   }, []);
 
   const filteredTeamData = teamData.filter((member) => member.year === selectedYear);
+
+  const ficMembers = filteredTeamData.filter(
+    (member) => member.team && member.team.toLowerCase() === "fic"
+  );
   const fourthYearMembers = filteredTeamData.filter((member) => member.team === "4th Year");
   const thirdYearMembers = filteredTeamData.filter((member) => member.team === "3rd Year");
   const secondYearMembers = filteredTeamData.filter((member) => member.team === "2nd Year");
   const developers = developerData.filter((member) => member.developer_team === "Yes");
+
+  const sections = [
+    { title: "FACULTY IN-CHARGE", members: ficMembers },
+    { title: "FOURTH YEAR MEMBERS", members: fourthYearMembers },
+    { title: "THIRD YEAR MEMBERS", members: thirdYearMembers },
+    { title: "SECOND YEAR MEMBERS", members: secondYearMembers },
+  ];
 
   return (
     <>
@@ -53,7 +64,7 @@ const Team = () => {
               id="year-select"
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
-              className="appearance-none p-2 pr-8 rounded bg-gray-800 text-white font-ethenocentric"
+              className="appearance-none p-2 pr-8 rounded bg-gray-800 text-white font-ethenocentric cursor-pointer"
             >
               <option value="2024">2024</option>
               <option value="2025">2025</option>
@@ -74,91 +85,117 @@ const Team = () => {
         </div>
       </div>
 
-      {[{ title: "FOURTH YEAR MEMBERS", members: fourthYearMembers },
-        { title: "THIRD YEAR MEMBERS", members: thirdYearMembers },
-        { title: "SECOND YEAR MEMBERS", members: secondYearMembers }].map((section, idx) => {
-          // If a year tier has no members for the chosen year selection, don't render its layout elements
-          if (section.members.length === 0) return null;
+      {sections.map((section, idx) => {
+        if (section.members.length === 0) return null;
 
-          return (
-            <div key={idx} className="text-center mt-24">
-              <h1 className="font-ethenocentric text-5xl bg-gradient-to-b from-[#ffffff] to-[#068bf7] bg-clip-text text-transparent meetour">
-                MEET OUR
-              </h1>
-              <h1 className="font-ethenocentric text-4xl mt-3 bg-gradient-to-b from-[#ffffff] to-[#068bf7] bg-clip-text text-transparent member">
-                {section.title} ({selectedYear})
-              </h1>
-              {isLaptopView ? (
-                <div className="grid grid-cols-1 mt-8 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-6">
+        return (
+          <div key={idx} className="text-center mt-24 w-full flex flex-col items-center">
+            <h1 className="font-ethenocentric text-5xl bg-gradient-to-b from-[#ffffff] to-[#068bf7] bg-clip-text text-transparent meetour">
+              MEET OUR
+            </h1>
+            <h1 className="font-ethenocentric text-4xl mt-3 bg-gradient-to-b from-[#ffffff] to-[#068bf7] bg-clip-text text-transparent member">
+              {section.title} ({selectedYear})
+            </h1>
+
+            {isLaptopView ? (
+              <div className="mt-8 px-6 w-full max-w-7xl mx-auto flex justify-center">
+                <div
+                  className={`grid gap-8 w-full justify-items-center items-center ${
+                    section.members.length === 1
+                      ? "grid-cols-1"
+                      : section.members.length === 2
+                      ? "grid-cols-2 max-w-4xl"
+                      : "grid-cols-3"
+                  }`}
+                >
                   {section.members.map((member, index) => (
-                    <TeamCard key={index} member={member} />
+                    <div key={member.id || index} className="flex justify-center items-center w-full">
+                      <TeamCard member={member} />
+                    </div>
                   ))}
                 </div>
-              ) : (
+              </div>
+            ) : (
+              <div className="mt-8 px-4 w-full max-w-full overflow-hidden">
                 <Swiper
                   navigation
                   pagination={false}
                   grabCursor={true}
                   spaceBetween={20}
                   slidesPerView={1}
+                  centeredSlides={true}
                   breakpoints={{
                     640: { slidesPerView: 1, spaceBetween: 10 },
-                    768: { slidesPerView: 2, spaceBetween: 20 },
-                    1024: { slidesPerView: 3, spaceBetween: 30 },
+                    768: { slidesPerView: Math.min(2, section.members.length), spaceBetween: 20 },
                   }}
                   modules={[Navigation, Pagination, EffectCoverflow]}
+                  className="w-full"
                 >
                   {section.members.map((member, index) => (
-                    <SwiperSlide key={index}>
+                    <SwiperSlide key={member.id || index} className="!flex !justify-center !items-center">
                       <TeamCard member={member} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
-              )}
-            </div>
-          );
+              </div>
+            )}
+          </div>
+        );
       })}
 
       {/* Developers Section */}
       {developers.length > 0 && (
-        <>
-          <div className="text-center mt-24">
-            <h1 className="font-ethenocentric text-4xl bg-gradient-to-b from-[#ffffff] to-[#068bf7] bg-clip-text text-transparent meetour">
-              MEET OUR
-            </h1>
-            <h1 className="font-ethenocentric text-4xl mt-3 bg-gradient-to-b from-[#ffffff] to-[#068bf7] bg-clip-text text-transparent member">
-              DEVELOPERS
-            </h1>
-          </div>
+        <div className="text-center mt-24 w-full flex flex-col items-center">
+          <h1 className="font-ethenocentric text-4xl bg-gradient-to-b from-[#ffffff] to-[#068bf7] bg-clip-text text-transparent meetour">
+            MEET OUR
+          </h1>
+          <h1 className="font-ethenocentric text-4xl mt-3 bg-gradient-to-b from-[#ffffff] to-[#068bf7] bg-clip-text text-transparent member">
+            DEVELOPERS
+          </h1>
 
           {isLaptopView ? (
-            <div className="grid grid-cols-1 mt-8 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-6">
-              {developers.map((member, index) => (
-                <TeamCard key={index} member={member} />
-              ))}
+            <div className="mt-8 px-6 w-full max-w-7xl mx-auto flex justify-center">
+              <div
+                className={`grid gap-8 w-full justify-items-center items-center ${
+                  developers.length === 1
+                    ? "grid-cols-1"
+                    : developers.length === 2
+                    ? "grid-cols-2 max-w-4xl"
+                    : "grid-cols-3"
+                }`}
+              >
+                {developers.map((member, index) => (
+                  <div key={member.id || index} className="flex justify-center items-center w-full">
+                    <TeamCard member={member} />
+                  </div>
+                ))}
+              </div>
             </div>
           ) : (
-            <Swiper
-              navigation
-              pagination={false}
-              grabCursor={true}
-              spaceBetween={20}
-              slidesPerView={1}
-              breakpoints={{
-                640: { slidesPerView: 1, spaceBetween: 10 },
-                768: { slidesPerView: 2, spaceBetween: 20 },
-                1024: { slidesPerView: 3, spaceBetween: 30 },
-              }}
-              modules={[Navigation, Pagination, EffectCoverflow]}
-            >
-              {developers.map((member, index) => (
-                <SwiperSlide key={index}>
-                  <TeamCard member={member} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            <div className="mt-8 px-4 w-full max-w-full overflow-hidden">
+              <Swiper
+                navigation
+                pagination={false}
+                grabCursor={true}
+                spaceBetween={20}
+                slidesPerView={1}
+                centeredSlides={true}
+                breakpoints={{
+                  640: { slidesPerView: 1, spaceBetween: 10 },
+                  768: { slidesPerView: Math.min(2, developers.length), spaceBetween: 20 },
+                }}
+                modules={[Navigation, Pagination, EffectCoverflow]}
+                className="w-full"
+              >
+                {developers.map((member, index) => (
+                  <SwiperSlide key={member.id || index} className="!flex !justify-center !items-center">
+                    <TeamCard member={member} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           )}
-        </>
+        </div>
       )}
     </>
   );
