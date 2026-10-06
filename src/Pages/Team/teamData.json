@@ -2493,6 +2493,42 @@
       "linkedin": "https://www.linkedin.com/in/rohan-pachahara-055b62381/",
       "image_id":     "https://res.cloudinary.com/dmxol2a4/image/upload/f_auto,q_auto/5601",
       "year": "2026"
+},
+{
+	 "id": 8353,
+      "name": "Dr. Devendra Singh Gurjar",
+      "team": "fic",
+      "designation": "Faculty Incharge",
+      "developer_team": "No",
+      "email": "",
+      "github": "",
+      "linkedin": "",
+      "image_id":     "https://res.cloudinary.com/dqeenwawp/image/upload/v1789900153/Screenshot_2026-09-20_155842_mc1gpr.png",
+      "year": "2026"
+},
+{
+	 "id": 8353,
+      "name": "Rohan",
+      "team": "fic",
+      "designation": "Junior Member",
+      "developer_team": "No",
+      "email": "indalsinghs506@gmail.com",
+      "github": "https://github.com/indalsinghs506",
+      "linkedin": "https://www.linkedin.com/in/rohan-pachahara-055b62381/",
+      "image_id":     "https://res.cloudinary.com/dmxol2a4/image/upload/f_auto,q_auto/5601",
+      "year": "2025"
+},
+{
+	 "id": 8353,
+      "name": "Rohan",
+      "team": "fic",
+      "designation": "Junior Member",
+      "developer_team": "No",
+      "email": "indalsinghs506@gmail.com",
+      "github": "https://github.com/indalsinghs506",
+      "linkedin": "https://www.linkedin.com/in/rohan-pachahara-055b62381/",
+      "image_id":     "https://res.cloudinary.com/dmxol2a4/image/upload/f_auto,q_auto/5601",
+      "year": "2024"
 }
 
 
