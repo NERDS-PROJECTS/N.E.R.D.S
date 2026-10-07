@@ -23,6 +23,8 @@ import {
 	ClipboardCheck,
 	Building2,
 	PackageCheck,
+	Home,
+	Music,
 } from "lucide-react";
 import { MultiStepLoader } from "../../components/Merch_components/multi-step-loader";
 import ProgressBar from "react-scroll-progress-bar";
@@ -299,10 +301,39 @@ const IntelSection = () => {
 							<h4>Registration Deadline</h4>
 						</div>
 						<p>
+							All participants with kit requirements must register before{" "}
+							<strong>15th October 2026, 12:00 PM</strong>.
+						</p>
+						<p>
 							Final closing date of registration for all participants is{" "}
 							<strong>25th October 2026, 12:00 PM</strong>. Ensure your
 							details are submitted on time to confirm your slot for{" "}
 							<strong>Robotron 2026</strong>.
+						</p>
+					</div>
+
+					<div className="robo-notice-card">
+						<div className="robo-notice-head">
+							<Home size={20} />
+							<h4>Accommodation &amp; Food</h4>
+						</div>
+						<p>
+							Participants from other colleges will be provided accommodation
+							and food services at <strong>nominal, chargeable rates</strong>{" "}
+							arranged by NIT Silchar.
+						</p>
+					</div>
+
+					<div className="robo-notice-card">
+						<div className="robo-notice-head">
+							<Music size={20} />
+							<h4>Festival Access</h4>
+						</div>
+						<p>
+							All registered participants from other colleges can enjoy{" "}
+							<strong>Tecnoesis festival attractions</strong> such as the DJ
+							Night, Artist Performances, and other campus events through
+							their <strong>college-issued access card</strong>.
 						</p>
 					</div>
 
@@ -319,7 +350,7 @@ const IntelSection = () => {
 							<ExternalLink size={14} /> Track Your Robot Kits
 						</a>
 					</div> */}
-
+					
 					<div className="robo-notice-card">
 						<div className="robo-notice-head">
 							<MessageCircle size={20} />

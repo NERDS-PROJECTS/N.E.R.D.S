@@ -11,7 +11,7 @@ const EVENTS = [
     Icon: Swords,
     image: '/robotron/war_.png',
     desc: 'Combat bots enter the arena — last machine standing wins.',
-    prize: '₹ 30,000',
+    prize: '₹ 36,000',
     venue: 'Football Ground',
     path: '/robowar',
   },
