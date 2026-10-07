@@ -172,7 +172,7 @@ const StatRow = () => (
 		<div className="robo-stat-card">
 			<Users size={20} />
 			<span className="robo-stat-label">Team Size</span>
-			<span className="robo-stat-value">2–3 Members</span>
+			<span className="robo-stat-value">Max 3 Members</span>
 		</div>
 	</div>
 );
@@ -848,8 +848,8 @@ function Robosumo() {
 											value={formData.teamMember2}
 											onChange={handleInputChange}
 											className="robo-input"
-											placeholder="Enter member 2 name"
-											required
+											placeholder="Enter member 2 name (optional)"
+											
 										/>
 									</div>
 									<div className="robo-field">
