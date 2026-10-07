@@ -41,7 +41,18 @@ const AppShell = ({ loading, handleSplineLoad }) => {
   const isRobotronPage = location.pathname === "/robotron";
 
   return (
-    <div className={`flex flex-col min-h-screen overflow-x-hidden ${loading || isRobotronPage ? '' : 'pt-24'}`}>
+    // overflow-x-clip, not overflow-x-hidden: per the CSS overflow spec,
+    // setting overflow-x to anything but `visible` forces overflow-y's
+    // COMPUTED value to `auto` too — even if overflow-y is explicitly
+    // set to `visible` (the browser overrides it back). That makes this
+    // wrapper a "scroll container" ancestor, which becomes the reference
+    // point for every descendant's position:sticky and silently breaks
+    // it everywhere on the site, since this wrapper never actually
+    // scrolls itself (the real document does). `clip` is the one
+    // overflow value exempt from that pairing rule (it implies no
+    // scroll mechanism at all), so it blocks horizontal overflow the
+    // same as `hidden` did without taking sticky positioning down with it.
+    <div className={`flex flex-col min-h-screen overflow-x-clip ${loading || isRobotronPage ? '' : 'pt-24'}`}>
       <ScrollToTop />
       {loading ? (
         <LoadingAnimation />
@@ -69,7 +80,7 @@ const AppShell = ({ loading, handleSplineLoad }) => {
               <Route path="/robowar" element={<Robowar/>} />
               <Route path="/robosoccer" element={<Robosoccer/>} />
               <Route path="/robodrift" element={<RoboDrift/>} />
-              <Route path="/algomaze" element={<AlgoMaze/>} />
+              <Route path="/robosumo" element={<AlgoMaze/>} />
               {/* Catch-all route for 404 page */}
               <Route path="*" element={<Error />} />
             </Routes>
