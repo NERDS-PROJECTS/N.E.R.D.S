@@ -902,7 +902,7 @@ function Robosoccer() {
 								<div className="robo-panel-step-body">
 									{[2, 3].map((num) => (
 										<div className="robo-field" key={num}>
-											<label className="robo-label">Team Member {num} Name *</label>
+											<label className="robo-label">Team Member {num} Name </label>
 											<input
 												type="text"
 												name={`teamMember${num}`}

@@ -836,12 +836,12 @@ function Robosumo() {
 									</div>
 									<div>
 										<h3>Team Members</h3>
-										<p>Add your team members (minimum 1 required, maximum 2 — 2 to 3 members including leader)</p>
+										<p>Add your team members (maximum 3 members including leader)</p>
 									</div>
 								</div>
 								<div className="robo-panel-step-body">
 									<div className="robo-field">
-										<label className="robo-label">Team Member 2 Name *</label>
+										<label className="robo-label">Team Member 2 Name</label>
 										<input
 											type="text"
 											name="teamMember2"
