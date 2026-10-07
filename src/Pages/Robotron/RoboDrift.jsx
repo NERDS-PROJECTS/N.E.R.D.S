@@ -164,7 +164,7 @@ const StatRow = () => (
 		<div className="robo-stat-card">
 			<Users size={20} />
 			<span className="robo-stat-label">Team Size</span>
-			<span className="robo-stat-value">Max 4 Members</span>
+			<span className="robo-stat-value">Max 3 Members</span>
 		</div>
 	</div>
 );
@@ -867,7 +867,7 @@ function RoboDrift() {
 									</div>
 									<div>
 										<h3>Team Members</h3>
-										<p>Add your team members (minimum 2 required, max 4 including leader)</p>
+										<p>Add your team members (max 3 including leader)</p>
 									</div>
 								</div>
 								<div className="robo-panel-step-body">
@@ -885,7 +885,7 @@ function RoboDrift() {
 											/>
 										</div>
 									))}
-									<div className="robo-field">
+									{/* <div className="robo-field">
 										<label className="robo-label">
 											Team Member 4 Name <span className="opt">(Optional)</span>
 										</label>
@@ -897,7 +897,7 @@ function RoboDrift() {
 											className="robo-input"
 											placeholder="Enter member 4 name (optional)"
 										/>
-									</div>
+									</div> */}
 								</div>
 							</div>
 
