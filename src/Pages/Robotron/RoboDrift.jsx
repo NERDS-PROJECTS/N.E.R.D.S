@@ -164,7 +164,7 @@ const StatRow = () => (
 		<div className="robo-stat-card">
 			<Users size={20} />
 			<span className="robo-stat-label">Team Size</span>
-			<span className="robo-stat-value">3–4 Members</span>
+			<span className="robo-stat-value">Max 4 Members</span>
 		</div>
 	</div>
 );
@@ -535,22 +535,22 @@ function RoboDrift() {
 			});
 			return;
 		}
-		if (!formData.teamMember2.trim()) {
-			setModal({
-				open: true,
-				message: "Please enter Team Member 2 name.",
-				success: false,
-			});
-			return;
-		}
-		if (!formData.teamMember3.trim()) {
-			setModal({
-				open: true,
-				message: "Please enter Team Member 3 name.",
-				success: false,
-			});
-			return;
-		}
+		// if (!formData.teamMember2.trim()) {
+		// 	setModal({
+		// 		open: true,
+		// 		message: "Please enter Team Member 2 name.",
+		// 		success: false,
+		// 	});
+		// 	return;
+		// }
+		// if (!formData.teamMember3.trim()) {
+		// 	setModal({
+		// 		open: true,
+		// 		message: "Please enter Team Member 3 name.",
+		// 		success: false,
+		// 	});
+		// 	return;
+		// }
 		if (collegeType === null) {
 			setModal({
 				open: true,
@@ -880,8 +880,8 @@ function RoboDrift() {
 												value={formData[`teamMember${num}`]}
 												onChange={handleInputChange}
 												className="robo-input"
-												placeholder={`Enter member ${num} name`}
-												required
+												placeholder={`Enter member ${num} name (optional)`}
+											
 											/>
 										</div>
 									))}

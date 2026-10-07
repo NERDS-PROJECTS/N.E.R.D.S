@@ -173,7 +173,7 @@ const StatRow = () => (
 		<div className="robo-stat-card">
 			<Users size={20} />
 			<span className="robo-stat-label">Team Size</span>
-			<span className="robo-stat-value">3–5 Members</span>
+			<span className="robo-stat-value">Max 5 Members</span>
 		</div>
 	</div>
 );
@@ -551,22 +551,22 @@ function Robosoccer() {
 			});
 			return;
 		}
-		if (!formData.teamMember2.trim()) {
-			setModal({
-				open: true,
-				message: "Please enter Team Member 2 name.",
-				success: false,
-			});
-			return;
-		}
-		if (!formData.teamMember3.trim()) {
-			setModal({
-				open: true,
-				message: "Please enter Team Member 3 name.",
-				success: false,
-			});
-			return;
-		}
+		// if (!formData.teamMember2.trim()) {
+		// 	setModal({
+		// 		open: true,
+		// 		message: "Please enter Team Member 2 name.",
+		// 		success: false,
+		// 	});
+		// 	return;
+		// }
+		// if (!formData.teamMember3.trim()) {
+		// 	setModal({
+		// 		open: true,
+		// 		message: "Please enter Team Member 3 name.",
+		// 		success: false,
+		// 	});
+		// 	return;
+		// }
 		// Validate college type selection
 		if (collegeType === null) {
 			setModal({
@@ -896,7 +896,7 @@ function Robosoccer() {
 									</div>
 									<div>
 										<h3>Team Members</h3>
-										<p>Add your team members (minimum 3 required, maximum 5)</p>
+										<p>Add your team members (maximum 5)</p>
 									</div>
 								</div>
 								<div className="robo-panel-step-body">
@@ -909,8 +909,8 @@ function Robosoccer() {
 												value={formData[`teamMember${num}`]}
 												onChange={handleInputChange}
 												className="robo-input"
-												placeholder={`Enter member ${num} name`}
-												required
+												placeholder={`Enter member ${num} name (optional)`}
+											
 											/>
 										</div>
 									))}
