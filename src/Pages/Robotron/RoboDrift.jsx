@@ -535,22 +535,22 @@ function RoboDrift() {
 			});
 			return;
 		}
-		if (!formData.teamMember2.trim()) {
-			setModal({
-				open: true,
-				message: "Please enter Team Member 2 name.",
-				success: false,
-			});
-			return;
-		}
-		if (!formData.teamMember3.trim()) {
-			setModal({
-				open: true,
-				message: "Please enter Team Member 3 name.",
-				success: false,
-			});
-			return;
-		}
+		// if (!formData.teamMember2.trim()) {
+		// 	setModal({
+		// 		open: true,
+		// 		message: "Please enter Team Member 2 name.",
+		// 		success: false,
+		// 	});
+		// 	return;
+		// }
+		// if (!formData.teamMember3.trim()) {
+		// 	setModal({
+		// 		open: true,
+		// 		message: "Please enter Team Member 3 name.",
+		// 		success: false,
+		// 	});
+		// 	return;
+		// }
 		if (collegeType === null) {
 			setModal({
 				open: true,

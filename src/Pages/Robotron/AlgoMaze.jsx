@@ -533,14 +533,14 @@ function Robosumo() {
 			});
 			return;
 		}
-		if (!formData.teamMember2.trim()) {
-			setModal({
-				open: true,
-				message: "Please enter Team Member 2 name.",
-				success: false,
-			});
-			return;
-		}
+		// if (!formData.teamMember2.trim()) {
+		// 	setModal({
+		// 		open: true,
+		// 		message: "Please enter Team Member 2 name.",
+		// 		success: false,
+		// 	});
+		// 	return;
+		// }
 		if (kitChoice === null) {
 			setModal({
 				open: true,
