@@ -27,23 +27,30 @@ const Glimpse = () => {
   };
 
   // Separate photos for each row
-  const photosRow1 = [
-    "https://res.cloudinary.com/dqmktpekh/image/upload/v1728917098/WhatsApp_11_u3zw4z.webp",
-    "https://res.cloudinary.com/dqmktpekh/image/upload/v1728917098/WhatsApp_8_iquk2w.webp",
-    "https://res.cloudinary.com/dqmktpekh/image/upload/v1728917103/WhatsApp_4_fynqri.webp",
-    "https://res.cloudinary.com/dqmktpekh/image/upload/v1728917097/WhatsApp_17_w0gh65.webp",
-    "https://res.cloudinary.com/diabjuzqc/image/upload/v1744131264/PHOTO-2025-04-08-15-04-24_gekchz.jpg",
-    "https://res.cloudinary.com/diabjuzqc/image/upload/v1744229322/PHOTO-2025-01-13-18-54-17_hmv3vh.jpg",
-    
-
-  ];
+  const photosRow1 =[
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791407283/DSC09259-Enhanced-NR_1.jpg",
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791406919/DSC09405-Enhanced-NR_1.jpg",
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791406787/DSC09392_1.jpg",
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791406658/DSC09364_1.jpg",
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791406532/DSC09323_1.jpg",
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791406418/DSC09299-Enhanced-NR_1.jpg",
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791406249/DSC09268-Enhanced-NR_1.jpg",
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791406137/DSC09243-Enhanced-NR_1.jpg",
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791406005/DSC09224-Enhanced-NR_1.jpg",
+  "https://res.cloudinary.com/wjfmxall/image/upload/v1791405693/DSC09178_1.jpg",
+  "https://res.cloudinary.com/djqzpak1s/image/upload/v1744057238/IMG-20250330-WA0231_uqupbk.jpg"
+];
 
   const photosRow2 = [
-    "https://res.cloudinary.com/dqmktpekh/image/upload/v1728917103/WhatsApp_5_yobcaa.webp",
-    "https://res.cloudinary.com/dqmktpekh/image/upload/v1728919448/chaar_dqxhhm.webp",
-    "https://res.cloudinary.com/dqmktpekh/image/upload/v1728919558/last_hmns34.webp",
-    "https://res.cloudinary.com/dqmktpekh/image/upload/v1728919448/ek_r4xsdb.webp",
-    "https://res.cloudinary.com/diabjuzqc/image/upload/v1744131267/PHOTO-2025-03-28-21-30-46_tgykio.jpg",
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1791466361/e45b265c-529d-4f2a-9646-cc97578c9f61.png",
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1791466527/b0a5a464-a0b5-41fd-b216-61b45501b8a3.png",
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1791466424/9e8edaf0-f63f-4c95-9c26-271333de17d4.png",
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1791466458/4bb85542-8130-4999-93c2-ae16b4f44e5c.png",
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1791466359/dd8b8fa1-9f67-406a-85c6-72030a0acabc.png",
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1791466561/c5a7703f-34ed-4af4-a191-43001f06e507.png",
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1791466733/bf3142b5-2539-44b5-ad22-1de0b7cf37b9.png",
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1791466737/d7503210-9088-43a5-8b7c-065b2060e753.png",
+    "https://res.cloudinary.com/dqeenwawp/image/upload/v1791467400/2fba483e-06fe-4ef5-a20e-cc24ca6ae38c.png"
   ];
 
   return (
