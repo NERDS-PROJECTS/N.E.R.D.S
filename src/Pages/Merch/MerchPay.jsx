@@ -1068,7 +1068,7 @@ const bill = useMemo(() => {
             {/* QR Code and UPI Pay */}
             <div className="flex-1 flex flex-col items-center justify-center">
               <img
-                src="/tshirt/abhinav_qr.jpeg"
+                src="/tshirt/abhinav_qr2.jpeg"
                 alt="Payment QR Code"
                 className="w-48 h-48 rounded-xl border-2 border-black mb-4 bg-white"
               />
