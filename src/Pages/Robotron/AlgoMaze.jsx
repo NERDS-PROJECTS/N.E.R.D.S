@@ -843,7 +843,7 @@ function Robosumo() {
 								</div>
 								<div className="robo-panel-step-body">
 									<div className="robo-field">
-										<label className="robo-label">Team Member 2 Name</label>
+										<label className="robo-label">Team Member 2 Name <span className="opt">(Optional)</span></label>
 										<input
 											type="text"
 											name="teamMember2"
