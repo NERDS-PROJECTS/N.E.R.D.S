@@ -172,7 +172,7 @@ const StatRow = () => (
 		<div className="robo-stat-card">
 			<Users size={20} />
 			<span className="robo-stat-label">Team Size</span>
-			<span className="robo-stat-value">Max 3 Members</span>
+			<span className="robo-stat-value">Max 4 Members</span>
 		</div>
 	</div>
 );
@@ -580,6 +580,7 @@ function Robosumo() {
 			formBody.append("CollegeType", "NIT Silchar");
 			formBody.append("TeamMemberSecond", formData.teamMember2);
 			formBody.append("TeamMemberThird", formData.teamMember3 || "");
+			formBody.append("TeamMemberFourth", formData.teamMember4 || "");
 			formBody.append("WantsKit", kitChoice !== "none" ? "Yes" : "No");
 			formBody.append(
 				"KitType",
@@ -615,6 +616,7 @@ function Robosumo() {
 				teamLeaderScholarId: "",
 				teamMember2: "",
 				teamMember3: "",
+				teamMember4: "",
 				paymentProofLink: "",
 				transactionNumber: "",
 			});
@@ -836,7 +838,7 @@ function Robosumo() {
 									</div>
 									<div>
 										<h3>Team Members</h3>
-										<p>Add your team members (maximum 3 members including leader)</p>
+										<p>Add your team members (maximum 4 members including leader)</p>
 									</div>
 								</div>
 								<div className="robo-panel-step-body">
@@ -863,6 +865,19 @@ function Robosumo() {
 											onChange={handleInputChange}
 											className="robo-input"
 											placeholder="Enter member 3 name (optional)"
+										/>
+									</div>
+									<div className="robo-field">
+										<label className="robo-label">
+											Team Member 4 Name <span className="opt">(Optional)</span>
+										</label>
+										<input
+											type="text"
+											name="teamMember4"
+											value={formData.teamMember4}
+											onChange={handleInputChange}
+											className="robo-input"
+											placeholder="Enter member 4 name (optional)"
 										/>
 									</div>
 								</div>
