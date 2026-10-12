@@ -127,9 +127,15 @@ function LoadedModel({ url, onFramed }) {
         new THREE.Vector3()
       );
 
-      // Center the model around the world origin
+      // Center the model around the world origin.
+      //
+      // VIEWER_OFFSET_X nudges the shirt right by a little so its *visual*
+      // centre lines up with the camera look-at point (the shirt's geometric
+      // bounding-box centre rarely matches its apparent centre). Because this
+      // lives on the scene and the whole group gets rescaled on resize, the
+      // offset scales along with the model and stays consistent.
       scene.position.set(
-        -center.x,
+        -center.x + VIEWER_OFFSET_X,
         -center.y,
         -center.z
       );
