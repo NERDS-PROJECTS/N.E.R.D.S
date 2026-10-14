@@ -302,7 +302,7 @@ const IntelSection = () => {
 						</div>
 						<p>
 							All participants with kit requirements must register before{" "}
-							<strong>15th October 2026, 12:00 PM</strong>.
+							<strong>16th October 2026, 12:00 PM</strong>.
 						</p>
 						<p>
 							Final closing date of registration for all participants is{" "}
