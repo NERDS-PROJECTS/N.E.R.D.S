@@ -310,7 +310,7 @@ const IntelSection = () => {
 						</div>
 						<p>
 							All NIT Silchar participants with kit requirements must register
-							before <strong>15th October, 12:00 PM</strong>.
+							before <strong>16th October, 12:00 PM</strong>.
 						</p>
 						<p>
 							Final closing date of registration for all participants is{" "}
