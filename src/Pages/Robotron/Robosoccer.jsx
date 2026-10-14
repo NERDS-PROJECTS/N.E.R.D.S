@@ -1141,10 +1141,10 @@ function Robosoccer() {
 											<div className="robo-qr-card is-primary">
 												<span className="robo-qr-tag">Primary</span>
 												<div className="robo-qr-image">
-													<img src="/tshirt/abhinav-singh.jpeg" alt="Primary Payment QR Code - Abhinav" />
+													<img src="/tshirt/abhinav_qr2.jpeg" alt="Primary Payment QR Code - Abhinav" />
 												</div>
 												<div className="name">Abhinav Singh</div>
-												<div className="upi">abhinav8723@okicici</div>
+												<div className="upi">abhinav8723@oksbi</div>
 											</div>
 											<div className="robo-qr-card">
 												<span className="robo-qr-tag">Alternative</span>
