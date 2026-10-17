@@ -1008,7 +1008,7 @@ function Robosoccer() {
 
 									{collegeType === "nit_silchar" && (
 										<div className="robo-field">
-											<label className="robo-label">Select Your Kit *</label>
+											<label className="robo-label">Register *</label>
 											<div className="robo-choice-grid">
 												<button
 													type="button"
@@ -1025,7 +1025,7 @@ function Robosoccer() {
 														<p>Bring your own robot &amp; components</p>
 													</span>
 												</button>
-												<button
+												{/* <button
 													type="button"
 													onClick={() => setKitChoice("wired")}
 													className={`robo-choice-card ${kitChoice === "wired" ? "is-selected" : ""}`}
@@ -1054,11 +1054,11 @@ function Robosoccer() {
 														<span className="meta">₹{nitSilcharWirelessKitFee}</span>
 														<p>Full wireless (ESP8266) kit — 2 bots, inclusive of registration</p>
 													</span>
-												</button>
+												</button> */}
 											</div>
 											{kitChoice === null && (
 												<p className="robo-hint robo-hint--warn">
-													Please select a kit option to continue
+													Kit order closed Registration only
 												</p>
 											)}
 											{kitChoice === "wired" && (

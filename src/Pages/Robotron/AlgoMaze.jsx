@@ -908,7 +908,7 @@ function Robosumo() {
 									</div>
 
 									<div className="robo-field">
-										<label className="robo-label">Select Your Kit *</label>
+										<label className="robo-label">Register *</label>
 										<div className="robo-choice-grid">
 											<button
 												type="button"
@@ -925,7 +925,7 @@ function Robosumo() {
 													<p>Bring your own robot &amp; components</p>
 												</span>
 											</button>
-											<button
+											{/* <button
 												type="button"
 												onClick={() => setKitChoice("wired")}
 												className={`robo-choice-card ${kitChoice === "wired" ? "is-selected" : ""}`}
@@ -954,11 +954,11 @@ function Robosumo() {
 													<span className="meta">₹{wirelessKitFee}</span>
 													<p>Full wireless (ESP8266) maze-bot kit</p>
 												</span>
-											</button>
+											</button> */}
 										</div>
 										{kitChoice === null && (
 											<p className="robo-hint robo-hint--warn">
-												Please select a kit option to continue
+												Register
 											</p>
 										)}
 										{kitChoice === "wired" && (

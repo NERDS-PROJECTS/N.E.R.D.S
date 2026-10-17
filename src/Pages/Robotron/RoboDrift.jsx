@@ -973,7 +973,7 @@ function RoboDrift() {
 
 									{collegeType === "nit_silchar" && (
 										<div className="robo-field">
-											<label className="robo-label">Do you want a Robot Kit? *</label>
+											<label className="robo-label">Register *</label>
 											<div className="robo-choice-grid">
 												<button
 													type="button"
@@ -990,7 +990,7 @@ function RoboDrift() {
 														<p>Bring your own robot &amp; components</p>
 													</span>
 												</button>
-												<button
+												{/* <button
 													type="button"
 													onClick={() => setWantsKit(true)}
 													className={`robo-choice-card ${wantsKit === true ? "is-selected" : ""}`}
@@ -1004,11 +1004,11 @@ function RoboDrift() {
 														<span className="meta">₹{nitSilcharKitFee}</span>
 														<p>We provide the full drift bot kit</p>
 													</span>
-												</button>
+												</button> */}
 											</div>
 											{wantsKit === null && (
 												<p className="robo-hint robo-hint--warn">
-													Please select whether you want a robot kit
+													Register
 												</p>
 											)}
 											{wantsKit === true && (
