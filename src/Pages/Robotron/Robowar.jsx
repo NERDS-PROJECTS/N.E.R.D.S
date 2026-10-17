@@ -952,7 +952,7 @@ function RobowarRegistration() {
 									</div>
 
 									<div className="robo-field">
-										<label className="robo-label">Select Your Kit *</label>
+										<label className="robo-label">Register *</label>
 										<div className="robo-choice-grid">
 											<button
 												type="button"
@@ -969,7 +969,7 @@ function RobowarRegistration() {
 													<p>Bring your own robot &amp; components</p>
 												</span>
 											</button>
-											<button
+											{/* <button
 												type="button"
 												onClick={() => setKitChoice("rpm")}
 												className={`robo-choice-card ${kitChoice === "rpm" ? "is-selected" : ""}`}
@@ -1013,11 +1013,11 @@ function RobowarRegistration() {
 													<span className="meta">₹{bothKitFee}</span>
 													<p>Common components + both kit types</p>
 												</span>
-											</button>
+											</button> */}
 										</div>
 										{kitChoice === null && (
 											<p className="robo-hint robo-hint--warn">
-												Please select a kit option to continue
+												Register
 											</p>
 										)}
 										{kitChoice !== null && kitChoice !== "none" && (
