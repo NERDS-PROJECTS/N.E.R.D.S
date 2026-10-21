@@ -375,6 +375,14 @@ const IntelSection = () => {
 						>
 							<ExternalLink size={14} /> Join Robosumo WhatsApp Group
 						</a>
+						<a
+							href="https://eventsliner.com/events/robotron-2026"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="robo-notice-link"
+						>
+							<ExternalLink size={14} /> Register here(Mandatory) !!!
+						</a>
 					</div>
 
 					{/* <div className="robo-notice-card">
@@ -660,8 +668,9 @@ function Robosumo() {
 						<p className="robo-modal-message">{modal.message}</p>
 						<div className="robo-modal-actions">
 							{modal.showWhatsAppButton && modal.success && (
+								<>
 								<a
-									href="https://chat.whatsapp.com/K4H5ROxqXIK2fagZzQjxOy?mode=gi_t"
+									href="https://chat.whatsapp.com/Dof7QmvBsIp31r5gUAQ2ak?mode=gi_t"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="robo-modal-btn robo-modal-btn-whatsapp"
@@ -669,6 +678,15 @@ function Robosumo() {
 									<MessageCircle size={18} />
 									Join WhatsApp Group
 								</a>
+								<a
+							href="https://eventsliner.com/events/robotron-2026"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="robo-notice-link"
+						>
+							<ExternalLink size={14} /> Register here(Mandatory) !!!
+						</a>
+								</>
 							)}
 							<button
 								onClick={() => setModal({ ...modal, open: false })}
